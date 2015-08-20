@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>guidePage01@4s</string>
+		<string>guidePage02@4s</string>
+		<string>guidePage03@4s</string>
+		<string>guidePage04@4s</string>
+		<string>guidePage05@4s</string>
+	</array>
+	<array>
+		<string>guidePage01@5s</string>
+		<string>guidePage02@5s</string>
+		<string>guidePage03@5s</string>
+		<string>guidePage04@5s</string>
+		<string>guidePage05@5s</string>
+	</array>
+	<array>
+		<string>guidePage01@6</string>
+		<string>guidePage02@6</string>
+		<string>guidePage03@6</string>
+		<string>guidePage04@6</string>
+		<string>guidePage05@6</string>
+	</array>
+	<array>
+		<string>guidePage01@6plus</string>
+		<string>guidePage02@6plus</string>
+		<string>guidePage03@6plus</string>
+		<string>guidePage04@6plus</string>
+		<string>guidePage05@6plus</string>
+	</array>
+</array>
+</plist>

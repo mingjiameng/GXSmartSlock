@@ -8,17 +8,111 @@
 
 #import "AppDelegate.h"
 
-@interface AppDelegate ()
+#import "MICRO_COMMON.h"
+
+#import "zkeyMiPushPackage.h"
+#import "WXApi.h"
+
+#import "GXGuidePageViewController.h"
+#import "GXRootViewController.h"
+
+
+@interface AppDelegate () <zkeyMiPushPackageDelegate, WXApiDelegate>
 
 @end
 
 @implementation AppDelegate
 
+@synthesize window = _window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [self becomeFirstResponder];
+    
+    // set navigationBar and tabBar style
+    [self setBarColor];
+    
+    // whether need to lunch guide page
+    BOOL needToLaunchGuidePage = [self whetherNeedToLauchGuidePage];
+    
+    if (needToLaunchGuidePage) {
+        GXGuidePageViewController *guidePageVC = [[GXGuidePageViewController alloc] init];
+        _window.rootViewController = guidePageVC;
+    } else {
+        GXRootViewController *rootVC = [[GXRootViewController alloc] init];
+        _window.rootViewController = rootVC;
+    }
+    
+    [_window makeKeyAndVisible];
+    
+    // request system rights
+    [self requestSystemNotificationServcie];
+    
+    // register WeiXin service
+    [WXApi registerApp:WEIXIN_GUOSIM_ID];
+    // register MiPushService
+    [[zkeyMiPushPackage sharedMiPush] registerMiPushWithLongConnection:self];
+    
     return YES;
 }
+
+- (BOOL)whetherNeedToLauchGuidePage
+{
+    NSString *currentAppVersionString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *historyAppVersionString = [[NSUserDefaults standardUserDefaults] objectForKey:APP_VERSION];
+    
+    if (historyAppVersionString != nil) {
+        if ([historyAppVersionString isEqualToString:currentAppVersionString]) {
+            return NO;
+        } else {
+            [[NSUserDefaults standardUserDefaults] setObject:currentAppVersionString forKey:APP_VERSION];
+            return YES;
+        }
+    } else {
+        [[NSUserDefaults standardUserDefaults] setObject:currentAppVersionString forKey:APP_VERSION];
+        return YES;
+        
+    }
+    
+    return YES;
+}
+
+
+- (void)setBarColor
+{
+    // set navigationBar title text color
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
+    // set navigationBarItem tint color
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    // set navigationBar background color
+    [[UINavigationBar appearance] setBarTintColor:MAIN_COLOR];
+    
+    // set navigationBar translucent
+    if(IOS8_OR_LATER && [UINavigationBar conformsToProtocol:@protocol(UIAppearanceContainer)]) {
+        [[UINavigationBar appearance] setTranslucent:NO];
+    }
+    
+    // tabbar
+    [[UITabBar appearance] setTintColor:MAIN_COLOR];
+    
+    // set status bar style
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+}
+
+- (void)requestSystemNotificationServcie
+{
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
+        UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+    } else {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
+    }
+}
+
+#pragma mark - application status change
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
