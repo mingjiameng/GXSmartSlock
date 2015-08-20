@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44E9B7F31B86048600D289F0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7F21B86048600D289F0 /* SystemConfiguration.framework */; };
+		44E9B7F51B8604F500D289F0 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7F41B8604F500D289F0 /* libresolv.dylib */; };
+		44E9B7F71B86050B00D289F0 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7F61B86050B00D289F0 /* libxml2.dylib */; };
+		44E9B7F91B86052500D289F0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7F81B86052500D289F0 /* MobileCoreServices.framework */; };
+		44E9B7FB1B86052D00D289F0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7FA1B86052D00D289F0 /* CFNetwork.framework */; };
+		44E9B7FD1B86053800D289F0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7FC1B86053800D289F0 /* CoreTelephony.framework */; };
+		44E9B8001B860B0900D289F0 /* GXRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E9B7FF1B860B0900D289F0 /* GXRootViewController.m */; };
+		44E9B8031B860C8000D289F0 /* zkeyActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E9B8021B860C8000D289F0 /* zkeyActivityIndicatorView.m */; };
+		44E9B8081B860CC600D289F0 /* zkeyAlertBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E9B8051B860CC600D289F0 /* zkeyAlertBanner.m */; };
+		44E9B8091B860CC600D289F0 /* zkeyViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E9B8071B860CC600D289F0 /* zkeyViewHelper.m */; };
 		44E9F7C81B84D4AC00165234 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E9F7C71B84D4AC00165234 /* main.m */; };
 		44E9F7CB1B84D4AC00165234 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E9F7CA1B84D4AC00165234 /* AppDelegate.m */; };
 		44E9F7CE1B84D4AC00165234 /* GXSmartSlock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44E9F7CC1B84D4AC00165234 /* GXSmartSlock.xcdatamodeld */; };
@@ -38,7 +48,6 @@
 		44E9F82B1B85E0C700165234 /* guidePage03@6plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E9F8261B85E0C700165234 /* guidePage03@6plus.png */; };
 		44E9F82C1B85E0C700165234 /* guidePage04@6plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E9F8271B85E0C700165234 /* guidePage04@6plus.png */; };
 		44E9F82D1B85E0C700165234 /* guidePage05@6plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E9F8281B85E0C700165234 /* guidePage05@6plus.png */; };
-		44E9F8301B85E17B00165234 /* GXRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E9F82F1B85E17B00165234 /* GXRootViewController.m */; };
 		44E9F8341B85EAB800165234 /* zkeyButtonWithImageAndTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E9F8331B85EAB800165234 /* zkeyButtonWithImageAndTitle.m */; };
 		44E9F8391B85EB6200165234 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F8361B85EB6200165234 /* libWeChatSDK.a */; };
 		44E9F83D1B85F00400165234 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F83C1B85F00400165234 /* libz.dylib */; };
@@ -57,6 +66,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		44E9B7F21B86048600D289F0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		44E9B7F41B8604F500D289F0 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
+		44E9B7F61B86050B00D289F0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		44E9B7F81B86052500D289F0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		44E9B7FA1B86052D00D289F0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		44E9B7FC1B86053800D289F0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		44E9B7FE1B860B0900D289F0 /* GXRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRootViewController.h; sourceTree = "<group>"; };
+		44E9B7FF1B860B0900D289F0 /* GXRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRootViewController.m; sourceTree = "<group>"; };
+		44E9B8011B860C8000D289F0 /* zkeyActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyActivityIndicatorView.h; sourceTree = "<group>"; };
+		44E9B8021B860C8000D289F0 /* zkeyActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyActivityIndicatorView.m; sourceTree = "<group>"; };
+		44E9B8041B860CC600D289F0 /* zkeyAlertBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyAlertBanner.h; sourceTree = "<group>"; };
+		44E9B8051B860CC600D289F0 /* zkeyAlertBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyAlertBanner.m; sourceTree = "<group>"; };
+		44E9B8061B860CC600D289F0 /* zkeyViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyViewHelper.h; sourceTree = "<group>"; };
+		44E9B8071B860CC600D289F0 /* zkeyViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyViewHelper.m; sourceTree = "<group>"; };
 		44E9F7C21B84D4AC00165234 /* GXSmartSlock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GXSmartSlock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E9F7C61B84D4AC00165234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44E9F7C71B84D4AC00165234 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -99,8 +122,6 @@
 		44E9F8261B85E0C700165234 /* guidePage03@6plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guidePage03@6plus.png"; sourceTree = "<group>"; };
 		44E9F8271B85E0C700165234 /* guidePage04@6plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guidePage04@6plus.png"; sourceTree = "<group>"; };
 		44E9F8281B85E0C700165234 /* guidePage05@6plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guidePage05@6plus.png"; sourceTree = "<group>"; };
-		44E9F82E1B85E17B00165234 /* GXRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRootViewController.h; sourceTree = "<group>"; };
-		44E9F82F1B85E17B00165234 /* GXRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRootViewController.m; sourceTree = "<group>"; };
 		44E9F8321B85EAB800165234 /* zkeyButtonWithImageAndTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyButtonWithImageAndTitle.h; sourceTree = "<group>"; };
 		44E9F8331B85EAB800165234 /* zkeyButtonWithImageAndTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyButtonWithImageAndTitle.m; sourceTree = "<group>"; };
 		44E9F8361B85EB6200165234 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
@@ -116,9 +137,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44E9B7FD1B86053800D289F0 /* CoreTelephony.framework in Frameworks */,
+				44E9B7FB1B86052D00D289F0 /* CFNetwork.framework in Frameworks */,
+				44E9B7F91B86052500D289F0 /* MobileCoreServices.framework in Frameworks */,
+				44E9F83D1B85F00400165234 /* libz.dylib in Frameworks */,
+				44E9B7F71B86050B00D289F0 /* libxml2.dylib in Frameworks */,
+				44E9B7F51B8604F500D289F0 /* libresolv.dylib in Frameworks */,
+				44E9B7F31B86048600D289F0 /* SystemConfiguration.framework in Frameworks */,
 				44E9F8411B85F02500165234 /* libc++.dylib in Frameworks */,
 				44E9F83F1B85F01800165234 /* libsqlite3.0.dylib in Frameworks */,
-				44E9F83D1B85F00400165234 /* libz.dylib in Frameworks */,
 				44E9F8391B85EB6200165234 /* libWeChatSDK.a in Frameworks */,
 				44E9F7F61B85D44600165234 /* libMiPushSDK.a in Frameworks */,
 			);
@@ -217,8 +244,8 @@
 		44E9F7F81B85DCD400165234 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				44E9F82E1B85E17B00165234 /* GXRootViewController.h */,
-				44E9F82F1B85E17B00165234 /* GXRootViewController.m */,
+				44E9B7FE1B860B0900D289F0 /* GXRootViewController.h */,
+				44E9B7FF1B860B0900D289F0 /* GXRootViewController.m */,
 			);
 			name = Root;
 			sourceTree = "<group>";
@@ -295,6 +322,12 @@
 		44E9F8311B85EA9B00165234 /* ViewHelper */ = {
 			isa = PBXGroup;
 			children = (
+				44E9B8041B860CC600D289F0 /* zkeyAlertBanner.h */,
+				44E9B8051B860CC600D289F0 /* zkeyAlertBanner.m */,
+				44E9B8061B860CC600D289F0 /* zkeyViewHelper.h */,
+				44E9B8071B860CC600D289F0 /* zkeyViewHelper.m */,
+				44E9B8011B860C8000D289F0 /* zkeyActivityIndicatorView.h */,
+				44E9B8021B860C8000D289F0 /* zkeyActivityIndicatorView.m */,
 				44E9F8321B85EAB800165234 /* zkeyButtonWithImageAndTitle.h */,
 				44E9F8331B85EAB800165234 /* zkeyButtonWithImageAndTitle.m */,
 			);
@@ -329,6 +362,12 @@
 		44E9F8421B85F04100165234 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				44E9B7FC1B86053800D289F0 /* CoreTelephony.framework */,
+				44E9B7FA1B86052D00D289F0 /* CFNetwork.framework */,
+				44E9B7F81B86052500D289F0 /* MobileCoreServices.framework */,
+				44E9B7F61B86050B00D289F0 /* libxml2.dylib */,
+				44E9B7F41B8604F500D289F0 /* libresolv.dylib */,
+				44E9B7F21B86048600D289F0 /* SystemConfiguration.framework */,
 				44E9F8401B85F02500165234 /* libc++.dylib */,
 				44E9F83E1B85F01800165234 /* libsqlite3.0.dylib */,
 				44E9F83C1B85F00400165234 /* libz.dylib */,
@@ -463,8 +502,11 @@
 				44E9F7CE1B84D4AC00165234 /* GXSmartSlock.xcdatamodeld in Sources */,
 				44E9F7CB1B84D4AC00165234 /* AppDelegate.m in Sources */,
 				44E9F8001B85E00100165234 /* GXGuidePageViewController.m in Sources */,
+				44E9B8091B860CC600D289F0 /* zkeyViewHelper.m in Sources */,
+				44E9B8081B860CC600D289F0 /* zkeyAlertBanner.m in Sources */,
 				44E9F7C81B84D4AC00165234 /* main.m in Sources */,
-				44E9F8301B85E17B00165234 /* GXRootViewController.m in Sources */,
+				44E9B8031B860C8000D289F0 /* zkeyActivityIndicatorView.m in Sources */,
+				44E9B8001B860B0900D289F0 /* GXRootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,7 +636,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = GXSmartSlock/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -612,7 +654,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = GXSmartSlock/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

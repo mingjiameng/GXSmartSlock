@@ -13,9 +13,12 @@
 #import "zkeyMiPushPackage.h"
 #import "WXApi.h"
 
+#import "zkeyViewHelper.h"
+
 #import "GXGuidePageViewController.h"
 #import "GXRootViewController.h"
 
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate () <zkeyMiPushPackageDelegate, WXApiDelegate>
 
@@ -35,7 +38,8 @@
     
     // whether need to lunch guide page
     BOOL needToLaunchGuidePage = [self whetherNeedToLauchGuidePage];
-    
+    needToLaunchGuidePage = NO;
+
     if (needToLaunchGuidePage) {
         GXGuidePageViewController *guidePageVC = [[GXGuidePageViewController alloc] init];
         _window.rootViewController = guidePageVC;
@@ -109,6 +113,130 @@
         [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
     } else {
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
+    }
+}
+
+#pragma mark - miPush
+// bind deviceToken
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    NSString *tokeStr = [NSString stringWithFormat:@"%@",deviceToken];
+    if (tokeStr.length <= 0) {
+        return;
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:tokeStr forKey:DEFAULT_DEVICE_TOKEN];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // about MiPush
+    [[zkeyMiPushPackage sharedMiPush] bindDeviceToken:deviceToken];
+    [self bindDeviceAccordingToAccount];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"failed to regist remote notification:%@, %@", error, [error userInfo]);
+}
+
+// 将userName设为account
+- (void)bindDeviceAccordingToAccount
+{
+    NSString *previousUserName = [[NSUserDefaults standardUserDefaults] objectForKey:PREVIOUS_USER_NAME];
+    if (previousUserName != nil) {
+        [[zkeyMiPushPackage sharedMiPush] unsetAccount:previousUserName];
+    }
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
+    if (userName != nil) {
+        [[zkeyMiPushPackage sharedMiPush] setAccount:userName];
+    }
+}
+
+- (void)successfullyBindDeviceTokenWithData:(NSDictionary *)data
+{
+    NSLog(@"bind token success");
+}
+
+- (void)successfullySetAccountWithData:(NSDictionary *)data
+{
+    NSLog(@"set account success:%@", data);
+}
+
+- (void)successfullyUnsetAccountWithData:(NSDictionary *)data
+{
+    NSLog(@"unset account data:%@", data);
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:PREVIOUS_USER_NAME];
+}
+
+// miPush 长连接收到消息
+- (void)miPushReceiveNotification:(NSDictionary *)data
+{
+    //NSLog(@"remote data:%@", data);
+    NSDictionary *aps = [data objectForKey:@"aps"];
+    NSString *alertMessage = [aps objectForKey:@"alert"];
+    UIApplication *application = [UIApplication sharedApplication];
+    if (application.applicationState == UIApplicationStateActive) {
+        // build location notification
+        [zkeyViewHelper presentLocalNotificationWithMessage:alertMessage];
+    }
+    
+    NSString *remoteDeviceToken = [data objectForKey:@"device_token"];
+    
+    if (remoteDeviceToken != nil) {
+        NSString *localDeviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_DEVICE_TOKEN];
+        if ([localDeviceToken isEqual:remoteDeviceToken]) {
+            //[self forceToLogout];
+        }
+    }
+    
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [[zkeyMiPushPackage sharedMiPush] handleReceiveRemoteNotification:userInfo];
+}
+
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    // play alert voice when receive local notification
+    if (application.applicationState == UIApplicationStateActive) {
+        [self playMusic];
+    }
+}
+
+// ... play alert voice
+-(void)playMusic{
+    NSString *pewPewPath = [[NSBundle mainBundle]
+                            pathForResource:@"Voicemail" ofType:@"wav"];
+    NSURL *pewPewURL = [NSURL fileURLWithPath:pewPewPath];
+    SystemSoundID pewPewSound;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)pewPewURL, &pewPewSound);
+    AudioServicesPlaySystemSound(pewPewSound);
+    
+}
+
+
+#pragma mark - WeiXin callback
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+// 微信分享后的回调
+// 根据返回的错误码采取动作
+- (void)onResp:(BaseResp *)resp
+{
+    if (![resp isKindOfClass:[SendMessageToWXResp class]]) {
+        return;
+    }
+    
+    if (resp.errCode != WXSuccess) {
+        //[[NSNotificationCenter defaultCenter] postNotificationName:WEIXIN_FAIL_TO_SHARE_NOTIFICATION object:nil];
     }
 }
 
