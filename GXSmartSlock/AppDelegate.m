@@ -45,7 +45,8 @@
         _window.rootViewController = guidePageVC;
     } else {
         GXRootViewController *rootVC = [[GXRootViewController alloc] init];
-        _window.rootViewController = rootVC;
+        UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:rootVC];
+        _window.rootViewController = navigation;
     }
     
     [_window makeKeyAndVisible];

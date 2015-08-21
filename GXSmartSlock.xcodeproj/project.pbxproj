@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44E916811B86CDE200EF9C38 /* Voicemail.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44E916801B86CDE200EF9C38 /* Voicemail.wav */; };
 		44E9B7F31B86048600D289F0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7F21B86048600D289F0 /* SystemConfiguration.framework */; };
 		44E9B7F51B8604F500D289F0 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7F41B8604F500D289F0 /* libresolv.dylib */; };
 		44E9B7F71B86050B00D289F0 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7F61B86050B00D289F0 /* libxml2.dylib */; };
@@ -66,6 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		44E916801B86CDE200EF9C38 /* Voicemail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Voicemail.wav; sourceTree = "<group>"; };
 		44E9B7F21B86048600D289F0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		44E9B7F41B8604F500D289F0 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		44E9B7F61B86050B00D289F0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -80,6 +82,7 @@
 		44E9B8051B860CC600D289F0 /* zkeyAlertBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyAlertBanner.m; sourceTree = "<group>"; };
 		44E9B8061B860CC600D289F0 /* zkeyViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyViewHelper.h; sourceTree = "<group>"; };
 		44E9B8071B860CC600D289F0 /* zkeyViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyViewHelper.m; sourceTree = "<group>"; };
+		44E9B80A1B863DB400D289F0 /* MICRO_ROOT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MICRO_ROOT.h; sourceTree = "<group>"; };
 		44E9F7C21B84D4AC00165234 /* GXSmartSlock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GXSmartSlock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E9F7C61B84D4AC00165234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44E9F7C71B84D4AC00165234 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -201,6 +204,7 @@
 		44E9F7C51B84D4AC00165234 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				44E916801B86CDE200EF9C38 /* Voicemail.wav */,
 				44E9F8421B85F04100165234 /* Framework */,
 				44E9F8011B85E00700165234 /* GuidePage */,
 				44E9F7EF1B85D43C00165234 /* miPush */,
@@ -246,6 +250,7 @@
 			children = (
 				44E9B7FE1B860B0900D289F0 /* GXRootViewController.h */,
 				44E9B7FF1B860B0900D289F0 /* GXRootViewController.m */,
+				44E9B80A1B863DB400D289F0 /* MICRO_ROOT.h */,
 			);
 			name = Root;
 			sourceTree = "<group>";
@@ -480,6 +485,7 @@
 				44E9F8091B85E03100165234 /* guidePage02@4s.png in Resources */,
 				44E9F8151B85E08A00165234 /* guidePage03@5s.png in Resources */,
 				44E9F8171B85E08A00165234 /* guidePage05@5s.png in Resources */,
+				44E916811B86CDE200EF9C38 /* Voicemail.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

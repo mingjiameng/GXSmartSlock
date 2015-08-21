@@ -6,6 +6,13 @@
 //  Copyright (c) 2015 guosim. All rights reserved.
 //
 
+// unlock mode
+typedef NS_ENUM(NSInteger, DefaultUnlockMode) {
+    DefaultUnlockModeAuto = 10,
+    DefaultUnlockModeManul = 20,
+    DefaultUnlockModeShake = 30
+};
+
 #ifndef GXSmartSlock_MICRO_COMMON_h
 #define GXSmartSlock_MICRO_COMMON_h
 
@@ -21,6 +28,7 @@
 #define DEFAULT_DEVICE_TOKEN @"deviceToken"
 #define PREVIOUS_USER_NAME @"previousUserName"
 #define DEFAULT_GESTURE_PASSWORD @"defaultGesturePassword"
+#define DEFAULT_UNLOCK_MODE @"defaultUnlockModel"
 
 // screen size parameter
 #define TOP_SPACE_IN_NAVIGATION_MODE 64.0
