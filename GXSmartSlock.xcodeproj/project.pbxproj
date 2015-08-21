@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		44E916811B86CDE200EF9C38 /* Voicemail.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44E916801B86CDE200EF9C38 /* Voicemail.wav */; };
+		44E916BC1B86F41300EF9C38 /* FHRegisterSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916B91B86F41300EF9C38 /* FHRegisterSecondViewController.m */; };
+		44E916BD1B86F41300EF9C38 /* FHRegisterThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916BB1B86F41300EF9C38 /* FHRegisterThirdViewController.m */; };
+		44E916C21B86F42300EF9C38 /* FHRegisterFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916BF1B86F42300EF9C38 /* FHRegisterFirstViewController.m */; };
+		44E916C31B86F42300EF9C38 /* GXLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916C11B86F42300EF9C38 /* GXLoginViewController.m */; };
+		44E916C71B86F46300EF9C38 /* GXRegisterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916C61B86F46300EF9C38 /* GXRegisterModel.m */; };
+		44E916D61B87157300EF9C38 /* GXDatabaseEntityDeviceUserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916D51B87157300EF9C38 /* GXDatabaseEntityDeviceUserItem.m */; };
+		44E916D91B87157400EF9C38 /* GXDatabaseEntityUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916D81B87157400EF9C38 /* GXDatabaseEntityUser.m */; };
+		44E916DC1B87157400EF9C38 /* GXDatabaseEntityRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916DB1B87157400EF9C38 /* GXDatabaseEntityRecord.m */; };
+		44E916DF1B87157400EF9C38 /* GXDatabaseEntityDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916DE1B87157400EF9C38 /* GXDatabaseEntityDevice.m */; };
+		44E916E21B87158800EF9C38 /* GXDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916E11B87158800EF9C38 /* GXDatabaseHelper.m */; };
 		44E9B7F31B86048600D289F0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7F21B86048600D289F0 /* SystemConfiguration.framework */; };
 		44E9B7F51B8604F500D289F0 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7F41B8604F500D289F0 /* libresolv.dylib */; };
 		44E9B7F71B86050B00D289F0 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7F61B86050B00D289F0 /* libxml2.dylib */; };
@@ -68,6 +78,26 @@
 
 /* Begin PBXFileReference section */
 		44E916801B86CDE200EF9C38 /* Voicemail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Voicemail.wav; sourceTree = "<group>"; };
+		44E916B81B86F41300EF9C38 /* FHRegisterSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FHRegisterSecondViewController.h; sourceTree = "<group>"; };
+		44E916B91B86F41300EF9C38 /* FHRegisterSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FHRegisterSecondViewController.m; sourceTree = "<group>"; };
+		44E916BA1B86F41300EF9C38 /* FHRegisterThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FHRegisterThirdViewController.h; sourceTree = "<group>"; };
+		44E916BB1B86F41300EF9C38 /* FHRegisterThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FHRegisterThirdViewController.m; sourceTree = "<group>"; };
+		44E916BE1B86F42300EF9C38 /* FHRegisterFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FHRegisterFirstViewController.h; sourceTree = "<group>"; };
+		44E916BF1B86F42300EF9C38 /* FHRegisterFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FHRegisterFirstViewController.m; sourceTree = "<group>"; };
+		44E916C01B86F42300EF9C38 /* GXLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXLoginViewController.h; sourceTree = "<group>"; };
+		44E916C11B86F42300EF9C38 /* GXLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXLoginViewController.m; sourceTree = "<group>"; };
+		44E916C51B86F46300EF9C38 /* GXRegisterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRegisterModel.h; sourceTree = "<group>"; };
+		44E916C61B86F46300EF9C38 /* GXRegisterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRegisterModel.m; sourceTree = "<group>"; };
+		44E916D41B87157300EF9C38 /* GXDatabaseEntityDeviceUserItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDatabaseEntityDeviceUserItem.h; sourceTree = "<group>"; };
+		44E916D51B87157300EF9C38 /* GXDatabaseEntityDeviceUserItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDatabaseEntityDeviceUserItem.m; sourceTree = "<group>"; };
+		44E916D71B87157400EF9C38 /* GXDatabaseEntityUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDatabaseEntityUser.h; sourceTree = "<group>"; };
+		44E916D81B87157400EF9C38 /* GXDatabaseEntityUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDatabaseEntityUser.m; sourceTree = "<group>"; };
+		44E916DA1B87157400EF9C38 /* GXDatabaseEntityRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDatabaseEntityRecord.h; sourceTree = "<group>"; };
+		44E916DB1B87157400EF9C38 /* GXDatabaseEntityRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDatabaseEntityRecord.m; sourceTree = "<group>"; };
+		44E916DD1B87157400EF9C38 /* GXDatabaseEntityDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDatabaseEntityDevice.h; sourceTree = "<group>"; };
+		44E916DE1B87157400EF9C38 /* GXDatabaseEntityDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDatabaseEntityDevice.m; sourceTree = "<group>"; };
+		44E916E01B87158800EF9C38 /* GXDatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDatabaseHelper.h; sourceTree = "<group>"; };
+		44E916E11B87158800EF9C38 /* GXDatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDatabaseHelper.m; sourceTree = "<group>"; };
 		44E9B7F21B86048600D289F0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		44E9B7F41B8604F500D289F0 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		44E9B7F61B86050B00D289F0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -164,6 +194,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		44E916B71B86F3FE00EF9C38 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				44E916BE1B86F42300EF9C38 /* FHRegisterFirstViewController.h */,
+				44E916BF1B86F42300EF9C38 /* FHRegisterFirstViewController.m */,
+				44E916C01B86F42300EF9C38 /* GXLoginViewController.h */,
+				44E916C11B86F42300EF9C38 /* GXLoginViewController.m */,
+				44E916B81B86F41300EF9C38 /* FHRegisterSecondViewController.h */,
+				44E916B91B86F41300EF9C38 /* FHRegisterSecondViewController.m */,
+				44E916BA1B86F41300EF9C38 /* FHRegisterThirdViewController.h */,
+				44E916BB1B86F41300EF9C38 /* FHRegisterThirdViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		44E916C41B86F43000EF9C38 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				44E916C51B86F46300EF9C38 /* GXRegisterModel.h */,
+				44E916C61B86F46300EF9C38 /* GXRegisterModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		44E9F7B91B84D4AC00165234 = {
 			isa = PBXGroup;
 			children = (
@@ -352,6 +406,8 @@
 		44E9F83A1B85EC0600165234 /* Login&Register&Logout */ = {
 			isa = PBXGroup;
 			children = (
+				44E916C41B86F43000EF9C38 /* Model */,
+				44E916B71B86F3FE00EF9C38 /* Controller */,
 			);
 			name = "Login&Register&Logout";
 			sourceTree = "<group>";
@@ -360,6 +416,16 @@
 			isa = PBXGroup;
 			children = (
 				44E9F7CC1B84D4AC00165234 /* GXSmartSlock.xcdatamodeld */,
+				44E916DD1B87157400EF9C38 /* GXDatabaseEntityDevice.h */,
+				44E916DE1B87157400EF9C38 /* GXDatabaseEntityDevice.m */,
+				44E916DA1B87157400EF9C38 /* GXDatabaseEntityRecord.h */,
+				44E916DB1B87157400EF9C38 /* GXDatabaseEntityRecord.m */,
+				44E916D71B87157400EF9C38 /* GXDatabaseEntityUser.h */,
+				44E916D81B87157400EF9C38 /* GXDatabaseEntityUser.m */,
+				44E916D41B87157300EF9C38 /* GXDatabaseEntityDeviceUserItem.h */,
+				44E916D51B87157300EF9C38 /* GXDatabaseEntityDeviceUserItem.m */,
+				44E916E01B87158800EF9C38 /* GXDatabaseHelper.h */,
+				44E916E11B87158800EF9C38 /* GXDatabaseHelper.m */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -506,12 +572,22 @@
 				44E9F8341B85EAB800165234 /* zkeyButtonWithImageAndTitle.m in Sources */,
 				44E9F7F71B85D44600165234 /* zkeyMiPushPackage.m in Sources */,
 				44E9F7CE1B84D4AC00165234 /* GXSmartSlock.xcdatamodeld in Sources */,
+				44E916C31B86F42300EF9C38 /* GXLoginViewController.m in Sources */,
+				44E916D61B87157300EF9C38 /* GXDatabaseEntityDeviceUserItem.m in Sources */,
+				44E916BC1B86F41300EF9C38 /* FHRegisterSecondViewController.m in Sources */,
 				44E9F7CB1B84D4AC00165234 /* AppDelegate.m in Sources */,
 				44E9F8001B85E00100165234 /* GXGuidePageViewController.m in Sources */,
+				44E916C21B86F42300EF9C38 /* FHRegisterFirstViewController.m in Sources */,
 				44E9B8091B860CC600D289F0 /* zkeyViewHelper.m in Sources */,
+				44E916BD1B86F41300EF9C38 /* FHRegisterThirdViewController.m in Sources */,
 				44E9B8081B860CC600D289F0 /* zkeyAlertBanner.m in Sources */,
 				44E9F7C81B84D4AC00165234 /* main.m in Sources */,
+				44E916DC1B87157400EF9C38 /* GXDatabaseEntityRecord.m in Sources */,
+				44E916DF1B87157400EF9C38 /* GXDatabaseEntityDevice.m in Sources */,
+				44E916C71B86F46300EF9C38 /* GXRegisterModel.m in Sources */,
 				44E9B8031B860C8000D289F0 /* zkeyActivityIndicatorView.m in Sources */,
+				44E916E21B87158800EF9C38 /* GXDatabaseHelper.m in Sources */,
+				44E916D91B87157400EF9C38 /* GXDatabaseEntityUser.m in Sources */,
 				44E9B8001B860B0900D289F0 /* GXRootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

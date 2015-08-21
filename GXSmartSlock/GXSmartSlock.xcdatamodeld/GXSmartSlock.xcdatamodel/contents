@@ -1,34 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="FHDevice" syncable="YES">
+    <entity name="GXDevice" representedClassName="GXDatabaseEntityDevice" syncable="YES">
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceBattery" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="deviceID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="deviceIdentifire" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceVersion" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="deviceUsers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXDeviceUserItem" inverseName="device" inverseEntity="GXDeviceUserItem" syncable="YES"/>
+        <relationship name="unlockRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXRecord" inverseName="device" inverseEntity="GXRecord" syncable="YES"/>
     </entity>
-    <entity name="FHDeviceUserItem" syncable="YES">
+    <entity name="GXDeviceUserItem" representedClassName="GXDatabaseEntityDeviceUserItem" syncable="YES">
         <attribute name="deviceIdentifire" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="device" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXDevice" inverseName="deviceUsers" inverseEntity="GXDevice" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXUser" inverseName="devices" inverseEntity="GXUser" syncable="YES"/>
     </entity>
-    <entity name="FHRecord" syncable="YES">
+    <entity name="GXRecord" representedClassName="GXDatabaseEntityRecord" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="deviceID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="deviceIdentifire" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="event" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eventType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="senderAccount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="eventType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="senderUserName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="device" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXDevice" inverseName="unlockRecords" inverseEntity="GXDevice" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXUser" syncable="YES"/>
     </entity>
-    <entity name="GXUser" syncable="YES">
+    <entity name="GXUser" representedClassName="GXDatabaseEntityUser" syncable="YES">
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="devices" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GXDeviceUserItem" inverseName="user" inverseEntity="GXDeviceUserItem" syncable="YES"/>
     </entity>
     <elements>
-        <element name="GXUser" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="FHRecord" positionX="-54" positionY="18" width="128" height="120"/>
-        <element name="FHDevice" positionX="-36" positionY="45" width="128" height="135"/>
-        <element name="FHDeviceUserItem" positionX="-18" positionY="90" width="128" height="90"/>
+        <element name="GXDevice" positionX="-36" positionY="45" width="128" height="165"/>
+        <element name="GXDeviceUserItem" positionX="-18" positionY="90" width="128" height="120"/>
+        <element name="GXRecord" positionX="-54" positionY="18" width="128" height="150"/>
+        <element name="GXUser" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>
