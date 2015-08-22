@@ -1,8 +1,8 @@
 //
-//  GXDatabaseEntityDeviceUserItem.h
+//  GXDatabaseEntityDeviceUserMappingItem.h
 //  GXSmartSlock
 //
-//  Created by zkey on 8/21/15.
+//  Created by zkey on 8/22/15.
 //  Copyright (c) 2015 guosim. All rights reserved.
 //
 
@@ -11,11 +11,12 @@
 
 @class GXDatabaseEntityDevice, GXDatabaseEntityUser;
 
-@interface GXDatabaseEntityDeviceUserItem : NSManagedObject
+@interface GXDatabaseEntityDeviceUserMappingItem : NSManagedObject
 
 @property (nonatomic, retain) NSString * deviceIdentifire;
 @property (nonatomic, retain) NSString * deviceName;
 @property (nonatomic, retain) NSString * userName;
+@property (nonatomic, retain) NSNumber * deviceUserMappingID;
 @property (nonatomic, retain) GXDatabaseEntityDevice *device;
 @property (nonatomic, retain) GXDatabaseEntityUser *user;
 

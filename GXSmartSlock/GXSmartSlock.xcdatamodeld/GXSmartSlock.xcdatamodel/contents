@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="GXDevice" representedClassName="GXDatabaseEntityDevice" syncable="YES">
-        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="deviceBattery" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="deviceAuthority" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceBattery" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="deviceCategory" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="deviceIdentifire" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceNickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceStatus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceVersion" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="deviceUsers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXDeviceUserItem" inverseName="device" inverseEntity="GXDeviceUserItem" syncable="YES"/>
+        <relationship name="deviceUsers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXDevice_User_Mapping" inverseName="device" inverseEntity="GXDevice_User_Mapping" syncable="YES"/>
         <relationship name="unlockRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXRecord" inverseName="device" inverseEntity="GXRecord" syncable="YES"/>
     </entity>
-    <entity name="GXDeviceUserItem" representedClassName="GXDatabaseEntityDeviceUserItem" syncable="YES">
+    <entity name="GXDevice_User_Mapping" representedClassName="GXDatabaseEntityDeviceUserMappingItem" syncable="YES">
         <attribute name="deviceIdentifire" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceUserMappingID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="device" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXDevice" inverseName="deviceUsers" inverseEntity="GXDevice" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXUser" inverseName="devices" inverseEntity="GXUser" syncable="YES"/>
@@ -30,11 +34,11 @@
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="devices" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GXDeviceUserItem" inverseName="user" inverseEntity="GXDeviceUserItem" syncable="YES"/>
+        <relationship name="devices" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GXDevice_User_Mapping" inverseName="user" inverseEntity="GXDevice_User_Mapping" syncable="YES"/>
     </entity>
     <elements>
-        <element name="GXDevice" positionX="-36" positionY="45" width="128" height="165"/>
-        <element name="GXDeviceUserItem" positionX="-18" positionY="90" width="128" height="120"/>
+        <element name="GXDevice" positionX="-36" positionY="45" width="128" height="210"/>
+        <element name="GXDevice_User_Mapping" positionX="-18" positionY="90" width="128" height="135"/>
         <element name="GXRecord" positionX="-54" positionY="18" width="128" height="150"/>
         <element name="GXUser" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
