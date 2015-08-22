@@ -14,9 +14,11 @@
 @implementation GXDatabaseEntityDeviceUserMappingItem
 
 @dynamic deviceIdentifire;
-@dynamic deviceName;
+@dynamic deviceNickname;
 @dynamic userName;
 @dynamic deviceUserMappingID;
+@dynamic deviceStatus;
+@dynamic deviceAuthority;
 @dynamic device;
 @dynamic user;
 

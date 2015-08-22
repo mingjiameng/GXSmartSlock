@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) NSString *deviceIdentifire;
 
-// the owner of the device
+// the device user
 @property (nonatomic, strong) NSString *userName;
 
 

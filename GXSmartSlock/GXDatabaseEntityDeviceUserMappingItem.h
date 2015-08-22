@@ -14,9 +14,11 @@
 @interface GXDatabaseEntityDeviceUserMappingItem : NSManagedObject
 
 @property (nonatomic, retain) NSString * deviceIdentifire;
-@property (nonatomic, retain) NSString * deviceName;
+@property (nonatomic, retain) NSString * deviceNickname;
 @property (nonatomic, retain) NSString * userName;
 @property (nonatomic, retain) NSNumber * deviceUserMappingID;
+@property (nonatomic, retain) NSString * deviceStatus;
+@property (nonatomic, retain) NSString * deviceAuthority;
 @property (nonatomic, retain) GXDatabaseEntityDevice *device;
 @property (nonatomic, retain) GXDatabaseEntityUser *user;
 

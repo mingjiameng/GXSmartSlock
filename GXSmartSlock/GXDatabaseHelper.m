@@ -13,6 +13,7 @@
 #import "GXDatabaseHelper.h"
 #import "AppDelegate.h"
 
+#import "MICRO_COMMON.h"
 #import "MICRO_COREDATA.h"
 
 #import "GXDeviceModel.h"
@@ -75,15 +76,104 @@
 
 + (void)insertDeviceUserMappingItemIntoDatabase:(NSArray *)deviceUserMappingArray
 {
+    NSString *defaultUserName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
     
+    deviceUserMappingArray = [deviceUserMappingArray sortedArrayUsingComparator:^NSComparisonResult(GXDeviceUserMappingModel *obj1, GXDeviceUserMappingModel *obj2) {
+        return (obj2.deviceUserMappingID <= obj1.deviceUserMappingID);
+    }];
+    NSArray *localDeviceUserMappingArray = [self allDeviceUserMappingArray];
     
+    NSMutableArray *deviceUserMappingNeedToInsert = [NSMutableArray array];
+    NSInteger index01 = 0, index02 = 0;
+    NSInteger indexBorder01 = deviceUserMappingArray.count;
+    NSInteger indexBorder02 = localDeviceUserMappingArray.count;
+    NSInteger deviceUserMappingID01, deviceUserMappingID02;
     
-    for (GXDeviceUserMappingModel *deviceMappingModel in deviceUserMappingArray) {
-        GXDatabaseEntityDeviceUserMappingItem *newDeviceEntityUserMappingEntity = [self deviceUserMappingEntityWithID:deviceMappingModel.deviceUserMappingID];
+    while (index01 < indexBorder01 && index02 < indexBorder02) {
+        GXDeviceUserMappingModel *deviceUserMappingModel = [deviceUserMappingArray objectAtIndex:index01];
+        GXDatabaseEntityDeviceUserMappingItem *deviceUserMappingEntity = [localDeviceUserMappingArray objectAtIndex:index02];
+        deviceUserMappingID01 = deviceUserMappingModel.deviceUserMappingID;
+        deviceUserMappingID02 = [deviceUserMappingEntity.deviceUserMappingID integerValue];
         
+        if (deviceUserMappingID01 > deviceUserMappingID02) {
+            [deviceUserMappingNeedToInsert addObject:deviceUserMappingModel];
+            ++deviceUserMappingID01;
+            continue;
+        }
         
+        if (deviceUserMappingID01 == deviceUserMappingID02) {
+            // status may need update
+            if (![deviceUserMappingModel.deviceStatus isEqualToString:deviceUserMappingEntity.deviceStatus]) {
+                deviceUserMappingEntity.deviceStatus = deviceUserMappingModel.deviceStatus;
+            }
+            
+            // if the device's user is defaultUser, we may need update the nickname of the device
+            // what's more
+            if ([deviceUserMappingEntity.userName isEqualToString:defaultUserName]) {
+                GXDatabaseEntityDevice *correspondDevice = [self deviceEntityWithDeviceIdentifire:deviceUserMappingModel.deviceIdentifire];
+                if (![deviceUserMappingModel.deviceNickname isEqualToString:correspondDevice.deviceNickname]) {
+                    correspondDevice.deviceNickname = deviceUserMappingModel.deviceNickname;
+                }
+                
+                if (![deviceUserMappingModel.deviceStatus isEqualToString:correspondDevice.deviceStatus]) {
+                    correspondDevice.deviceStatus = deviceUserMappingModel.deviceStatus;
+                }
+            }
+            
+            ++index01;
+            ++index02;
+            continue;
+        }
+        
+        if (deviceUserMappingID01 < deviceUserMappingID02) {
+            [managedObjectContext deleteObject:deviceUserMappingEntity];
+            ++index02;
+            continue;
+        }
     }
+    
+    for (; index01 < indexBorder01; ++index01) {
+        [deviceUserMappingNeedToInsert addObject:[deviceUserMappingArray objectAtIndex:index01]];
+    }
+    
+    for (; index02 < indexBorder02; ++index02) {
+        [managedObjectContext deleteObject:[localDeviceUserMappingArray objectAtIndex:index02]];
+    }
+    
+    for (GXDeviceUserMappingModel *deviceUserMappingModel in deviceUserMappingNeedToInsert) {
+        GXDatabaseEntityDevice *device = [self deviceEntityWithDeviceIdentifire:deviceUserMappingModel.deviceIdentifire];
+        if (device == nil) {
+            NSLog(@"error: deviceUserMappingModel has no correspond device with identifire:%@", deviceUserMappingModel.deviceIdentifire);
+            continue;
+        }
+        
+        GXDatabaseEntityUser *user = [self userEntityWithUserName:deviceUserMappingModel.userName];
+        if (user == nil) {
+            NSLog(@"error: deviceUserMappingModel has no correspond user with userName:%@", deviceUserMappingModel.userName);
+        }
+        
+        GXDatabaseEntityDeviceUserMappingItem *newDeviceUserMappingItem = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_DEVICE_USER_MAPPING inManagedObjectContext:managedObjectContext];
+        
+        newDeviceUserMappingItem.deviceUserMappingID = [NSNumber numberWithInteger:deviceUserMappingModel.deviceUserMappingID];
+        newDeviceUserMappingItem.deviceIdentifire = deviceUserMappingModel.deviceIdentifire;
+        newDeviceUserMappingItem.userName = deviceUserMappingModel.userName;
+        newDeviceUserMappingItem.deviceNickname = deviceUserMappingModel.deviceNickname;
+        newDeviceUserMappingItem.deviceStatus = deviceUserMappingModel.deviceStatus;
+        newDeviceUserMappingItem.deviceAuthority = deviceUserMappingModel.deviceAuthority;
+        
+        newDeviceUserMappingItem.device = device;
+        newDeviceUserMappingItem.user = user;
+        
+        // if the device user is defaultUser, we need to make up info in correspond device entity
+        if ([deviceUserMappingModel.userName isEqualToString:defaultUserName]) {
+            device.deviceNickname = deviceUserMappingModel.deviceNickname;
+            device.deviceStatus = deviceUserMappingModel.deviceStatus;
+            device.deviceAuthority = deviceUserMappingModel.deviceAuthority;
+        }
+    }
+    
+    [self saveContext];
 }
 
 + (void)insertUserIntoDatabase:(NSArray *)userArray
@@ -97,10 +187,9 @@
     userArray = [userArray sortedArrayUsingComparator:^NSComparisonResult(GXUserModel *obj1, GXUserModel *obj2) {
         return (obj2.userID < obj1.userID);
     }];
+    NSArray *localUserArray = [self allUserEntityArray];
     
     NSMutableArray *userNeedToInsert = [NSMutableArray array];
-    
-    NSArray *localUserArray = [self allUserEntityArray];
     NSInteger index01 = 0, index02 = 0;
     NSInteger indexBorder01 = userArray.count;
     NSInteger indexBorder02 = localUserArray.count;
@@ -119,6 +208,11 @@
         }
         
         if (userID01 == userID02) {
+            // user's nickname may need update
+            if (![userModel.nickname isEqualToString:userEntity.nickname]) {
+                userEntity.nickname = userModel.nickname;
+            }
+            
             ++userID01;
             ++userID02;
             continue;
@@ -240,6 +334,29 @@
     return device;
 }
 
++ (NSArray *)allDeviceUserMappingArray
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityDeviceUserMapping = [NSEntityDescription entityForName:ENTITY_DEVICE_USER_MAPPING inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityDeviceUserMapping];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"deviceUserMappingID" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    NSError *error = nil;
+    NSArray *deviceUserMappingArray = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"error: fetch all deviceUserMapping array:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    return deviceUserMappingArray;
+}
+
 + (GXDatabaseEntityDeviceUserMappingItem *)deviceUserMappingEntityWithID:(NSInteger)deviceUserMappingID
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
@@ -287,14 +404,14 @@
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     
     NSError *error = nil;
-    NSArray *allUserArray = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSArray *userArray = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if (error != nil) {
         NSLog(@"error: fetch all user array:%@, %@", error, [error userInfo]);
         return nil;
     }
     
-    return allUserArray;
+    return userArray;
 }
 
 + (GXDatabaseEntityUser *)userEntityWithUserName:(NSString *)userName
