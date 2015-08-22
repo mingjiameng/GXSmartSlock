@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSString *deviceStatus;
 
 
+
 /*
  * the following data is provided in "Device" table in server
  */

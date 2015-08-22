@@ -22,6 +22,8 @@
 		44E916F81B88414000EF9C38 /* GXDatabaseEntityDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916F71B88414000EF9C38 /* GXDatabaseEntityDevice.m */; };
 		44E916FE1B8843D100EF9C38 /* GXDeviceUserMappingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916FD1B8843D100EF9C38 /* GXDeviceUserMappingModel.m */; };
 		44E917011B8849A900EF9C38 /* GXDatabaseEntityDeviceUserMappingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E917001B8849A900EF9C38 /* GXDatabaseEntityDeviceUserMappingItem.m */; };
+		44E917041B884B9000EF9C38 /* GXServerDataAnalyst.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E917031B884B9000EF9C38 /* GXServerDataAnalyst.m */; };
+		44E9170B1B8883B700EF9C38 /* GXUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E9170A1B8883B700EF9C38 /* GXUserModel.m */; };
 		44E9B7F31B86048600D289F0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7F21B86048600D289F0 /* SystemConfiguration.framework */; };
 		44E9B7F51B8604F500D289F0 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7F41B8604F500D289F0 /* libresolv.dylib */; };
 		44E9B7F71B86050B00D289F0 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9B7F61B86050B00D289F0 /* libxml2.dylib */; };
@@ -112,6 +114,11 @@
 		44E916FD1B8843D100EF9C38 /* GXDeviceUserMappingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDeviceUserMappingModel.m; sourceTree = "<group>"; };
 		44E916FF1B8849A900EF9C38 /* GXDatabaseEntityDeviceUserMappingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDatabaseEntityDeviceUserMappingItem.h; sourceTree = "<group>"; };
 		44E917001B8849A900EF9C38 /* GXDatabaseEntityDeviceUserMappingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDatabaseEntityDeviceUserMappingItem.m; sourceTree = "<group>"; };
+		44E917021B884B9000EF9C38 /* GXServerDataAnalyst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXServerDataAnalyst.h; sourceTree = "<group>"; };
+		44E917031B884B9000EF9C38 /* GXServerDataAnalyst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXServerDataAnalyst.m; sourceTree = "<group>"; };
+		44E917081B8868BB00EF9C38 /* MICRO_SERVER_DATA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MICRO_SERVER_DATA.h; sourceTree = "<group>"; };
+		44E917091B8883B700EF9C38 /* GXUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUserModel.h; sourceTree = "<group>"; };
+		44E9170A1B8883B700EF9C38 /* GXUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUserModel.m; sourceTree = "<group>"; };
 		44E9B7F21B86048600D289F0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		44E9B7F41B8604F500D289F0 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		44E9B7F61B86050B00D289F0 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -285,6 +292,11 @@
 				44E916F41B880EA300EF9C38 /* GXDeviceModel.m */,
 				44E916FC1B8843D100EF9C38 /* GXDeviceUserMappingModel.h */,
 				44E916FD1B8843D100EF9C38 /* GXDeviceUserMappingModel.m */,
+				44E917021B884B9000EF9C38 /* GXServerDataAnalyst.h */,
+				44E917031B884B9000EF9C38 /* GXServerDataAnalyst.m */,
+				44E917081B8868BB00EF9C38 /* MICRO_SERVER_DATA.h */,
+				44E917091B8883B700EF9C38 /* GXUserModel.h */,
+				44E9170A1B8883B700EF9C38 /* GXUserModel.m */,
 			);
 			name = ServerDataAnalyst;
 			sourceTree = "<group>";
@@ -644,9 +656,11 @@
 				44E916F01B87880300EF9C38 /* zkeyIndentifierValidator.m in Sources */,
 				44E9F8001B85E00100165234 /* GXGuidePageViewController.m in Sources */,
 				44E916F81B88414000EF9C38 /* GXDatabaseEntityDevice.m in Sources */,
+				44E917041B884B9000EF9C38 /* GXServerDataAnalyst.m in Sources */,
 				44E916C21B86F42300EF9C38 /* FHRegisterFirstViewController.m in Sources */,
 				44E9B8091B860CC600D289F0 /* zkeyViewHelper.m in Sources */,
 				44E916F51B880EA300EF9C38 /* GXDeviceModel.m in Sources */,
+				44E9170B1B8883B700EF9C38 /* GXUserModel.m in Sources */,
 				44E916BD1B86F41300EF9C38 /* FHRegisterThirdViewController.m in Sources */,
 				44E9B8081B860CC600D289F0 /* zkeyAlertBanner.m in Sources */,
 				44E9F7C81B84D4AC00165234 /* main.m in Sources */,

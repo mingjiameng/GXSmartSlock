@@ -17,9 +17,11 @@
 
 #import "GXDeviceModel.h"
 #import "GXDeviceUserMappingModel.h"
+#import "GXUserModel.h"
 
 #import "GXDatabaseEntityDevice.h"
 #import "GXDatabaseEntityDeviceUserMappingItem.h"
+#import "GXDatabaseEntityUser.h"
 
 #import <Foundation/Foundation.h>
 
@@ -36,7 +38,7 @@
 // ... but the data GXDeviceModel object contains here exclude "deviceNickname"\"deviceStatus"\"deviceAuthority"
 // ... for that "deviceNickname"\"deviceStatus"\"deviceAuthority" in server database is storaged in "Mapping" table
 // ... so server does not return us these data when we request data from "device" table
-+ (void)insertDevice:(NSArray *)deviceArray
++ (void)insertDeviceIntoDatabase:(NSArray *)deviceArray
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
     
@@ -71,9 +73,11 @@
     [self saveContext];
 }
 
-+ (void)insertDeviceUserMappingItem:(NSArray *)deviceUserMappingArray
++ (void)insertDeviceUserMappingItemIntoDatabase:(NSArray *)deviceUserMappingArray
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    
     
     for (GXDeviceUserMappingModel *deviceMappingModel in deviceUserMappingArray) {
         GXDatabaseEntityDeviceUserMappingItem *newDeviceEntityUserMappingEntity = [self deviceUserMappingEntityWithID:deviceMappingModel.deviceUserMappingID];
@@ -82,10 +86,75 @@
     }
 }
 
++ (void)insertUserIntoDatabase:(NSArray *)userArray
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    
+    // sort the userArray for server and localUserArray in descending order
+    // crossing contrast data in userArray and localUserArray in time complexity O(n)
+    // to prevent unneccessary delete and insert action
+    userArray = [userArray sortedArrayUsingComparator:^NSComparisonResult(GXUserModel *obj1, GXUserModel *obj2) {
+        return (obj2.userID < obj1.userID);
+    }];
+    
+    NSMutableArray *userNeedToInsert = [NSMutableArray array];
+    
+    NSArray *localUserArray = [self allUserEntityArray];
+    NSInteger index01 = 0, index02 = 0;
+    NSInteger indexBorder01 = userArray.count;
+    NSInteger indexBorder02 = localUserArray.count;
+    NSInteger userID01, userID02;
+    
+    while (index01 < indexBorder01 && index02 < indexBorder02) {
+        GXUserModel *userModel = [userArray objectAtIndex:index01];
+        GXDatabaseEntityUser *userEntity = [localUserArray objectAtIndex:index02];
+        userID01 = userModel.userID;
+        userID02 = [userEntity.userID integerValue];
+        
+        if (userID01 > userID02) {
+            [userNeedToInsert addObject:userModel];
+            ++userID01;
+            continue;
+        }
+        
+        if (userID01 == userID02) {
+            ++userID01;
+            ++userID02;
+            continue;
+        }
+        
+        if (userID01 < userID02) {
+            [managedObjectContext deleteObject:userEntity];
+            ++userID02;
+            continue;
+        }
+    }
+    
+    for (; index01 < indexBorder01; ++index01) {
+        [userNeedToInsert addObject:[userArray objectAtIndex:index01]];
+    }
+    
+    for (; index01 < indexBorder02; ++index02) {
+        [managedObjectContext deleteObject:[localUserArray objectAtIndex:index02]];
+    }
+    
+    // perform the neccessary insert action
+    for (GXUserModel *userModel in userNeedToInsert) {
+        GXDatabaseEntityUser *newUserEntity = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_USER inManagedObjectContext:managedObjectContext];
+        
+        newUserEntity.userID = [NSNumber numberWithInteger:userModel.userID];
+        newUserEntity.userName = userModel.userName;
+        newUserEntity.nickname = userModel.nickname;
+    }
+    
+    [self saveContext];
+}
+
 /*
  * the following method provide data for runtime application
  */
-+ (NSFetchedResultsController *)validDevice
++ (NSFetchedResultsController *)validDeviceFetchedResultsController
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
     
@@ -204,5 +273,62 @@
     GXDatabaseEntityDeviceUserMappingItem *deviceUserMappingItem = [correspondDeviceUserMappingArray objectAtIndex:0];
     return deviceUserMappingItem;
 }
+
++ (NSArray *)allUserEntityArray
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityDevice = [NSEntityDescription entityForName:ENTITY_USER inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityDevice];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"userID" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    NSError *error = nil;
+    NSArray *allUserArray = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"error: fetch all user array:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    return allUserArray;
+}
+
++ (GXDatabaseEntityUser *)userEntityWithUserName:(NSString *)userName
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityUser = [NSEntityDescription entityForName:ENTITY_USER inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityUser];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userName == '%@'", userName];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *correspondUserArray = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"bad fetch request: request user with userName:%@", userName);
+        abort();
+    }
+    
+    if (correspondUserArray.count <= 0) {
+        NSLog(@"database has no such user with userName:%@", userName);
+        return nil;
+    }
+    
+    if (correspondUserArray.count > 1) {
+        NSLog(@"error: mutiple user with the same userName:%@", userName);
+    }
+    
+    GXDatabaseEntityUser *user = [correspondUserArray objectAtIndex:0];
+    return user;
+}
+
 
 @end

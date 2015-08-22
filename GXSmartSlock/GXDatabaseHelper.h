@@ -11,4 +11,6 @@
 
 @interface GXDatabaseHelper : NSObject
 
++ (void)insertDeviceIntoDatabase:(NSArray *)deviceArray;
+
 @end
