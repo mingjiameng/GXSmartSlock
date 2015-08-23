@@ -1,12 +1,12 @@
 //
-//  FHRegisterThirdViewController.m
+//  GXRegisterThirdViewController.m
 //  FenHongForIOS
 //
 //  Created by zkey on 8/5/15.
 //  Copyright (c) 2015 GuoXinTech. All rights reserved.
 //
 
-#import "FHRegisterThirdViewController.h"
+#import "GXRegisterThirdViewController.h"
 
 #import "MICRO_COMMON.h"
 
@@ -17,7 +17,7 @@
 
 #import "GXRootViewController.h"
 
-@interface FHRegisterThirdViewController () <UITextFieldDelegate, GXRegisterModelDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface GXRegisterThirdViewController () <UITextFieldDelegate, GXRegisterModelDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     UITextField *_passwordFirstTextField;
     UITextField *_passwordSecondTextField;
@@ -31,7 +31,7 @@
 }
 @end
  
-@implementation FHRegisterThirdViewController
+@implementation GXRegisterThirdViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

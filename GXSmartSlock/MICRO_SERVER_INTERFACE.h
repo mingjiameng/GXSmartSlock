@@ -13,7 +13,9 @@
 #define LOGIN_USER_LIST @"users"
 #define LOGIN_USER_DEVICE_MAPPING @"mappings"
 #define LOGIN_DEVICE_LIST @"devices"
-
+   
 #define GET_VERIFICATION_CODE_STATUS @"status"
+
+#define RESET_PASSWORD_STATUS @"status"
 
 #endif

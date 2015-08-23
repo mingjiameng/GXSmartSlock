@@ -86,6 +86,9 @@
 		44ED41961B896B9700079207 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED418B1B896B9700079207 /* AFURLSessionManager.m */; };
 		44ED41971B896B9700079207 /* GXReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED418D1B896B9700079207 /* GXReachability.m */; };
 		44ED419C1B897ACE00079207 /* GXGetVerificationCodeParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED419B1B897ACE00079207 /* GXGetVerificationCodeParam.m */; };
+		44ED419F1B8A1B7300079207 /* GXVerifyCodeParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED419E1B8A1B7300079207 /* GXVerifyCodeParam.m */; };
+		44ED41A21B8A1F9E00079207 /* GXResetPasswordParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED41A11B8A1F9E00079207 /* GXResetPasswordParam.m */; };
+		44ED41A51B8A214300079207 /* GXRegisterParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED41A41B8A214300079207 /* GXRegisterParam.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -235,6 +238,12 @@
 		44ED41991B89714900079207 /* MICRO_SERVER_INTERFACE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MICRO_SERVER_INTERFACE.h; sourceTree = "<group>"; };
 		44ED419A1B897ACE00079207 /* GXGetVerificationCodeParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXGetVerificationCodeParam.h; sourceTree = "<group>"; };
 		44ED419B1B897ACE00079207 /* GXGetVerificationCodeParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXGetVerificationCodeParam.m; sourceTree = "<group>"; };
+		44ED419D1B8A1B7300079207 /* GXVerifyCodeParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXVerifyCodeParam.h; sourceTree = "<group>"; };
+		44ED419E1B8A1B7300079207 /* GXVerifyCodeParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXVerifyCodeParam.m; sourceTree = "<group>"; };
+		44ED41A01B8A1F9E00079207 /* GXResetPasswordParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXResetPasswordParam.h; sourceTree = "<group>"; };
+		44ED41A11B8A1F9E00079207 /* GXResetPasswordParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXResetPasswordParam.m; sourceTree = "<group>"; };
+		44ED41A31B8A214300079207 /* GXRegisterParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRegisterParam.h; sourceTree = "<group>"; };
+		44ED41A41B8A214300079207 /* GXRegisterParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRegisterParam.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -602,6 +611,12 @@
 				44ED416D1B89682500079207 /* GXLoginParam.m */,
 				44ED419A1B897ACE00079207 /* GXGetVerificationCodeParam.h */,
 				44ED419B1B897ACE00079207 /* GXGetVerificationCodeParam.m */,
+				44ED419D1B8A1B7300079207 /* GXVerifyCodeParam.h */,
+				44ED419E1B8A1B7300079207 /* GXVerifyCodeParam.m */,
+				44ED41A01B8A1F9E00079207 /* GXResetPasswordParam.h */,
+				44ED41A11B8A1F9E00079207 /* GXResetPasswordParam.m */,
+				44ED41A31B8A214300079207 /* GXRegisterParam.h */,
+				44ED41A41B8A214300079207 /* GXRegisterParam.m */,
 			);
 			name = Param;
 			sourceTree = "<group>";
@@ -763,12 +778,14 @@
 				44ED418F1B896B9700079207 /* AFHTTPRequestOperationManager.m in Sources */,
 				44E916EA1B87874300EF9C38 /* zkeyLoginView.m in Sources */,
 				44E916C31B86F42300EF9C38 /* GXLoginViewController.m in Sources */,
+				44ED419F1B8A1B7300079207 /* GXVerifyCodeParam.m in Sources */,
 				44ED41741B8969EE00079207 /* GXSystemInfoHelper.m in Sources */,
 				44E916BC1B86F41300EF9C38 /* GXRegisterSecondViewController.m in Sources */,
 				44E9F7CB1B84D4AC00165234 /* AppDelegate.m in Sources */,
 				44ED41711B89695100079207 /* GXHttpTool.m in Sources */,
 				44E916FE1B8843D100EF9C38 /* GXDeviceUserMappingModel.m in Sources */,
 				44ED41691B89667200079207 /* GXLoginModel.m in Sources */,
+				44ED41A21B8A1F9E00079207 /* GXResetPasswordParam.m in Sources */,
 				44E916F01B87880300EF9C38 /* zkeyIndentifierValidator.m in Sources */,
 				44ED41901B896B9700079207 /* AFHTTPSessionManager.m in Sources */,
 				44E9F8001B85E00100165234 /* GXGuidePageViewController.m in Sources */,
@@ -783,6 +800,7 @@
 				44ED41961B896B9700079207 /* AFURLSessionManager.m in Sources */,
 				44E916BD1B86F41300EF9C38 /* GXRegisterThirdViewController.m in Sources */,
 				44ED419C1B897ACE00079207 /* GXGetVerificationCodeParam.m in Sources */,
+				44ED41A51B8A214300079207 /* GXRegisterParam.m in Sources */,
 				44ED41971B896B9700079207 /* GXReachability.m in Sources */,
 				44ED416E1B89682500079207 /* GXLoginParam.m in Sources */,
 				44ED41631B89654600079207 /* GXDatabaseEntityDeviceUserMappingItem.m in Sources */,

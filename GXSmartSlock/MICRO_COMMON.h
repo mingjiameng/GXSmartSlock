@@ -16,13 +16,15 @@ typedef NS_ENUM(NSInteger, DefaultUnlockMode) {
 #ifndef GXSmartSlock_MICRO_COMMON_h
 #define GXSmartSlock_MICRO_COMMON_h
 
+#define NAVIGATION_BASED_TOP_SPACE 64.0f
+
 // application tint color
 #define MAIN_COLOR [UIColor colorWithRed:51.0/255.0 green:181.0/255.0 blue:229.0/255/0 alpha:1.0]
 
 // data store in [NSUserDefaults standardUserDefaults]
 #define DEFAULT_USER_NAME @"defaultUserName"
 #define DEFAULT_USER_PASSWORD @"defaultUserPassword"
-#define LOGIN_STATUS @"loginStatus"
+#define DEFAULT_LOGIN_STATUS @"loginStatus"
 #define USER_HEAD_IMAGE_FILE_PATH @"userHeadImageFilePath"
 #define APP_VERSION @"appVersion"
 #define DEFAULT_DEVICE_TOKEN @"deviceToken"

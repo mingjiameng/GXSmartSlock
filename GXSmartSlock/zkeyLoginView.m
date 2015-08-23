@@ -99,7 +99,7 @@
     _userNameTextField.layer.borderColor = [[UIColor colorWithWhite:0.9 alpha:1.0] CGColor];
     _userNameTextField.layer.borderWidth = 1.0;
     _userNameTextField.layer.cornerRadius = 2.0;
-    _userNameTextField.placeholder = @"手机号";
+    _userNameTextField.placeholder = @"手机号或邮箱";
     _userNameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     _userNameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     _userNameTextField.returnKeyType = UIReturnKeyNext;

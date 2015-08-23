@@ -12,7 +12,7 @@
 
 #import "zkeyViewHelper.h"
 
-#import "FHRegisterThirdViewController.h"
+#import "GXRegisterThirdViewController.h"
 
 @interface GXRegisterSecondViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 {
@@ -111,7 +111,7 @@
         return;
     }
     
-    FHRegisterThirdViewController *registerThirdVC = [[FHRegisterThirdViewController alloc] init];
+    GXRegisterThirdViewController *registerThirdVC = [[GXRegisterThirdViewController alloc] init];
     registerThirdVC.userName = self.userName;
     registerThirdVC.validityCode = self.validityCode;
     registerThirdVC.nickname = nickname;

@@ -44,7 +44,8 @@
             [self.delegate wrongUserNameOrPassword];
         } else if (status == 1) {
             [[zkeyMiPushPackage sharedMiPush] setAccount:userName];
-            [self initializeDatabaseWithData:result userName:userName password:password];
+            [GXLoginModel initializeDatabaseWithData:result userName:userName password:password];
+            [self.delegate successfullyLogin];
         }
     } failure:^(NSError *error) {
         [self.delegate noNetworkToLogin];
@@ -65,7 +66,6 @@
         
         [GXServerDataAnalyst login:result];
         
-        [self.delegate successfullyLogin];
     });
     
 }

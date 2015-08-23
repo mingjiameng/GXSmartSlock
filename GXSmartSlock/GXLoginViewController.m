@@ -15,7 +15,7 @@
 #import "GXLoginModel.h"
 #import "zkeyMiPushPackage.h"
 
-#import "FHRegisterFirstViewController.h"
+#import "GXRegisterFirstViewController.h"
 
 @interface GXLoginViewController () <zkeyLoginViewDelegate, GXLoginModelDelegate>
 {
@@ -66,14 +66,14 @@
 
 - (void)clickForgetPasswordButton
 {
-    FHRegisterFirstViewController *forgetPassword = [[FHRegisterFirstViewController alloc] init];
+    GXRegisterFirstViewController *forgetPassword = [[GXRegisterFirstViewController alloc] init];
     forgetPassword.viewType = RegisterViewTypeForgetPassword;
     [self.navigationController pushViewController:forgetPassword animated:YES];
 }
 
 - (void)clickRegisterButton
 {
-    FHRegisterFirstViewController *registerVC = [[FHRegisterFirstViewController alloc] init];
+    GXRegisterFirstViewController *registerVC = [[GXRegisterFirstViewController alloc] init];
     registerVC.viewType = RegisterViewTypeRegister;
     [self.navigationController pushViewController:registerVC animated:YES];
 }

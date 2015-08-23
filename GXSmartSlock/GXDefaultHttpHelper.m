@@ -13,6 +13,9 @@
 
 #import "GXLoginParam.h"
 #import "GXGetVerificationCodeParam.h"
+#import "GXVerifyCodeParam.h"
+#import "GXRegisterParam.h"
+#import "GXResetPasswordParam.h"
 
 @implementation GXDefaultHttpHelper
 
@@ -58,6 +61,57 @@
         NSLog(@"error: get verification code interface receive unrecognized param named type:%ld", (long)type);
     }
     
+}
+
++ (void)postWithVerifyCodeParam:(GXVerifyCodeParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_VERIFICATION_CODE : param.verificationCode};
+    
+    
+    [GXHttpTool postWithServerURL:GXVerifyCodeURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"核对验证码失败");
+            failure(error);
+        }
+    }];
+    
+}
+
++ (void)postWithRegisterParam:(GXRegisterParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_VERIFICATION_CODE : param.verificationCode,
+                               KEY_NICKNAME : param.nickname,
+                               KEY_PHONE_INFO : param.phoneInfo};
+    
+    [GXHttpTool postWithServerURL:GXRegisterURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"注册失败");
+            failure(error);
+        }
+    }];
+}
+
++ (void)postWithResetPasswordParam:(GXResetPasswordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_VERIFICATION_CODE : param.verificationCode};
+    
+    [GXHttpTool postWithServerURL:GXResetPasswordURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"重置密码失败");
+            failure(error);
+        }
+    }];
 }
 
 @end

@@ -16,8 +16,8 @@
 #import "zkeyViewHelper.h"
 #import "zkeyActivityIndicatorView.h"
 
-#import "FHRegisterSecondViewController.h"
-#import "FHRegisterThirdViewController.h"
+#import "GXRegisterSecondViewController.h"
+#import "GXRegisterThirdViewController.h"
 
 @interface GXRegisterFirstViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, GXRegisterModelDelegate>
 {
@@ -110,7 +110,7 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     
     if (indexPath.section == 0) {
-        cell.textLabel.text = @"手机号";
+        cell.textLabel.text = @"用户名";
         
         // 手机号输入框
         _userNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width - 110.0f, 30.0)];
@@ -118,7 +118,7 @@
         _userNameTextField.borderStyle = UITextBorderStyleNone;
         _userNameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _userNameTextField.returnKeyType = UIReturnKeyDone;
-        _userNameTextField.placeholder = @"请输入您的手机号";
+        _userNameTextField.placeholder = @"请输入手机号或邮箱";
         _userNameTextField.delegate = self;
         cell.accessoryView = _userNameTextField;
     } else if (indexPath.section == 1) {
@@ -152,7 +152,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        return @"该手机号将作为您的用户名";
+        return @"该手机号/邮箱将作为您的用户名";
     } else if (section == 1) {
         return @"验证码300秒内有效";
     }
@@ -179,7 +179,7 @@
         } else {
             _userName = _userNameTextField.text;
             if (![zkeyIndentifierValidator isValidChinesePhoneNumber:_userName]) {
-                [self alertWithMessage:@"请输入正确的手机号"];
+                [self alertWithMessage:@"请输入正确的手机号或邮箱"];
                 return NO;
             }
             
@@ -305,14 +305,14 @@
     }
     
     if (self.viewType == RegisterViewTypeForgetPassword) {
-        FHRegisterThirdViewController *registerThridStep = [[FHRegisterThirdViewController alloc] init];
+        GXRegisterThirdViewController *registerThridStep = [[GXRegisterThirdViewController alloc] init];
         registerThridStep.userName = _userName;
         registerThridStep.validityCode = _validityCode;
         registerThridStep.viewType = self.viewType;
         
         [self.navigationController pushViewController:registerThridStep animated:YES];
     } else if (self.viewType == RegisterViewTypeRegister) {
-        FHRegisterSecondViewController *registerSecondStep = [[FHRegisterSecondViewController alloc] init];
+        GXRegisterSecondViewController *registerSecondStep = [[GXRegisterSecondViewController alloc] init];
         registerSecondStep.userName = _userName;
         registerSecondStep.validityCode = _validityCode;
         registerSecondStep.viewType = self.viewType;

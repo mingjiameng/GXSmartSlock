@@ -14,10 +14,16 @@
 #define GXLoginURL [NSString stringWithFormat:@"%@user_exist", GXBaseURL]
 #define GXGetVerificationCodeForRegisetURL [NSString stringWithFormat:@"%@submit_account", GXBaseURL]
 #define GXGetVerificationCodeForResetPasswordURL [NSString stringWithFormat:@"%@submit_account_reset_pw", GXBaseURL]
+#define GXVerifyCodeURL [NSString stringWithFormat:@"%@verify_account", GXBaseURL]
+#define GXRegisterURL [NSString stringWithFormat:@"%@user_register", GXBaseURL]
+#define GXResetPasswordURL [NSString stringWithFormat:@"%@reset_password",GXBaseURL]
+
+
 
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"
 #define KEY_PHONE_INFO @"phone_info"
-
+#define KEY_VERIFICATION_CODE @"code"
+#define KEY_NICKNAME @"nickname"
 
 #endif
