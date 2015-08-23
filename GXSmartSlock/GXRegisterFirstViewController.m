@@ -1,12 +1,12 @@
 //
-//  FHRegisterFirstViewController.m
+//  GXRegisterFirstViewController.m
 //  FenHongForIOS
 //
 //  Created by zkey on 8/5/15.
 //  Copyright (c) 2015 GuoXinTech. All rights reserved.
 //
 
-#import "FHRegisterFirstViewController.h"
+#import "GXRegisterFirstViewController.h"
 
 #import "MICRO_COMMON.h"
 
@@ -19,7 +19,7 @@
 #import "FHRegisterSecondViewController.h"
 #import "FHRegisterThirdViewController.h"
 
-@interface FHRegisterFirstViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, GXRegisterModelDelegate>
+@interface GXRegisterFirstViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, GXRegisterModelDelegate>
 {
     UITableView *_tableView;
     UIButton *_nextStepButton;
@@ -43,7 +43,7 @@
 }
 @end
 
-@implementation FHRegisterFirstViewController
+@implementation GXRegisterFirstViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

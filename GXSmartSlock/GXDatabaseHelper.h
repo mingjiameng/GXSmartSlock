@@ -11,6 +11,12 @@
 
 @interface GXDatabaseHelper : NSObject
 
+
 + (void)insertDeviceIntoDatabase:(NSArray *)deviceArray;
++ (void)insertDeviceUserMappingItemIntoDatabase:(NSArray *)deviceUserMappingArray;
++ (void)insertUserIntoDatabase:(NSArray *)userArray;
+
+/************************seperator*********************************/
++ (NSFetchedResultsController *)validDeviceFetchedResultsController;
 
 @end

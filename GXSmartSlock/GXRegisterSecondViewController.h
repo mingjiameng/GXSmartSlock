@@ -1,5 +1,5 @@
 //
-//  FHRegisterFirstViewController.h
+//  GXRegisterSecondViewController.h
 //  FenHongForIOS
 //
 //  Created by zkey on 8/5/15.
@@ -10,8 +10,10 @@
 
 #import "MICRO_LOGIN.h"
 
-@interface FHRegisterFirstViewController : UIViewController
+@interface GXRegisterSecondViewController : UIViewController
 
+@property (nonatomic, copy) NSString *userName;
+@property (nonatomic, copy) NSString *validityCode;
 @property (nonatomic) RegisterViewType viewType;
 
 @end

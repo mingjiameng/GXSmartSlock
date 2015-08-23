@@ -18,6 +18,18 @@
 
 @implementation GXServerDataAnalyst
 
++ (void)login:(NSDictionary *)data
+{
+    NSArray *deviceList = [data objectForKey:LOGIN_KEY_DEVICE_LIST];
+    [self insertDeviceIntoDatabase:deviceList];
+    
+    NSArray *userList = [data objectForKey:LOGIN_KEY_USER_LIST];
+    [self insertUserIntoDatabase:userList];
+    
+    NSArray *deviceUserMappingList = [data objectForKey:LOGIN_KEY_DEVICE_USER_MAPPING_LIST];
+    [self insertDeviceUserMappingItemIntoDatabase:deviceUserMappingList];
+}
+
 + (void)insertDeviceIntoDatabase:(NSArray *)deviceArray
 {
     NSMutableArray *deviceModelArray = [NSMutableArray array];

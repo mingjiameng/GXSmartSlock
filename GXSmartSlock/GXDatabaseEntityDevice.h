@@ -2,34 +2,34 @@
 //  GXDatabaseEntityDevice.h
 //  GXSmartSlock
 //
-//  Created by zkey on 8/22/15.
+//  Created by zkey on 8/23/15.
 //  Copyright (c) 2015 guosim. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class GXDatabaseEntityDeviceUserMapping, GXDatabaseEntityRecord;
+@class GXDatabaseEntityDeviceUserMappingItem, GXDatabaseEntityRecord;
 
 @interface GXDatabaseEntityDevice : NSManagedObject
 
-@property (nonatomic, retain) NSString * deviceCategory;
+@property (nonatomic, retain) NSString * deviceAuthority;
 @property (nonatomic, retain) NSNumber * deviceBattery;
+@property (nonatomic, retain) NSString * deviceCategory;
 @property (nonatomic, retain) NSNumber * deviceID;
 @property (nonatomic, retain) NSString * deviceIdentifire;
 @property (nonatomic, retain) NSString * deviceKey;
-@property (nonatomic, retain) NSNumber * deviceVersion;
-@property (nonatomic, retain) NSString * deviceStatus;
 @property (nonatomic, retain) NSString * deviceNickname;
-@property (nonatomic, retain) NSString * deviceAuthority;
+@property (nonatomic, retain) NSString * deviceStatus;
+@property (nonatomic, retain) NSNumber * deviceVersion;
 @property (nonatomic, retain) NSSet *deviceUsers;
 @property (nonatomic, retain) NSSet *unlockRecords;
 @end
 
 @interface GXDatabaseEntityDevice (CoreDataGeneratedAccessors)
 
-- (void)addDeviceUsersObject:(GXDatabaseEntityDeviceUserMapping *)value;
-- (void)removeDeviceUsersObject:(GXDatabaseEntityDeviceUserMapping *)value;
+- (void)addDeviceUsersObject:(GXDatabaseEntityDeviceUserMappingItem *)value;
+- (void)removeDeviceUsersObject:(GXDatabaseEntityDeviceUserMappingItem *)value;
 - (void)addDeviceUsers:(NSSet *)values;
 - (void)removeDeviceUsers:(NSSet *)values;
 

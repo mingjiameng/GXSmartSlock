@@ -9,6 +9,12 @@
 #ifndef GXSmartSlock_MICRO_SERVER_DATA_h
 #define GXSmartSlock_MICRO_SERVER_DATA_h
 
+// key in dicationary "login"
+#define LOGIN_KEY_DEVICE_LIST @"devices"
+#define LOGIN_KEY_DEVICE_USER_MAPPING_LIST @"mappings"
+#define LOGIN_KEY_RECORD_LIST @"records"
+#define LOGIN_KEY_USER_LIST @"users"
+
 // key in dictionary "device"
 #define DEVICE_KEY_ID @"id"
 #define DEVICE_KEY_CATEGORY @"category"

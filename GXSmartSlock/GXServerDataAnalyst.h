@@ -10,4 +10,9 @@
 
 @interface GXServerDataAnalyst : NSObject
 
++ (void)login:(NSDictionary *)data;
++ (void)insertDeviceIntoDatabase:(NSArray *)deviceArray;
++ (void)insertDeviceUserMappingItemIntoDatabase:(NSArray *)deviceUserMappingItemArray;
++ (void)insertUserIntoDatabase:(NSArray *)userArray;
+
 @end

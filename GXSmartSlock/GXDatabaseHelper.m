@@ -275,7 +275,14 @@
     return fetchedResultsController;
 }
 
-
++ (GXDatabaseEntityUser *)defaultUser
+{
+    NSString *defaultUserName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
+    
+    GXDatabaseEntityUser *user = [self userEntityWithUserName:defaultUserName];
+    
+    return user;
+}
 /*
  the following method provide neccessary assistant
  */

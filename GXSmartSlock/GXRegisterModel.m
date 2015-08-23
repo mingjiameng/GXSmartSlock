@@ -10,14 +10,13 @@
 
 #import "MICRO_COMMON.h"
 #import "MICRO_LOGIN.h"
+#import "MICRO_SERVER_INTERFACE.h"
 
-#import "GXEMailHttpTool.h"
-#import "GXResourceHelper.h"
-#import "GXUserRegisterParam.h"
-#import "GXAuthHttpTool.h"
-#import "GXResetPasswordParam.h"
-#import "GXDataManager.h"
+#import "GXGetVerificationCodeParam.h"
+
+#import "GXDefaultHttpHelper.h"
 #import "zkeyMiPushPackage.h"
+#import "GXLoginModel.h"
 
 #import <sys/utsname.h>
 
@@ -25,27 +24,26 @@
 
 - (void)getValidCode:(NSString *)userName withType:(RegisterViewType)type
 {
+    GXGetVerificationCodeParam *param = [GXGetVerificationCodeParam paramWithUserName:userName];
+    
+    VerificationCodeType codeType = VerificationCodeTypeRegister;
     if (type == RegisterViewTypeRegister) {
-        [GXEMailHttpTool submitAccountInfoWithParams:userName succeed:^(GXUserExistResult *result) {
-            if (result.status == 0) {
-                [self.delegate invalidUserName];
-            } else {
-                [self.delegate validUserName];
-            }
-        } failure:^(NSError *error) {
-            [self.delegate noNetwork];
-        }];
+        codeType = VerificationCodeTypeRegister;
     } else if (type == RegisterViewTypeForgetPassword) {
-        [GXEMailHttpTool forgetAccountInfoWithParams:userName succeed:^(GXUserExistResult *result) {
-            if (result.status == 0) {
-                [self.delegate invalidUserName];
-            } else {
-                [self.delegate validUserName];
-            }
-        } failure:^(NSError *error) {
-            [self.delegate noNetwork];
-        }];
+        codeType = VerificationCodeTypeResetPassword;
     }
+    
+    [GXDefaultHttpHelper postWithGetVerificationCodeParam:param codeType:codeType success:^(NSDictionary *result) {
+        NSInteger status = [[result objectForKey:GET_VERIFICATION_CODE_STATUS] integerValue];
+        if (status == 0) {
+            [self.delegate invalidUserName];
+        } else if (status == 1) {
+            [self.delegate validUserName];
+        }
+        
+    } failure:^(NSError *error) {
+        [self.delegate noNetwork];
+    }];
 }
 
 - (void)checkValidCode:(NSString *)validCode withUserName:(NSString *)userName
@@ -107,34 +105,9 @@
     }];
 }
 
-- (void)initializeDatabaseWithData:(GXRegisterResult *)result andParam:(GXUserRegisterParam *)param
+- (void)initializeDatabaseWithData:(GXRegisterResult *)result userName:(NSString *)userName password:(NSString *)password
 {
-    // 必须放在主线程里执行
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [kUserDefault setBool:false forKey:DEFAULT_LOGOUT_STATUS];
-        [kUserDefault setObject:result.uuid forKey:DEFAULT_USER_UUID];
-        [kUserDefault setObject:param.username forKey:DEFAULT_USER_NAME];
-        [kUserDefault setObject:param.password forKey:DEFAULT_USER_PASSWORD];
-        [kUserDefault setObject:param.nickname forKey:DEFAULT_USER_NICKNAME];
-        [kUserDefault setObject:[NSNumber numberWithInteger:DefaultUnlockModeManul] forKey:DEFAULT_UNLOCK_MODE];
-        [kUserDefault synchronize];
-        
-        
-        // 与miPush绑定
-        [[zkeyMiPushPackage sharedMiPush] setAccount:param.username];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_NICKNAME_NOTIFICATION object:nil];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:UNLOCK_MODE_CHANGE_NOTIFICATION object:nil];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:APPLICATION_DID_BECOME_ACTIVE_NOTIFICATION object:nil];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:TRANSFORM_TO_DEVICE_LIST_NOTIFICATION object:nil];
-        
-        [self.delegate registerOrResetSucceed];
-    });
-    
-    
+    [GXLoginModel initializeDatabaseWithData:result userName:userName password:password];
 }
 
 @end

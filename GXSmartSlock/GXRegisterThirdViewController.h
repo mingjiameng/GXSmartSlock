@@ -1,5 +1,5 @@
 //
-//  FHRegisterThirdViewController.h
+//  GXRegisterThirdViewController.h
 //  FenHongForIOS
 //
 //  Created by zkey on 8/5/15.
@@ -10,7 +10,7 @@
 
 #import "MICRO_LOGIN.h"
 
-@interface FHRegisterThirdViewController : UIViewController
+@interface GXRegisterThirdViewController : UIViewController
 
 @property (nonatomic, copy) NSString *userName;
 @property (nonatomic, copy) NSString *nickname;

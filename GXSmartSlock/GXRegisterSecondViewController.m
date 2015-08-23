@@ -1,12 +1,12 @@
 //
-//  FHRegisterSecondViewController.m
+//  GXRegisterSecondViewController.m
 //  FenHongForIOS
 //
 //  Created by zkey on 8/5/15.
 //  Copyright (c) 2015 GuoXinTech. All rights reserved.
 //
 
-#import "FHRegisterSecondViewController.h"
+#import "GXRegisterSecondViewController.h"
 
 #import "MICRO_COMMON.h"
 
@@ -14,7 +14,7 @@
 
 #import "FHRegisterThirdViewController.h"
 
-@interface FHRegisterSecondViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface GXRegisterSecondViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     UITextField *_nicknameTextField;
     UIButton *_nextStepButton;
@@ -23,7 +23,7 @@
 }
 @end
 
-@implementation FHRegisterSecondViewController
+@implementation GXRegisterSecondViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

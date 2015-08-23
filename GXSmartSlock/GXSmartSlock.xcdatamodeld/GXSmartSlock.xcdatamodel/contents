@@ -30,18 +30,19 @@
         <attribute name="eventType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="senderUserName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="device" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXDevice" inverseName="unlockRecords" inverseEntity="GXDevice" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXUser" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXUser" inverseName="records" inverseEntity="GXUser" syncable="YES"/>
     </entity>
     <entity name="GXUser" representedClassName="GXDatabaseEntityUser" syncable="YES">
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="devices" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GXDevice_User_Mapping" inverseName="user" inverseEntity="GXDevice_User_Mapping" syncable="YES"/>
+        <relationship name="devices" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXDevice_User_Mapping" inverseName="user" inverseEntity="GXDevice_User_Mapping" syncable="YES"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXRecord" inverseName="user" inverseEntity="GXRecord" syncable="YES"/>
     </entity>
     <elements>
         <element name="GXDevice" positionX="-36" positionY="45" width="128" height="210"/>
         <element name="GXDevice_User_Mapping" positionX="-18" positionY="90" width="128" height="165"/>
         <element name="GXRecord" positionX="-54" positionY="18" width="128" height="150"/>
-        <element name="GXUser" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="GXUser" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>
