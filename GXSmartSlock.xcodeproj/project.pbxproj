@@ -15,7 +15,6 @@
 		44E916C71B86F46300EF9C38 /* GXRegisterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916C61B86F46300EF9C38 /* GXRegisterModel.m */; };
 		44E916DC1B87157400EF9C38 /* GXDatabaseEntityRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916DB1B87157400EF9C38 /* GXDatabaseEntityRecord.m */; };
 		44E916E21B87158800EF9C38 /* GXDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916E11B87158800EF9C38 /* GXDatabaseHelper.m */; };
-		44E916EA1B87874300EF9C38 /* zkeyLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916E91B87874300EF9C38 /* zkeyLoginView.m */; };
 		44E916F01B87880300EF9C38 /* zkeyIndentifierValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916EF1B87880300EF9C38 /* zkeyIndentifierValidator.m */; };
 		44E916F51B880EA300EF9C38 /* GXDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916F41B880EA300EF9C38 /* GXDeviceModel.m */; };
 		44E916FE1B8843D100EF9C38 /* GXDeviceUserMappingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916FD1B8843D100EF9C38 /* GXDeviceUserMappingModel.m */; };
@@ -67,6 +66,7 @@
 		44E9F83D1B85F00400165234 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F83C1B85F00400165234 /* libz.dylib */; };
 		44E9F83F1B85F01800165234 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F83E1B85F01800165234 /* libsqlite3.0.dylib */; };
 		44E9F8411B85F02500165234 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F8401B85F02500165234 /* libc++.dylib */; };
+		44ED1D411B8B15C200F1A7F4 /* zkeyLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED1D401B8B15C200F1A7F4 /* zkeyLoginView.m */; };
 		44ED41601B89654600079207 /* GXDatabaseEntityDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED415F1B89654600079207 /* GXDatabaseEntityDevice.m */; };
 		44ED41631B89654600079207 /* GXDatabaseEntityDeviceUserMappingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED41621B89654600079207 /* GXDatabaseEntityDeviceUserMappingItem.m */; };
 		44ED41661B89654600079207 /* GXDatabaseEntityUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED41651B89654600079207 /* GXDatabaseEntityUser.m */; };
@@ -118,8 +118,6 @@
 		44E916E01B87158800EF9C38 /* GXDatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDatabaseHelper.h; sourceTree = "<group>"; };
 		44E916E11B87158800EF9C38 /* GXDatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDatabaseHelper.m; sourceTree = "<group>"; };
 		44E916E31B877F5000EF9C38 /* MICRO_COREDATA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MICRO_COREDATA.h; sourceTree = "<group>"; };
-		44E916E81B87874300EF9C38 /* zkeyLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyLoginView.h; sourceTree = "<group>"; };
-		44E916E91B87874300EF9C38 /* zkeyLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyLoginView.m; sourceTree = "<group>"; };
 		44E916EB1B87878500EF9C38 /* MICRO_LOGIN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MICRO_LOGIN.h; sourceTree = "<group>"; };
 		44E916EE1B87880300EF9C38 /* zkeyIndentifierValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyIndentifierValidator.h; sourceTree = "<group>"; };
 		44E916EF1B87880300EF9C38 /* zkeyIndentifierValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyIndentifierValidator.m; sourceTree = "<group>"; };
@@ -197,6 +195,8 @@
 		44E9F83C1B85F00400165234 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		44E9F83E1B85F01800165234 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		44E9F8401B85F02500165234 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		44ED1D3F1B8B15C200F1A7F4 /* zkeyLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyLoginView.h; sourceTree = "<group>"; };
+		44ED1D401B8B15C200F1A7F4 /* zkeyLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyLoginView.m; sourceTree = "<group>"; };
 		44ED415E1B89654600079207 /* GXDatabaseEntityDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDatabaseEntityDevice.h; sourceTree = "<group>"; };
 		44ED415F1B89654600079207 /* GXDatabaseEntityDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDatabaseEntityDevice.m; sourceTree = "<group>"; };
 		44ED41611B89654600079207 /* GXDatabaseEntityDeviceUserMappingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDatabaseEntityDeviceUserMappingItem.h; sourceTree = "<group>"; };
@@ -304,8 +304,8 @@
 		44E916E71B87871C00EF9C38 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				44E916E81B87874300EF9C38 /* zkeyLoginView.h */,
-				44E916E91B87874300EF9C38 /* zkeyLoginView.m */,
+				44ED1D3F1B8B15C200F1A7F4 /* zkeyLoginView.h */,
+				44ED1D401B8B15C200F1A7F4 /* zkeyLoginView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -776,7 +776,6 @@
 				44ED41601B89654600079207 /* GXDatabaseEntityDevice.m in Sources */,
 				44E9F7CE1B84D4AC00165234 /* GXSmartSlock.xcdatamodeld in Sources */,
 				44ED418F1B896B9700079207 /* AFHTTPRequestOperationManager.m in Sources */,
-				44E916EA1B87874300EF9C38 /* zkeyLoginView.m in Sources */,
 				44E916C31B86F42300EF9C38 /* GXLoginViewController.m in Sources */,
 				44ED419F1B8A1B7300079207 /* GXVerifyCodeParam.m in Sources */,
 				44ED41741B8969EE00079207 /* GXSystemInfoHelper.m in Sources */,
@@ -801,6 +800,7 @@
 				44E916BD1B86F41300EF9C38 /* GXRegisterThirdViewController.m in Sources */,
 				44ED419C1B897ACE00079207 /* GXGetVerificationCodeParam.m in Sources */,
 				44ED41A51B8A214300079207 /* GXRegisterParam.m in Sources */,
+				44ED1D411B8B15C200F1A7F4 /* zkeyLoginView.m in Sources */,
 				44ED41971B896B9700079207 /* GXReachability.m in Sources */,
 				44ED416E1B89682500079207 /* GXLoginParam.m in Sources */,
 				44ED41631B89654600079207 /* GXDatabaseEntityDeviceUserMappingItem.m in Sources */,

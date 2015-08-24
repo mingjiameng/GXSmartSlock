@@ -14,8 +14,8 @@
 #define TOOL_BAR_SECOND_CELL_TITLE @"发送钥匙"
 #define TOOL_BAR_THIRD_CELL_TITLE @"开锁记录"
 
-#define TOOL_BAR_FIRST_CELL_IMG @"HomePageToolBarFirst"
-#define TOOL_BAR_SECOND_CELL_IMG @"HomePageToolBarSecond"
-#define TOOL_BAR_THIRD_CELL_IMG @"HomePageToolBarThird"
+#define TOOL_BAR_FIRST_CELL_IMG @"myDevice"
+#define TOOL_BAR_SECOND_CELL_IMG @"sendKey"
+#define TOOL_BAR_THIRD_CELL_IMG @"notificationCenter"
 
 #endif

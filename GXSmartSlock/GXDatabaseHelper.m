@@ -43,26 +43,56 @@
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
     
-    for (GXDeviceModel *deviceModel in deviceArray) {
-        GXDatabaseEntityDevice *newDeviceEntity = [self deviceEntityWithDeviceIdentifire:deviceModel.deviceIdentifire];
+    deviceArray = [deviceArray sortedArrayUsingComparator:^NSComparisonResult(GXDeviceModel *obj1, GXDeviceModel *obj2) {
+        return (obj2.deviceID <= obj1.deviceID);
+    }];
+    NSArray *localDeviceArray = [self allDeviceArray];
+    
+    NSMutableArray *deviceNeedToInsert = [NSMutableArray array];
+    NSInteger index01 = 0, index02 = 0;
+    NSInteger indexBorder01 = deviceArray.count;
+    NSInteger indexBorder02 = localDeviceArray.count;
+    NSInteger deviceID01, deviceID02;
+    
+    while (index01 < indexBorder01 && index02 < indexBorder02) {
+        GXDeviceModel *deviceModel = [deviceArray objectAtIndex:index01];
+        GXDatabaseEntityDevice *deviceEntity = [localDeviceArray objectAtIndex:index02];
+        deviceID01 = deviceModel.deviceID;
+        deviceID02 = [deviceEntity.deviceID integerValue];
         
-        if (newDeviceEntity != nil) {
-            NSNumber *batteryNumber = newDeviceEntity.deviceBattery;
+        if (deviceID01 > deviceID02) {
+            [deviceNeedToInsert addObject:deviceModel];
+            ++index01;
+            continue;
+        }
+        
+        if (deviceID01 == deviceID02) {
+            // update device information
+            NSNumber *batteryNumber = deviceEntity.deviceBattery;
             if ([batteryNumber integerValue] != deviceModel.deviceBattery) {
                 batteryNumber = [NSNumber numberWithInteger:deviceModel.deviceBattery];
-                newDeviceEntity.deviceBattery = batteryNumber;
+                deviceEntity.deviceBattery = batteryNumber;
             }
             
-            NSNumber *versionNumber = newDeviceEntity.deviceVersion;
+            NSNumber *versionNumber = deviceEntity.deviceVersion;
             if ([versionNumber integerValue] != deviceModel.deviceVersion) {
                 versionNumber = [NSNumber numberWithInteger:deviceModel.deviceVersion];
-                newDeviceEntity.deviceVersion = versionNumber;
+                deviceEntity.deviceVersion = versionNumber;
             }
             
             continue;
         }
         
-        newDeviceEntity = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_DEVICE inManagedObjectContext:managedObjectContext];
+        if (deviceID01 < deviceID02) {
+            [managedObjectContext deleteObject:deviceEntity];
+            continue;
+        }
+        
+    }
+    
+    for (GXDeviceModel *deviceModel in deviceNeedToInsert) {
+        GXDatabaseEntityDevice *newDeviceEntity = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_DEVICE inManagedObjectContext:managedObjectContext];
+        
         newDeviceEntity.deviceBattery = [NSNumber numberWithInteger:deviceModel.deviceBattery];
         newDeviceEntity.deviceCategory = deviceModel.deviceCategory;
         newDeviceEntity.deviceID = [NSNumber numberWithInteger:deviceModel.deviceID];
@@ -72,6 +102,8 @@
     }
     
     [self saveContext];
+    
+    NSLog(@"successfully insert device");
 }
 
 + (void)insertDeviceUserMappingItemIntoDatabase:(NSArray *)deviceUserMappingArray
@@ -151,6 +183,7 @@
         GXDatabaseEntityUser *user = [self userEntityWithUserName:deviceUserMappingModel.userName];
         if (user == nil) {
             NSLog(@"error: deviceUserMappingModel has no correspond user with userName:%@", deviceUserMappingModel.userName);
+            continue;
         }
         
         GXDatabaseEntityDeviceUserMappingItem *newDeviceUserMappingItem = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_DEVICE_USER_MAPPING inManagedObjectContext:managedObjectContext];
@@ -174,6 +207,8 @@
     }
     
     [self saveContext];
+    
+    NSLog(@"successfully insert deviceUserMapping");
 }
 
 + (void)insertUserIntoDatabase:(NSArray *)userArray
@@ -243,6 +278,8 @@
     }
     
     [self saveContext];
+    
+    NSLog(@"successfullt insert user");
 }
 
 /*
@@ -317,7 +354,7 @@
     NSEntityDescription *entityDevice = [NSEntityDescription entityForName:ENTITY_DEVICE inManagedObjectContext:managedObjectContext];
     [fetchRequest setEntity:entityDevice];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceIdentifire == '%@'", deviceIdentifire];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceIdentifire == %@", deviceIdentifire];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;
@@ -339,6 +376,29 @@
     
     GXDatabaseEntityDevice *device = [correspondDeviceArray objectAtIndex:0];
     return device;
+}
+
++ (NSArray *)allDeviceArray
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityDevice = [NSEntityDescription entityForName:ENTITY_DEVICE inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityDevice];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"deviceID" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    NSError *error = nil;
+    NSArray *allDevice = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"error: fetch all device array:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    return allDevice;
 }
 
 + (NSArray *)allDeviceUserMappingArray
@@ -430,7 +490,7 @@
     NSEntityDescription *entityUser = [NSEntityDescription entityForName:ENTITY_USER inManagedObjectContext:managedObjectContext];
     [fetchRequest setEntity:entityUser];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userName == '%@'", userName];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userName == %@", userName];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;

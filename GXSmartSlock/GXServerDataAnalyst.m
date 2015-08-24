@@ -67,7 +67,7 @@
         [deviceUserMappingModelArray addObject:deviceUserMappingModel];
     }
     
-    // TO DO - send data to database
+    [GXDatabaseHelper insertDeviceUserMappingItemIntoDatabase:deviceUserMappingModelArray];
 }
 
 + (void)insertUserIntoDatabase:(NSArray *)userArray
@@ -84,7 +84,7 @@
         [userModelArray addObject:userModel];
     }
     
-    // TO DO - send data to database
+    [GXDatabaseHelper insertUserIntoDatabase:userModelArray];
 }
 
 @end

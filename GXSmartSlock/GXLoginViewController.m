@@ -16,6 +16,7 @@
 #import "zkeyMiPushPackage.h"
 
 #import "GXRegisterFirstViewController.h"
+#import "GXRootViewController.h"
 
 @interface GXLoginViewController () <zkeyLoginViewDelegate, GXLoginModelDelegate>
 {
@@ -92,9 +93,10 @@
 - (void)successfullyLogin
 {
     [_loginView successfullyLogin];
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    
+    GXRootViewController *rootVC = [[GXRootViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:rootVC];
+    self.view.window.rootViewController = navigationController;
 }
 
 

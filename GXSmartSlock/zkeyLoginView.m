@@ -79,6 +79,10 @@
     _loginScrollView.contentOffset = CGPointZero;
     _loginScrollView.delegate = self;
     [self addSubview:_loginScrollView];
+    
+    UIButton *hideKeyboardButton = [[UIButton alloc] initWithFrame:_loginScrollView.bounds];
+    [hideKeyboardButton addTarget:self action:@selector(hideKeyboard:) forControlEvents:UIControlEventTouchUpInside];
+    [_loginScrollView addSubview:hideKeyboardButton];
 }
 
 - (void)addAppIconImageView:(CGRect)frame
@@ -215,7 +219,6 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     [_loginScrollView setContentOffset:CGPointMake(0, 25.0) animated:YES];
-    _loginScrollView.scrollEnabled = YES;
     
     return YES;
 }
@@ -223,7 +226,6 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     [_loginScrollView setContentOffset:CGPointZero animated:YES];
-    _loginScrollView.scrollEnabled = NO;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -262,7 +264,6 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [_loginScrollView setContentOffset:CGPointZero animated:YES];
-    _loginScrollView.scrollEnabled = NO;
 }
 
 #pragma mark - action feedback
@@ -274,7 +275,10 @@
 
 - (void)successfullyLogin
 {
-    [_loginActivityIndicator removeFromSuperview];
+    if (_loginActivityIndicator != nil) {
+        [_loginActivityIndicator removeFromSuperview];
+    }
+    
 }
 
 - (void)wrongUserNameOrPassword
@@ -283,4 +287,9 @@
     [zkeyViewHelper alertWithMessage:@"用户名或密码错误" inView:self withFrame:self.frame];
 }
 
+- (void)hideKeyboard:(UIButton *)sender
+{
+    [_userNameTextField resignFirstResponder];
+    [_passwordTextField resignFirstResponder];
+}
 @end

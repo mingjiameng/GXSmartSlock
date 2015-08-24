@@ -17,6 +17,7 @@
 
 #import "GXGuidePageViewController.h"
 #import "GXRootViewController.h"
+#import "GXLoginViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -44,8 +45,16 @@
         GXGuidePageViewController *guidePageVC = [[GXGuidePageViewController alloc] init];
         _window.rootViewController = guidePageVC;
     } else {
-        GXRootViewController *rootVC = [[GXRootViewController alloc] init];
-        UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:rootVC];
+        UINavigationController *navigation = nil;
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:DEFAULT_LOGIN_STATUS]) {
+            GXRootViewController *rootVC = [[GXRootViewController alloc] init];
+            navigation = [[UINavigationController alloc] initWithRootViewController:rootVC];
+            
+        } else {
+            GXLoginViewController *loginVC = [[GXLoginViewController alloc] init];
+            navigation = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        }
+        
         _window.rootViewController = navigation;
     }
     
