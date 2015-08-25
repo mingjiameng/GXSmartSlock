@@ -19,10 +19,14 @@
 
 #import <CoreData/CoreData.h>
 
-@interface GXRootViewController ()
+
+#define BOTTOM_TOOL_BAR_HEIGHT 100.0F
+
+@interface GXRootViewController () <NSFetchedResultsControllerDelegate>
 {
     UIButton *_selectUnlockModeButton;
     NSFetchedResultsController *_validKeyFetchedResultsController;
+    UIButton *_centralButton;
 }
 @end
 
@@ -33,10 +37,10 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    CGFloat toolBarHeight = 100.0;
-    [self addToolBar:CGRectMake(0, self.view.frame.size.height - TOP_SPACE_IN_NAVIGATION_MODE - toolBarHeight, self.view.frame.size.width, toolBarHeight)];
+    [self addToolBar:CGRectMake(0, self.view.frame.size.height - TOP_SPACE_IN_NAVIGATION_MODE - BOTTOM_TOOL_BAR_HEIGHT, self.view.frame.size.width, BOTTOM_TOOL_BAR_HEIGHT)];
     
     [self configNavigationBar];
+    [self configCentralButton];
 }
 
 - (void)configNavigationBar
@@ -59,9 +63,53 @@
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
+- (void)reloadView
+{
+    [self configNavigationBarTitleView];
+    [self configCentralButton];
+}
+
+- (void)configCentralButton
+{
+    if (_centralButton == nil) {
+        CGFloat buttonSize = fmin(self.view.frame.size.height - TOP_SPACE_IN_NAVIGATION_MODE - BOTTOM_TOOL_BAR_HEIGHT - 40.0f, self.view.frame.size.width - 40.0f);
+        CGFloat verticalSpace = (self.view.frame.size.height - buttonSize - TOP_SPACE_IN_NAVIGATION_MODE - BOTTOM_TOOL_BAR_HEIGHT) / 2.0;
+        CGFloat centralY = verticalSpace + buttonSize / 2.0;
+        _centralButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)];
+        _centralButton.center = CGPointMake(self.view.frame.size.width / 2.0, centralY);
+        
+        [self.view addSubview:_centralButton];
+    }
+    
+    [_centralButton removeTarget:self action:@selector(autoUnlockGuide:) forControlEvents:UIControlEventTouchUpInside];
+    [_centralButton removeTarget:self action:@selector(shakeUnlockGuide:) forControlEvents:UIControlEventTouchUpInside];
+    [_centralButton removeTarget:self action:@selector(manulUnlock:) forControlEvents:UIControlEventTouchUpInside];
+    
+    NSString *backgroundImageName = CENTRAL_BUTTON_TYPE_NONE;
+    if ([self isThereValidDevice]) {
+        DefaultUnlockMode unlockMode = [self unlockMode];
+        if (unlockMode == DefaultUnlockModeManul) {
+            backgroundImageName = CENTRAL_BUTTON_TYPE_MANUL;
+            [_centralButton addTarget:self action:@selector(manulUnlock:) forControlEvents:UIControlEventTouchUpInside];
+        } else if (unlockMode == DefaultUnlockModeAuto) {
+            backgroundImageName = CENTRAL_BUTTON_TYPE_AUTO;
+            [_centralButton addTarget:self action:@selector(autoUnlockGuide:) forControlEvents:UIControlEventTouchUpInside];
+        } else if (unlockMode == DefaultUnlockModeShake) {
+            backgroundImageName = CENTRAL_BUTTON_TYPE_SHAKE;
+            [_centralButton addTarget:self action:@selector(shakeUnlockGuide:) forControlEvents:UIControlEventTouchUpInside];
+        } else {
+            NSLog(@"invalid unlock mode");
+        }
+    } else {
+        backgroundImageName = CENTRAL_BUTTON_TYPE_NONE;
+    }
+    
+    [_centralButton setBackgroundImage:[UIImage imageNamed:backgroundImageName] forState:UIControlStateNormal];
+}
+
 - (void)configNavigationBarTitleView
 {
-    if ([self isThereUseableDevice]) {
+    if ([self isThereValidDevice]) {
         if (_selectUnlockModeButton == nil) {
             _selectUnlockModeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100.0f, 22.0f)];
             _selectUnlockModeButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0];
@@ -78,17 +126,9 @@
     }
 }
 
-
-
 - (NSString *)currentUnlockModeDescription
 {
-    NSNumber *unlockModeNumber = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_UNLOCK_MODE];
-    if (unlockModeNumber == nil) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:DefaultUnlockModeManul] forKey:DEFAULT_UNLOCK_MODE];
-        unlockModeNumber = [NSNumber numberWithInteger:DefaultUnlockModeManul];
-    }
-    
-    DefaultUnlockMode unlockMode = [unlockModeNumber integerValue];
+    DefaultUnlockMode unlockMode = [self unlockMode];
     if (unlockMode == DefaultUnlockModeManul) {
         return @"手动开锁 ▾";
     } else if (unlockMode == DefaultUnlockModeAuto) {
@@ -100,10 +140,27 @@
     return @"";
 }
 
-- (BOOL)isThereUseableDevice
+- (DefaultUnlockMode)unlockMode
+{
+    NSNumber *unlockModeNumber = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_UNLOCK_MODE];
+    if (unlockModeNumber == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:DefaultUnlockModeManul] forKey:DEFAULT_UNLOCK_MODE];
+        unlockModeNumber = [NSNumber numberWithInteger:DefaultUnlockModeManul];
+    }
+    
+    DefaultUnlockMode unlockMode = [unlockModeNumber integerValue];
+    return unlockMode;
+}
+
+- (BOOL)isThereValidDevice
 {
     if (_validKeyFetchedResultsController == nil) {
         _validKeyFetchedResultsController = [GXDatabaseHelper validDeviceFetchedResultsController];
+        _validKeyFetchedResultsController.delegate = self;
+    }
+    
+    if (_validKeyFetchedResultsController == nil) {
+        return NO;
     }
     
     if ([[_validKeyFetchedResultsController sections] count] <= 0) {
@@ -159,6 +216,11 @@
     
 }
 
+- (void)manulUnlock:(UIButton *)sender
+{
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -194,10 +256,31 @@
 }
 
 // how to use "自动开锁"
+- (void)autoUnlockGuide:(UIButton *)sender
+{
+
+}
 
 // how to use "摇一摇开锁"
+- (void)shakeUnlockGuide:(UIButton *)sender
+{
+    
+}
 
 
+#pragma mark - database change
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    
+    [self reloadView];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    [self reloadView];
+}
 
 
 @end

@@ -23,6 +23,7 @@
 
 @property (nonatomic, strong) GXDeviceListTableView *deviceListTableView;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic) BOOL refreshed;
 
 @end
 
@@ -36,6 +37,7 @@
     [super viewDidLoad];
     // do something...
     
+    self.refreshed = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     [self configNavigationBar];
     [self addDeviceListDataSource];
@@ -120,4 +122,80 @@
 {
     
 }
+
+- (void)tableViewRequestNewData:(zkeyTableViewWithPullFresh *)tableView
+{
+    [tableView didEndLoadingData];
+}
+
+#pragma mark - view navigation
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (!self.refreshed) {
+        [_deviceListTableView forceToRefresh];
+        
+        self.refreshed = YES;
+    }
+}
+
+#pragma mark - database change
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.deviceListTableView.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    
+    if (type == NSFetchedResultsChangeInsert) {
+        [self.deviceListTableView.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                      withRowAnimation:UITableViewRowAnimationFade];
+    } else if (type == NSFetchedResultsChangeDelete) {
+        [self.deviceListTableView.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                      withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    
+    UITableView *tableView = self.deviceListTableView.tableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            //让tableView在newIndexPath位置插入一个cell
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            //让tableView刷新indexPath位置上的cell
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.deviceListTableView.tableView endUpdates];
+}
+
 @end
