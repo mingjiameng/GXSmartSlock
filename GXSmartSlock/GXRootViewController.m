@@ -22,11 +22,12 @@
 
 #define BOTTOM_TOOL_BAR_HEIGHT 100.0F
 
-@interface GXRootViewController () <NSFetchedResultsControllerDelegate>
+@interface GXRootViewController () <NSFetchedResultsControllerDelegate, UIActionSheetDelegate>
 {
     UIButton *_selectUnlockModeButton;
     NSFetchedResultsController *_validKeyFetchedResultsController;
     UIButton *_centralButton;
+    UIActionSheet *_unlockModeActionSheet;
 }
 @end
 
@@ -114,6 +115,7 @@
             _selectUnlockModeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100.0f, 22.0f)];
             _selectUnlockModeButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0];
             [_selectUnlockModeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [_selectUnlockModeButton addTarget:self action:@selector(selectUnlockMode:) forControlEvents:UIControlEventTouchUpInside];
         }
         
         [_selectUnlockModeButton setTitle:[self currentUnlockModeDescription] forState:UIControlStateNormal];
@@ -132,7 +134,7 @@
     if (unlockMode == DefaultUnlockModeManul) {
         return @"手动开锁 ▾";
     } else if (unlockMode == DefaultUnlockModeAuto) {
-        return @"自动开锁 ▾";
+        return @"感应开锁 ▾";
     } else if (unlockMode == DefaultUnlockModeShake) {
         return @"摇一摇开锁 ▾";
     }
@@ -213,7 +215,37 @@
 #pragma mark - user action
 - (void)selectUnlockMode:(UIButton *)sender
 {
+    if (_unlockModeActionSheet == nil) {
+        _unlockModeActionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择开锁模式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"手动开锁", @"感应开锁", @"摇一摇开锁", nil];
+    }
     
+    [_unlockModeActionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        return;
+    }
+    
+    DefaultUnlockMode unlockMode = DefaultUnlockModeManul;
+    if (buttonIndex == 0) {
+        unlockMode = DefaultUnlockModeManul;
+    } else if (buttonIndex == 1) {
+        unlockMode = DefaultUnlockModeAuto;
+    } else if (buttonIndex == 2) {
+        unlockMode = DefaultUnlockModeShake;
+    }
+    
+    DefaultUnlockMode previousUnlockMode = [[[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_UNLOCK_MODE] integerValue];
+    if (previousUnlockMode == unlockMode) {
+        return;
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:unlockMode] forKey:DEFAULT_UNLOCK_MODE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self reloadView];
 }
 
 - (void)manulUnlock:(UIButton *)sender
