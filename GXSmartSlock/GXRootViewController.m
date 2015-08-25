@@ -11,10 +11,19 @@
 #import "MICRO_COMMON.h"
 #import "MICRO_ROOT.h"
 
+#import "GXDatabaseHelper.h"
+
 #import "zkeyButtonWithImageAndTitle.h"
 
-@interface GXRootViewController ()
+#import "GXDeviceListViewController.h"
 
+#import <CoreData/CoreData.h>
+
+@interface GXRootViewController ()
+{
+    UIButton *_selectUnlockModeButton;
+    NSFetchedResultsController *_validKeyFetchedResultsController;
+}
 @end
 
 @implementation GXRootViewController
@@ -53,12 +62,16 @@
 - (void)configNavigationBarTitleView
 {
     if ([self isThereUseableDevice]) {
-        UIButton *selectUnlockModeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100.0f, 22.0f)];
-        selectUnlockModeButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0];
-        [selectUnlockModeButton setTitle:[self currentUnlockModeDescription] forState:UIControlStateNormal];
-        [selectUnlockModeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        if (_selectUnlockModeButton == nil) {
+            _selectUnlockModeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100.0f, 22.0f)];
+            _selectUnlockModeButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0];
+            [_selectUnlockModeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
         
-        self.navigationItem.titleView = selectUnlockModeButton;
+        [_selectUnlockModeButton setTitle:[self currentUnlockModeDescription] forState:UIControlStateNormal];
+        
+        self.navigationItem.title = nil;
+        self.navigationItem.titleView = _selectUnlockModeButton;
     } else {
         self.navigationItem.titleView = nil;
         self.navigationItem.title = @"请添加门锁";
@@ -77,11 +90,11 @@
     
     DefaultUnlockMode unlockMode = [unlockModeNumber integerValue];
     if (unlockMode == DefaultUnlockModeManul) {
-        return @"手动开锁";
+        return @"手动开锁 ▾";
     } else if (unlockMode == DefaultUnlockModeAuto) {
-        return @"自动开锁";
+        return @"自动开锁 ▾";
     } else if (unlockMode == DefaultUnlockModeShake) {
-        return @"摇一摇开锁";
+        return @"摇一摇开锁 ▾";
     }
     
     return @"";
@@ -89,6 +102,19 @@
 
 - (BOOL)isThereUseableDevice
 {
+    if (_validKeyFetchedResultsController == nil) {
+        _validKeyFetchedResultsController = [GXDatabaseHelper validDeviceFetchedResultsController];
+    }
+    
+    if ([[_validKeyFetchedResultsController sections] count] <= 0) {
+        return NO;
+    }
+    
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[_validKeyFetchedResultsController sections] objectAtIndex:0];
+    if ([sectionInfo numberOfObjects] <= 0) {
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -143,7 +169,8 @@
 #pragma mark - Navigation
 - (void)showDeviceList:(UIButton *)sender
 {
-    
+    GXDeviceListViewController *deviceListVC = [[GXDeviceListViewController alloc] init];
+    [self.navigationController pushViewController:deviceListVC animated:YES];
 }
 
 - (void)sendKey:(UIButton *)sender

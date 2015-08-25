@@ -10,6 +10,8 @@
 #define GXSmartSlock_MICRO_SERVER_DATA_h
 
 // key in dicationary "login"
+#define LOGIN_KEY_USER_ID @"user_id"
+#define LOGIN_KEY_USER_NICKNAME @"nickname"
 #define LOGIN_KEY_DEVICE_LIST @"devices"
 #define LOGIN_KEY_DEVICE_USER_MAPPING_LIST @"mappings"
 #define LOGIN_KEY_RECORD_LIST @"records"
@@ -27,7 +29,7 @@
 #define MAPPING_KEY_DEVICE_IDENTIFIRE @"device_id"
 #define MAPPING_KEY_DEVICE_NICKNAME @"device_name"
 #define MAPPING_KEY_DEVICE_USER @"email"
-#define MAPPING_KEY_DEVICE_STATUS @"status = active"
+#define MAPPING_KEY_DEVICE_STATUS @"status"
 #define MAPPING_KEY_DEVICE_AUTHORITY @"type"
 #define MAPPING_KEY_ID @"id"
 

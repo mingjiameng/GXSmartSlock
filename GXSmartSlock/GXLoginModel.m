@@ -60,7 +60,7 @@
         
         [[NSUserDefaults standardUserDefaults] setObject:userName forKey:DEFAULT_USER_NAME];
         [[NSUserDefaults standardUserDefaults] setObject:password forKey:DEFAULT_USER_PASSWORD];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:true] forKey:LOGIN_STATUS];
+        [[NSUserDefaults standardUserDefaults] setBool:true forKey:DEFAULT_LOGIN_STATUS];
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:DefaultUnlockModeManul] forKey:DEFAULT_UNLOCK_MODE];
         [[NSUserDefaults standardUserDefaults] synchronize];
         

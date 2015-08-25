@@ -36,7 +36,6 @@
 		44E9F7D41B84D4AC00165234 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44E9F7D21B84D4AC00165234 /* Main.storyboard */; };
 		44E9F7D61B84D4AC00165234 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44E9F7D51B84D4AC00165234 /* Images.xcassets */; };
 		44E9F7D91B84D4AC00165234 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44E9F7D71B84D4AC00165234 /* LaunchScreen.xib */; };
-		44E9F7E51B84D4AC00165234 /* GXSmartSlockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E9F7E41B84D4AC00165234 /* GXSmartSlockTests.m */; };
 		44E9F7F61B85D44600165234 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F7F01B85D44600165234 /* libMiPushSDK.a */; };
 		44E9F7F71B85D44600165234 /* zkeyMiPushPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E9F7F51B85D44600165234 /* zkeyMiPushPackage.m */; };
 		44E9F7FF1B85E00100165234 /* guidePageImgSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44E9F7FC1B85E00100165234 /* guidePageImgSource.plist */; };
@@ -67,6 +66,13 @@
 		44E9F83F1B85F01800165234 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F83E1B85F01800165234 /* libsqlite3.0.dylib */; };
 		44E9F8411B85F02500165234 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F8401B85F02500165234 /* libc++.dylib */; };
 		44ED1D411B8B15C200F1A7F4 /* zkeyLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED1D401B8B15C200F1A7F4 /* zkeyLoginView.m */; };
+		44ED1D4C1B8C148200F1A7F4 /* CircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED1D471B8C148200F1A7F4 /* CircleView.m */; };
+		44ED1D4D1B8C148200F1A7F4 /* zkeyRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED1D491B8C148200F1A7F4 /* zkeyRefreshHeaderView.m */; };
+		44ED1D4E1B8C148200F1A7F4 /* zkeyTableViewWithPullFresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED1D4B1B8C148200F1A7F4 /* zkeyTableViewWithPullFresh.m */; };
+		44ED1D511B8C157200F1A7F4 /* GXDeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED1D501B8C157200F1A7F4 /* GXDeviceListViewController.m */; };
+		44ED1D601B8C454900F1A7F4 /* GXDeviceListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED1D5F1B8C454900F1A7F4 /* GXDeviceListTableView.m */; };
+		44ED1D641B8C464C00F1A7F4 /* GXDeviceListTableViewCellDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED1D631B8C464C00F1A7F4 /* GXDeviceListTableViewCellDataModel.m */; };
+		44ED1D671B8C47DC00F1A7F4 /* GXDeviceListTableViewCellBatteryLevelLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED1D661B8C47DC00F1A7F4 /* GXDeviceListTableViewCellBatteryLevelLabel.m */; };
 		44ED41601B89654600079207 /* GXDatabaseEntityDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED415F1B89654600079207 /* GXDatabaseEntityDevice.m */; };
 		44ED41631B89654600079207 /* GXDatabaseEntityDeviceUserMappingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED41621B89654600079207 /* GXDatabaseEntityDeviceUserMappingItem.m */; };
 		44ED41661B89654600079207 /* GXDatabaseEntityUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED41651B89654600079207 /* GXDatabaseEntityUser.m */; };
@@ -90,16 +96,6 @@
 		44ED41A21B8A1F9E00079207 /* GXResetPasswordParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED41A11B8A1F9E00079207 /* GXResetPasswordParam.m */; };
 		44ED41A51B8A214300079207 /* GXRegisterParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED41A41B8A214300079207 /* GXRegisterParam.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		44E9F7DF1B84D4AC00165234 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 44E9F7BA1B84D4AC00165234 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 44E9F7C11B84D4AC00165234;
-			remoteInfo = GXSmartSlock;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		44E916801B86CDE200EF9C38 /* Voicemail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Voicemail.wav; sourceTree = "<group>"; };
@@ -154,9 +150,6 @@
 		44E9F7D31B84D4AC00165234 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		44E9F7D51B84D4AC00165234 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		44E9F7D81B84D4AC00165234 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		44E9F7DE1B84D4AC00165234 /* GXSmartSlockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GXSmartSlockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		44E9F7E31B84D4AC00165234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		44E9F7E41B84D4AC00165234 /* GXSmartSlockTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GXSmartSlockTests.m; sourceTree = "<group>"; };
 		44E9F7EE1B85CDD100165234 /* MICRO_COMMON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MICRO_COMMON.h; sourceTree = "<group>"; };
 		44E9F7F01B85D44600165234 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
 		44E9F7F11B85D44600165234 /* MiPushMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushMessage.h; sourceTree = "<group>"; };
@@ -197,6 +190,21 @@
 		44E9F8401B85F02500165234 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		44ED1D3F1B8B15C200F1A7F4 /* zkeyLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyLoginView.h; sourceTree = "<group>"; };
 		44ED1D401B8B15C200F1A7F4 /* zkeyLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyLoginView.m; sourceTree = "<group>"; };
+		44ED1D461B8C148200F1A7F4 /* CircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleView.h; sourceTree = "<group>"; };
+		44ED1D471B8C148200F1A7F4 /* CircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleView.m; sourceTree = "<group>"; };
+		44ED1D481B8C148200F1A7F4 /* zkeyRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyRefreshHeaderView.h; sourceTree = "<group>"; };
+		44ED1D491B8C148200F1A7F4 /* zkeyRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyRefreshHeaderView.m; sourceTree = "<group>"; };
+		44ED1D4A1B8C148200F1A7F4 /* zkeyTableViewWithPullFresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyTableViewWithPullFresh.h; sourceTree = "<group>"; };
+		44ED1D4B1B8C148200F1A7F4 /* zkeyTableViewWithPullFresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyTableViewWithPullFresh.m; sourceTree = "<group>"; };
+		44ED1D4F1B8C157200F1A7F4 /* GXDeviceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDeviceListViewController.h; sourceTree = "<group>"; };
+		44ED1D501B8C157200F1A7F4 /* GXDeviceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDeviceListViewController.m; sourceTree = "<group>"; };
+		44ED1D5E1B8C454900F1A7F4 /* GXDeviceListTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDeviceListTableView.h; sourceTree = "<group>"; };
+		44ED1D5F1B8C454900F1A7F4 /* GXDeviceListTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDeviceListTableView.m; sourceTree = "<group>"; };
+		44ED1D611B8C45CF00F1A7F4 /* MICRO_DEVICE_LIST.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MICRO_DEVICE_LIST.h; sourceTree = "<group>"; };
+		44ED1D621B8C464C00F1A7F4 /* GXDeviceListTableViewCellDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDeviceListTableViewCellDataModel.h; sourceTree = "<group>"; };
+		44ED1D631B8C464C00F1A7F4 /* GXDeviceListTableViewCellDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDeviceListTableViewCellDataModel.m; sourceTree = "<group>"; };
+		44ED1D651B8C47DC00F1A7F4 /* GXDeviceListTableViewCellBatteryLevelLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDeviceListTableViewCellBatteryLevelLabel.h; sourceTree = "<group>"; };
+		44ED1D661B8C47DC00F1A7F4 /* GXDeviceListTableViewCellBatteryLevelLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDeviceListTableViewCellBatteryLevelLabel.m; sourceTree = "<group>"; };
 		44ED415E1B89654600079207 /* GXDatabaseEntityDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDatabaseEntityDevice.h; sourceTree = "<group>"; };
 		44ED415F1B89654600079207 /* GXDatabaseEntityDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDatabaseEntityDevice.m; sourceTree = "<group>"; };
 		44ED41611B89654600079207 /* GXDatabaseEntityDeviceUserMappingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDatabaseEntityDeviceUserMappingItem.h; sourceTree = "<group>"; };
@@ -262,13 +270,6 @@
 				44E9F83F1B85F01800165234 /* libsqlite3.0.dylib in Frameworks */,
 				44E9F8391B85EB6200165234 /* libWeChatSDK.a in Frameworks */,
 				44E9F7F61B85D44600165234 /* libMiPushSDK.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		44E9F7DB1B84D4AC00165234 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,7 +373,6 @@
 			isa = PBXGroup;
 			children = (
 				44E9F7C41B84D4AC00165234 /* GXSmartSlock */,
-				44E9F7E11B84D4AC00165234 /* GXSmartSlockTests */,
 				44E9F7C31B84D4AC00165234 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -381,7 +381,6 @@
 			isa = PBXGroup;
 			children = (
 				44E9F7C21B84D4AC00165234 /* GXSmartSlock.app */,
-				44E9F7DE1B84D4AC00165234 /* GXSmartSlockTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -389,6 +388,9 @@
 		44E9F7C41B84D4AC00165234 /* GXSmartSlock */ = {
 			isa = PBXGroup;
 			children = (
+				44ED1D441B8C06E600F1A7F4 /* UnlockRecord */,
+				44ED1D431B8C06D400F1A7F4 /* DeviceList */,
+				44ED1D421B8C06CB00F1A7F4 /* SendKey */,
 				44ED416A1B8966D900079207 /* ServerDataInteraction */,
 				44E916EC1B8787E900EF9C38 /* Helper */,
 				44E9F83B1B85EC2000165234 /* Database */,
@@ -416,23 +418,6 @@
 				44E9F7C61B84D4AC00165234 /* Info.plist */,
 				44E9F7C71B84D4AC00165234 /* main.m */,
 				44E9F7EE1B85CDD100165234 /* MICRO_COMMON.h */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		44E9F7E11B84D4AC00165234 /* GXSmartSlockTests */ = {
-			isa = PBXGroup;
-			children = (
-				44E9F7E41B84D4AC00165234 /* GXSmartSlockTests.m */,
-				44E9F7E21B84D4AC00165234 /* Supporting Files */,
-			);
-			path = GXSmartSlockTests;
-			sourceTree = "<group>";
-		};
-		44E9F7E21B84D4AC00165234 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				44E9F7E31B84D4AC00165234 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -532,6 +517,7 @@
 		44E9F8311B85EA9B00165234 /* ViewHelper */ = {
 			isa = PBXGroup;
 			children = (
+				44ED1D451B8C146900F1A7F4 /* zkeyTableViewWithPullRefresh */,
 				44E9B8041B860CC600D289F0 /* zkeyAlertBanner.h */,
 				44E9B8051B860CC600D289F0 /* zkeyAlertBanner.m */,
 				44E9B8061B860CC600D289F0 /* zkeyViewHelper.h */,
@@ -588,6 +574,73 @@
 				44E9F83C1B85F00400165234 /* libz.dylib */,
 			);
 			name = Framework;
+			sourceTree = "<group>";
+		};
+		44ED1D421B8C06CB00F1A7F4 /* SendKey */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SendKey;
+			sourceTree = "<group>";
+		};
+		44ED1D431B8C06D400F1A7F4 /* DeviceList */ = {
+			isa = PBXGroup;
+			children = (
+				44ED1D541B8C15CC00F1A7F4 /* Model */,
+				44ED1D531B8C15C700F1A7F4 /* View */,
+				44ED1D521B8C15C000F1A7F4 /* Controller */,
+			);
+			name = DeviceList;
+			sourceTree = "<group>";
+		};
+		44ED1D441B8C06E600F1A7F4 /* UnlockRecord */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = UnlockRecord;
+			sourceTree = "<group>";
+		};
+		44ED1D451B8C146900F1A7F4 /* zkeyTableViewWithPullRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				44ED1D461B8C148200F1A7F4 /* CircleView.h */,
+				44ED1D471B8C148200F1A7F4 /* CircleView.m */,
+				44ED1D481B8C148200F1A7F4 /* zkeyRefreshHeaderView.h */,
+				44ED1D491B8C148200F1A7F4 /* zkeyRefreshHeaderView.m */,
+				44ED1D4A1B8C148200F1A7F4 /* zkeyTableViewWithPullFresh.h */,
+				44ED1D4B1B8C148200F1A7F4 /* zkeyTableViewWithPullFresh.m */,
+			);
+			name = zkeyTableViewWithPullRefresh;
+			sourceTree = "<group>";
+		};
+		44ED1D521B8C15C000F1A7F4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				44ED1D4F1B8C157200F1A7F4 /* GXDeviceListViewController.h */,
+				44ED1D501B8C157200F1A7F4 /* GXDeviceListViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		44ED1D531B8C15C700F1A7F4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				44ED1D5E1B8C454900F1A7F4 /* GXDeviceListTableView.h */,
+				44ED1D5F1B8C454900F1A7F4 /* GXDeviceListTableView.m */,
+				44ED1D651B8C47DC00F1A7F4 /* GXDeviceListTableViewCellBatteryLevelLabel.h */,
+				44ED1D661B8C47DC00F1A7F4 /* GXDeviceListTableViewCellBatteryLevelLabel.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		44ED1D541B8C15CC00F1A7F4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				44ED1D611B8C45CF00F1A7F4 /* MICRO_DEVICE_LIST.h */,
+				44ED1D621B8C464C00F1A7F4 /* GXDeviceListTableViewCellDataModel.h */,
+				44ED1D631B8C464C00F1A7F4 /* GXDeviceListTableViewCellDataModel.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		44ED416A1B8966D900079207 /* ServerDataInteraction */ = {
@@ -667,24 +720,6 @@
 			productReference = 44E9F7C21B84D4AC00165234 /* GXSmartSlock.app */;
 			productType = "com.apple.product-type.application";
 		};
-		44E9F7DD1B84D4AC00165234 /* GXSmartSlockTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 44E9F7EB1B84D4AC00165234 /* Build configuration list for PBXNativeTarget "GXSmartSlockTests" */;
-			buildPhases = (
-				44E9F7DA1B84D4AC00165234 /* Sources */,
-				44E9F7DB1B84D4AC00165234 /* Frameworks */,
-				44E9F7DC1B84D4AC00165234 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				44E9F7E01B84D4AC00165234 /* PBXTargetDependency */,
-			);
-			name = GXSmartSlockTests;
-			productName = GXSmartSlockTests;
-			productReference = 44E9F7DE1B84D4AC00165234 /* GXSmartSlockTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -697,10 +732,6 @@
 					44E9F7C11B84D4AC00165234 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = Z59QGLWNHK;
-					};
-					44E9F7DD1B84D4AC00165234 = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = 44E9F7C11B84D4AC00165234;
 					};
 				};
 			};
@@ -718,7 +749,6 @@
 			projectRoot = "";
 			targets = (
 				44E9F7C11B84D4AC00165234 /* GXSmartSlock */,
-				44E9F7DD1B84D4AC00165234 /* GXSmartSlockTests */,
 			);
 		};
 /* End PBXProject section */
@@ -756,13 +786,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		44E9F7DC1B84D4AC00165234 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -784,8 +807,12 @@
 				44ED41711B89695100079207 /* GXHttpTool.m in Sources */,
 				44E916FE1B8843D100EF9C38 /* GXDeviceUserMappingModel.m in Sources */,
 				44ED41691B89667200079207 /* GXLoginModel.m in Sources */,
+				44ED1D4E1B8C148200F1A7F4 /* zkeyTableViewWithPullFresh.m in Sources */,
+				44ED1D4C1B8C148200F1A7F4 /* CircleView.m in Sources */,
+				44ED1D4D1B8C148200F1A7F4 /* zkeyRefreshHeaderView.m in Sources */,
 				44ED41A21B8A1F9E00079207 /* GXResetPasswordParam.m in Sources */,
 				44E916F01B87880300EF9C38 /* zkeyIndentifierValidator.m in Sources */,
+				44ED1D601B8C454900F1A7F4 /* GXDeviceListTableView.m in Sources */,
 				44ED41901B896B9700079207 /* AFHTTPSessionManager.m in Sources */,
 				44E9F8001B85E00100165234 /* GXGuidePageViewController.m in Sources */,
 				44ED41911B896B9700079207 /* AFNetworkReachabilityManager.m in Sources */,
@@ -797,6 +824,7 @@
 				44E9170B1B8883B700EF9C38 /* GXUserModel.m in Sources */,
 				44ED418E1B896B9700079207 /* AFHTTPRequestOperation.m in Sources */,
 				44ED41961B896B9700079207 /* AFURLSessionManager.m in Sources */,
+				44ED1D641B8C464C00F1A7F4 /* GXDeviceListTableViewCellDataModel.m in Sources */,
 				44E916BD1B86F41300EF9C38 /* GXRegisterThirdViewController.m in Sources */,
 				44ED419C1B897ACE00079207 /* GXGetVerificationCodeParam.m in Sources */,
 				44ED41A51B8A214300079207 /* GXRegisterParam.m in Sources */,
@@ -809,32 +837,18 @@
 				44E9F7C81B84D4AC00165234 /* main.m in Sources */,
 				44ED41951B896B9700079207 /* AFURLResponseSerialization.m in Sources */,
 				44ED41941B896B9700079207 /* AFURLRequestSerialization.m in Sources */,
+				44ED1D671B8C47DC00F1A7F4 /* GXDeviceListTableViewCellBatteryLevelLabel.m in Sources */,
 				44E916DC1B87157400EF9C38 /* GXDatabaseEntityRecord.m in Sources */,
 				44E916C71B86F46300EF9C38 /* GXRegisterModel.m in Sources */,
 				44E9B8031B860C8000D289F0 /* zkeyActivityIndicatorView.m in Sources */,
 				44E916E21B87158800EF9C38 /* GXDatabaseHelper.m in Sources */,
+				44ED1D511B8C157200F1A7F4 /* GXDeviceListViewController.m in Sources */,
 				44E9B8001B860B0900D289F0 /* GXRootViewController.m in Sources */,
 				44ED41661B89654600079207 /* GXDatabaseEntityUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		44E9F7DA1B84D4AC00165234 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				44E9F7E51B84D4AC00165234 /* GXSmartSlockTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		44E9F7E01B84D4AC00165234 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 44E9F7C11B84D4AC00165234 /* GXSmartSlock */;
-			targetProxy = 44E9F7DF1B84D4AC00165234 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		44E9F7D21B84D4AC00165234 /* Main.storyboard */ = {
@@ -892,7 +906,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -930,7 +944,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -974,40 +988,6 @@
 			};
 			name = Release;
 		};
-		44E9F7EC1B84D4AC00165234 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = GXSmartSlockTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GXSmartSlock.app/GXSmartSlock";
-			};
-			name = Debug;
-		};
-		44E9F7ED1B84D4AC00165234 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = GXSmartSlockTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GXSmartSlock.app/GXSmartSlock";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1025,15 +1005,6 @@
 			buildConfigurations = (
 				44E9F7E91B84D4AC00165234 /* Debug */,
 				44E9F7EA1B84D4AC00165234 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		44E9F7EB1B84D4AC00165234 /* Build configuration list for PBXNativeTarget "GXSmartSlockTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				44E9F7EC1B84D4AC00165234 /* Debug */,
-				44E9F7ED1B84D4AC00165234 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

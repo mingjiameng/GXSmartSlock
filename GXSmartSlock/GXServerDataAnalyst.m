@@ -8,6 +8,7 @@
 
 #import "GXServerDataAnalyst.h"
 
+#import "MICRO_COMMON.h"
 #import "MICRO_SERVER_DATA.h"
 
 #import "GXDeviceModel.h"
@@ -20,6 +21,14 @@
 
 + (void)login:(NSDictionary *)data
 {
+    NSLog(@"%@", data);
+    
+    GXUserModel *defaultUser = [[GXUserModel alloc] init];
+    defaultUser.userName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
+    defaultUser.userID = [[data objectForKey:LOGIN_KEY_USER_ID] integerValue];
+    defaultUser.nickname = [data objectForKey:LOGIN_KEY_USER_NICKNAME];
+    [GXDatabaseHelper setDefaultUser:defaultUser];
+    
     NSArray *deviceList = [data objectForKey:LOGIN_KEY_DEVICE_LIST];
     [self insertDeviceIntoDatabase:deviceList];
     

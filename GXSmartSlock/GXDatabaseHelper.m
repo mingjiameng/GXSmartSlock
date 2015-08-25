@@ -15,6 +15,7 @@
 
 #import "MICRO_COMMON.h"
 #import "MICRO_COREDATA.h"
+#import "MICRO_DEVICE_LIST.h"
 
 #import "GXDeviceModel.h"
 #import "GXDeviceUserMappingModel.h"
@@ -39,12 +40,32 @@
 // ... but the data GXDeviceModel object contains here exclude "deviceNickname"\"deviceStatus"\"deviceAuthority"
 // ... for that "deviceNickname"\"deviceStatus"\"deviceAuthority" in server database is storaged in "Mapping" table
 // ... so server does not return us these data when we request data from "device" table
++ (void)setDefaultUser:(GXUserModel *)user
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    GXDatabaseEntityUser *defaultUserEntity = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_USER inManagedObjectContext:managedObjectContext];
+    
+    defaultUserEntity.userID = [NSNumber numberWithInteger:user.userID];
+    defaultUserEntity.nickname = user.nickname;
+    defaultUserEntity.userName = user.userName;
+    
+    
+    [self saveContext];
+}
+
 + (void)insertDeviceIntoDatabase:(NSArray *)deviceArray
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
     
     deviceArray = [deviceArray sortedArrayUsingComparator:^NSComparisonResult(GXDeviceModel *obj1, GXDeviceModel *obj2) {
-        return (obj2.deviceID <= obj1.deviceID);
+        if (obj2.deviceID < obj1.deviceID) {
+            return NSOrderedAscending;
+        } else if (obj2.deviceID == obj1.deviceID) {
+            return NSOrderedSame;
+        } else {
+            return NSOrderedDescending;
+        }
     }];
     NSArray *localDeviceArray = [self allDeviceArray];
     
@@ -80,14 +101,25 @@
                 deviceEntity.deviceVersion = versionNumber;
             }
             
+            ++index01;
+            ++index02;
             continue;
         }
         
         if (deviceID01 < deviceID02) {
             [managedObjectContext deleteObject:deviceEntity];
+            ++index02;
             continue;
         }
         
+    }
+    
+    for (; index01 < indexBorder01; ++index01) {
+        [deviceNeedToInsert addObject:[deviceArray objectAtIndex:index01]];
+    }
+    
+    for (; index02 < indexBorder02; ++index02) {
+        [managedObjectContext deleteObject:[localDeviceArray objectAtIndex:index02]];
     }
     
     for (GXDeviceModel *deviceModel in deviceNeedToInsert) {
@@ -99,6 +131,11 @@
         newDeviceEntity.deviceIdentifire = deviceModel.deviceIdentifire;
         newDeviceEntity.deviceKey = deviceModel.deviceKey;
         newDeviceEntity.deviceVersion = [NSNumber numberWithInteger:deviceModel.deviceVersion];
+        
+        // set the default value for some info
+        newDeviceEntity.deviceStatus = DEVICE_STATUS_INVALID;
+        newDeviceEntity.deviceAuthority = DEVICE_AUTHORITY_NORMAL;
+        newDeviceEntity.deviceNickname = @"nickname";
     }
     
     [self saveContext];
@@ -112,7 +149,13 @@
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
     
     deviceUserMappingArray = [deviceUserMappingArray sortedArrayUsingComparator:^NSComparisonResult(GXDeviceUserMappingModel *obj1, GXDeviceUserMappingModel *obj2) {
-        return (obj2.deviceUserMappingID <= obj1.deviceUserMappingID);
+        if (obj2.deviceUserMappingID < obj1.deviceUserMappingID) {
+            return NSOrderedAscending;
+        } else if (obj2.deviceUserMappingID == obj1.deviceUserMappingID) {
+            return NSOrderedSame;
+        } else {
+            return NSOrderedDescending;
+        }
     }];
     NSArray *localDeviceUserMappingArray = [self allDeviceUserMappingArray];
     
@@ -130,7 +173,7 @@
         
         if (deviceUserMappingID01 > deviceUserMappingID02) {
             [deviceUserMappingNeedToInsert addObject:deviceUserMappingModel];
-            ++deviceUserMappingID01;
+            ++index01;
             continue;
         }
         
@@ -215,13 +258,19 @@
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
     
-    
     // sort the userArray for server and localUserArray in descending order
     // crossing contrast data in userArray and localUserArray in time complexity O(n)
     // to prevent unneccessary delete and insert action
     userArray = [userArray sortedArrayUsingComparator:^NSComparisonResult(GXUserModel *obj1, GXUserModel *obj2) {
-        return (obj2.userID < obj1.userID);
+        if (obj2.userID < obj1.userID) {
+            return NSOrderedAscending;
+        } else if (obj2.userID == obj1.userID) {
+            return NSOrderedSame;
+        } else {
+            return NSOrderedDescending;
+        }
     }];
+    
     NSArray *localUserArray = [self allUserEntityArray];
     
     NSMutableArray *userNeedToInsert = [NSMutableArray array];
@@ -238,7 +287,7 @@
         
         if (userID01 > userID02) {
             [userNeedToInsert addObject:userModel];
-            ++userID01;
+            ++index01;
             continue;
         }
         
@@ -248,14 +297,14 @@
                 userEntity.nickname = userModel.nickname;
             }
             
-            ++userID01;
-            ++userID02;
+            ++index01;
+            ++index02;
             continue;
         }
         
         if (userID01 < userID02) {
             [managedObjectContext deleteObject:userEntity];
-            ++userID02;
+            ++index02;
             continue;
         }
     }
@@ -264,7 +313,7 @@
         [userNeedToInsert addObject:[userArray objectAtIndex:index01]];
     }
     
-    for (; index01 < indexBorder02; ++index02) {
+    for (; index02 < indexBorder02; ++index02) {
         [managedObjectContext deleteObject:[localUserArray objectAtIndex:index02]];
     }
     
@@ -296,6 +345,30 @@
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceStatus == 'active'"];
     [fetchRequest setPredicate:predicate];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"deviceID" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    
+    NSError *error = nil;
+    if (![fetchedResultsController performFetch:&error]) {
+        NSLog(@"fetch valid device error:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    return fetchedResultsController;
+}
+
++ (NSFetchedResultsController *)allDeviceFetchedResultsController
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityDevice = [NSEntityDescription entityForName:ENTITY_DEVICE inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityDevice];
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"deviceID" ascending:NO];
     [fetchRequest setSortDescriptors:@[sortDescriptor]];

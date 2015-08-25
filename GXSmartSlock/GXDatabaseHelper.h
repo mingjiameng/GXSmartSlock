@@ -9,14 +9,17 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class GXUserModel;
+
 @interface GXDatabaseHelper : NSObject
 
-
++ (void)setDefaultUser:(GXUserModel *)user;
 + (void)insertDeviceIntoDatabase:(NSArray *)deviceArray;
 + (void)insertDeviceUserMappingItemIntoDatabase:(NSArray *)deviceUserMappingArray;
 + (void)insertUserIntoDatabase:(NSArray *)userArray;
 
 /************************seperator*********************************/
 + (NSFetchedResultsController *)validDeviceFetchedResultsController;
++ (NSFetchedResultsController *)allDeviceFetchedResultsController;
 
 @end
