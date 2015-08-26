@@ -250,7 +250,7 @@
 
 - (void)manulUnlock:(UIButton *)sender
 {
-    
+    NSLog(@"点击手动开锁");
 }
 
 
@@ -269,7 +269,7 @@
 
 - (void)sendKey:(UIButton *)sender
 {
-
+    
 }
 
 - (void)unlockRecord:(UIButton *)sender
@@ -290,13 +290,13 @@
 // how to use "自动开锁"
 - (void)autoUnlockGuide:(UIButton *)sender
 {
-
+    NSLog(@"自动开锁");
 }
 
 // how to use "摇一摇开锁"
 - (void)shakeUnlockGuide:(UIButton *)sender
 {
-    
+    NSLog(@"摇一摇开锁");
 }
 
 

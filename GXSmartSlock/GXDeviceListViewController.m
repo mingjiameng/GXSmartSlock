@@ -17,6 +17,8 @@
 
 #import "GXDeviceListTableView.h"
 
+#import "GXDeviceDetailViewController.h"
+
 #import <CoreData/CoreData.h>
 
 @interface GXDeviceListViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, NSFetchedResultsControllerDelegate>
@@ -120,7 +122,12 @@
 
 - (void)tableView:(zkeyTableViewWithPullFresh *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    GXDatabaseEntityDevice *deviceEntity = [_fetchedResultsController objectAtIndexPath:indexPath];
     
+    GXDeviceDetailViewController *deviceDetailVC = [[GXDeviceDetailViewController alloc] init];
+    deviceDetailVC.deviceEntity = deviceEntity;
+    
+    [self.navigationController pushViewController:deviceDetailVC animated:YES];
 }
 
 - (void)tableViewRequestNewData:(zkeyTableViewWithPullFresh *)tableView

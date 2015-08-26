@@ -88,13 +88,15 @@
         }
         
         if (deviceID01 == deviceID02) {
-            // update device information
-            NSNumber *batteryNumber = deviceEntity.deviceBattery;
-            if ([batteryNumber integerValue] != deviceModel.deviceBattery) {
-                batteryNumber = [NSNumber numberWithInteger:deviceModel.deviceBattery];
-                deviceEntity.deviceBattery = batteryNumber;
-            }
+            // ... Attention! - we have no needs to update device battery level once we store the device info in local
+            // ... because that we don't update the device battery to server when we unlock the door
+//            NSNumber *batteryNumber = deviceEntity.deviceBattery;
+//            if ([batteryNumber integerValue] != deviceModel.deviceBattery) {
+//                batteryNumber = [NSNumber numberWithInteger:deviceModel.deviceBattery];
+//                deviceEntity.deviceBattery = batteryNumber;
+//            }
             
+            // update version number
             NSNumber *versionNumber = deviceEntity.deviceVersion;
             if ([versionNumber integerValue] != deviceModel.deviceVersion) {
                 versionNumber = [NSNumber numberWithInteger:deviceModel.deviceVersion];
