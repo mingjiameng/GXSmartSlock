@@ -57,6 +57,7 @@
     _deviceListTableView = [[GXDeviceListTableView alloc] initWithFrame:frame];
     _deviceListTableView.dataSource = self;
     _deviceListTableView.delegate = self;
+    _deviceListTableView.tableView.separatorInset = UIEdgeInsetsMake(0, 80.0f, 0, 0);
     
     [self.view addSubview:_deviceListTableView];
 }
@@ -91,6 +92,8 @@
     
     GXDeviceListTableViewCellDataModel *cellData = [[GXDeviceListTableViewCellDataModel alloc] init];
     
+    cellData.deviceIdentifire = deviceEntity.deviceIdentifire;
+    
     cellData.title = deviceEntity.deviceNickname;
     
     if ([deviceEntity.deviceStatus isEqualToString:DEVICE_STATUS_VALID]) {
@@ -117,7 +120,7 @@
 #pragma mark - table view delegate
 - (CGFloat)tableView:(zkeyTableViewWithPullFresh *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60.0f;
+    return 80.0f;
 }
 
 - (void)tableView:(zkeyTableViewWithPullFresh *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -126,6 +129,11 @@
     
     GXDeviceDetailViewController *deviceDetailVC = [[GXDeviceDetailViewController alloc] init];
     deviceDetailVC.deviceEntity = deviceEntity;
+    deviceDetailVC.deviceInformationChanged = ^(BOOL changed) {
+        if (changed) {
+            [tableView.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+    };
     
     [self.navigationController pushViewController:deviceDetailVC animated:YES];
 }

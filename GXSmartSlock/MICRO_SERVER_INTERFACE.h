@@ -18,4 +18,6 @@
 
 #define RESET_PASSWORD_STATUS @"status"
 
+#define CHANGE_DEVICE_NICKNAME_STATUS @"status"
+
 #endif

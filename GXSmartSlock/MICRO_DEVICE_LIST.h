@@ -25,4 +25,7 @@
 #define DEVICE_AUTHORITY_ADMIN @"admin"
 #define DEVICE_AUTHORITY_NORMAL @"anytime"
 
+#define SET_DEVICE_IMAGE_TAKE_PICTURE @"setHeadImageTakePicture"
+#define SET_DEVICE_IMAGE_SELECT_PICTURE @"setHeadImageSelectPicture"
+
 #endif

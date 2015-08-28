@@ -11,8 +11,10 @@
 #import "MICRO_DEVICE_LIST.h"
 
 #import "GXDeviceListTableViewCellDataModel.h"
+#import "zkeySandboxHelper.h"
 
 #import "GXDeviceListTableViewCellBatteryLevelLabel.h"
+#import "GXDeviceListTableViewCell.h"
 
 @implementation GXDeviceListTableView
 
@@ -22,20 +24,17 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:DEVICE_LIST_TABLE_VIEW_CELL_REUSE_IDENTIFIRE];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:DEVICE_LIST_TABLE_VIEW_CELL_REUSE_IDENTIFIRE];
+        cell = [[GXDeviceListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:DEVICE_LIST_TABLE_VIEW_CELL_REUSE_IDENTIFIRE];
     }
     
-    NSString *deviceCategoryImageName = DEVICE_CATEGORY_DEFAULT_IMG;
-    if ([cellData.deviceCategory isEqualToString:DEVICE_CATEGORY_DEFAULT]) {
-        deviceCategoryImageName = DEVICE_CATEGORY_DEFAULT_IMG;
-    } else if ([cellData.deviceCategory isEqualToString:DEVICE_CATEGORY_ELECTRIC]) {
-        deviceCategoryImageName = DEVICE_CATEGORY_ELECTRIC_IMG;
-    } else if ([cellData.deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD]) {
-        deviceCategoryImageName = DEVICE_CATEGORY_GUARD_IMG;
+    cell.imageView.layer.masksToBounds = YES;
+    cell.imageView.layer.cornerRadius = cell.imageView.frame.size.width / 2.0f;
+    NSString *deviceImageFilePath = [NSString stringWithFormat:@"%@/%@.png", [zkeySandboxHelper pathOfDocuments], cellData.deviceIdentifire];
+    if ([zkeySandboxHelper fileExitAtPath:deviceImageFilePath]) {
+        cell.imageView.image = [UIImage imageWithContentsOfFile:deviceImageFilePath];
     } else {
-        NSLog(@"error: invalid device category:%@", cellData.deviceCategory);
+        cell.imageView.image = [UIImage imageNamed:[self deviceImageNameAccordingDeviceCategory:cellData.deviceCategory]];
     }
-    cell.imageView.image = [UIImage imageNamed:deviceCategoryImageName];
     
     cell.textLabel.text = cellData.title;
     
@@ -48,5 +47,21 @@
     
     return cell;
 }
+
+- (NSString *)deviceImageNameAccordingDeviceCategory:(NSString *)deviceCategory
+{
+    if ([deviceCategory isEqualToString:DEVICE_CATEGORY_DEFAULT]) {
+        return DEVICE_CATEGORY_DEFAULT_IMG;
+    } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_ELECTRIC]) {
+        return DEVICE_CATEGORY_ELECTRIC_IMG;
+    } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD]) {
+        return DEVICE_CATEGORY_GUARD_IMG;
+    } else {
+        NSLog(@"error: invalid device category");
+    }
+    
+    return DEVICE_CATEGORY_DEFAULT_IMG;
+}
+
 
 @end

@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong)  GXDatabaseEntityDevice *deviceEntity;
 
+@property (nonatomic, copy) void (^deviceInformationChanged) (BOOL changed);
+
 @end

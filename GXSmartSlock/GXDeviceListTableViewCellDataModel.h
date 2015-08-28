@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSString *subtitle;
 @property (nonatomic) NSInteger batteryLevel;
 @property (nonatomic) NSString *deviceCategory;
+@property (nonatomic, strong) NSString *deviceIdentifire;
 
 @end

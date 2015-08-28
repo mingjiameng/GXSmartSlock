@@ -17,7 +17,7 @@
 #define GXVerifyCodeURL [NSString stringWithFormat:@"%@verify_account", GXBaseURL]
 #define GXRegisterURL [NSString stringWithFormat:@"%@user_register", GXBaseURL]
 #define GXResetPasswordURL [NSString stringWithFormat:@"%@reset_password",GXBaseURL]
-
+#define GXChangeDeviceNicknameURL [NSString stringWithFormat:@"%@update_devicename",GXBaseURL]
 
 
 #define KEY_USER_NAME @"username"
@@ -25,5 +25,7 @@
 #define KEY_PHONE_INFO @"phone_info"
 #define KEY_VERIFICATION_CODE @"code"
 #define KEY_NICKNAME @"nickname"
+#define KEY_DEVICE_IDENTIFIRE @"device_id"
+#define KEY_DEVICE_NICKNAME @"device_name"
 
 #endif

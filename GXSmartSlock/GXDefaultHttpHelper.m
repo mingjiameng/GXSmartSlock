@@ -16,6 +16,7 @@
 #import "GXVerifyCodeParam.h"
 #import "GXRegisterParam.h"
 #import "GXResetPasswordParam.h"
+#import "GXChangeDeviceNicknameParam.h"
 
 @implementation GXDefaultHttpHelper
 
@@ -109,6 +110,23 @@
     } failure:^(NSError *error) {
         if (error != nil) {
             NSLog(@"重置密码失败");
+            failure(error);
+        }
+    }];
+}
+
++ (void)POstWithChangeDeviceNicknameParam:(GXChangeDeviceNicknameParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_DEVICE_IDENTIFIRE : param.deviceIdentifire,
+                               KEY_DEVICE_NICKNAME : param.deviceNickname};
+    
+    [GXHttpTool postWithServerURL:GXChangeDeviceNicknameURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"更改设备昵称失败");
             failure(error);
         }
     }];
