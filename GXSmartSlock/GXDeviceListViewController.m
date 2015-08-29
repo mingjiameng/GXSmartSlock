@@ -57,7 +57,7 @@
     _deviceListTableView = [[GXDeviceListTableView alloc] initWithFrame:frame];
     _deviceListTableView.dataSource = self;
     _deviceListTableView.delegate = self;
-    _deviceListTableView.tableView.separatorInset = UIEdgeInsetsMake(0, 80.0f, 0, 0);
+    _deviceListTableView.tableView.separatorInset = UIEdgeInsetsMake(0, 85.0f, 0, 0);
     
     [self.view addSubview:_deviceListTableView];
 }

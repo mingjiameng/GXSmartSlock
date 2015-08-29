@@ -187,17 +187,21 @@
     zkeyActivityIndicatorView *activityIndicator = [[zkeyActivityIndicatorView alloc] initWithFrame:self.view.frame title:@"正在更换门锁图片..."];
     [self.view addSubview:activityIndicator];
     
-    [zkeySandboxHelper deleteFileAtPath:[self deviceImageFilePath]];
-    
-    NSData *imageData = UIImagePNGRepresentation(_deviceImage);
-    
-    [imageData writeToFile:[self deviceImageFilePath] atomically:YES];
-    
-    [self setDeviceImage:_deviceImageView];
-    
-    if (self.deviceImageChanged) {
-        self.deviceImageChanged(YES);
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [zkeySandboxHelper deleteFileAtPath:[self deviceImageFilePath]];
+        
+        NSData *imageData = UIImagePNGRepresentation(_deviceImage);
+        
+        [imageData writeToFile:[self deviceImageFilePath] atomically:YES];
+        
+        [self setDeviceImage:_deviceImageView];
+        
+        if (self.deviceImageChanged) {
+            self.deviceImageChanged(YES);
+        }
+        
+    });
     
     [activityIndicator removeFromSuperview];
     activityIndicator = nil;

@@ -20,4 +20,6 @@
 
 #define CHANGE_DEVICE_NICKNAME_STATUS @"status"
 
+#define DELETE_DEVICE_STATUS @"status"
+
 #endif

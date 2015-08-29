@@ -11,6 +11,7 @@
 @protocol GXChangeDeviceNicknameModelDelegate <NSObject>
 @required
 - (void)changeDeviceNicknameSuccess:(BOOL)successful;
+- (void)deviceHasBeenDeleted;
 - (void)noNetwork;
 @end
 

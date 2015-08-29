@@ -17,8 +17,11 @@
     CGFloat imageViewSize = 60.0f;
     self.imageView.frame = CGRectMake(15.0f, 10.0f, imageViewSize, imageViewSize);
     self.imageView.layer.masksToBounds = YES;
-    self.imageView.layer.cornerRadius = imageViewSize / 2.0f;
+    self.imageView.layer.cornerRadius = self.imageView.frame.size.width / 2.0f;
     
+    self.textLabel.frame = CGRectMake(100.0f, 10.0f, self.frame.size.width - 170.0f, 40.0f);
+    
+    self.detailTextLabel.frame = CGRectMake(100.0f, 50.0f, self.frame.size.width - 170.0f, 20.0f);
 }
 
 @end

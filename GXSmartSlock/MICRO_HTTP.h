@@ -19,6 +19,11 @@
 #define GXResetPasswordURL [NSString stringWithFormat:@"%@reset_password",GXBaseURL]
 #define GXChangeDeviceNicknameURL [NSString stringWithFormat:@"%@update_devicename",GXBaseURL]
 
+// delete all device and it's user when defaultUser is administator
+#define GXDeleteDeviceURL [NSString stringWithFormat:@"%@delete_device",GXBaseURL]
+
+// only delete the current user from the device's users
+#define GXDeleteSelfKeyURL [NSString stringWithFormat:@"%@delete_self_key",GXBaseURL]
 
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"

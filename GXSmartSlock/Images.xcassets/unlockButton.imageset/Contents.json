@@ -2,18 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "Manul_Unlock_Button_Enable@1x.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Manul_Unlock_Button_Enable@2x.png"
+      "filename" : "£’£Ó£Ï£Ô£„£Î£¬£ı£Ù£Ù£Ô£Ó£¿£≥£¯.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "Manul_Unlock_Button_Enable@3x.png"
+      "filename" : "unlockButton@3x.png"
     }
   ],
   "info" : {

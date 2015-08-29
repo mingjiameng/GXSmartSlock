@@ -37,7 +37,7 @@
         <attribute name="userID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="devices" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXDevice_User_Mapping" inverseName="user" inverseEntity="GXDevice_User_Mapping" syncable="YES"/>
-        <relationship name="records" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXRecord" inverseName="user" inverseEntity="GXRecord" syncable="YES"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GXRecord" inverseName="user" inverseEntity="GXRecord" syncable="YES"/>
     </entity>
     <elements>
         <element name="GXDevice" positionX="-36" positionY="45" width="128" height="210"/>

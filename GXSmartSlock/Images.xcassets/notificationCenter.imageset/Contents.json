@@ -2,18 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "Device_Detail_Notificaiton_Center@1×.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Device_Detail_Notificaiton_Center@2×.png"
+      "filename" : "notificationCenter@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "Device_Detail_Notificaiton_Center@3×.png"
+      "scale" : "3x"
     }
   ],
   "info" : {

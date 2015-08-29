@@ -66,6 +66,8 @@
 		44E9F83D1B85F00400165234 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F83C1B85F00400165234 /* libz.dylib */; };
 		44E9F83F1B85F01800165234 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F83E1B85F01800165234 /* libsqlite3.0.dylib */; };
 		44E9F8411B85F02500165234 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F8401B85F02500165234 /* libc++.dylib */; };
+		44EA133C1B913EC200D4FD64 /* GXDeleteDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EA133B1B913EC200D4FD64 /* GXDeleteDeviceModel.m */; };
+		44EA133F1B91485600D4FD64 /* GXDeleteDeviceParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EA133E1B91485600D4FD64 /* GXDeleteDeviceParam.m */; };
 		44ED1D411B8B15C200F1A7F4 /* zkeyLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED1D401B8B15C200F1A7F4 /* zkeyLoginView.m */; };
 		44ED1D4C1B8C148200F1A7F4 /* CircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED1D471B8C148200F1A7F4 /* CircleView.m */; };
 		44ED1D4D1B8C148200F1A7F4 /* zkeyRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED1D491B8C148200F1A7F4 /* zkeyRefreshHeaderView.m */; };
@@ -198,6 +200,10 @@
 		44E9F83C1B85F00400165234 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		44E9F83E1B85F01800165234 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		44E9F8401B85F02500165234 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		44EA133A1B913EC200D4FD64 /* GXDeleteDeviceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDeleteDeviceModel.h; sourceTree = "<group>"; };
+		44EA133B1B913EC200D4FD64 /* GXDeleteDeviceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDeleteDeviceModel.m; sourceTree = "<group>"; };
+		44EA133D1B91485600D4FD64 /* GXDeleteDeviceParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDeleteDeviceParam.h; sourceTree = "<group>"; };
+		44EA133E1B91485600D4FD64 /* GXDeleteDeviceParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDeleteDeviceParam.m; sourceTree = "<group>"; };
 		44ED1D3F1B8B15C200F1A7F4 /* zkeyLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyLoginView.h; sourceTree = "<group>"; };
 		44ED1D401B8B15C200F1A7F4 /* zkeyLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyLoginView.m; sourceTree = "<group>"; };
 		44ED1D461B8C148200F1A7F4 /* CircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleView.h; sourceTree = "<group>"; };
@@ -677,6 +683,8 @@
 				44ED1D631B8C464C00F1A7F4 /* GXDeviceListTableViewCellDataModel.m */,
 				44F63B991B8F4BF200F5335B /* GXChangeDeviceNicknameModel.h */,
 				44F63B9A1B8F4BF200F5335B /* GXChangeDeviceNicknameModel.m */,
+				44EA133A1B913EC200D4FD64 /* GXDeleteDeviceModel.h */,
+				44EA133B1B913EC200D4FD64 /* GXDeleteDeviceModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -710,6 +718,8 @@
 				44ED41A41B8A214300079207 /* GXRegisterParam.m */,
 				44F63B961B8F2F3700F5335B /* GXChangeDeviceNicknameParam.h */,
 				44F63B971B8F2F3700F5335B /* GXChangeDeviceNicknameParam.m */,
+				44EA133D1B91485600D4FD64 /* GXDeleteDeviceParam.h */,
+				44EA133E1B91485600D4FD64 /* GXDeleteDeviceParam.m */,
 			);
 			name = Param;
 			sourceTree = "<group>";
@@ -844,6 +854,7 @@
 				44ED419F1B8A1B7300079207 /* GXVerifyCodeParam.m in Sources */,
 				44ED41741B8969EE00079207 /* GXSystemInfoHelper.m in Sources */,
 				44E916BC1B86F41300EF9C38 /* GXRegisterSecondViewController.m in Sources */,
+				44EA133F1B91485600D4FD64 /* GXDeleteDeviceParam.m in Sources */,
 				44E9F7CB1B84D4AC00165234 /* AppDelegate.m in Sources */,
 				44ED41711B89695100079207 /* GXHttpTool.m in Sources */,
 				44E916FE1B8843D100EF9C38 /* GXDeviceUserMappingModel.m in Sources */,
@@ -863,6 +874,7 @@
 				44ED41931B896B9700079207 /* AFURLConnectionOperation.m in Sources */,
 				44E916C21B86F42300EF9C38 /* GXRegisterFirstViewController.m in Sources */,
 				44E9B8091B860CC600D289F0 /* zkeyViewHelper.m in Sources */,
+				44EA133C1B913EC200D4FD64 /* GXDeleteDeviceModel.m in Sources */,
 				44F63BA11B8F556700F5335B /* zkeySandboxHelper.m in Sources */,
 				44E916F51B880EA300EF9C38 /* GXDeviceModel.m in Sources */,
 				44E9170B1B8883B700EF9C38 /* GXUserModel.m in Sources */,

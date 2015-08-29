@@ -13,6 +13,7 @@
 
 #import "GXChangeDeviceNicknameParam.h"
 #import "GXDefaultHttpHelper.h"
+#import "GXDatabaseHelper.h"
 
 @implementation GXChangeDeviceNicknameModel
 
@@ -23,14 +24,18 @@
     
     GXChangeDeviceNicknameParam *param = [GXChangeDeviceNicknameParam paramWithUserName:userName password:password deviceIdentifire:deviceIdentifire newDeviceNickname:nickname];
     
-    [GXDefaultHttpHelper POstWithChangeDeviceNicknameParam:param success:^(NSDictionary *result) {
+    [GXDefaultHttpHelper postWithChangeDeviceNicknameParam:param success:^(NSDictionary *result) {
+        
         NSInteger status = [[result objectForKey:CHANGE_DEVICE_NICKNAME_STATUS] integerValue];
         if (status == 0) {
             [self.delegate changeDeviceNicknameSuccess:NO];
         } else if (status == 1) {
+            [GXDatabaseHelper changeDeviceNickname:deviceIdentifire deviceNickname:nickname];
             [self.delegate changeDeviceNicknameSuccess:YES];
+        } else if (status == 3) {
+            [self.delegate deviceHasBeenDeleted];
         } else {
-            NSLog(@"change device nickname invalid status");
+            NSLog(@"change device nickname invalid status:%ld", (long)status);
         }
         
     } failure:^(NSError *error) {

@@ -17,6 +17,7 @@
 #import "GXRegisterParam.h"
 #import "GXResetPasswordParam.h"
 #import "GXChangeDeviceNicknameParam.h"
+#import "GXDeleteDeviceParam.h"
 
 @implementation GXDefaultHttpHelper
 
@@ -115,7 +116,7 @@
     }];
 }
 
-+ (void)POstWithChangeDeviceNicknameParam:(GXChangeDeviceNicknameParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
++ (void)postWithChangeDeviceNicknameParam:(GXChangeDeviceNicknameParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
 {
     NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
                                KEY_PASSWORD : param.password,
@@ -131,5 +132,31 @@
         }
     }];
 }
+
++ (void)postWithDeleteDeviceParam:(GXDeleteDeviceParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_DEVICE_IDENTIFIRE : param.deviceIdentifire};
+    
+    NSString *urlString = GXDeleteSelfKeyURL;
+    if ([param.deviceAuthority isEqualToString:@"admin"]) {
+        urlString = GXDeleteDeviceURL;
+    } else {
+        urlString = GXDeleteSelfKeyURL;
+    }
+    
+    [GXHttpTool postWithServerURL:urlString params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"删除门锁失败");
+            failure(error);
+        }
+    }];
+}
+
+
+
 
 @end

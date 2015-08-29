@@ -13,11 +13,20 @@
 
 #import "GXDatabaseEntityDevice.h"
 #import "zkeySandboxHelper.h"
+#import "GXDeleteDeviceModel.h"
+
+#import "zkeyViewHelper.h"
+#import "zkeyActivityIndicatorView.h"
 
 #import "GXChangeDeviceImageViewController.h"
+#import "GXChangeDeviceNicknameViewController.h"
 
-@interface GXDeviceDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@interface GXDeviceDetailViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, GXDeleteDeviceModelDelegate>
+{
+    GXDeleteDeviceModel *_deleteDeviceModel;
+    zkeyActivityIndicatorView *_activityIndicator;
+}
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *titleNameArray;
 @property (nonatomic, strong) UIButton *deleteDeviceButton;
@@ -163,6 +172,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
+        // change device image
         if (indexPath.row == 0) {
             GXChangeDeviceImageViewController *changeDeviceImageVC = [[GXChangeDeviceImageViewController alloc] init];
             changeDeviceImageVC.deviceEntity = self.deviceEntity;
@@ -179,13 +189,118 @@
             [self.navigationController pushViewController:changeDeviceImageVC animated:YES];
         }
         
+        // change device nickname
+        if (indexPath.row == 1) {
+            GXChangeDeviceNicknameViewController *changeDeviceNicknameVC = [[GXChangeDeviceNicknameViewController alloc] init];
+            changeDeviceNicknameVC.deviceEntity = self.deviceEntity;
+            changeDeviceNicknameVC.deviceNicknameChanged = ^(BOOL changed) {
+                if (changed) {
+                    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                    
+                    if (self.deviceInformationChanged) {
+                        self.deviceInformationChanged(YES);
+                    }
+                }
+            };
+            
+            [self.navigationController pushViewController:changeDeviceNicknameVC animated:YES];
+        }
+        
+    } else if (indexPath.section == 1) {
+        
+    } else if (indexPath.section == 2) {
+        
     }
+    
 }
 
 #pragma mark - user action
 - (void)deleteDevice:(UIButton *)sender
 {
+    NSString *title = nil;
+    if ([self.deviceEntity.deviceAuthority isEqualToString:DEVICE_AUTHORITY_ADMIN]) {
+        title = @"您是该门锁的管理员，如果您删除该门锁，该门锁的所有授权用户将无法打开该门锁。同时系统会删除该门锁的所有用户及其相关的开锁记录。您确定要删除该门锁吗？";
+    } else {
+        title = @"删除该门锁后，系统将无法为您打开该门锁，您确定要删除该门锁吗？";
+    }
     
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles: nil];
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        return;
+    }
+    
+    if (buttonIndex == actionSheet.destructiveButtonIndex) {
+        [self lockUI];
+        
+        if (_activityIndicator == nil) {
+            _activityIndicator = [[zkeyActivityIndicatorView alloc] initWithFrame:self.view.frame title:@"正在删除门锁..."];
+        }
+        [self.view addSubview:_activityIndicator];
+        
+        if (_deleteDeviceModel == nil) {
+            _deleteDeviceModel = [[GXDeleteDeviceModel alloc] init];
+            _deleteDeviceModel.delegate = self;
+        }
+        
+        [_deleteDeviceModel deleteDeviceWithIdentifire:self.deviceEntity.deviceIdentifire authorityStatus:self.deviceEntity.deviceAuthority];
+    }
+}
+
+#pragma mark - deleteDeviceDelegate
+- (void)noNetwork
+{
+    if (_activityIndicator != nil) {
+        [_activityIndicator removeFromSuperview];
+    }
+    
+    [self alertWithMessage:@"无法连接服务器"];
+    
+    [self activeUI];
+}
+
+- (void)deleteDeviceSuccessful:(BOOL)successful
+{
+    if (_activityIndicator != nil) {
+        [_activityIndicator removeFromSuperview];
+    }
+    
+    if (successful) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self alertWithMessage:@"删除失败 请重新尝试"];
+        [self activeUI];
+    }
+    
+}
+
+- (void)deviceHasBeenDeleted
+{
+    if (_activityIndicator != nil) {
+        [_activityIndicator removeFromSuperview];
+    }
+    
+    [self alertWithMessage:@"该门锁已被删除"];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)alertWithMessage:(NSString *)message
+{
+    [zkeyViewHelper alertWithMessage:message inView:self.view withFrame:self.view.frame];
+}
+
+- (void)lockUI
+{
+    _tableView.userInteractionEnabled = NO;
+}
+
+- (void)activeUI
+{
+    _tableView.userInteractionEnabled = YES;
 }
 
 @end

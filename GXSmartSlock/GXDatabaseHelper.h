@@ -13,13 +13,26 @@
 
 @interface GXDatabaseHelper : NSObject
 
+/*
+ * insert data
+ */
 + (void)setDefaultUser:(GXUserModel *)user;
 + (void)insertDeviceIntoDatabase:(NSArray *)deviceArray;
 + (void)insertDeviceUserMappingItemIntoDatabase:(NSArray *)deviceUserMappingArray;
 + (void)insertUserIntoDatabase:(NSArray *)userArray;
 
 /************************seperator*********************************/
+
+/*
+ * provide data
+ */
 + (NSFetchedResultsController *)validDeviceFetchedResultsController;
 + (NSFetchedResultsController *)allDeviceFetchedResultsController;
+
+/*
+ * change data
+ */
++ (void)changeDeviceNickname:(NSString *)deviceIdentifire deviceNickname:(NSString *)nickname;
++ (void)deleteDeviceWithIdentifire:(NSString *)deviceIdentifire;
 
 @end

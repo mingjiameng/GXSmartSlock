@@ -589,5 +589,24 @@
     return user;
 }
 
++ (void)changeDeviceNickname:(NSString *)deviceIdentifire deviceNickname:(NSString *)nickname
+{
+    GXDatabaseEntityDevice *deviceEntity = [self deviceEntityWithDeviceIdentifire:deviceIdentifire];
+    
+    if (![deviceEntity.deviceNickname isEqualToString:nickname]) {
+        deviceEntity.deviceNickname = nickname;
+    }
+}
+
++ (void)deleteDeviceWithIdentifire:(NSString *)deviceIdentifire
+{
+    GXDatabaseEntityDevice *deviceEntity = [self deviceEntityWithDeviceIdentifire:deviceIdentifire];
+    
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    [managedObjectContext deleteObject:deviceEntity];
+    
+    [self saveContext];
+}
 
 @end

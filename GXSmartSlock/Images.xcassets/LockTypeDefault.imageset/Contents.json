@@ -2,16 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "LockTypeDefault@1x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "LockTypeDefault.png"
+      "filename" : "LockTypeDefault@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "LockTypeDefault@3x.png"
     }
   ],
   "info" : {
