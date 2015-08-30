@@ -29,12 +29,8 @@
     
     cell.imageView.layer.masksToBounds = YES;
     cell.imageView.layer.cornerRadius = cell.imageView.frame.size.width / 2.0f;
-    NSString *deviceImageFilePath = [NSString stringWithFormat:@"%@/%@.png", [zkeySandboxHelper pathOfDocuments], cellData.deviceIdentifire];
-    if ([zkeySandboxHelper fileExitAtPath:deviceImageFilePath]) {
-        cell.imageView.image = [UIImage imageWithContentsOfFile:deviceImageFilePath];
-    } else {
-        cell.imageView.image = [UIImage imageNamed:[self deviceImageNameAccordingDeviceCategory:cellData.deviceCategory]];
-    }
+    
+    cell.imageView.image = [self deviceImageNameAccordingDeviceCategory:cellData.deviceCategory andDeviceIdentifire:cellData.deviceIdentifire];
     
     cell.textLabel.text = cellData.title;
     
@@ -48,19 +44,26 @@
     return cell;
 }
 
-- (NSString *)deviceImageNameAccordingDeviceCategory:(NSString *)deviceCategory
+- (UIImage *)deviceImageNameAccordingDeviceCategory:(NSString *)deviceCategory andDeviceIdentifire:(NSString *)deviceIdentifire
 {
+    NSString *deviceImageFilePath = [NSString stringWithFormat:@"%@/%@.png", [zkeySandboxHelper pathOfDocuments], deviceIdentifire];
+    if ([zkeySandboxHelper fileExitAtPath:deviceImageFilePath]) {
+        return [UIImage imageWithContentsOfFile:deviceImageFilePath];
+    }
+    
+    NSString *imageName = nil;
+    
     if ([deviceCategory isEqualToString:DEVICE_CATEGORY_DEFAULT]) {
-        return DEVICE_CATEGORY_DEFAULT_IMG;
+        imageName = DEVICE_CATEGORY_DEFAULT_IMG;
     } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_ELECTRIC]) {
-        return DEVICE_CATEGORY_ELECTRIC_IMG;
+        imageName = DEVICE_CATEGORY_ELECTRIC_IMG;
     } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD]) {
-        return DEVICE_CATEGORY_GUARD_IMG;
+        imageName = DEVICE_CATEGORY_GUARD_IMG;
     } else {
         NSLog(@"error: invalid device category");
     }
     
-    return DEVICE_CATEGORY_DEFAULT_IMG;
+    return [UIImage imageNamed:imageName];
 }
 
 

@@ -28,6 +28,7 @@
  */
 + (NSFetchedResultsController *)validDeviceFetchedResultsController;
 + (NSFetchedResultsController *)allDeviceFetchedResultsController;
++ (NSFetchedResultsController *)deviceUserMappingModelFetchedResultsController:(NSString *)deviceIdentifire;
 
 /*
  * change data

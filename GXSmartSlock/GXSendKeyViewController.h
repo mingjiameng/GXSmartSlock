@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import <CoreData/CoreData.h>
+
 @interface GXSendKeyViewController : UIViewController
 
-
+@property (nonatomic, strong) NSArray *validDeviceArray;
 
 @end

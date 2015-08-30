@@ -387,6 +387,31 @@
     return fetchedResultsController;
 }
 
++ (NSFetchedResultsController *)deviceUserMappingModelFetchedResultsController:(NSString *)deviceIdentifire
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityDeviceUserMapping = [NSEntityDescription entityForName:ENTITY_DEVICE_USER_MAPPING inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityDeviceUserMapping];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"deviceUserMappingID" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    
+    NSError *error = nil;
+    if (![fetchedResultsController performFetch:&error]) {
+        NSLog(@"fetch valid device error:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    return fetchedResultsController;
+}
+
+
 + (GXDatabaseEntityUser *)defaultUser
 {
     NSString *defaultUserName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
@@ -395,6 +420,7 @@
     
     return user;
 }
+
 /*
  the following method provide neccessary assistant
  */
