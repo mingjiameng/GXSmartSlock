@@ -19,7 +19,7 @@
 #import "GXChangeDeviceNicknameParam.h"
 #import "GXDeleteDeviceParam.h"
 #import "GXUpdateProfileImageParam.h"
-
+#import "GXUpdateNicknameParam.h"
 
 @implementation GXDefaultHttpHelper
 
@@ -174,6 +174,21 @@
     }];
 }
 
++ (void)postWithUpdateNicknameParam:(GXUpdateNicknameParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_NEW_NICKNAME : param.nickname};
+    
+    [GXHttpTool postWithServerURL:GXUpdateUserNicknameURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"更新昵称失败");
+            failure(error);
+        }
+    }];
+}
 
 
 @end

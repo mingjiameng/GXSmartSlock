@@ -24,4 +24,6 @@
 
 #define UPDATE_PROFILE_IMAGE_STATUS @"status"
 
+#define UPDATE_NICKNAME_STATUS @"status"
+
 #endif

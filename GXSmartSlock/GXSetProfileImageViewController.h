@@ -10,4 +10,6 @@
 
 @interface GXSetProfileImageViewController : UIViewController
 
+@property (nonatomic, copy) void (^profileImageChanged) (BOOL changed);
+
 @end

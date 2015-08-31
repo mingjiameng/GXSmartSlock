@@ -12,8 +12,10 @@
 #import "MICRO_ROOT.h"
 
 #import "GXDatabaseHelper.h"
+#import "GXDatabaseEntityUser.h"
 
 #import "zkeyButtonWithImageAndTitle.h"
+#import "UIImageView+FHProfileDownload.h"
 
 #import "GXDeviceListViewController.h"
 #import "GXUserSettingViewController.h"
@@ -29,6 +31,7 @@
     NSFetchedResultsController *_validKeyFetchedResultsController;
     UIButton *_centralButton;
     UIActionSheet *_unlockModeActionSheet;
+    UIImageView *_headImageView;
 }
 @end
 
@@ -43,13 +46,21 @@
     
     [self configNavigationBar];
     [self configCentralButton];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setHeadImage) name:NOTIFICATION_UPDATE_PROFILE_IMAGE object:nil];
 }
 
 - (void)configNavigationBar
 {
     // left bar button - user personal setting list
-    UIButton *personalSettingButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 34.0f, 34.0f)];
-    [personalSettingButton setBackgroundImage:[UIImage imageNamed:@"appLogoForLogin"] forState:UIControlStateNormal];
+    CGFloat imageSize = 34.0f;
+    UIButton *personalSettingButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, imageSize, imageSize)];
+    _headImageView = [[UIImageView alloc] initWithFrame:personalSettingButton.bounds];
+    _headImageView.layer.masksToBounds = YES;
+    _headImageView.layer.cornerRadius = imageSize / 2.0f;
+    [self setHeadImage];
+    [personalSettingButton addSubview:_headImageView];
+    
     [personalSettingButton addTarget:self action:@selector(personalSetting:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:personalSettingButton];
     self.navigationItem.leftBarButtonItem = leftBarButtonItem;
@@ -63,6 +74,15 @@
     
     // back button style
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+}
+
+- (void)setHeadImage
+{
+    UIImage *placeHolderImage = [UIImage imageNamed:@"appLogoForLogin"];
+    
+    GXDatabaseEntityUser *defaultUser = [GXDatabaseHelper defaultUser];
+    
+    [_headImageView setProfileWithUrlString:defaultUser.headImageURL placeholderImage:placeHolderImage];
 }
 
 - (void)reloadView
@@ -320,5 +340,10 @@
     [self reloadView];
 }
 
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

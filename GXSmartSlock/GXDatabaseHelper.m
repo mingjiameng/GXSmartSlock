@@ -636,4 +636,13 @@
     [self saveContext];
 }
 
++ (void)updateDefaultUserNickname:(NSString *)nickname
+{
+    GXDatabaseEntityUser *userEntity = [self defaultUser];
+    
+    userEntity.nickname = nickname;
+    
+    [self saveContext];
+}
+
 @end

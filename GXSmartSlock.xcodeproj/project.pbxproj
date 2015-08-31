@@ -21,6 +21,9 @@
 		44E6F27A1B93FEFF00A38DF9 /* GXSetProfileImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2791B93FEFF00A38DF9 /* GXSetProfileImageViewController.m */; };
 		44E6F27E1B9400D800A38DF9 /* GXUpdateProfileImageParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F27D1B9400D800A38DF9 /* GXUpdateProfileImageParam.m */; };
 		44E6F2811B94012100A38DF9 /* GXUpdateProfileImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2801B94012100A38DF9 /* GXUpdateProfileImageModel.m */; };
+		44E6F2861B9473AD00A38DF9 /* GXSetNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2851B9473AD00A38DF9 /* GXSetNicknameViewController.m */; };
+		44E6F2891B948A1100A38DF9 /* GXUpdateNicknameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2881B948A1100A38DF9 /* GXUpdateNicknameModel.m */; };
+		44E6F28C1B948E6200A38DF9 /* GXUpdateNicknameParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F28B1B948E6200A38DF9 /* GXUpdateNicknameParam.m */; };
 		44E916811B86CDE200EF9C38 /* Voicemail.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44E916801B86CDE200EF9C38 /* Voicemail.wav */; };
 		44E916BC1B86F41300EF9C38 /* GXRegisterSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916B91B86F41300EF9C38 /* GXRegisterSecondViewController.m */; };
 		44E916BD1B86F41300EF9C38 /* GXRegisterThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916BB1B86F41300EF9C38 /* GXRegisterThirdViewController.m */; };
@@ -149,6 +152,12 @@
 		44E6F27D1B9400D800A38DF9 /* GXUpdateProfileImageParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUpdateProfileImageParam.m; sourceTree = "<group>"; };
 		44E6F27F1B94012100A38DF9 /* GXUpdateProfileImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUpdateProfileImageModel.h; sourceTree = "<group>"; };
 		44E6F2801B94012100A38DF9 /* GXUpdateProfileImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUpdateProfileImageModel.m; sourceTree = "<group>"; };
+		44E6F2841B9473AD00A38DF9 /* GXSetNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSetNicknameViewController.h; sourceTree = "<group>"; };
+		44E6F2851B9473AD00A38DF9 /* GXSetNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXSetNicknameViewController.m; sourceTree = "<group>"; };
+		44E6F2871B948A1100A38DF9 /* GXUpdateNicknameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUpdateNicknameModel.h; sourceTree = "<group>"; };
+		44E6F2881B948A1100A38DF9 /* GXUpdateNicknameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUpdateNicknameModel.m; sourceTree = "<group>"; };
+		44E6F28A1B948E6200A38DF9 /* GXUpdateNicknameParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUpdateNicknameParam.h; sourceTree = "<group>"; };
+		44E6F28B1B948E6200A38DF9 /* GXUpdateNicknameParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUpdateNicknameParam.m; sourceTree = "<group>"; };
 		44E916801B86CDE200EF9C38 /* Voicemail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Voicemail.wav; sourceTree = "<group>"; };
 		44E916B81B86F41300EF9C38 /* GXRegisterSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRegisterSecondViewController.h; sourceTree = "<group>"; };
 		44E916B91B86F41300EF9C38 /* GXRegisterSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRegisterSecondViewController.m; sourceTree = "<group>"; };
@@ -374,6 +383,8 @@
 				44E6F27B1B94007A00A38DF9 /* MICRO_USER_SETTING.h */,
 				44E6F27F1B94012100A38DF9 /* GXUpdateProfileImageModel.h */,
 				44E6F2801B94012100A38DF9 /* GXUpdateProfileImageModel.m */,
+				44E6F2871B948A1100A38DF9 /* GXUpdateNicknameModel.h */,
+				44E6F2881B948A1100A38DF9 /* GXUpdateNicknameModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -385,6 +396,8 @@
 				44E6F2661B93DE4800A38DF9 /* GXUserSettingViewController.m */,
 				44E6F2781B93FEFF00A38DF9 /* GXSetProfileImageViewController.h */,
 				44E6F2791B93FEFF00A38DF9 /* GXSetProfileImageViewController.m */,
+				44E6F2841B9473AD00A38DF9 /* GXSetNicknameViewController.h */,
+				44E6F2851B9473AD00A38DF9 /* GXSetNicknameViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -842,6 +855,8 @@
 				44EA133E1B91485600D4FD64 /* GXDeleteDeviceParam.m */,
 				44E6F27C1B9400D800A38DF9 /* GXUpdateProfileImageParam.h */,
 				44E6F27D1B9400D800A38DF9 /* GXUpdateProfileImageParam.m */,
+				44E6F28A1B948E6200A38DF9 /* GXUpdateNicknameParam.h */,
+				44E6F28B1B948E6200A38DF9 /* GXUpdateNicknameParam.m */,
 			);
 			name = Param;
 			sourceTree = "<group>";
@@ -980,6 +995,7 @@
 				44E916BC1B86F41300EF9C38 /* GXRegisterSecondViewController.m in Sources */,
 				44EA133F1B91485600D4FD64 /* GXDeleteDeviceParam.m in Sources */,
 				44E6F27A1B93FEFF00A38DF9 /* GXSetProfileImageViewController.m in Sources */,
+				44E6F2891B948A1100A38DF9 /* GXUpdateNicknameModel.m in Sources */,
 				44E6F27E1B9400D800A38DF9 /* GXUpdateProfileImageParam.m in Sources */,
 				44E9F7CB1B84D4AC00165234 /* AppDelegate.m in Sources */,
 				44ED41711B89695100079207 /* GXHttpTool.m in Sources */,
@@ -1006,6 +1022,7 @@
 				44F63BA11B8F556700F5335B /* zkeySandboxHelper.m in Sources */,
 				44E916F51B880EA300EF9C38 /* GXDeviceModel.m in Sources */,
 				44E9170B1B8883B700EF9C38 /* GXUserModel.m in Sources */,
+				44E6F2861B9473AD00A38DF9 /* GXSetNicknameViewController.m in Sources */,
 				44E6F26F1B93EFA200A38DF9 /* FHProfileImageDownloader.m in Sources */,
 				44ED418E1B896B9700079207 /* AFHTTPRequestOperation.m in Sources */,
 				44ED1D701B8DCC8800F1A7F4 /* GXSendKeyViewController.m in Sources */,
@@ -1014,6 +1031,7 @@
 				44E916BD1B86F41300EF9C38 /* GXRegisterThirdViewController.m in Sources */,
 				44F63B9B1B8F4BF200F5335B /* GXChangeDeviceNicknameModel.m in Sources */,
 				44ED419C1B897ACE00079207 /* GXGetVerificationCodeParam.m in Sources */,
+				44E6F28C1B948E6200A38DF9 /* GXUpdateNicknameParam.m in Sources */,
 				448BE17D1B903B3900DC6FD0 /* GXDeviceListTableViewCell.m in Sources */,
 				44ED41A51B8A214300079207 /* GXRegisterParam.m in Sources */,
 				44ED1D411B8B15C200F1A7F4 /* zkeyLoginView.m in Sources */,

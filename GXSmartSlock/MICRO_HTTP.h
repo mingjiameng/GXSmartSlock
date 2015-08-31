@@ -27,6 +27,8 @@
 
 #define GXUploadUserHeadImageURL [NSString stringWithFormat:@"%@update_profile", GXBaseURL]
 
+#define GXUpdateUserNicknameURL [NSString stringWithFormat:@"%@update_nickname", GXBaseURL]
+
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"
 #define KEY_PHONE_INFO @"phone_info"
@@ -35,5 +37,6 @@
 #define KEY_DEVICE_IDENTIFIRE @"device_id"
 #define KEY_DEVICE_NICKNAME @"device_name"
 #define KEY_USER_HEAD_IMAGE_STRING @"profile_img"
+#define KEY_NEW_NICKNAME @"nnickname"
 
 #endif

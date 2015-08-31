@@ -44,5 +44,8 @@ typedef NS_ENUM(NSInteger, DefaultUnlockMode) {
 #define WEIXIN_GUOSIM_ID @"wxd5b207c3ecc53a2e"
 
 
+// notification
+#define NOTIFICATION_UPDATE_PROFILE_IMAGE @"updateProfileImageNotification"
+
 
 #endif

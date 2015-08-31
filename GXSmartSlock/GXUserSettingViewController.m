@@ -18,6 +18,8 @@
 
 #import "GXLoginViewController.h"
 #import "GXSetProfileImageViewController.h"
+#import "GXSetNicknameViewController.h"
+
 
 @interface GXUserSettingViewController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
 
@@ -151,9 +153,31 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        GXSetProfileImageViewController *setProfileVC = [[GXSetProfileImageViewController alloc] init];
-        [self.navigationController pushViewController:setProfileVC animated:YES];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            GXSetProfileImageViewController *setProfileVC = [[GXSetProfileImageViewController alloc] init];
+            setProfileVC.profileImageChanged = ^(BOOL changed) {
+                if (changed) {
+                    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                }
+            };
+            
+            [self.navigationController pushViewController:setProfileVC animated:YES];
+        } else if (indexPath.row == 2) {
+            GXSetNicknameViewController *setNicknameVC = [[GXSetNicknameViewController alloc] init];
+            setNicknameVC.defaultUserNicknameChanged = ^(BOOL changed) {
+                if (changed) {
+                    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                }
+            };
+            
+            [self.navigationController pushViewController:setNicknameVC animated:YES];
+        }
+        
+    } else if (indexPath.section == 1) {
+    
+    } else if (indexPath.section == 2) {
+        
     }
 }
 

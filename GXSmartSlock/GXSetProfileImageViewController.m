@@ -50,7 +50,7 @@
 
 - (void)configNavigationBar
 {
-    self.navigationItem.title = @"头像设置";
+    self.title = @"头像设置";
 }
 
 - (void)addHeadImageView:(CGRect)frame
@@ -174,7 +174,10 @@
 
 - (void)alterHeadImage
 {
-    _activityIndicator = [[zkeyActivityIndicatorView alloc] initWithFrame:self.view.bounds title:@"正在更换头像..."];
+    if (_activityIndicator == nil) {
+        _activityIndicator = [[zkeyActivityIndicatorView alloc] initWithFrame:self.view.bounds title:@"正在更换头像..."];
+    }
+    
     [self.view addSubview:_activityIndicator];
     
     NSData *headImageData = UIImageJPEGRepresentation(_headImage, 0.1);
@@ -196,6 +199,11 @@
     
     if (successful) {
         [self setHeadImage:_headImageView];
+        if (self.profileImageChanged) {
+            self.profileImageChanged(YES);
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_PROFILE_IMAGE object:nil];
     } else {
         [self alertWithMessage:@"更换头像失败 请重试"];
     }
