@@ -18,6 +18,8 @@
 #import "GXResetPasswordParam.h"
 #import "GXChangeDeviceNicknameParam.h"
 #import "GXDeleteDeviceParam.h"
+#import "GXUpdateProfileImageParam.h"
+
 
 @implementation GXDefaultHttpHelper
 
@@ -156,6 +158,21 @@
     }];
 }
 
++ (void)postwithUpdateProfileImageParam:(GXUpdateProfileImageParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_USER_HEAD_IMAGE_STRING : param.imageBase64String};
+    
+    [GXHttpTool postWithServerURL:GXUploadUserHeadImageURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"更换头像失败");
+            failure(error);
+        }
+    }];
+}
 
 
 

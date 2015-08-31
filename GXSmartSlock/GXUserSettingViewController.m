@@ -17,6 +17,7 @@
 #import "GXLogoutModel.h"
 
 #import "GXLoginViewController.h"
+#import "GXSetProfileImageViewController.h"
 
 @interface GXUserSettingViewController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
 
@@ -33,12 +34,15 @@
     // do something...
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [self configNavigationBar];
+    
     [self addUserSettingTableView:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - TOP_SPACE_IN_NAVIGATION_MODE)];
 }
 
 - (void)configNavigationBar
 {
-    
+    self.navigationItem.title = @"用户设置";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissVC)];
 }
 
 - (void)addUserSettingTableView:(CGRect)frame
@@ -146,6 +150,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        GXSetProfileImageViewController *setProfileVC = [[GXSetProfileImageViewController alloc] init];
+        [self.navigationController pushViewController:setProfileVC animated:YES];
+    }
 }
 
 #pragma mark - user action
@@ -167,5 +176,12 @@
     UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
     self.view.window.rootViewController = navigationVC;
     
+}
+
+- (void)dismissVC
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 @end

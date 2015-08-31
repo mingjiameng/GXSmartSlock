@@ -22,4 +22,6 @@
 
 #define DELETE_DEVICE_STATUS @"status"
 
+#define UPDATE_PROFILE_IMAGE_STATUS @"status"
+
 #endif

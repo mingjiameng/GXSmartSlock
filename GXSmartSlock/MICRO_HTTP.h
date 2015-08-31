@@ -25,6 +25,8 @@
 // only delete the current user from the device's users
 #define GXDeleteSelfKeyURL [NSString stringWithFormat:@"%@delete_self_key",GXBaseURL]
 
+#define GXUploadUserHeadImageURL [NSString stringWithFormat:@"%@update_profile", GXBaseURL]
+
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"
 #define KEY_PHONE_INFO @"phone_info"
@@ -32,5 +34,6 @@
 #define KEY_NICKNAME @"nickname"
 #define KEY_DEVICE_IDENTIFIRE @"device_id"
 #define KEY_DEVICE_NICKNAME @"device_name"
+#define KEY_USER_HEAD_IMAGE_STRING @"profile_img"
 
 #endif
