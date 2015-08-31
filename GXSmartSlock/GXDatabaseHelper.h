@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class GXUserModel;
+@class GXUserModel, GXDatabaseEntityUser;
 
 @interface GXDatabaseHelper : NSObject
 
@@ -29,6 +29,7 @@
 + (NSFetchedResultsController *)validDeviceFetchedResultsController;
 + (NSFetchedResultsController *)allDeviceFetchedResultsController;
 + (NSFetchedResultsController *)deviceUserMappingModelFetchedResultsController:(NSString *)deviceIdentifire;
++ (GXDatabaseEntityUser *)defaultUser;
 
 /*
  * change data

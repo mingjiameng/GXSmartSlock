@@ -16,6 +16,7 @@
 #import "zkeyButtonWithImageAndTitle.h"
 
 #import "GXDeviceListViewController.h"
+#import "GXUserSettingViewController.h"
 
 #import <CoreData/CoreData.h>
 
@@ -279,7 +280,12 @@
 
 - (void)personalSetting:(UIButton *)sender
 {
+    GXUserSettingViewController *userSettingVC = [[GXUserSettingViewController alloc] init];
+    UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController:userSettingVC];
     
+    [self presentViewController:navigationVC animated:YES completion:^{
+        
+    }];
 }
 
 - (void)addDevice:(UIButton *)sender

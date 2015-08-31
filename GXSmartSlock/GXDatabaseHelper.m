@@ -49,7 +49,7 @@
     defaultUserEntity.userID = [NSNumber numberWithInteger:user.userID];
     defaultUserEntity.nickname = user.nickname;
     defaultUserEntity.userName = user.userName;
-    
+    defaultUserEntity.headImageURL = [NSString stringWithFormat:@"https://115.28.226.149/user_profile?user_id=%ld.jpg", (long)user.userID];
     
     [self saveContext];
 }
@@ -326,6 +326,7 @@
         newUserEntity.userID = [NSNumber numberWithInteger:userModel.userID];
         newUserEntity.userName = userModel.userName;
         newUserEntity.nickname = userModel.nickname;
+        newUserEntity.headImageURL = [NSString stringWithFormat:@"https://115.28.226.149/user_profile?user_id=%ld.jpg", (long)userModel.userID];
     }
     
     [self saveContext];
