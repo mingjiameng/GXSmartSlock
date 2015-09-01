@@ -18,6 +18,7 @@
 #import "GXGuidePageViewController.h"
 #import "GXRootViewController.h"
 #import "GXLoginViewController.h"
+#import "FHGesturePasswordViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -67,6 +68,8 @@
     [WXApi registerApp:WEIXIN_GUOSIM_ID];
     // register MiPushService
     [[zkeyMiPushPackage sharedMiPush] registerMiPushWithLongConnection:self];
+    
+    [self openGestureSecretViewIfNeccessary];
     
     return YES;
 }
@@ -264,6 +267,8 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+
+    [self openGestureSecretViewIfNeccessary];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -274,6 +279,15 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+- (void)openGestureSecretViewIfNeccessary
+{
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_GESTURE_PASSWORD]) {
+        FHGesturePasswordViewController *gesturePasswordVerifyVC = [[FHGesturePasswordViewController alloc] init];
+        gesturePasswordVerifyVC.viewType = GesturePasswordViewTypeVerification;
+        [self.window.rootViewController presentViewController:gesturePasswordVerifyVC animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Core Data stack

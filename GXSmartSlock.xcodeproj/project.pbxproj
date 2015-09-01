@@ -24,6 +24,11 @@
 		44E6F2861B9473AD00A38DF9 /* GXSetNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2851B9473AD00A38DF9 /* GXSetNicknameViewController.m */; };
 		44E6F2891B948A1100A38DF9 /* GXUpdateNicknameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2881B948A1100A38DF9 /* GXUpdateNicknameModel.m */; };
 		44E6F28C1B948E6200A38DF9 /* GXUpdateNicknameParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F28B1B948E6200A38DF9 /* GXUpdateNicknameParam.m */; };
+		44E6F2961B957F2700A38DF9 /* FHGesturePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F28F1B957F2700A38DF9 /* FHGesturePasswordViewController.m */; };
+		44E6F2971B957F2700A38DF9 /* GesturePasswordButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2911B957F2700A38DF9 /* GesturePasswordButton.m */; };
+		44E6F2981B957F2700A38DF9 /* GesturePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2931B957F2700A38DF9 /* GesturePasswordView.m */; };
+		44E6F2991B957F2700A38DF9 /* TentacleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2951B957F2700A38DF9 /* TentacleView.m */; };
+		44E6F29C1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F29B1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.m */; };
 		44E916811B86CDE200EF9C38 /* Voicemail.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44E916801B86CDE200EF9C38 /* Voicemail.wav */; };
 		44E916BC1B86F41300EF9C38 /* GXRegisterSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916B91B86F41300EF9C38 /* GXRegisterSecondViewController.m */; };
 		44E916BD1B86F41300EF9C38 /* GXRegisterThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916BB1B86F41300EF9C38 /* GXRegisterThirdViewController.m */; };
@@ -158,6 +163,16 @@
 		44E6F2881B948A1100A38DF9 /* GXUpdateNicknameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUpdateNicknameModel.m; sourceTree = "<group>"; };
 		44E6F28A1B948E6200A38DF9 /* GXUpdateNicknameParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUpdateNicknameParam.h; sourceTree = "<group>"; };
 		44E6F28B1B948E6200A38DF9 /* GXUpdateNicknameParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUpdateNicknameParam.m; sourceTree = "<group>"; };
+		44E6F28E1B957F2700A38DF9 /* FHGesturePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FHGesturePasswordViewController.h; sourceTree = "<group>"; };
+		44E6F28F1B957F2700A38DF9 /* FHGesturePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FHGesturePasswordViewController.m; sourceTree = "<group>"; };
+		44E6F2901B957F2700A38DF9 /* GesturePasswordButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GesturePasswordButton.h; sourceTree = "<group>"; };
+		44E6F2911B957F2700A38DF9 /* GesturePasswordButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GesturePasswordButton.m; sourceTree = "<group>"; };
+		44E6F2921B957F2700A38DF9 /* GesturePasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GesturePasswordView.h; sourceTree = "<group>"; };
+		44E6F2931B957F2700A38DF9 /* GesturePasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GesturePasswordView.m; sourceTree = "<group>"; };
+		44E6F2941B957F2700A38DF9 /* TentacleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TentacleView.h; sourceTree = "<group>"; };
+		44E6F2951B957F2700A38DF9 /* TentacleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TentacleView.m; sourceTree = "<group>"; };
+		44E6F29A1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FHUserSetting+HandGestureSecretViewController.h"; sourceTree = "<group>"; };
+		44E6F29B1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FHUserSetting+HandGestureSecretViewController.m"; sourceTree = "<group>"; };
 		44E916801B86CDE200EF9C38 /* Voicemail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Voicemail.wav; sourceTree = "<group>"; };
 		44E916B81B86F41300EF9C38 /* GXRegisterSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRegisterSecondViewController.h; sourceTree = "<group>"; };
 		44E916B91B86F41300EF9C38 /* GXRegisterSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRegisterSecondViewController.m; sourceTree = "<group>"; };
@@ -358,6 +373,7 @@
 		44E6F2641B9347E400A38DF9 /* UserSetting */ = {
 			isa = PBXGroup;
 			children = (
+				44E6F28D1B957F1300A38DF9 /* HandGesturePassword */,
 				44E6F2831B94198800A38DF9 /* Controller */,
 				44E6F2821B94197F00A38DF9 /* Model */,
 			);
@@ -392,6 +408,8 @@
 		44E6F2831B94198800A38DF9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				44E6F29A1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.h */,
+				44E6F29B1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.m */,
 				44E6F2651B93DE4800A38DF9 /* GXUserSettingViewController.h */,
 				44E6F2661B93DE4800A38DF9 /* GXUserSettingViewController.m */,
 				44E6F2781B93FEFF00A38DF9 /* GXSetProfileImageViewController.h */,
@@ -400,6 +418,21 @@
 				44E6F2851B9473AD00A38DF9 /* GXSetNicknameViewController.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		44E6F28D1B957F1300A38DF9 /* HandGesturePassword */ = {
+			isa = PBXGroup;
+			children = (
+				44E6F28E1B957F2700A38DF9 /* FHGesturePasswordViewController.h */,
+				44E6F28F1B957F2700A38DF9 /* FHGesturePasswordViewController.m */,
+				44E6F2901B957F2700A38DF9 /* GesturePasswordButton.h */,
+				44E6F2911B957F2700A38DF9 /* GesturePasswordButton.m */,
+				44E6F2921B957F2700A38DF9 /* GesturePasswordView.h */,
+				44E6F2931B957F2700A38DF9 /* GesturePasswordView.m */,
+				44E6F2941B957F2700A38DF9 /* TentacleView.h */,
+				44E6F2951B957F2700A38DF9 /* TentacleView.m */,
+			);
+			name = HandGesturePassword;
 			sourceTree = "<group>";
 		};
 		44E916B71B86F3FE00EF9C38 /* Controller */ = {
@@ -1015,6 +1048,7 @@
 				44E9F8001B85E00100165234 /* GXGuidePageViewController.m in Sources */,
 				44ED41911B896B9700079207 /* AFNetworkReachabilityManager.m in Sources */,
 				44E917041B884B9000EF9C38 /* GXServerDataAnalyst.m in Sources */,
+				44E6F2971B957F2700A38DF9 /* GesturePasswordButton.m in Sources */,
 				44ED41931B896B9700079207 /* AFURLConnectionOperation.m in Sources */,
 				44E916C21B86F42300EF9C38 /* GXRegisterFirstViewController.m in Sources */,
 				44E9B8091B860CC600D289F0 /* zkeyViewHelper.m in Sources */,
@@ -1035,10 +1069,13 @@
 				448BE17D1B903B3900DC6FD0 /* GXDeviceListTableViewCell.m in Sources */,
 				44ED41A51B8A214300079207 /* GXRegisterParam.m in Sources */,
 				44ED1D411B8B15C200F1A7F4 /* zkeyLoginView.m in Sources */,
+				44E6F2961B957F2700A38DF9 /* FHGesturePasswordViewController.m in Sources */,
 				44ED41971B896B9700079207 /* GXReachability.m in Sources */,
 				44E6F2811B94012100A38DF9 /* GXUpdateProfileImageModel.m in Sources */,
 				44ED416E1B89682500079207 /* GXLoginParam.m in Sources */,
 				44ED41631B89654600079207 /* GXDatabaseEntityDeviceUserMappingItem.m in Sources */,
+				44E6F29C1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.m in Sources */,
+				44E6F2981B957F2700A38DF9 /* GesturePasswordView.m in Sources */,
 				44E9B8081B860CC600D289F0 /* zkeyAlertBanner.m in Sources */,
 				44ED41921B896B9700079207 /* AFSecurityPolicy.m in Sources */,
 				44E6F2741B93F21300A38DF9 /* GXDatabaseEntityUser.m in Sources */,
@@ -1047,6 +1084,7 @@
 				44ED41941B896B9700079207 /* AFURLRequestSerialization.m in Sources */,
 				44ED1D671B8C47DC00F1A7F4 /* GXDeviceListTableViewCellBatteryLevelLabel.m in Sources */,
 				44EA13421B91F73F00D4FD64 /* GXDeviceAuthorizedUserListViewController.m in Sources */,
+				44E6F2991B957F2700A38DF9 /* TentacleView.m in Sources */,
 				44E916DC1B87157400EF9C38 /* GXDatabaseEntityRecord.m in Sources */,
 				44E916C71B86F46300EF9C38 /* GXRegisterModel.m in Sources */,
 				44E9B8031B860C8000D289F0 /* zkeyActivityIndicatorView.m in Sources */,

@@ -19,7 +19,7 @@
 #import "GXLoginViewController.h"
 #import "GXSetProfileImageViewController.h"
 #import "GXSetNicknameViewController.h"
-
+#import "FHUserSetting+HandGestureSecretViewController.h"
 
 @interface GXUserSettingViewController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
 
@@ -175,8 +175,12 @@
         }
         
     } else if (indexPath.section == 1) {
-    
-    } else if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            
+        } else if (indexPath.row == 1) {
+            FHUserSetting_HandGestureSecretViewController *gesturePasswordVC = [[FHUserSetting_HandGestureSecretViewController alloc] init];
+            [self.navigationController pushViewController:gesturePasswordVC animated:YES];
+        }
         
     }
 }

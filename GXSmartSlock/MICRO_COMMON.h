@@ -25,7 +25,6 @@ typedef NS_ENUM(NSInteger, DefaultUnlockMode) {
 #define DEFAULT_USER_NAME @"defaultUserName"
 #define DEFAULT_USER_PASSWORD @"defaultUserPassword"
 #define DEFAULT_LOGIN_STATUS @"loginStatus"
-#define USER_HEAD_IMAGE_FILE_PATH @"userHeadImageFilePath"
 #define APP_VERSION @"appVersion"
 #define DEFAULT_DEVICE_TOKEN @"deviceToken"
 #define PREVIOUS_USER_NAME @"previousUserName"
