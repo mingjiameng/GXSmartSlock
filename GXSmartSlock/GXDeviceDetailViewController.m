@@ -20,7 +20,7 @@
 
 #import "GXChangeDeviceImageViewController.h"
 #import "GXChangeDeviceNicknameViewController.h"
-
+#import "GXDeviceAuthorizedUserListViewController.h"
 
 @interface GXDeviceDetailViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, GXDeleteDeviceModelDelegate>
 {
@@ -208,6 +208,12 @@
         
     } else if (indexPath.section == 1) {
         
+        if (indexPath.row == 0) {
+            GXDeviceAuthorizedUserListViewController *authorizedUserVC = [[GXDeviceAuthorizedUserListViewController alloc] init];
+            authorizedUserVC.deviceIdentifire = self.deviceEntity.deviceIdentifire;
+            [self.navigationController pushViewController:authorizedUserVC animated:YES];
+            
+        }
     } else if (indexPath.section == 2) {
         
     }

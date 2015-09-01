@@ -20,6 +20,7 @@
 #import "GXDeleteDeviceParam.h"
 #import "GXUpdateProfileImageParam.h"
 #import "GXUpdateNicknameParam.h"
+#import "GXUpdatePasswordParam.h"
 
 @implementation GXDefaultHttpHelper
 
@@ -190,5 +191,19 @@
     }];
 }
 
-
++ (void)postWithUpdatePasswordParam:(GXUpdatePasswordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_NEW_PASSWORD : param.nPassword};
+    
+    [GXHttpTool postWithServerURL:GXUpdateUserPasswordURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"更改密码失败");
+            failure(error);
+        }
+    }];
+}
 @end

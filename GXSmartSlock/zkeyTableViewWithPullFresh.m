@@ -91,7 +91,11 @@
 #pragma mark - zkeyRefreshHeaderViewDelegate
 - (void)requestNewData
 {
-    [self.delegate tableViewRequestNewData:self];
+    if ([self.delegate respondsToSelector:@selector(tableViewRequestNewData:)]) {
+        [self.delegate tableViewRequestNewData:self];
+    } else {
+        [self didEndLoadingData];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -125,7 +129,10 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate tableView:self didSelectRowAtIndexPath:indexPath];
+    if ([self.delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+        [self.delegate tableView:self didSelectRowAtIndexPath:indexPath];
+    }
+    
 }
 
 - (void)reloadTableViewData

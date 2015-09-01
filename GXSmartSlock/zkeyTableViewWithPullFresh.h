@@ -14,11 +14,9 @@
  deal with user interaction
  */
 @protocol zkeyTableViewWithPullFreshDelegate <NSObject>
-@required
+@optional
 - (void)tableViewRequestNewData:(zkeyTableViewWithPullFresh *)tableView ;
 - (void)tableView:(zkeyTableViewWithPullFresh *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
-
-@optional
 - (CGFloat)tableView:(zkeyTableViewWithPullFresh *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

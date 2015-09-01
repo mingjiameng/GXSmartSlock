@@ -29,6 +29,12 @@
 		44E6F2981B957F2700A38DF9 /* GesturePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2931B957F2700A38DF9 /* GesturePasswordView.m */; };
 		44E6F2991B957F2700A38DF9 /* TentacleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2951B957F2700A38DF9 /* TentacleView.m */; };
 		44E6F29C1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F29B1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.m */; };
+		44E6F29F1B9583D700A38DF9 /* GXSetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F29E1B9583D700A38DF9 /* GXSetPasswordViewController.m */; };
+		44E6F2A21B9599B500A38DF9 /* GXUpdatePasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2A11B9599B500A38DF9 /* GXUpdatePasswordModel.m */; };
+		44E6F2A51B959A5300A38DF9 /* GXUpdatePasswordParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2A41B959A5300A38DF9 /* GXUpdatePasswordParam.m */; };
+		44E6F2AB1B95F3C200A38DF9 /* GXAuthorizedUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2AA1B95F3C200A38DF9 /* GXAuthorizedUserTableViewCell.m */; };
+		44E6F2AE1B95F43800A38DF9 /* GXAuthorizedUserTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2AD1B95F43800A38DF9 /* GXAuthorizedUserTableView.m */; };
+		44E6F2B11B95F52000A38DF9 /* GXAuthorizedUserTableViewCellDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2B01B95F52000A38DF9 /* GXAuthorizedUserTableViewCellDataModel.m */; };
 		44E916811B86CDE200EF9C38 /* Voicemail.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44E916801B86CDE200EF9C38 /* Voicemail.wav */; };
 		44E916BC1B86F41300EF9C38 /* GXRegisterSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916B91B86F41300EF9C38 /* GXRegisterSecondViewController.m */; };
 		44E916BD1B86F41300EF9C38 /* GXRegisterThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916BB1B86F41300EF9C38 /* GXRegisterThirdViewController.m */; };
@@ -173,6 +179,18 @@
 		44E6F2951B957F2700A38DF9 /* TentacleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TentacleView.m; sourceTree = "<group>"; };
 		44E6F29A1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FHUserSetting+HandGestureSecretViewController.h"; sourceTree = "<group>"; };
 		44E6F29B1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FHUserSetting+HandGestureSecretViewController.m"; sourceTree = "<group>"; };
+		44E6F29D1B9583D700A38DF9 /* GXSetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSetPasswordViewController.h; sourceTree = "<group>"; };
+		44E6F29E1B9583D700A38DF9 /* GXSetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXSetPasswordViewController.m; sourceTree = "<group>"; };
+		44E6F2A01B9599B500A38DF9 /* GXUpdatePasswordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUpdatePasswordModel.h; sourceTree = "<group>"; };
+		44E6F2A11B9599B500A38DF9 /* GXUpdatePasswordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUpdatePasswordModel.m; sourceTree = "<group>"; };
+		44E6F2A31B959A5300A38DF9 /* GXUpdatePasswordParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUpdatePasswordParam.h; sourceTree = "<group>"; };
+		44E6F2A41B959A5300A38DF9 /* GXUpdatePasswordParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUpdatePasswordParam.m; sourceTree = "<group>"; };
+		44E6F2A91B95F3C200A38DF9 /* GXAuthorizedUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXAuthorizedUserTableViewCell.h; sourceTree = "<group>"; };
+		44E6F2AA1B95F3C200A38DF9 /* GXAuthorizedUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXAuthorizedUserTableViewCell.m; sourceTree = "<group>"; };
+		44E6F2AC1B95F43800A38DF9 /* GXAuthorizedUserTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXAuthorizedUserTableView.h; sourceTree = "<group>"; };
+		44E6F2AD1B95F43800A38DF9 /* GXAuthorizedUserTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXAuthorizedUserTableView.m; sourceTree = "<group>"; };
+		44E6F2AF1B95F52000A38DF9 /* GXAuthorizedUserTableViewCellDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXAuthorizedUserTableViewCellDataModel.h; sourceTree = "<group>"; };
+		44E6F2B01B95F52000A38DF9 /* GXAuthorizedUserTableViewCellDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXAuthorizedUserTableViewCellDataModel.m; sourceTree = "<group>"; };
 		44E916801B86CDE200EF9C38 /* Voicemail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Voicemail.wav; sourceTree = "<group>"; };
 		44E916B81B86F41300EF9C38 /* GXRegisterSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRegisterSecondViewController.h; sourceTree = "<group>"; };
 		44E916B91B86F41300EF9C38 /* GXRegisterSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRegisterSecondViewController.m; sourceTree = "<group>"; };
@@ -401,6 +419,8 @@
 				44E6F2801B94012100A38DF9 /* GXUpdateProfileImageModel.m */,
 				44E6F2871B948A1100A38DF9 /* GXUpdateNicknameModel.h */,
 				44E6F2881B948A1100A38DF9 /* GXUpdateNicknameModel.m */,
+				44E6F2A01B9599B500A38DF9 /* GXUpdatePasswordModel.h */,
+				44E6F2A11B9599B500A38DF9 /* GXUpdatePasswordModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -416,6 +436,8 @@
 				44E6F2791B93FEFF00A38DF9 /* GXSetProfileImageViewController.m */,
 				44E6F2841B9473AD00A38DF9 /* GXSetNicknameViewController.h */,
 				44E6F2851B9473AD00A38DF9 /* GXSetNicknameViewController.m */,
+				44E6F29D1B9583D700A38DF9 /* GXSetPasswordViewController.h */,
+				44E6F29E1B9583D700A38DF9 /* GXSetPasswordViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -837,6 +859,10 @@
 				44ED1D661B8C47DC00F1A7F4 /* GXDeviceListTableViewCellBatteryLevelLabel.m */,
 				448BE17B1B903B3900DC6FD0 /* GXDeviceListTableViewCell.h */,
 				448BE17C1B903B3900DC6FD0 /* GXDeviceListTableViewCell.m */,
+				44E6F2A91B95F3C200A38DF9 /* GXAuthorizedUserTableViewCell.h */,
+				44E6F2AA1B95F3C200A38DF9 /* GXAuthorizedUserTableViewCell.m */,
+				44E6F2AC1B95F43800A38DF9 /* GXAuthorizedUserTableView.h */,
+				44E6F2AD1B95F43800A38DF9 /* GXAuthorizedUserTableView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -851,6 +877,8 @@
 				44F63B9A1B8F4BF200F5335B /* GXChangeDeviceNicknameModel.m */,
 				44EA133A1B913EC200D4FD64 /* GXDeleteDeviceModel.h */,
 				44EA133B1B913EC200D4FD64 /* GXDeleteDeviceModel.m */,
+				44E6F2AF1B95F52000A38DF9 /* GXAuthorizedUserTableViewCellDataModel.h */,
+				44E6F2B01B95F52000A38DF9 /* GXAuthorizedUserTableViewCellDataModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -890,6 +918,8 @@
 				44E6F27D1B9400D800A38DF9 /* GXUpdateProfileImageParam.m */,
 				44E6F28A1B948E6200A38DF9 /* GXUpdateNicknameParam.h */,
 				44E6F28B1B948E6200A38DF9 /* GXUpdateNicknameParam.m */,
+				44E6F2A31B959A5300A38DF9 /* GXUpdatePasswordParam.h */,
+				44E6F2A41B959A5300A38DF9 /* GXUpdatePasswordParam.m */,
 			);
 			name = Param;
 			sourceTree = "<group>";
@@ -1013,6 +1043,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44E6F2AE1B95F43800A38DF9 /* GXAuthorizedUserTableView.m in Sources */,
 				44E9F8341B85EAB800165234 /* zkeyButtonWithImageAndTitle.m in Sources */,
 				44E9F7F71B85D44600165234 /* zkeyMiPushPackage.m in Sources */,
 				44E2D2BE1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.m in Sources */,
@@ -1065,6 +1096,8 @@
 				44E916BD1B86F41300EF9C38 /* GXRegisterThirdViewController.m in Sources */,
 				44F63B9B1B8F4BF200F5335B /* GXChangeDeviceNicknameModel.m in Sources */,
 				44ED419C1B897ACE00079207 /* GXGetVerificationCodeParam.m in Sources */,
+				44E6F2A21B9599B500A38DF9 /* GXUpdatePasswordModel.m in Sources */,
+				44E6F29F1B9583D700A38DF9 /* GXSetPasswordViewController.m in Sources */,
 				44E6F28C1B948E6200A38DF9 /* GXUpdateNicknameParam.m in Sources */,
 				448BE17D1B903B3900DC6FD0 /* GXDeviceListTableViewCell.m in Sources */,
 				44ED41A51B8A214300079207 /* GXRegisterParam.m in Sources */,
@@ -1072,9 +1105,11 @@
 				44E6F2961B957F2700A38DF9 /* FHGesturePasswordViewController.m in Sources */,
 				44ED41971B896B9700079207 /* GXReachability.m in Sources */,
 				44E6F2811B94012100A38DF9 /* GXUpdateProfileImageModel.m in Sources */,
+				44E6F2B11B95F52000A38DF9 /* GXAuthorizedUserTableViewCellDataModel.m in Sources */,
 				44ED416E1B89682500079207 /* GXLoginParam.m in Sources */,
 				44ED41631B89654600079207 /* GXDatabaseEntityDeviceUserMappingItem.m in Sources */,
 				44E6F29C1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.m in Sources */,
+				44E6F2A51B959A5300A38DF9 /* GXUpdatePasswordParam.m in Sources */,
 				44E6F2981B957F2700A38DF9 /* GesturePasswordView.m in Sources */,
 				44E9B8081B860CC600D289F0 /* zkeyAlertBanner.m in Sources */,
 				44ED41921B896B9700079207 /* AFSecurityPolicy.m in Sources */,
@@ -1093,6 +1128,7 @@
 				44ED1D511B8C157200F1A7F4 /* GXDeviceListViewController.m in Sources */,
 				44E6F2711B93EFA200A38DF9 /* zkeyWebImageCache.m in Sources */,
 				44E6F2671B93DE4800A38DF9 /* GXUserSettingViewController.m in Sources */,
+				44E6F2AB1B95F3C200A38DF9 /* GXAuthorizedUserTableViewCell.m in Sources */,
 				44E9B8001B860B0900D289F0 /* GXRootViewController.m in Sources */,
 				44E6F2771B93F4FE00A38DF9 /* GXLogoutModel.m in Sources */,
 			);

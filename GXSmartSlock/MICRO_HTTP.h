@@ -29,6 +29,11 @@
 
 #define GXUpdateUserNicknameURL [NSString stringWithFormat:@"%@update_nickname", GXBaseURL]
 
+#define GXUpdateUserPasswordURL [NSString stringWithFormat:@"%@update_password",GXBaseURL]
+
+
+
+
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"
 #define KEY_PHONE_INFO @"phone_info"
@@ -38,5 +43,5 @@
 #define KEY_DEVICE_NICKNAME @"device_name"
 #define KEY_USER_HEAD_IMAGE_STRING @"profile_img"
 #define KEY_NEW_NICKNAME @"nnickname"
-
+#define KEY_NEW_PASSWORD @"npassword"
 #endif

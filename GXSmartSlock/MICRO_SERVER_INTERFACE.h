@@ -26,4 +26,6 @@
 
 #define UPDATE_NICKNAME_STATUS @"status"
 
+#define UPDATE_PASSWORD_STATUS @"status"
+
 #endif

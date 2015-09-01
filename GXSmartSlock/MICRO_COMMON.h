@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, DefaultUnlockMode) {
 #define PREVIOUS_USER_NAME @"previousUserName"
 #define DEFAULT_GESTURE_PASSWORD @"defaultGesturePassword"
 #define DEFAULT_UNLOCK_MODE @"defaultUnlockModel"
+#define DEFAULT_PROFILE_IMG @"defaultUserHeadImage"
 
 // screen size parameter
 #define TOP_SPACE_IN_NAVIGATION_MODE 64.0
