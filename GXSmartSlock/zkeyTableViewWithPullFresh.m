@@ -135,24 +135,29 @@
     
 }
 
-- (void)reloadTableViewData
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [_tableView reloadData];
+    if ([self.delegate respondsToSelector:@selector(tableView:canEditRowAtIndexPath:)]) {
+        return [self.delegate tableView:self canEditRowAtIndexPath:indexPath];
+    }
+    
+    return NO;
 }
 
-- (void)tableViewBeginUpdates
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [_tableView beginUpdates];
+    if ([self.delegate respondsToSelector:@selector(tableView:editingStyleForRowAtIndexPath:)]) {
+        [self.delegate tableView:self editingStyleForRowAtIndexPath:indexPath];
+    }
+    
+    return UITableViewCellEditingStyleNone;
 }
 
-- (void)tableViewEndUpdates
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [_tableView endUpdates];
-}
-
-- (void)deleteRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    if ([self.delegate respondsToSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)]) {
+        [self.delegate tableView:self commitEditingStyle:editingStyle forRowAtIndexPath:indexPath];
+    }
 }
 
 @end

@@ -31,7 +31,7 @@
 
 #define GXUpdateUserPasswordURL [NSString stringWithFormat:@"%@update_password",GXBaseURL]
 
-
+#define GXDeleteAuthorizedUserURL [NSString stringWithFormat:@"%@delete_key",GXBaseURL]
 
 
 #define KEY_USER_NAME @"username"
@@ -44,4 +44,6 @@
 #define KEY_USER_HEAD_IMAGE_STRING @"profile_img"
 #define KEY_NEW_NICKNAME @"nnickname"
 #define KEY_NEW_PASSWORD @"npassword"
+#define KEY_DELETED_USER_NAME @"contact"
+
 #endif

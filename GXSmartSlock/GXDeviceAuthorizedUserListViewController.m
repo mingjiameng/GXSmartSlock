@@ -14,14 +14,19 @@
 #import "GXDatabaseHelper.h"
 #import "GXDatabaseEntityDeviceUserMappingItem.h"
 #import "GXDatabaseEntityUser.h"
+#import "GXDeleteAuthorizedUserModel.h"
 
 #import "GXAuthorizedUserTableView.h"
+#import "zkeyViewHelper.h"
+#import "zkeyActivityIndicatorView.h"
 
 #import <CoreData/CoreData.h>
 
-@interface GXDeviceAuthorizedUserListViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate>
+@interface GXDeviceAuthorizedUserListViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, UIActionSheetDelegate, GXDeleteAuthorizedUserModelDelegate>
 {
-    
+    NSIndexPath *_deletedIndexPath; // store the indexPath of GXDatabaseEntityDeviceUserMappingItem which need to deleted
+    GXDeleteAuthorizedUserModel *_deleteUserModel;
+    zkeyActivityIndicatorView *_activityIndicator;
 }
 
 @property (nonatomic, strong) GXAuthorizedUserTableView *tableView;
@@ -41,6 +46,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self addDatasource];
+    [self configNavigationBar];
     [self addUserListTableView:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - TOP_SPACE_IN_NAVIGATION_MODE)];
 }
 
@@ -113,7 +119,72 @@
     [tableView didEndLoadingData];
 }
 
+
 #pragma mark - user action
+
+// delete user
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != actionSheet.destructiveButtonIndex) {
+        return;
+    }
+    
+    self.view.userInteractionEnabled = NO;
+    
+    if (_activityIndicator == nil) {
+        _activityIndicator = [[zkeyActivityIndicatorView alloc] initWithFrame:self.view.frame title:@"正在删除用户..."];
+    }
+    [self.view addSubview:_activityIndicator];
+    
+    GXDatabaseEntityDeviceUserMappingItem *deviceUserMappingEntity = [self.fetchedResultsController objectAtIndexPath:_deletedIndexPath];
+    
+    if (_deleteUserModel == nil) {
+        _deleteUserModel = [[GXDeleteAuthorizedUserModel alloc] init];
+        _deleteUserModel.delegate = self;
+    }
+    
+    [_deleteUserModel deleteUser:deviceUserMappingEntity.userName fromDevice:deviceUserMappingEntity.deviceIdentifire];
+}
+
+- (void)deleteAuthorizedUserSuccessful:(BOOL)successful
+{
+    if (_activityIndicator != nil) {
+        [_activityIndicator removeFromSuperview];
+    }
+    
+    if (successful) {
+        [self alertWithMessage:@"成功删除用户"];
+    } else {
+        [self alertWithMessage:@"删除用户失败 请重试"];
+    }
+    
+    self.view.userInteractionEnabled = YES;
+}
+
+- (void)noNetwork
+{
+    if (_activityIndicator != nil) {
+        [_activityIndicator removeFromSuperview];
+    }
+    
+    [self alertWithMessage:@"无法连接服务器"];
+    self.view.userInteractionEnabled = YES;
+}
+
+- (void)userHadBeenDeleted
+{
+    if (_activityIndicator != nil) {
+        [_activityIndicator removeFromSuperview];
+    }
+    
+    [self alertWithMessage:@"该用户已被其他管理员删除"];
+    self.view.userInteractionEnabled = YES;
+}
+
+- (void)alertWithMessage:(NSString *)message
+{
+    [zkeyViewHelper alertWithMessage:message inView:self.view withFrame:self.view.frame];
+}
 
 #pragma mark - database change
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller

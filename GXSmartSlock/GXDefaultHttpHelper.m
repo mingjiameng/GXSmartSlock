@@ -21,6 +21,7 @@
 #import "GXUpdateProfileImageParam.h"
 #import "GXUpdateNicknameParam.h"
 #import "GXUpdatePasswordParam.h"
+#import "GXDeleteAuthorizedUserParam.h"
 
 @implementation GXDefaultHttpHelper
 
@@ -206,4 +207,23 @@
         }
     }];
 }
+
++ (void)postWithDeleteAuthorizedUserParam:(GXDeleteAuthorizedUserParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_DEVICE_IDENTIFIRE : param.deviceIdentifire,
+                               KEY_DELETED_USER_NAME : param.deletedUserName};
+    
+    
+    [GXHttpTool postWithServerURL:GXDeleteAuthorizedUserURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"删除授权用户失败");
+            failure(error);
+        }
+    }];
+}
+
 @end

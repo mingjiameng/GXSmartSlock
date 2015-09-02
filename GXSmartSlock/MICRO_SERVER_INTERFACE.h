@@ -28,4 +28,6 @@
 
 #define UPDATE_PASSWORD_STATUS @"status"
 
+#define DELETE_AUTHORIZED_USER @"status"
+
 #endif

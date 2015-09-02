@@ -18,6 +18,9 @@
 - (void)tableViewRequestNewData:(zkeyTableViewWithPullFresh *)tableView ;
 - (void)tableView:(zkeyTableViewWithPullFresh *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 - (CGFloat)tableView:(zkeyTableViewWithPullFresh *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)tableView:(zkeyTableViewWithPullFresh *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UITableViewCellEditingStyle)tableView:(zkeyTableViewWithPullFresh *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (BOOL)tableView:(zkeyTableViewWithPullFresh *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath;;
 
 @end
 
@@ -30,6 +33,7 @@
 - (NSInteger)numberOfSectionsInTableView:(zkeyTableViewWithPullFresh *)tableView;
 - (NSInteger)tableView:(zkeyTableViewWithPullFresh *)tableView numberOfRowsInSection:(NSInteger)section;
 - (NSObject *)tableView:(zkeyTableViewWithPullFresh *)tableView cellDataForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 
 @optional
 
@@ -45,9 +49,5 @@
 
 - (void)forceToRefresh;
 - (void)didEndLoadingData;
-- (void)reloadTableViewData;
-- (void)deleteRowAtIndexPath:(NSIndexPath *)indexPath;
-- (void)tableViewBeginUpdates;
-- (void)tableViewEndUpdates;
 
 @end
