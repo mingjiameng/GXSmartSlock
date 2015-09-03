@@ -13,6 +13,7 @@
 
 #import "GXDeleteAuthorizedUserParam.h"
 #import "GXDefaultHttpHelper.h"
+#import "GXDatabaseHelper.h"
 
 @implementation GXDeleteAuthorizedUserModel
 
@@ -28,8 +29,10 @@
             [self.delegate deleteAuthorizedUserSuccessful:NO];
         } else if (status == 1) {
             [self.delegate deleteAuthorizedUserSuccessful:YES];
+            [GXDatabaseHelper deleteUser:deletedUserName fromDevice:deviceIdentifire];
         } else if (status == 3) {
             [self.delegate userHadBeenDeleted];
+            [GXDatabaseHelper deleteUser:deletedUserName fromDevice:deviceIdentifire];
         } else {
             [self.delegate deleteAuthorizedUserSuccessful:NO];
         }

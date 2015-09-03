@@ -58,7 +58,9 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if ([self.delegate respondsToSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)]) {
+        [self.delegate tableView:self commitEditingStyle:editingStyle forRowAtIndexPath:indexPath];
+    }
 }
 
 @end

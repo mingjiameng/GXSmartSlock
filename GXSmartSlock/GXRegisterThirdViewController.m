@@ -98,7 +98,7 @@
         _passwordFirstTextField.borderStyle = UITextBorderStyleNone;
         _passwordFirstTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _passwordFirstTextField.returnKeyType = UIReturnKeyDone;
-        _passwordFirstTextField.placeholder = @"8-20位数字或字母";
+        _passwordFirstTextField.placeholder = @"8-20位数字和字母";
         _passwordFirstTextField.delegate = self;
         _passwordFirstTextField.secureTextEntry = YES;
         cell.accessoryView = _passwordFirstTextField;
@@ -141,12 +141,12 @@
     NSString *password = _passwordFirstTextField.text;
     
     if (password.length < 8 || password.length > 20) {
-        [self alertWithMessage:@"密码应为8-20位数字或字母"];
+        [self alertWithMessage:@"密码长度应为8-20位"];
         return;
     }
     
     if (![zkeyIndentifierValidator isStringWithNumberAndAlphabet:password]) {
-        [self alertWithMessage:@"密码应为8-20位数字或字母"];
+        [self alertWithMessage:@"密码应包含数字和字母"];
         return;
     }
     

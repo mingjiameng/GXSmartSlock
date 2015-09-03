@@ -29,10 +29,13 @@
 
 #define GXUpdateUserNicknameURL [NSString stringWithFormat:@"%@update_nickname", GXBaseURL]
 
-#define GXUpdateUserPasswordURL [NSString stringWithFormat:@"%@update_password",GXBaseURL]
+#define GXUpdateUserPasswordURL [NSString stringWithFormat:@"%@",GXBaseURL]
 
 #define GXDeleteAuthorizedUserURL [NSString stringWithFormat:@"%@delete_key",GXBaseURL]
 
+#define GXSynchronizeDeviceUserURL [NSString stringWithFormat:@"%@sync_key",GXBaseURL]
+
+#define GXSynchronizeDeviceURL [NSString stringWithFormat:@"%@sync_device",GXBaseURL]
 
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"

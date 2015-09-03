@@ -15,6 +15,7 @@
 #import "GXDatabaseEntityDeviceUserMappingItem.h"
 #import "GXDatabaseEntityUser.h"
 #import "GXDeleteAuthorizedUserModel.h"
+#import "GXSynchronizeDeviceUserModel.h"
 
 #import "GXAuthorizedUserTableView.h"
 #import "zkeyViewHelper.h"
@@ -22,11 +23,12 @@
 
 #import <CoreData/CoreData.h>
 
-@interface GXDeviceAuthorizedUserListViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, UIActionSheetDelegate, GXDeleteAuthorizedUserModelDelegate>
+@interface GXDeviceAuthorizedUserListViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, UIActionSheetDelegate, GXDeleteAuthorizedUserModelDelegate, GXSynchronizeDeviceUserModelDelegate>
 {
     NSIndexPath *_deletedIndexPath; // store the indexPath of GXDatabaseEntityDeviceUserMappingItem which need to deleted
     GXDeleteAuthorizedUserModel *_deleteUserModel;
     zkeyActivityIndicatorView *_activityIndicator;
+    GXSynchronizeDeviceUserModel *_synchronizeDeviceUserModel;
 }
 
 @property (nonatomic, strong) GXAuthorizedUserTableView *tableView;
@@ -116,10 +118,28 @@
 
 - (void)tableViewRequestNewData:(zkeyTableViewWithPullFresh *)tableView
 {
-    [tableView didEndLoadingData];
+    if (_synchronizeDeviceUserModel == nil) {
+        _synchronizeDeviceUserModel = [[GXSynchronizeDeviceUserModel alloc] init];
+        _synchronizeDeviceUserModel.delegate = self;
+    }
+    
+    [_synchronizeDeviceUserModel synchronizeDeviceUser:self.deviceIdentifire];
 }
 
+- (void)tableView:(zkeyTableViewWithPullFresh *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        _deletedIndexPath = indexPath;
+        UIActionSheet *deleteActionSheet = [[UIActionSheet alloc] initWithTitle:@"删除该授权用户后，该用户将无法打开对应的门锁，确定要删除该用户吗？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确认删除" otherButtonTitles:nil];
+        [deleteActionSheet showInView:self.view];
+    }
+    
+}
 
+- (void)synchronizeDeviceUserSuccessful:(BOOL)successful
+{
+    [_tableView didEndLoadingData];
+}
 #pragma mark - user action
 
 // delete user

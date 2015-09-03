@@ -37,6 +37,10 @@
 		44E6F2B11B95F52000A38DF9 /* GXAuthorizedUserTableViewCellDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2B01B95F52000A38DF9 /* GXAuthorizedUserTableViewCellDataModel.m */; };
 		44E6F2B41B96E11D00A38DF9 /* GXDeleteAuthorizedUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2B31B96E11D00A38DF9 /* GXDeleteAuthorizedUserModel.m */; };
 		44E6F2B71B96E27300A38DF9 /* GXDeleteAuthorizedUserParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2B61B96E27300A38DF9 /* GXDeleteAuthorizedUserParam.m */; };
+		44E6F2BA1B97472D00A38DF9 /* GXSynchronizeDeviceUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2B91B97472D00A38DF9 /* GXSynchronizeDeviceUserModel.m */; };
+		44E6F2BD1B98403600A38DF9 /* GXSynchronizeDeviceUserParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2BC1B98403600A38DF9 /* GXSynchronizeDeviceUserParam.m */; };
+		44E6F2C01B988F1A00A38DF9 /* GXSynchronizeDeviceParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2BF1B988F1A00A38DF9 /* GXSynchronizeDeviceParam.m */; };
+		44E6F2C31B98946600A38DF9 /* GXSynchronizeDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2C21B98946600A38DF9 /* GXSynchronizeDeviceModel.m */; };
 		44E916811B86CDE200EF9C38 /* Voicemail.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44E916801B86CDE200EF9C38 /* Voicemail.wav */; };
 		44E916BC1B86F41300EF9C38 /* GXRegisterSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916B91B86F41300EF9C38 /* GXRegisterSecondViewController.m */; };
 		44E916BD1B86F41300EF9C38 /* GXRegisterThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E916BB1B86F41300EF9C38 /* GXRegisterThirdViewController.m */; };
@@ -197,6 +201,14 @@
 		44E6F2B31B96E11D00A38DF9 /* GXDeleteAuthorizedUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDeleteAuthorizedUserModel.m; sourceTree = "<group>"; };
 		44E6F2B51B96E27300A38DF9 /* GXDeleteAuthorizedUserParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDeleteAuthorizedUserParam.h; sourceTree = "<group>"; };
 		44E6F2B61B96E27300A38DF9 /* GXDeleteAuthorizedUserParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDeleteAuthorizedUserParam.m; sourceTree = "<group>"; };
+		44E6F2B81B97472D00A38DF9 /* GXSynchronizeDeviceUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSynchronizeDeviceUserModel.h; sourceTree = "<group>"; };
+		44E6F2B91B97472D00A38DF9 /* GXSynchronizeDeviceUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXSynchronizeDeviceUserModel.m; sourceTree = "<group>"; };
+		44E6F2BB1B98403600A38DF9 /* GXSynchronizeDeviceUserParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSynchronizeDeviceUserParam.h; sourceTree = "<group>"; };
+		44E6F2BC1B98403600A38DF9 /* GXSynchronizeDeviceUserParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXSynchronizeDeviceUserParam.m; sourceTree = "<group>"; };
+		44E6F2BE1B988F1A00A38DF9 /* GXSynchronizeDeviceParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSynchronizeDeviceParam.h; sourceTree = "<group>"; };
+		44E6F2BF1B988F1A00A38DF9 /* GXSynchronizeDeviceParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXSynchronizeDeviceParam.m; sourceTree = "<group>"; };
+		44E6F2C11B98946600A38DF9 /* GXSynchronizeDeviceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSynchronizeDeviceModel.h; sourceTree = "<group>"; };
+		44E6F2C21B98946600A38DF9 /* GXSynchronizeDeviceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXSynchronizeDeviceModel.m; sourceTree = "<group>"; };
 		44E916801B86CDE200EF9C38 /* Voicemail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Voicemail.wav; sourceTree = "<group>"; };
 		44E916B81B86F41300EF9C38 /* GXRegisterSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRegisterSecondViewController.h; sourceTree = "<group>"; };
 		44E916B91B86F41300EF9C38 /* GXRegisterSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRegisterSecondViewController.m; sourceTree = "<group>"; };
@@ -887,6 +899,10 @@
 				44E6F2B01B95F52000A38DF9 /* GXAuthorizedUserTableViewCellDataModel.m */,
 				44E6F2B21B96E11D00A38DF9 /* GXDeleteAuthorizedUserModel.h */,
 				44E6F2B31B96E11D00A38DF9 /* GXDeleteAuthorizedUserModel.m */,
+				44E6F2B81B97472D00A38DF9 /* GXSynchronizeDeviceUserModel.h */,
+				44E6F2B91B97472D00A38DF9 /* GXSynchronizeDeviceUserModel.m */,
+				44E6F2C11B98946600A38DF9 /* GXSynchronizeDeviceModel.h */,
+				44E6F2C21B98946600A38DF9 /* GXSynchronizeDeviceModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -930,6 +946,10 @@
 				44E6F2A41B959A5300A38DF9 /* GXUpdatePasswordParam.m */,
 				44E6F2B51B96E27300A38DF9 /* GXDeleteAuthorizedUserParam.h */,
 				44E6F2B61B96E27300A38DF9 /* GXDeleteAuthorizedUserParam.m */,
+				44E6F2BB1B98403600A38DF9 /* GXSynchronizeDeviceUserParam.h */,
+				44E6F2BC1B98403600A38DF9 /* GXSynchronizeDeviceUserParam.m */,
+				44E6F2BE1B988F1A00A38DF9 /* GXSynchronizeDeviceParam.h */,
+				44E6F2BF1B988F1A00A38DF9 /* GXSynchronizeDeviceParam.m */,
 			);
 			name = Param;
 			sourceTree = "<group>";
@@ -1055,11 +1075,13 @@
 			files = (
 				44E6F2AE1B95F43800A38DF9 /* GXAuthorizedUserTableView.m in Sources */,
 				44E9F8341B85EAB800165234 /* zkeyButtonWithImageAndTitle.m in Sources */,
+				44E6F2BA1B97472D00A38DF9 /* GXSynchronizeDeviceUserModel.m in Sources */,
 				44E9F7F71B85D44600165234 /* zkeyMiPushPackage.m in Sources */,
 				44E2D2BE1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.m in Sources */,
 				44ED41771B896A6300079207 /* GXDefaultHttpHelper.m in Sources */,
 				44F63B9E1B8F539A00F5335B /* GXChangeDeviceImageViewController.m in Sources */,
 				44ED41601B89654600079207 /* GXDatabaseEntityDevice.m in Sources */,
+				44E6F2BD1B98403600A38DF9 /* GXSynchronizeDeviceUserParam.m in Sources */,
 				44E9F7CE1B84D4AC00165234 /* GXSmartSlock.xcdatamodeld in Sources */,
 				44ED418F1B896B9700079207 /* AFHTTPRequestOperationManager.m in Sources */,
 				44E916C31B86F42300EF9C38 /* GXLoginViewController.m in Sources */,
@@ -1069,12 +1091,14 @@
 				44E916BC1B86F41300EF9C38 /* GXRegisterSecondViewController.m in Sources */,
 				44EA133F1B91485600D4FD64 /* GXDeleteDeviceParam.m in Sources */,
 				44E6F27A1B93FEFF00A38DF9 /* GXSetProfileImageViewController.m in Sources */,
+				44E6F2C01B988F1A00A38DF9 /* GXSynchronizeDeviceParam.m in Sources */,
 				44E6F2891B948A1100A38DF9 /* GXUpdateNicknameModel.m in Sources */,
 				44E6F27E1B9400D800A38DF9 /* GXUpdateProfileImageParam.m in Sources */,
 				44E9F7CB1B84D4AC00165234 /* AppDelegate.m in Sources */,
 				44ED41711B89695100079207 /* GXHttpTool.m in Sources */,
 				44E2D2C11B92F6A30021EB9F /* GXSelectContactViewController.m in Sources */,
 				44E916FE1B8843D100EF9C38 /* GXDeviceUserMappingModel.m in Sources */,
+				44E6F2C31B98946600A38DF9 /* GXSynchronizeDeviceModel.m in Sources */,
 				44ED41691B89667200079207 /* GXLoginModel.m in Sources */,
 				44ED1D4E1B8C148200F1A7F4 /* zkeyTableViewWithPullFresh.m in Sources */,
 				44F63B951B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.m in Sources */,

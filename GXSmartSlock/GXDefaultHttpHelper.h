@@ -11,7 +11,7 @@
 typedef void(^HttpSuccess)(NSDictionary *result);
 typedef void(^HttpFailure)(NSError *error);
 
-@class GXLoginParam, GXGetVerificationCodeParam, GXVerifyCodeParam, GXResetPasswordParam, GXRegisterParam, GXChangeDeviceNicknameParam, GXDeleteDeviceParam, GXUpdateProfileImageParam, GXUpdateNicknameParam, GXUpdatePasswordParam, GXDeleteAuthorizedUserParam;
+@class GXLoginParam, GXGetVerificationCodeParam, GXVerifyCodeParam, GXResetPasswordParam, GXRegisterParam, GXChangeDeviceNicknameParam, GXDeleteDeviceParam, GXUpdateProfileImageParam, GXUpdateNicknameParam, GXUpdatePasswordParam, GXDeleteAuthorizedUserParam, GXSynchronizeDeviceUserParam, GXSynchronizeDeviceParam;
 
 #import "GXGetVerificationCodeParam.h"
 
@@ -28,5 +28,7 @@ typedef void(^HttpFailure)(NSError *error);
 + (void)postWithUpdateNicknameParam:(GXUpdateNicknameParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
 + (void)postWithUpdatePasswordParam:(GXUpdatePasswordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
 + (void)postWithDeleteAuthorizedUserParam:(GXDeleteAuthorizedUserParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
++ (void)postWithSynchronizeDeviceUserParam:(GXSynchronizeDeviceUserParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
++ (void)postWithSynchronizeDeviceParam:(GXSynchronizeDeviceParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
 
 @end

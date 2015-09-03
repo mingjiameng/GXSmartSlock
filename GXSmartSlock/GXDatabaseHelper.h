@@ -37,5 +37,6 @@
 + (void)changeDeviceNickname:(NSString *)deviceIdentifire deviceNickname:(NSString *)nickname;
 + (void)deleteDeviceWithIdentifire:(NSString *)deviceIdentifire;
 + (void)updateDefaultUserNickname:(NSString *)nickname;
++ (void)deleteUser:(NSString *)userName fromDevice:(NSString *)deviceIdentifire;
 
 @end

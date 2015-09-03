@@ -8,6 +8,13 @@
 
 #import "zkeyTableViewWithPullFresh.h"
 
+@protocol GXAuthorizedUserTableViewDelegate <NSObject>
+
+
+
+@end
+
 @interface GXAuthorizedUserTableView : zkeyTableViewWithPullFresh
+
 
 @end

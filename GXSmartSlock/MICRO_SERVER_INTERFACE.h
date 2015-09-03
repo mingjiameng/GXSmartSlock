@@ -30,4 +30,11 @@
 
 #define DELETE_AUTHORIZED_USER @"status"
 
+#define SYNCHRONIZE_DEVICE_USER_STATUS @"status"
+
+#define SYNCHRONIZE_DEVICE_STATUS @"status"
+#define SYNCHRONIZE_DEVICE_USER @"users"
+#define SYNCHRONIZE_DEVICE_MAPPING @"mappings"
+#define SYNCHRONIZE_DEVICE_DEVICE @"devices"
+
 #endif

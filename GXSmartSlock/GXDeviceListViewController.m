@@ -14,18 +14,25 @@
 #import "GXDatabaseHelper.h"
 #import "GXDatabaseEntityDevice.h"
 #import "GXDeviceListTableViewCellDataModel.h"
+#import "GXSynchronizeDeviceModel.h"
 
+#import "zkeyViewHelper.h"
 #import "GXDeviceListTableView.h"
-
 #import "GXDeviceDetailViewController.h"
 
 #import <CoreData/CoreData.h>
 
-@interface GXDeviceListViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, NSFetchedResultsControllerDelegate>
+@interface GXDeviceListViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, NSFetchedResultsControllerDelegate, GXSynchronizeDeviceModel>
+
+{
+    BOOL _refreshed;
+    GXSynchronizeDeviceModel *_synchronizeDeviceModel;
+    
+}
 
 @property (nonatomic, strong) GXDeviceListTableView *deviceListTableView;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic) BOOL refreshed;
+
 
 @end
 
@@ -39,7 +46,7 @@
     [super viewDidLoad];
     // do something...
     
-    self.refreshed = NO;
+    _refreshed = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     [self configNavigationBar];
     [self addDeviceListDataSource];
@@ -140,18 +147,41 @@
 
 - (void)tableViewRequestNewData:(zkeyTableViewWithPullFresh *)tableView
 {
-    [tableView didEndLoadingData];
+    if (_synchronizeDeviceModel == nil) {
+        _synchronizeDeviceModel = [[GXSynchronizeDeviceModel alloc] init];
+        _synchronizeDeviceModel.delegate = self;
+    }
+    
+    [_synchronizeDeviceModel synchronizeDevice];
 }
+
+- (void)synchronizeDeviceSuccessful:(BOOL)successful
+{
+    [_deviceListTableView didEndLoadingData];
+}
+
+- (void)noNetwork
+{
+    [self alertWithMessage:@"无法连接服务器"];
+}
+
+
+- (void)alertWithMessage:(NSString *)message
+{
+    [zkeyViewHelper alertWithMessage:message inView:self.view withFrame:self.view.frame];
+}
+
+
 
 #pragma mark - view navigation
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    if (!self.refreshed) {
+    if (!_refreshed) {
         [_deviceListTableView forceToRefresh];
         
-        self.refreshed = YES;
+        _refreshed = YES;
     }
 }
 

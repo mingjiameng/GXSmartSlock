@@ -81,15 +81,31 @@
 
 + (BOOL)isStringWithNumberAndAlphabet:(NSString *)str
 {
+    BOOL containAlphabet = NO;
+    BOOL containNumber = NO;
+
+    BOOL alphabet, number;
+    
     for (NSInteger index = 0; index < str.length; ++index) {
         char c = [str characterAtIndex:index];
         
-        if (!([self isNumber:c] || [self isAlphabet:c] )) {
+        number = [self isNumber:c];
+        alphabet = [self isAlphabet:c];
+        
+        if (number) {
+            containNumber = YES;
+        }
+        
+        if (alphabet) {
+            containAlphabet = YES;
+        }
+        
+        if (!(number || alphabet)) {
             return NO;
         }
     }
     
-    return YES;
+    return (containAlphabet && containNumber);
 }
 
 /*

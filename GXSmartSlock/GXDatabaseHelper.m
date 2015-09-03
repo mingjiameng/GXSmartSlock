@@ -185,6 +185,13 @@
                 deviceUserMappingEntity.deviceStatus = deviceUserMappingModel.deviceStatus;
             }
             
+            if (deviceUserMappingEntity.user == nil) {
+                GXDatabaseEntityUser *user = [self userEntityWithUserName:deviceUserMappingEntity.userName];
+                if (user != nil) {
+                    deviceUserMappingEntity.user = user;
+                }
+            }
+            
             // if the device's user is defaultUser, we may need update the nickname of the device
             // what's more
             if ([deviceUserMappingEntity.userName isEqualToString:defaultUserName]) {
@@ -196,6 +203,7 @@
                 if (![deviceUserMappingModel.deviceStatus isEqualToString:correspondDevice.deviceStatus]) {
                     correspondDevice.deviceStatus = deviceUserMappingModel.deviceStatus;
                 }
+                
             }
             
             ++index01;
@@ -228,7 +236,6 @@
         GXDatabaseEntityUser *user = [self userEntityWithUserName:deviceUserMappingModel.userName];
         if (user == nil) {
             NSLog(@"error: deviceUserMappingModel has no correspond user with userName:%@", deviceUserMappingModel.userName);
-            continue;
         }
         
         GXDatabaseEntityDeviceUserMappingItem *newDeviceUserMappingItem = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_DEVICE_USER_MAPPING inManagedObjectContext:managedObjectContext];
@@ -241,7 +248,11 @@
         newDeviceUserMappingItem.deviceAuthority = deviceUserMappingModel.deviceAuthority;
         
         newDeviceUserMappingItem.device = device;
-        newDeviceUserMappingItem.user = user;
+        
+        if (user != nil) {
+            newDeviceUserMappingItem.user = user;
+        }
+        
         
         // if the device user is defaultUser, we need to make up info in correspond device entity
         if ([deviceUserMappingModel.userName isEqualToString:defaultUserName]) {
@@ -535,8 +546,8 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
-    NSEntityDescription *entityDevice = [NSEntityDescription entityForName:ENTITY_DEVICE_USER_MAPPING inManagedObjectContext:managedObjectContext];
-    [fetchRequest setEntity:entityDevice];
+    NSEntityDescription *entityDeviceUserMapping = [NSEntityDescription entityForName:ENTITY_DEVICE_USER_MAPPING inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityDeviceUserMapping];
     
     NSNumber *deviceUserMappingIdParam = [NSNumber numberWithInteger:deviceUserMappingID];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceUserMappingID == %@", deviceUserMappingIdParam];
@@ -644,6 +655,30 @@
     GXDatabaseEntityUser *userEntity = [self defaultUser];
     
     userEntity.nickname = nickname;
+    
+    [self saveContext];
+}
+
++ (void)deleteUser:(NSString *)userName fromDevice:(NSString *)deviceIdentifire
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityDeviceUserMapping = [NSEntityDescription entityForName:ENTITY_DEVICE_USER_MAPPING inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityDeviceUserMapping];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceIdentifire == %@ AND userName == %@", deviceIdentifire, userName];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *deviceUserMappingArray = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error == nil) {
+        for (GXDatabaseEntityDeviceUserMappingItem *deviceUserMappingItem in deviceUserMappingArray) {
+            [managedObjectContext deleteObject:deviceUserMappingItem];
+        }
+    }
     
     [self saveContext];
 }

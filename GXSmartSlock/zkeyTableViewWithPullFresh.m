@@ -135,29 +135,4 @@
     
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([self.delegate respondsToSelector:@selector(tableView:canEditRowAtIndexPath:)]) {
-        return [self.delegate tableView:self canEditRowAtIndexPath:indexPath];
-    }
-    
-    return NO;
-}
-
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([self.delegate respondsToSelector:@selector(tableView:editingStyleForRowAtIndexPath:)]) {
-        [self.delegate tableView:self editingStyleForRowAtIndexPath:indexPath];
-    }
-    
-    return UITableViewCellEditingStyleNone;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([self.delegate respondsToSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)]) {
-        [self.delegate tableView:self commitEditingStyle:editingStyle forRowAtIndexPath:indexPath];
-    }
-}
-
 @end

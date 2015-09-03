@@ -22,6 +22,8 @@
 #import "GXUpdateNicknameParam.h"
 #import "GXUpdatePasswordParam.h"
 #import "GXDeleteAuthorizedUserParam.h"
+#import "GXSynchronizeDeviceUserParam.h"
+#import "GXSynchronizeDeviceParam.h"
 
 @implementation GXDefaultHttpHelper
 
@@ -226,4 +228,35 @@
     }];
 }
 
++ (void)postWithSynchronizeDeviceUserParam:(GXSynchronizeDeviceUserParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_DEVICE_IDENTIFIRE : param.deviceIdentifire};
+    
+    [GXHttpTool postWithServerURL:GXSynchronizeDeviceUserURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"同步设备用户失败");
+            failure(error);
+        }
+    }];
+}
+
++ (void)postWithSynchronizeDeviceParam:(GXSynchronizeDeviceParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password};
+    
+    [GXHttpTool postWithServerURL:GXSynchronizeDeviceURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"同步设备失败");
+            failure(error);
+        }
+    }];
+    
+}
 @end
