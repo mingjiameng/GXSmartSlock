@@ -74,8 +74,10 @@
         return DEVICE_CATEGORY_ELECTRIC_IMG;
     } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD]) {
         return DEVICE_CATEGORY_GUARD_IMG;
+    } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_IN_DOOR]) {
+        return DEVICE_CATEGORY_IN_DOOR_IMG;
     } else {
-        NSLog(@"error: invalid device category");
+        NSLog(@"error: invalid device category:%@", deviceCategory);
     }
     
     return DEVICE_CATEGORY_DEFAULT_IMG;

@@ -25,6 +25,7 @@
     
     GXSynchronizeDeviceParam *param = [GXSynchronizeDeviceParam paramWithUserName:userName password:password];
     [GXDefaultHttpHelper postWithSynchronizeDeviceParam:param success:^(NSDictionary *result) {
+        //NSLog(@"result:%@", result);
         NSInteger status = [[result objectForKey:SYNCHRONIZE_DEVICE_STATUS] integerValue];
         if (status == 0) {
             [self.delegate synchronizeDeviceSuccessful:NO];

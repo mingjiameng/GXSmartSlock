@@ -193,10 +193,6 @@
 
 - (void)updateProfileImageSuccessful:(BOOL)successful
 {
-    if (_activityIndicator != nil) {
-        [_activityIndicator removeFromSuperview];
-    }
-    
     if (successful) {
         [self setHeadImage:_headImageView];
         if (self.profileImageChanged) {
@@ -204,9 +200,19 @@
         }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_PROFILE_IMAGE object:nil];
+        
+        if (_activityIndicator != nil) {
+            [_activityIndicator removeFromSuperview];
+        }
     } else {
+        if (_activityIndicator != nil) {
+            [_activityIndicator removeFromSuperview];
+        }
+        
         [self alertWithMessage:@"更换头像失败 请重试"];
     }
+    
+    
 }
 
 - (void)noNetwork

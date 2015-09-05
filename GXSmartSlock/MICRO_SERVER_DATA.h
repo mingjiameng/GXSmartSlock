@@ -19,7 +19,7 @@
 
 // key in dictionary "device"
 #define DEVICE_KEY_ID @"id"
-#define DEVICE_KEY_CATEGORY @"category"
+#define DEVICE_KEY_CATEGORY @"typecode"
 #define DEVICE_KEY_BATTERY @"device_battery"
 #define DEVICE_KEY_UNLOCK_KEY @"device_key"
 #define DEVICE_KEY_VERSION @"device_version"

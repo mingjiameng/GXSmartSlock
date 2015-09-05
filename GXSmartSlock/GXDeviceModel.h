@@ -33,9 +33,10 @@
 
 @property (nonatomic) NSInteger deviceBattery;
 
-// deviceCategory = "Lock" - 普通门锁
-// deviceCategory = "Access" － 门禁
-// deviceCategory = "Electric" - 电机
+// deviceCategory = "0101" - 普通门锁
+// deviceCategory = "0201" － 门禁
+// deviceCategory = "0301" - 电机
+// deviceCategory = "0401" - 室内锁
 @property (nonatomic, strong) NSString *deviceCategory;
 
 @property (nonatomic) NSInteger deviceID;

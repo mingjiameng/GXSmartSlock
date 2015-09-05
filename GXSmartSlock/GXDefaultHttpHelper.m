@@ -26,6 +26,7 @@
 #import "GXSynchronizeDeviceParam.h"
 #import "GXRejectKeyParam.h"
 #import "GXReceiveKeyParam.h"
+#import "GXAddNewDeviceParam.h"
 
 @implementation GXDefaultHttpHelper
 
@@ -290,6 +291,28 @@
     } failure:^(NSError *error) {
         if (error != nil) {
             NSLog(@"接收钥匙失败");
+            failure(error);
+        }
+    }];
+}
+
++ (void)postWithAddNewDeviceParam:(GXAddNewDeviceParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_DEVICE_IDENTIFIRE : param.deviceIdentifire,
+                               KEY_DEVICE_NICKNAME : param.deviceNickname,
+                               KEY_DEVICE_SECRET_KEY : param.secretKey,
+                               KEY_DEVICE_VERSION : param.deviceVersion,
+                               KEY_DEVICE_LOCATION : param.deviceLocation,
+                               KEY_DEVICE_BATTERY : param.batteryLevel};
+    
+    
+    [GXHttpTool postWithServerURL:GXAddNewDeviceURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"添加设备失败");
             failure(error);
         }
     }];

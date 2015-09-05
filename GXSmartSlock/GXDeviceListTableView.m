@@ -60,7 +60,7 @@
     } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD]) {
         imageName = DEVICE_CATEGORY_GUARD_IMG;
     } else {
-        NSLog(@"error: invalid device category");
+        NSLog(@"error: invalid device category:%@", deviceCategory);
     }
     
     return [UIImage imageNamed:imageName];

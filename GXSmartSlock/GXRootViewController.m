@@ -19,6 +19,7 @@
 
 #import "GXDeviceListViewController.h"
 #import "GXUserSettingViewController.h"
+#import "GXAddNewDeviceViewController.h"
 
 #import <CoreData/CoreData.h>
 
@@ -69,7 +70,7 @@
     [self configNavigationBarTitleView];
     
     // right bar button - add device
-    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addDevice:)];
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addDevice)];
     self.navigationItem.rightBarButtonItem = rightBarButtonItem;
     
     // back button style
@@ -308,9 +309,13 @@
     }];
 }
 
-- (void)addDevice:(UIButton *)sender
+- (void)addDevice
 {
-    
+    GXAddNewDeviceViewController *addDevice = [[GXAddNewDeviceViewController alloc] init];
+    UINavigationController *addDeviceNavigation = [[UINavigationController alloc] initWithRootViewController:addDevice];
+    [self.navigationController presentViewController:addDeviceNavigation animated:YES completion:^{
+        
+    }];
 }
 
 // how to use "自动开锁"

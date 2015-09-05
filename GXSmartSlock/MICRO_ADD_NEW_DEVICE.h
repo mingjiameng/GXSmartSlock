@@ -1,0 +1,46 @@
+//
+//  MICRO_ADD_NEW_DEVICE.h
+//  GXBLESmartHomeFurnishing
+//
+//  Created by zkey on 6/22/15.
+//  Copyright (c) 2015 guosim. All rights reserved.
+//
+
+#ifndef GXBLESmartHomeFurnishing_MICRO_ADD_NEW_DEVICE_h
+#define GXBLESmartHomeFurnishing_MICRO_ADD_NEW_DEVICE_h
+
+#define ANIMATION_IMG_FILE @"AddNewDeviceAnimationImage"
+
+#define GX_PAIR_SERVICE_CBUUID_IDENTIFY [CBUUID UUIDWithString:@"1804"]
+#define GX_PAIR_SERVICE_CBUUID_OAD [CBUUID UUIDWithString:@"0xF000FFC0-0451-4000-B000-000000000000"]
+#define GX_PAIR_SERVICE_CBUUID_MAIN [CBUUID UUIDWithString:@"FFF0"]
+
+
+#define GX_UNLOCK_SERVICE_CBUUID_IDENTIFY [CBUUID UUIDWithString:@"FF10"]
+
+#define GX_PAIR_CHARACTERISTIC_DEVICE_VERSION [CBUUID UUIDWithString:@"0xF000FFC1-0451-4000-B000-000000000000"]
+#define GX_PAIR_CHARACTERISTIC_READ_SECRET_KEY [CBUUID UUIDWithString:@"FFF2"]
+#define GX_PAIR_CHARACTERISTIC_READ_BATTERY_LEVEL [CBUUID UUIDWithString:@"FFF5"]
+#define GX_PAIR_CHARACTERISTIC_PREPARE_FOR_INITIALIZATION [CBUUID UUIDWithString:@"FFF1"]
+#define GX_PAIR_CHARACTERISTIC_WRITE_INITIALIZATION [CBUUID UUIDWithString:@"FFF6"]
+
+// advertisement data key
+#define ADVERTISEMENT_DATA_KEY_UUIDS @"kCBAdvDataServiceUUIDs"
+#define ADVERTISEMENT_DATA_KEY_LOCAL_NAME @"kCBAdvDataLocalName"
+
+
+// peripheral data dictionary key
+#define PERIPHERAL @"peripheral"
+#define DEVICE_ID @"deviceID"
+#define DEVICE_VERSION @"deviceVersion"
+#define SECRET_KEY @"secretKey"
+#define BATTERY_LEVEL @"batteryLevel"
+#define DEVICE_NAME @"deviceName"
+#define CAN_BE_INITIALIZED @"canBeInitialized"
+
+// other key
+#define GX_PAIR_DEVICE_STATUS_WAIT_FOR_INITIALIZATION @"<01>"
+#define GX_PAIR_DEVICE_STATUS_INITIALIZED @"<02>"
+#define GX_PAIR_DEVICE_STATUS_WRITE_INITIALIZATION @"03"
+
+#endif

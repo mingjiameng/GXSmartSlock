@@ -29,18 +29,19 @@
 
 #define GXUpdateUserNicknameURL [NSString stringWithFormat:@"%@update_nickname", GXBaseURL]
 
-#define GXUpdateUserPasswordURL [NSString stringWithFormat:@"%@",GXBaseURL]
+#define GXUpdateUserPasswordURL [NSString stringWithFormat:@"%@", GXBaseURL]
 
-#define GXDeleteAuthorizedUserURL [NSString stringWithFormat:@"%@delete_key",GXBaseURL]
+#define GXDeleteAuthorizedUserURL [NSString stringWithFormat:@"%@delete_key", GXBaseURL]
 
-#define GXSynchronizeDeviceUserURL [NSString stringWithFormat:@"%@sync_key",GXBaseURL]
+#define GXSynchronizeDeviceUserURL [NSString stringWithFormat:@"%@sync_key", GXBaseURL]
 
-#define GXSynchronizeDeviceURL [NSString stringWithFormat:@"%@sync_device",GXBaseURL]
+#define GXSynchronizeDeviceURL [NSString stringWithFormat:@"%@sync_device", GXBaseURL]
 
-#define GXRejectKeyURL [NSString stringWithFormat:@"%@delete_self_key",GXBaseURL] 
+#define GXRejectKeyURL [NSString stringWithFormat:@"%@delete_self_key", GXBaseURL]
 
-#define GXReceiveKeyURL [NSString stringWithFormat:@"%@receive_key",GXBaseURL]
+#define GXReceiveKeyURL [NSString stringWithFormat:@"%@receive_key", GXBaseURL]
 
+#define GXAddNewDeviceURL [NSString stringWithFormat:@"%@setup_device", GXBaseURL]
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"
 #define KEY_PHONE_INFO @"phone_info"
@@ -52,5 +53,9 @@
 #define KEY_NEW_NICKNAME @"nnickname"
 #define KEY_NEW_PASSWORD @"npassword"
 #define KEY_DELETED_USER_NAME @"contact"
+#define KEY_DEVICE_SECRET_KEY @"key"
+#define KEY_DEVICE_VERSION @"device_version"
+#define KEY_DEVICE_LOCATION @"device_location"
+#define KEY_DEVICE_BATTERY @"device_battery"
 
 #endif
