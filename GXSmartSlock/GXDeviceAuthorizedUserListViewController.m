@@ -188,6 +188,9 @@
     }
     
     [self alertWithMessage:@"无法连接服务器"];
+    
+    [_tableView didEndLoadingData];
+    
     self.view.userInteractionEnabled = YES;
 }
 

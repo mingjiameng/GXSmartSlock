@@ -10,7 +10,7 @@
 
 #import "MICRO_COMMON.h"
 
-#import "zkeyIndentifierValidator.h"
+#import "zkeyIdentifierValidator.h"
 #import "GXUpdatePasswordModel.h"
 
 
@@ -158,7 +158,7 @@
     }
     
     NSString *newPassword = _newPasswordOnceTextField.text;
-    if (newPassword.length < 8 || newPassword.length > 20 || ![zkeyIndentifierValidator isStringWithNumberAndAlphabet:newPassword]) {
+    if (newPassword.length < 8 || newPassword.length > 20 || ![zkeyIdentifierValidator isStringWithNumberAndAlphabet:newPassword]) {
         [_activityIndicator removeFromSuperview];
         [self alertWithMessage:@"密码应为8-20位数字或字母"];
         self.view.userInteractionEnabled = YES;

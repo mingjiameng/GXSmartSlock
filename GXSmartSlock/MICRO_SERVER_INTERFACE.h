@@ -37,4 +37,6 @@
 #define SYNCHRONIZE_DEVICE_MAPPING @"mappings"
 #define SYNCHRONIZE_DEVICE_DEVICE @"devices"
 
+#define REJECT_KEY_STATUS  @"status"
+
 #endif

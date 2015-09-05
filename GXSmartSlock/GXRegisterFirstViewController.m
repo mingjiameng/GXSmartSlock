@@ -11,7 +11,7 @@
 #import "MICRO_COMMON.h"
 
 #import "GXRegisterModel.h"
-#import "zkeyIndentifierValidator.h"
+#import "zkeyIdentifierValidator.h"
 
 #import "zkeyViewHelper.h"
 #import "zkeyActivityIndicatorView.h"
@@ -178,7 +178,7 @@
             return YES;
         } else {
             _userName = _userNameTextField.text;
-            if (![zkeyIndentifierValidator isValidChinesePhoneNumber:_userName]) {
+            if (![zkeyIdentifierValidator isValidChinesePhoneNumber:_userName]) {
                 [self alertWithMessage:@"请输入正确的手机号或邮箱"];
                 return NO;
             }

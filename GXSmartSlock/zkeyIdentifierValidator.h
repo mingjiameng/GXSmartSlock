@@ -1,5 +1,5 @@
 //
-//  zkeyIndentifierValidator.h
+//  zkeyIdentifierValidator.h
 //  FenHongForIOS
 //
 //  Created by zkey on 8/11/15.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface zkeyIndentifierValidator : NSObject
+@interface zkeyIdentifierValidator : NSObject
 
 + (BOOL)isValidCreditNumber:(NSString*)numberString;
 + (BOOL)isValidBankCardNumber:(NSString *)cardNumber;

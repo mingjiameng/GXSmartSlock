@@ -37,6 +37,10 @@
 
 #define GXSynchronizeDeviceURL [NSString stringWithFormat:@"%@sync_device",GXBaseURL]
 
+#define GXRejectKeyURL [NSString stringWithFormat:@"%@delete_self_key",GXBaseURL] 
+
+#define GXReceiveKeyURL [NSString stringWithFormat:@"%@receive_key",GXBaseURL]
+
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"
 #define KEY_PHONE_INFO @"phone_info"

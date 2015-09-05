@@ -89,6 +89,10 @@
 {
     _IsDragging = false;
     
+    if (_IsDownloading) {
+        return;
+    }
+    
     if (scrollView.contentOffset.y > -64) {
         return;
     }

@@ -24,6 +24,8 @@
 #import "GXDeleteAuthorizedUserParam.h"
 #import "GXSynchronizeDeviceUserParam.h"
 #import "GXSynchronizeDeviceParam.h"
+#import "GXRejectKeyParam.h"
+#import "GXReceiveKeyParam.h"
 
 @implementation GXDefaultHttpHelper
 
@@ -259,4 +261,38 @@
     }];
     
 }
+
++ (void)postWithRejectKeyParam:(GXRejectKeyParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_DEVICE_IDENTIFIRE : param.deviceIdentifire};
+    
+    [GXHttpTool postWithServerURL:GXRejectKeyURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"拒绝钥匙失败");
+            failure(error);
+        }
+    }];
+}
+
++ (void)postWithReceiveKeyParam:(GXReceiveKeyParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_DEVICE_IDENTIFIRE : param.deviceIdentifire,
+                               KEY_DEVICE_NICKNAME : param.nickname};
+    
+    [GXHttpTool postWithServerURL:GXReceiveKeyURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"接收钥匙失败");
+            failure(error);
+        }
+    }];
+}
+
 @end

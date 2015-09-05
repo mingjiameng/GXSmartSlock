@@ -19,6 +19,7 @@
 #import "zkeyViewHelper.h"
 #import "GXDeviceListTableView.h"
 #import "GXDeviceDetailViewController.h"
+#import "GXAcceptKeyViewController.h"
 
 #import <CoreData/CoreData.h>
 
@@ -134,15 +135,23 @@
 {
     GXDatabaseEntityDevice *deviceEntity = [_fetchedResultsController objectAtIndexPath:indexPath];
     
-    GXDeviceDetailViewController *deviceDetailVC = [[GXDeviceDetailViewController alloc] init];
-    deviceDetailVC.deviceEntity = deviceEntity;
-    deviceDetailVC.deviceInformationChanged = ^(BOOL changed) {
-        if (changed) {
-            [tableView.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        }
-    };
+    if ([deviceEntity.deviceStatus isEqualToString:DEVICE_STATUS_INVALID]) {
+        GXAcceptKeyViewController *acceptKeyVC = [[GXAcceptKeyViewController alloc] init];
+        acceptKeyVC.deviceIdentifire = deviceEntity.deviceIdentifire;
+        [self.navigationController pushViewController:acceptKeyVC animated:YES];
+        
+    } else {
+        GXDeviceDetailViewController *deviceDetailVC = [[GXDeviceDetailViewController alloc] init];
+        deviceDetailVC.deviceEntity = deviceEntity;
+        deviceDetailVC.deviceInformationChanged = ^(BOOL changed) {
+            if (changed) {
+                [tableView.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            }
+        };
+        
+        [self.navigationController pushViewController:deviceDetailVC animated:YES];
+    }
     
-    [self.navigationController pushViewController:deviceDetailVC animated:YES];
 }
 
 - (void)tableViewRequestNewData:(zkeyTableViewWithPullFresh *)tableView
@@ -163,6 +172,8 @@
 - (void)noNetwork
 {
     [self alertWithMessage:@"无法连接服务器"];
+    
+    [_deviceListTableView didEndLoadingData];
 }
 
 

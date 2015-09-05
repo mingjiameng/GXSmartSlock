@@ -11,7 +11,7 @@
 #import "MICRO_COMMON.h"
 
 #import "GXRegisterModel.h"
-#import "zkeyIndentifierValidator.h"
+#import "zkeyIdentifierValidator.h"
 #import "zkeyViewHelper.h"
 #import "zkeyActivityIndicatorView.h"
 
@@ -145,7 +145,7 @@
         return;
     }
     
-    if (![zkeyIndentifierValidator isStringWithNumberAndAlphabet:password]) {
+    if (![zkeyIdentifierValidator isStringWithNumberAndAlphabet:password]) {
         [self alertWithMessage:@"密码应包含数字和字母"];
         return;
     }
