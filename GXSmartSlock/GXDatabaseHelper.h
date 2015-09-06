@@ -30,6 +30,7 @@
 + (NSFetchedResultsController *)allDeviceFetchedResultsController;
 + (NSFetchedResultsController *)deviceUserMappingModelFetchedResultsController:(NSString *)deviceIdentifire;
 + (GXDatabaseEntityUser *)defaultUser;
++ (NSArray *)managedDeviceArray;
 
 /*
  * change data

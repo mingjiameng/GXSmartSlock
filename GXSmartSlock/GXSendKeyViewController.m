@@ -14,6 +14,7 @@
 #import "zkeySandboxHelper.h"
 
 #import "GXDatabaseEntityDevice.h"
+#import "GXDatabaseHelper.h"
 
 #import "GXSelectDeviceTableViewCell.h"
 
@@ -24,6 +25,7 @@
     GXDatabaseEntityDevice *_selectedDeviceEntity;
 }
 
+@property (nonatomic, strong) NSArray *validDeviceArray;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UILabel *alertLabel;
 @property (nonatomic, strong) UISwitch *adminAuthoritySwitch;
@@ -59,7 +61,6 @@
     _alertLabel.text = @"您不是任何一把门锁的管理员\n无法向其他用户发送钥匙";
     
     [self.view addSubview:_alertLabel];
-    
     
 }
 
@@ -98,7 +99,8 @@
     } else if (indexPath.section == 1) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
         
-        cell.textLabel.text = @"门锁";
+        cell.textLabel.text = @"发送给";
+        cell.detailTextLabel.text = @"?";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (indexPath.section == 2) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
@@ -130,6 +132,8 @@
         imageName = DEVICE_CATEGORY_ELECTRIC_IMG;
     } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD]) {
         imageName = DEVICE_CATEGORY_GUARD_IMG;
+    } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_IN_DOOR]) {
+        imageName = DEVICE_CATEGORY_IN_DOOR_IMG;
     } else {
         NSLog(@"error: invalid device category:%@", deviceCategory);
     }
@@ -174,6 +178,18 @@
     } else if (indexPath.section == 1) {
         
     }
+}
+
+#pragma mark - send device
+
+
+- (NSArray *)validDeviceArray
+{
+    if (_validDeviceArray == nil) {
+        _validDeviceArray = [GXDatabaseHelper managedDeviceArray];
+    }
+    
+    return _validDeviceArray;
 }
 
 @end

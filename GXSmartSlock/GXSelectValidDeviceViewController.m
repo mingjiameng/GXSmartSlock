@@ -85,6 +85,8 @@
         imageName = DEVICE_CATEGORY_ELECTRIC_IMG;
     } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD]) {
         imageName = DEVICE_CATEGORY_GUARD_IMG;
+    } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_IN_DOOR]) {
+        imageName = DEVICE_CATEGORY_IN_DOOR_IMG;
     } else {
         NSLog(@"error: invalid device category:%@", deviceCategory);
     }

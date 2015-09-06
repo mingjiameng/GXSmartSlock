@@ -12,6 +12,4 @@
 
 @interface GXSendKeyViewController : UIViewController
 
-@property (nonatomic, strong) NSArray *validDeviceArray;
-
 @end

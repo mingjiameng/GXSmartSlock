@@ -399,6 +399,31 @@
     return fetchedResultsController;
 }
 
+// defaultUser is the administrator
++ (NSArray *)managedDeviceArray
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityDevice = [NSEntityDescription entityForName:ENTITY_DEVICE inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityDevice];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceAuthority == 'admin'"];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *managedDevice = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"fetch managed device array error:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    return managedDevice;
+}
+
+
 + (NSFetchedResultsController *)deviceUserMappingModelFetchedResultsController:(NSString *)deviceIdentifire
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
