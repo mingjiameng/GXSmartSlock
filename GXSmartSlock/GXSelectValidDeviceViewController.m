@@ -29,8 +29,14 @@
     [super viewDidLoad];
     // do something...
     
+    [self configNavigationBar];
     [self addValidDeviceListTableView:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - TOP_SPACE_IN_NAVIGATION_MODE)];
     
+}
+
+- (void)configNavigationBar
+{
+    self.title = @"选择要发送的钥匙";
 }
 
 - (void)addValidDeviceListTableView:(CGRect)frame

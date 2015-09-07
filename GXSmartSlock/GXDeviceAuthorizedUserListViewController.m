@@ -23,7 +23,7 @@
 
 #import <CoreData/CoreData.h>
 
-@interface GXDeviceAuthorizedUserListViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, UIActionSheetDelegate, GXDeleteAuthorizedUserModelDelegate, GXSynchronizeDeviceUserModelDelegate>
+@interface GXDeviceAuthorizedUserListViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, UIActionSheetDelegate, GXDeleteAuthorizedUserModelDelegate, GXSynchronizeDeviceUserModelDelegate, NSFetchedResultsControllerDelegate>
 {
     NSIndexPath *_deletedIndexPath; // store the indexPath of GXDatabaseEntityDeviceUserMappingItem which need to deleted
     GXDeleteAuthorizedUserModel *_deleteUserModel;
@@ -61,6 +61,7 @@
 - (void)addDatasource
 {
     _fetchedResultsController = [GXDatabaseHelper deviceUserMappingModelFetchedResultsController:self.deviceIdentifire];
+    _fetchedResultsController.delegate = self;
 }
 
 - (void)addUserListTableView:(CGRect)frame

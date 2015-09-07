@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "sendKey@1x.png"
+      "filename" : "LockTypeInDoor@1x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "sendKey@2x.png"
+      "filename" : "LockTypeInDoor@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "sendKey@3x.png"
+      "filename" : "LockTypeInDoor@3x.png"
     }
   ],
   "info" : {

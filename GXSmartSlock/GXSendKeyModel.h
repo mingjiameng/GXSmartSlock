@@ -10,4 +10,6 @@
 
 @interface GXSendKeyModel : NSObject
 
++ (NSArray *)sendKey:(NSString *)deviceIdentifire to:(NSArray *)contactModelArray withAuthority:(NSString *)authorityType;
+
 @end

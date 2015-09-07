@@ -16,7 +16,7 @@
 
 @implementation GXSendKeyModel
 
-- (void)sendKey:(NSString *)deviceIdentifire to:(NSArray *)contactModelArray withAuthority:(NSString *)authorityType
++ (NSArray *)sendKey:(NSString *)deviceIdentifire to:(NSArray *)contactModelArray withAuthority:(NSString *)authorityType
 {
     __block NSMutableArray *failedContactModelArray = [NSMutableArray array];
     
@@ -26,11 +26,16 @@
     for (GXContactModel *contactModel in contactModelArray) {
         GXSendKeyParam *param = [GXSendKeyParam paramWithUserName:userName password:password deviceIdentifire:deviceIdentifire receiverUserName:contactModel.phoneNumber authorityType:authorityType];
         [GXDefaultHttpHelper postWithSendKeyParam:param success:^(NSDictionary *result) {
-            
+            NSInteger status = [[result objectForKey:@"status"] integerValue];
+            if (status == 0) {
+                [failedContactModelArray addObject:contactModel];
+            }
         } failure:^(NSError *error) {
-            
+            [failedContactModelArray addObject:contactModel];
         }];
     }
+    
+    return failedContactModelArray;
 }
 
 @end

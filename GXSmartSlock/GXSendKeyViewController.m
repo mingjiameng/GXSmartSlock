@@ -15,8 +15,10 @@
 
 #import "GXDatabaseEntityDevice.h"
 #import "GXDatabaseHelper.h"
+#import "GXSendKeyModel.h"
 
 #import "GXSelectDeviceTableViewCell.h"
+#import "zkeyActivityIndicatorView.h"
 
 #import "GXSelectValidDeviceViewController.h"
 #import "GXEnterAndSelectUserViewController.h"
@@ -41,8 +43,13 @@
 {
     [super viewDidLoad];
     // do something...
-    
+    [self configNavigationBar];
     [self buildUI];
+}
+
+- (void)configNavigationBar
+{
+    self.title = @"发送钥匙";
 }
 
 - (void)buildUI
@@ -78,9 +85,9 @@
     
     UIButton *sendKeyButton = [[UIButton alloc] initWithFrame:CGRectMake(20.0f, 25.0f, frame.size.width - 40.0f, 40.0f)];
     [sendKeyButton setBackgroundColor:MAIN_COLOR];
-    [sendKeyButton setTitle:@"删除门锁" forState:UIControlStateNormal];
+    [sendKeyButton setTitle:@"发送钥匙" forState:UIControlStateNormal];
     [sendKeyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [sendKeyButton addTarget:self action:@selector(sendke) forControlEvents:UIControlEventTouchUpInside];
+    [sendKeyButton addTarget:self action:@selector(sendKey) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:sendKeyButton];
 
 }
@@ -201,8 +208,29 @@
     }
 }
 
-#pragma mark - send device
-
+#pragma mark - user action
+- (void)sendKey
+{
+    zkeyActivityIndicatorView *activityIndicator = [[zkeyActivityIndicatorView alloc] initWithFrame:self.view.frame title:@"正在发送钥匙..."];
+    [self.view addSubview:activityIndicator];
+    
+    NSString *authorityStatus = DEVICE_AUTHORITY_NORMAL;
+    if (_adminAuthoritySwitch.on) {
+        authorityStatus = DEVICE_AUTHORITY_ADMIN;
+    }
+    
+    NSArray *failedToSendArray = [GXSendKeyModel sendKey:_selectedDeviceEntity.deviceIdentifire to:_contactModelArray withAuthority:authorityStatus];
+    
+    [activityIndicator removeFromSuperview];
+    activityIndicator = nil;
+    
+    if (failedToSendArray.count > 0) {
+        
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+}
 
 - (NSArray *)validDeviceArray
 {

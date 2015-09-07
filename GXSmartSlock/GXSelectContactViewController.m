@@ -8,9 +8,11 @@
 
 #import "GXSelectContactViewController.h"
 
-#import <AddressBook/AddressBook.h>
-
 #import "GXContactModel.h"
+
+#import "zkeyActivityIndicatorView.h"
+
+#import <AddressBook/AddressBook.h>
 
 @interface GXSelectContactViewController () <UITableViewDataSource, UITableViewDelegate>
 {
@@ -59,9 +61,10 @@
         if (firstName == nil) {
             firstName = @"";
         } else {
-            
+            firstName = [firstName stringByReplacingOccurrencesOfString:@" " withString:@""];
         }
-        firstName = [firstName stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        
     }
 }
 
@@ -123,6 +126,8 @@
 
 - (void)doneAddUser
 {
+    
+    
     NSMutableArray *selectedUserArray = [NSMutableArray array];
     
     for (NSInteger indexRow = 0; indexRow < _contanctArray.count; ++indexRow) {
