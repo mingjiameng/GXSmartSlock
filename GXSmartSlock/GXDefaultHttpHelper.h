@@ -11,7 +11,24 @@
 typedef void(^HttpSuccess)(NSDictionary *result);
 typedef void(^HttpFailure)(NSError *error);
 
-@class GXLoginParam, GXGetVerificationCodeParam, GXVerifyCodeParam, GXResetPasswordParam, GXRegisterParam, GXChangeDeviceNicknameParam, GXDeleteDeviceParam, GXUpdateProfileImageParam, GXUpdateNicknameParam, GXUpdatePasswordParam, GXDeleteAuthorizedUserParam, GXSynchronizeDeviceUserParam, GXSynchronizeDeviceParam, GXRejectKeyParam, GXReceiveKeyParam, GXAddNewDeviceParam;
+#import "GXLoginParam.h"
+#import "GXGetVerificationCodeParam.h"
+#import "GXVerifyCodeParam.h"
+#import "GXRegisterParam.h"
+#import "GXResetPasswordParam.h"
+#import "GXChangeDeviceNicknameParam.h"
+#import "GXDeleteDeviceParam.h"
+#import "GXUpdateProfileImageParam.h"
+#import "GXUpdateNicknameParam.h"
+#import "GXUpdatePasswordParam.h"
+#import "GXDeleteAuthorizedUserParam.h"
+#import "GXSynchronizeDeviceUserParam.h"
+#import "GXSynchronizeDeviceParam.h"
+#import "GXRejectKeyParam.h"
+#import "GXReceiveKeyParam.h"
+#import "GXAddNewDeviceParam.h"
+#import "GXSynchronizeUnlockRecordParam.h"
+#import "GXSendKeyParam.h"
 
 #import "GXGetVerificationCodeParam.h"
 
@@ -33,5 +50,7 @@ typedef void(^HttpFailure)(NSError *error);
 + (void)postWithRejectKeyParam:(GXRejectKeyParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
 + (void)postWithReceiveKeyParam:(GXReceiveKeyParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
 + (void)postWithAddNewDeviceParam:(GXAddNewDeviceParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
++ (void)postWithSynchronizeUnlockRecordParam:(GXSynchronizeUnlockRecordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
++ (void)postWithSendKeyParam:(GXSendKeyParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;;
 
 @end

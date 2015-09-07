@@ -20,6 +20,7 @@
 #import "GXDeviceListViewController.h"
 #import "GXUserSettingViewController.h"
 #import "GXAddNewDeviceViewController.h"
+#import "GXSendKeyViewController.h"
 
 #import <CoreData/CoreData.h>
 
@@ -291,7 +292,8 @@
 
 - (void)sendKey:(UIButton *)sender
 {
-
+    GXSendKeyViewController *sendKeyVC = [[GXSendKeyViewController alloc] init];
+    [self.navigationController pushViewController:sendKeyVC animated:YES];
 }
 
 - (void)unlockRecord:(UIButton *)sender

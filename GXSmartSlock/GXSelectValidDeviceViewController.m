@@ -108,6 +108,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60.0f;
+}
 
 
 @end

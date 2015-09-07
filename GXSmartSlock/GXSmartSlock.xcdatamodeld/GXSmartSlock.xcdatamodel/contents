@@ -28,6 +28,7 @@
         <attribute name="deviceIdentifire" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="event" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="recordID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="senderUserName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="device" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXDevice" inverseName="unlockRecords" inverseEntity="GXDevice" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXUser" inverseName="records" inverseEntity="GXUser" syncable="YES"/>
@@ -43,7 +44,7 @@
     <elements>
         <element name="GXDevice" positionX="-36" positionY="45" width="128" height="210"/>
         <element name="GXDevice_User_Mapping" positionX="-18" positionY="90" width="128" height="165"/>
-        <element name="GXRecord" positionX="-54" positionY="18" width="128" height="150"/>
+        <element name="GXRecord" positionX="-54" positionY="18" width="128" height="165"/>
         <element name="GXUser" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

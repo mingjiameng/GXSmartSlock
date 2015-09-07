@@ -10,6 +10,10 @@
 
 #import "MICRO_COMMON.h"
 
+#import "GXContactModel.h"
+
+#import "GXEnterUserNameViewController.h"
+#import "GXSelectContactViewController.h"
 
 @interface GXEnterAndSelectUserViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 
@@ -25,6 +29,7 @@
     [super viewDidLoad];
     // do something...
     
+    [self configNavigationBar];
     [self addUserListTableView:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
 }
 
@@ -51,15 +56,22 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.userNameArray.count;
+    return self.contactModelArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView:@"userName"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userName"];
     if (cell == nil) {
-        cell = [UITableViewCell alloc] initWithStyle:uitableiv reuseIdentifier:<#(NSString *)#>
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"userName"];
     }
+    
+    GXContactModel *contacModel = [self.contactModelArray objectAtIndex:indexPath.row];;
+    cell.textLabel.text = contacModel.nickname;
+    cell.detailTextLabel.text = contacModel.phoneNumber;
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
 }
 
 #pragma mark - table view delegate
@@ -76,9 +88,10 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.userNameArray removeObjectAtIndex:indexPath.row];
+        [self.contactModelArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
     }
+    
 }
 
 #pragma mark - add user
@@ -97,11 +110,24 @@
         }
         
         if (buttonIndex == 0) {
+            GXEnterUserNameViewController *userNameVC = [[GXEnterUserNameViewController alloc] init];
+            userNameVC.addContact = ^(GXContactModel *contactModel) {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                [self.contactModelArray insertObject:contactModel atIndex:0];
+                [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            };
             
+            UINavigationController *navigator = [[UINavigationController alloc] initWithRootViewController:userNameVC];
+            [self.navigationController presentViewController:navigator animated:YES completion:^{
+                
+            }];
         } else if (buttonIndex == 1) {
-            
+            GXSelectContactViewController *selectContactVC = [[GXSelectContactViewController alloc] init];
+            selectContactVC.addUser = ^(NSArray *userModelArray) {
+                self.contactModelArray = (NSMutableArray *) [self.contactModelArray arrayByAddingObjectsFromArray:userModelArray];
+            };
         }
-    
+        
     }
 }
 

@@ -10,6 +10,6 @@
 
 @interface GXEnterAndSelectUserViewController : UIViewController
 
-@property (nonatomic, strong) NSMutableArray *userNameArray;
+@property (nonatomic, strong) NSMutableArray *contactModelArray;
 
 @end

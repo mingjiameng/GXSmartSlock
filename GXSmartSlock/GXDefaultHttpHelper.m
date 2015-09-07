@@ -11,22 +11,7 @@
 
 #import "MICRO_HTTP.h"
 
-#import "GXLoginParam.h"
-#import "GXGetVerificationCodeParam.h"
-#import "GXVerifyCodeParam.h"
-#import "GXRegisterParam.h"
-#import "GXResetPasswordParam.h"
-#import "GXChangeDeviceNicknameParam.h"
-#import "GXDeleteDeviceParam.h"
-#import "GXUpdateProfileImageParam.h"
-#import "GXUpdateNicknameParam.h"
-#import "GXUpdatePasswordParam.h"
-#import "GXDeleteAuthorizedUserParam.h"
-#import "GXSynchronizeDeviceUserParam.h"
-#import "GXSynchronizeDeviceParam.h"
-#import "GXRejectKeyParam.h"
-#import "GXReceiveKeyParam.h"
-#import "GXAddNewDeviceParam.h"
+
 
 @implementation GXDefaultHttpHelper
 
@@ -313,6 +298,39 @@
     } failure:^(NSError *error) {
         if (error != nil) {
             NSLog(@"添加设备失败");
+            failure(error);
+        }
+    }];
+}
+
++ (void)postWithSynchronizeUnlockRecordParam:(GXSynchronizeUnlockRecordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password};
+    
+    [GXHttpTool postWithServerURL:GXSynchronizeUnlockRecordURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"同步开锁记录失败");
+            failure(error);
+        }
+    }];
+}
+
++ (void)postWithSendKeyParam:(GXSendKeyParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_DEVICE_IDENTIFIRE : param.deviceIdentifire,
+                               KEY_AUTHORITY_TYPE : param.authorityType,
+                               KEY_RECEIVER_USER_NAME : param.receiverUserName};
+    
+    [GXHttpTool postWithServerURL:GXSendKeyURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"发送钥匙失败");
             failure(error);
         }
     }];

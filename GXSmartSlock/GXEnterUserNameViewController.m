@@ -11,8 +11,10 @@
 #import "MICRO_COMMON.h"
 
 #import "zkeyIdentifierValidator.h"
+#import "GXContactModel.h"
 
 #import "zkeyViewHelper.h"
+
 
 @interface GXEnterUserNameViewController () <UITableViewDataSource, UITextFieldDelegate>
 
@@ -36,8 +38,9 @@
 
 - (void)configNavigationBar
 {
-    self.title = @"添加用户名";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addUser)];
+    self.title = @"添加用户";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelAddUser)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAddUser)];
 }
 
 - (void)addUserNameTableView:(CGRect)frame
@@ -64,13 +67,15 @@
     UITableViewCell *cell = nil;
     if (indexPath.section == 0 && indexPath.row == 0) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.textLabel.text = @"门锁昵称";
+        cell.textLabel.text = @"用户名";
         
         _userNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width - 110.0f, 30.0)];
         _userNameTextField.borderStyle = UITextBorderStyleNone;
         _userNameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        _userNameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _userNameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
         _userNameTextField.returnKeyType = UIReturnKeyDone;
-        _userNameTextField.placeholder = @"请输入门锁昵称";
+        _userNameTextField.placeholder = @"请输入对方的用户名";
         _userNameTextField.delegate = self;
         cell.accessoryView = _userNameTextField;
     }
@@ -79,8 +84,10 @@
     return cell;
 }
 
-- (void)addUser
+- (void)doneAddUser
 {
+    [_userNameTextField resignFirstResponder];
+    
     NSString *userName = _userNameTextField.text;
     if (![zkeyIdentifierValidator isValidChinesePhoneNumber:userName] && ![zkeyIdentifierValidator isValidEmailAddress:userName]) {
         [self alertWithMessage:@"请输入正确的用户名"];
@@ -88,11 +95,31 @@
     }
     
     
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (self.addContact) {
+            GXContactModel *contactModel = [GXContactModel modelWithUserName:userName nickname:userName];
+            self.addContact(contactModel);
+        }
+    }];
 }
 
 - (void)alertWithMessage:(NSString *)message
 {
     [zkeyViewHelper alertWithMessage:message inView:self.view withFrame:self.view.frame];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    return YES;
+}
+
+- (void)cancelAddUser
+{
+    [_userNameTextField resignFirstResponder];
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 @end

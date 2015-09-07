@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class GXContactModel;
+
 @interface GXEnterUserNameViewController : UIViewController
 
-@property (nonatomic, copy) void (^addUser) (NSString *userName);
+@property (nonatomic, copy) void (^addContact) (GXContactModel *contactModel);
 
 @end

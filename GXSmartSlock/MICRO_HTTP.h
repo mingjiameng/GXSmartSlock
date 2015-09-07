@@ -42,6 +42,12 @@
 #define GXReceiveKeyURL [NSString stringWithFormat:@"%@receive_key", GXBaseURL]
 
 #define GXAddNewDeviceURL [NSString stringWithFormat:@"%@setup_device", GXBaseURL]
+
+#define GXSynchronizeUnlockRecordURL [NSString stringWithFormat:@"%@sync_record", GXBaseURL]
+
+#define GXSendKeyURL [NSString stringWithFormat:@"%@send_key", GXBaseURL]
+
+
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"
 #define KEY_PHONE_INFO @"phone_info"
@@ -57,5 +63,7 @@
 #define KEY_DEVICE_VERSION @"device_version"
 #define KEY_DEVICE_LOCATION @"device_location"
 #define KEY_DEVICE_BATTERY @"device_battery"
+#define KEY_AUTHORITY_TYPE @"key_type"
+#define KEY_RECEIVER_USER_NAME @"contact"
 
 #endif
