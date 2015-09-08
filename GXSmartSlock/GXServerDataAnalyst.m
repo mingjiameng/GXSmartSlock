@@ -16,11 +16,14 @@
 #import "GXUserModel.h"
 
 #import "GXDatabaseHelper.h"
+#import "zkeyMiPushPackage.h"
 
 @implementation GXServerDataAnalyst
 
 + (void)login:(NSDictionary *)data
 {
+    NSLog(@"%@", data);
+    
     GXUserModel *defaultUser = [[GXUserModel alloc] init];
     defaultUser.userName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
     defaultUser.userID = [[data objectForKey:LOGIN_KEY_USER_ID] integerValue];
@@ -92,6 +95,29 @@
     }
     
     [GXDatabaseHelper insertUserIntoDatabase:userModelArray];
+}
+
++ (void)insertUnlockRecordIntoDatabase:(NSArray *)unlockRecordArray
+{
+    
+}
+
++ (void)logout
+{
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
+    [[NSUserDefaults standardUserDefaults] setObject:userName forKey:PREVIOUS_USER_NAME];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:false forKey:DEFAULT_LOGIN_STATUS];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DEFAULT_USER_NAME];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DEFAULT_USER_PASSWORD];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DEFAULT_GESTURE_PASSWORD];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DEFAULT_UNLOCK_MODE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [GXDatabaseHelper logout];
+    
+    [[zkeyMiPushPackage sharedMiPush] unsetAccount:userName];
+    
 }
 
 @end

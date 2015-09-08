@@ -19,9 +19,9 @@
     self.imageView.layer.masksToBounds = YES;
     self.imageView.layer.cornerRadius = 5.0f;
     
-    self.textLabel.frame = CGRectMake(100.0f, 10.0f, self.frame.size.width - 170.0f, 40.0f);
+    self.textLabel.frame = CGRectMake(100.0f, 15.0f, self.frame.size.width - 170.0f, 35.0f);
     
-    self.detailTextLabel.frame = CGRectMake(100.0f, 50.0f, self.frame.size.width - 170.0f, 20.0f);
+    self.detailTextLabel.frame = CGRectMake(100.0f, 50.0f, self.frame.size.width - 170.0f, 15.0f);
 }
 
 @end

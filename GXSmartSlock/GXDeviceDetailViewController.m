@@ -107,6 +107,8 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         CGFloat imageViewSize = 60.0f;
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imageViewSize, imageViewSize)];
+        imageView.layer.masksToBounds = YES;
+        imageView.layer.cornerRadius = DEFAULT_ROUND_RECTANGLE_CORNER_RADIUS;
         
         imageView.image = [self deviceImage];
         cell.accessoryView = imageView;

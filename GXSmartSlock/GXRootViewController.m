@@ -135,7 +135,7 @@
 {
     if ([self isThereValidDevice]) {
         if (_selectUnlockModeButton == nil) {
-            _selectUnlockModeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100.0f, 22.0f)];
+            _selectUnlockModeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100.0f, 30.0f)];
             _selectUnlockModeButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0];
             [_selectUnlockModeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [_selectUnlockModeButton addTarget:self action:@selector(selectUnlockMode:) forControlEvents:UIControlEventTouchUpInside];

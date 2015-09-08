@@ -99,6 +99,8 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             UIImageView *headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50.0f, 50.0f)];
+            headImageView.layer.masksToBounds = YES;
+            headImageView.layer.cornerRadius = DEFAULT_ROUND_RECTANGLE_CORNER_RADIUS;
             [self setHeadImage:headImageView];
             cell.accessoryView = headImageView;
         } else if (indexPath.row == 1) {

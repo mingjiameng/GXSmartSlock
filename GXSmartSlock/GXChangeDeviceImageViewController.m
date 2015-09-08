@@ -51,7 +51,7 @@
     _deviceImageView = [[UIImageView alloc] initWithFrame:frame];
     [self setDeviceImage:_deviceImageView];
     _deviceImageView.layer.masksToBounds = YES;
-    _deviceImageView.layer.cornerRadius = frame.size.width / 2.0;
+    _deviceImageView.layer.cornerRadius = DEFAULT_ROUND_RECTANGLE_CORNER_RADIUS;
     
     [self.view addSubview:_deviceImageView];
 }

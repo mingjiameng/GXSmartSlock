@@ -43,6 +43,8 @@
 {
     [super viewDidLoad];
     // do something...
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     [self configNavigationBar];
     [self buildUI];
 }
@@ -191,6 +193,7 @@
     if (indexPath.section == 0) {
         GXSelectValidDeviceViewController *selectDeviceVC = [[GXSelectValidDeviceViewController alloc] init];
         selectDeviceVC.validDeviceArray = self.validDeviceArray;
+        selectDeviceVC.viewType = SelectValidDeviceViewTypeSendKey;
         selectDeviceVC.deviceSelected = ^(GXDatabaseEntityDevice *device) {
             _selectedDeviceEntity = device;
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];

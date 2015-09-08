@@ -156,6 +156,7 @@
 		44ED419F1B8A1B7300079207 /* GXVerifyCodeParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED419E1B8A1B7300079207 /* GXVerifyCodeParam.m */; };
 		44ED41A21B8A1F9E00079207 /* GXResetPasswordParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED41A11B8A1F9E00079207 /* GXResetPasswordParam.m */; };
 		44ED41A51B8A214300079207 /* GXRegisterParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED41A41B8A214300079207 /* GXRegisterParam.m */; };
+		44EE9A3A1B9DE67A0095EFAC /* GXUnlockRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EE9A391B9DE67A0095EFAC /* GXUnlockRecordViewController.m */; };
 		44F63B951B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F63B941B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.m */; };
 		44F63B981B8F2F3700F5335B /* GXChangeDeviceNicknameParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F63B971B8F2F3700F5335B /* GXChangeDeviceNicknameParam.m */; };
 		44F63B9B1B8F4BF200F5335B /* GXChangeDeviceNicknameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F63B9A1B8F4BF200F5335B /* GXChangeDeviceNicknameModel.m */; };
@@ -440,6 +441,8 @@
 		44ED41A11B8A1F9E00079207 /* GXResetPasswordParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXResetPasswordParam.m; sourceTree = "<group>"; };
 		44ED41A31B8A214300079207 /* GXRegisterParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRegisterParam.h; sourceTree = "<group>"; };
 		44ED41A41B8A214300079207 /* GXRegisterParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRegisterParam.m; sourceTree = "<group>"; };
+		44EE9A381B9DE67A0095EFAC /* GXUnlockRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUnlockRecordViewController.h; sourceTree = "<group>"; };
+		44EE9A391B9DE67A0095EFAC /* GXUnlockRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUnlockRecordViewController.m; sourceTree = "<group>"; };
 		44F63B931B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXChangeDeviceNicknameViewController.h; sourceTree = "<group>"; };
 		44F63B941B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXChangeDeviceNicknameViewController.m; sourceTree = "<group>"; };
 		44F63B961B8F2F3700F5335B /* GXChangeDeviceNicknameParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXChangeDeviceNicknameParam.h; sourceTree = "<group>"; };
@@ -914,6 +917,7 @@
 		44EB633B1B9D1800008BF8BE /* UnlockRecord */ = {
 			isa = PBXGroup;
 			children = (
+				44F0AFF61B9DDE8D001EF998 /* Controller */,
 				44EB63401B9D1AB0008BF8BE /* Model */,
 				44EB633C1B9D180F008BF8BE /* View */,
 			);
@@ -1127,6 +1131,15 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
+		44F0AFF61B9DDE8D001EF998 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				44EE9A381B9DE67A0095EFAC /* GXUnlockRecordViewController.h */,
+				44EE9A391B9DE67A0095EFAC /* GXUnlockRecordViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1252,6 +1265,7 @@
 				44E6F27E1B9400D800A38DF9 /* GXUpdateProfileImageParam.m in Sources */,
 				44E9F7CB1B84D4AC00165234 /* AppDelegate.m in Sources */,
 				44ED41711B89695100079207 /* GXHttpTool.m in Sources */,
+				44EE9A3A1B9DE67A0095EFAC /* GXUnlockRecordViewController.m in Sources */,
 				44E916FE1B8843D100EF9C38 /* GXDeviceUserMappingModel.m in Sources */,
 				44E6F2C31B98946600A38DF9 /* GXSynchronizeDeviceModel.m in Sources */,
 				44ED41691B89667200079207 /* GXLoginModel.m in Sources */,

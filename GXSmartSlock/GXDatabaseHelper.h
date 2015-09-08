@@ -31,6 +31,7 @@
 + (NSFetchedResultsController *)deviceUserMappingModelFetchedResultsController:(NSString *)deviceIdentifire;
 + (GXDatabaseEntityUser *)defaultUser;
 + (NSArray *)managedDeviceArray;
++ (NSFetchedResultsController *)unlockRecordOfDevice:(NSString *)deviceIdentifire;
 
 /*
  * change data
@@ -39,5 +40,6 @@
 + (void)deleteDeviceWithIdentifire:(NSString *)deviceIdentifire;
 + (void)updateDefaultUserNickname:(NSString *)nickname;
 + (void)deleteUser:(NSString *)userName fromDevice:(NSString *)deviceIdentifire;
++ (void)logout;
 
 @end

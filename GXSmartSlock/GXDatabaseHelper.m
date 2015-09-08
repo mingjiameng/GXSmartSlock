@@ -708,4 +708,20 @@
     [self saveContext];
 }
 
++ (void)logout
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSArray *allDevice = [self allDeviceArray];
+    for (GXDatabaseEntityDevice *deviceEnity in allDevice) {
+        [managedObjectContext deleteObject:deviceEnity];
+    }
+    
+    NSArray *allUser = [self allUserEntityArray];
+    for (GXDatabaseEntityUser *userEntity in allUser) {
+        [managedObjectContext deleteObject:userEntity];
+    }
+    
+    [self saveContext];
+}
 @end

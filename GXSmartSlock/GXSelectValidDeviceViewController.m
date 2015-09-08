@@ -36,7 +36,13 @@
 
 - (void)configNavigationBar
 {
-    self.title = @"选择要发送的钥匙";
+    if (self.viewType == SelectValidDeviceViewTypeSendKey) {
+        self.title = @"选择要发送的钥匙";
+    } else if (self.viewType == SelectValidDeviceViewTypeUnlockRecord) {
+        self.title = @"选择要查看的门锁";
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissViewControllerAnimated:completion:)];
+    }
+    
 }
 
 - (void)addValidDeviceListTableView:(CGRect)frame
@@ -44,6 +50,7 @@
     _tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
     [self.view addSubview:_tableView];
 }
