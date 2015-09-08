@@ -15,6 +15,5 @@
 + (void)insertDeviceUserMappingItemIntoDatabase:(NSArray *)deviceUserMappingItemArray;
 + (void)insertUserIntoDatabase:(NSArray *)userArray;
 + (void)insertUnlockRecordIntoDatabase:(NSArray *)unlockRecordArray;
-+ (void)logout;
 
 @end

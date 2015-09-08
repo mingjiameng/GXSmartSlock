@@ -125,7 +125,7 @@
         return;
     }
     
-    if (nickname.length <= 2 || nickname.length >= 10) {
+    if (nickname.length < 2 || nickname.length > 10) {
         [self alertWithMessage:@"门锁昵称应为2-10位中英文字符"];
         return;
     }

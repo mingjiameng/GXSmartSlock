@@ -17,8 +17,8 @@
 @interface GXSelectContactViewController () <UITableViewDataSource, UITableViewDelegate>
 {
     UITableView *_tableView;
-    NSArray *_contanctArray;
-    
+    NSMutableArray *_contanctArray;
+    bool *_isContactAtRowSelected;
 }
 @end
 
@@ -29,7 +29,8 @@
     [super viewDidLoad];
     // do something...
     
-    
+    [self configNavigationBar];
+    [self requestContactAuthority];
 }
 
 - (void)configNavigationBar
@@ -54,18 +55,66 @@
     //获取通讯录中的所有人
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBooks);
     
-    // 循环获取联系人中的信息
+    _contanctArray = [NSMutableArray array];
+    
     for (NSInteger i = 0; i < CFArrayGetCount(allPeople); ++i) {
         ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
-        NSString *firstName = (__bridge NSString*) ABRecordCopyValue(person, kABPersonFirstNameProperty);
+        
+        ABMultiValueRef phoneArray = ABRecordCopyValue(person, kABPersonPhoneProperty);
+        NSString *guosimUserName = nil;
+        for (CFIndex index = 0; index < ABMultiValueGetCount(phoneArray); ++index) {
+            NSString *phoneNumber = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phoneArray, index);
+            if (phoneNumber != nil) {
+                phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+                phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
+                phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"+86" withString:@""];
+                
+                guosimUserName = phoneNumber;
+                
+                break;
+            }
+        }
+        
+        if (guosimUserName == nil) {
+            ABMultiValueRef emailArray = ABRecordCopyValue(person, kABPersonEmailProperty);
+            for (CFIndex index = 0; index < ABMultiValueGetCount(emailArray); ++index) {
+                NSString *emailAddress = (__bridge NSString *)ABMultiValueCopyValueAtIndex(emailArray, index);
+                if (emailAddress != nil) {
+                    guosimUserName = emailAddress;
+                    
+                    break;
+                }
+            }
+        }
+        
+        if (guosimUserName == nil) {
+            continue;
+        }
+        
+        NSString *firstName = (__bridge NSString*)ABRecordCopyValue(person, kABPersonFirstNameProperty);
         if (firstName == nil) {
             firstName = @"";
         } else {
             firstName = [firstName stringByReplacingOccurrencesOfString:@" " withString:@""];
         }
         
+        NSString *lastName = (__bridge NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
+        if (lastName == nil) {
+            lastName = @"";
+        } else {
+            lastName = [lastName stringByReplacingOccurrencesOfString:@" " withString:@""];
+        }
         
+        NSString *userNickname= [firstName stringByAppendingString:lastName];
+        
+        GXContactModel *contactModel = [GXContactModel modelWithUserName:guosimUserName nickname:userNickname];
+        [_contanctArray addObject:contactModel];
     }
+    
+    _isContactAtRowSelected = malloc(sizeof(bool) * _contanctArray.count);
+    memset(_isContactAtRowSelected, 0, sizeof(_isContactAtRowSelected));
+    
+    [self addUserListTableView];
 }
 
 - (void)addUserListTableView
@@ -105,14 +154,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell.selected) {
+    
+    if (_isContactAtRowSelected[indexPath.row]) {
         cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.selected = NO;
+        _isContactAtRowSelected[indexPath.row] = false;
     } else {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        cell.selected = YES;
+        _isContactAtRowSelected[indexPath.row] = true;
     }
 }
 
@@ -126,14 +175,10 @@
 
 - (void)doneAddUser
 {
-    
-    
     NSMutableArray *selectedUserArray = [NSMutableArray array];
     
     for (NSInteger indexRow = 0; indexRow < _contanctArray.count; ++indexRow) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:indexRow inSection:0];
-        UITableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
-        if (cell.selected) {
+        if (_isContactAtRowSelected[indexRow]) {
             [selectedUserArray addObject:[_contanctArray objectAtIndex:indexRow]];
         }
     }

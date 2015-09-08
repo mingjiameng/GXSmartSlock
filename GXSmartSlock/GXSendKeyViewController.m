@@ -222,7 +222,10 @@
         authorityStatus = DEVICE_AUTHORITY_ADMIN;
     }
     
-    NSArray *failedToSendArray = [GXSendKeyModel sendKey:_selectedDeviceEntity.deviceIdentifire to:_contactModelArray withAuthority:authorityStatus];
+    __block NSArray *failedToSendArray = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        failedToSendArray = [GXSendKeyModel sendKey:_selectedDeviceEntity.deviceIdentifire to:_contactModelArray withAuthority:authorityStatus];
+    });
     
     [activityIndicator removeFromSuperview];
     activityIndicator = nil;

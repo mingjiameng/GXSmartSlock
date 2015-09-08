@@ -24,9 +24,7 @@
 #import <CoreData/CoreData.h>
 
 @interface GXDeviceListViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, NSFetchedResultsControllerDelegate, GXSynchronizeDeviceModel>
-
 {
-    BOOL _refreshed;
     GXSynchronizeDeviceModel *_synchronizeDeviceModel;
     
 }
@@ -46,8 +44,7 @@
 {
     [super viewDidLoad];
     // do something...
-    
-    _refreshed = NO;
+
     self.view.backgroundColor = [UIColor whiteColor];
     [self configNavigationBar];
     [self addDeviceListDataSource];
@@ -182,19 +179,6 @@
     [zkeyViewHelper alertWithMessage:message inView:self.view withFrame:self.view.frame];
 }
 
-
-
-#pragma mark - view navigation
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    if (!_refreshed) {
-        [_deviceListTableView forceToRefresh];
-        
-        _refreshed = YES;
-    }
-}
 
 #pragma mark - database change
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller

@@ -118,14 +118,23 @@
             };
             
             UINavigationController *navigator = [[UINavigationController alloc] initWithRootViewController:userNameVC];
-            [self.navigationController presentViewController:navigator animated:YES completion:^{
+            [self presentViewController:navigator animated:YES completion:^{
                 
             }];
         } else if (buttonIndex == 1) {
             GXSelectContactViewController *selectContactVC = [[GXSelectContactViewController alloc] init];
-            selectContactVC.addUser = ^(NSArray *userModelArray) {
-                self.contactModelArray = (NSMutableArray *) [self.contactModelArray arrayByAddingObjectsFromArray:userModelArray];
+            selectContactVC.addUser = ^(NSArray *contactModelArray) {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                for (GXContactModel *contactModel in contactModelArray) {
+                    [self.contactModelArray insertObject:contactModel atIndex:0];
+                    [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
             };
+            
+            UINavigationController *navigator = [[UINavigationController alloc] initWithRootViewController:selectContactVC];
+            [self presentViewController:navigator animated:YES completion:^{
+                
+            }];
         }
         
     }
