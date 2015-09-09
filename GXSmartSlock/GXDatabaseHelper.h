@@ -32,6 +32,7 @@
 + (GXDatabaseEntityUser *)defaultUser;
 + (NSArray *)managedDeviceArray;
 + (NSFetchedResultsController *)unlockRecordOfDevice:(NSString *)deviceIdentifire;
++ (NSArray *)validDeviceArray;
 
 /*
  * change data

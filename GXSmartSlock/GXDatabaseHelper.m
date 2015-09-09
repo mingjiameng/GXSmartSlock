@@ -375,6 +375,29 @@
     return fetchedResultsController;
 }
 
++ (NSArray *)validDeviceArray
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityDevice = [NSEntityDescription entityForName:ENTITY_DEVICE inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityDevice];
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceStatus == 'active'"];
+    [fetchRequest setPredicate:predicate];
+
+    NSError *error = nil;
+    NSArray *validDeviceArray = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"fetch validDeviceArray error:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    return validDeviceArray;
+}
+
 + (NSFetchedResultsController *)allDeviceFetchedResultsController
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];

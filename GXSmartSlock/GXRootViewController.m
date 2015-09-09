@@ -13,6 +13,7 @@
 
 #import "GXDatabaseHelper.h"
 #import "GXDatabaseEntityUser.h"
+#import "GXUnlockTool.h"
 
 #import "zkeyButtonWithImageAndTitle.h"
 #import "UIImageView+FHProfileDownload.h"
@@ -34,6 +35,8 @@
     UIButton *_centralButton;
     UIActionSheet *_unlockModeActionSheet;
     UIImageView *_headImageView;
+    
+    GXUnlockTool *_unlockTool;
 }
 @end
 
@@ -50,6 +53,7 @@
     [self configCentralButton];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setHeadImage) name:NOTIFICATION_UPDATE_PROFILE_IMAGE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:_unlockTool selector:@selector(uploadUnlockRecord) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)configNavigationBar
@@ -351,6 +355,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:_unlockTool];
 }
 
 @end

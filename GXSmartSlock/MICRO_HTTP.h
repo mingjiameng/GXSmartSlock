@@ -9,7 +9,7 @@
 #ifndef GXSmartSlock_MICRO_HTTP_h
 #define GXSmartSlock_MICRO_HTTP_h
 
-#define GXBaseURL @"https://115.28.226.149/"
+#define GXBaseURL @"https://115.28.226.149:443/"
 
 #define GXLoginURL [NSString stringWithFormat:@"%@user_exist", GXBaseURL]
 #define GXGetVerificationCodeForRegisetURL [NSString stringWithFormat:@"%@submit_account", GXBaseURL]
