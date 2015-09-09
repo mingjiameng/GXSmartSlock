@@ -51,6 +51,7 @@
     
     [self configNavigationBar];
     [self configCentralButton];
+    [self addUnlockTool];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setHeadImage) name:NOTIFICATION_UPDATE_PROFILE_IMAGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:_unlockTool selector:@selector(uploadUnlockRecord) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -133,6 +134,11 @@
     }
     
     [_centralButton setBackgroundImage:[UIImage imageNamed:backgroundImageName] forState:UIControlStateNormal];
+}
+
+- (void)addUnlockTool
+{
+    _unlockTool = [[GXUnlockTool alloc] init];
 }
 
 - (void)configNavigationBarTitleView
@@ -278,6 +284,7 @@
 - (void)manulUnlock:(UIButton *)sender
 {
     NSLog(@"点击手动开锁");
+    [_unlockTool manulUnlock];
 }
 
 
@@ -342,6 +349,7 @@
            atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
     
     [self reloadView];
+    [_unlockTool updateDeviceKeyDictionary];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
@@ -349,6 +357,7 @@
       newIndexPath:(NSIndexPath *)newIndexPath
 {
     [self reloadView];
+    [_unlockTool updateDeviceKeyDictionary];
 }
 
 
@@ -356,6 +365,8 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] removeObserver:_unlockTool];
+    
+    _unlockTool = nil;
 }
 
 @end

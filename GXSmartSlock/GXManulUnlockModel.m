@@ -28,6 +28,7 @@
     //        @"characteristic" : NSArray
     //        @"token" : NSData
     //        @"writeUnlock" : NSNumber (Bool)
+    //        @"batteryRead" : NSNumber (Bool)
     //    },
     //     ...
     //    )
@@ -92,10 +93,12 @@
     }
     
     // remark peripheral which is to connect
-    NSDictionary *newReadyPeripheral = @{PERIPHERAL : peripheral,
+    NSDictionary *tmpNewReadyPeripheral = @{PERIPHERAL : peripheral,
                                          DEVICE_IDENTIFIRE : deviceIdentifire,
                                          SECRET_KEY :  correspondSecretKey,
                                          RSSI_NUMBER : RSSI};
+    NSMutableDictionary *newReadyPeripheral = [NSMutableDictionary dictionaryWithDictionary:tmpNewReadyPeripheral];
+    
     [_peripheralProccessingArray addObject:newReadyPeripheral];
     
     [central connectPeripheral:peripheral options:nil];
@@ -243,6 +246,15 @@
         NSString *batteryLevelString = [NSString stringWithFormat:@"%ld", strtoul([[characteristic.value.description ConvertToString] UTF8String], 0, 16)];
         float batteryLevel = [batteryLevelString floatValue];
         NSLog(@"%f", batteryLevel);
+        
+        NSString *tmpDeviceIdentifire = nil;
+        for (NSMutableDictionary *peripheralProccessing in _peripheralProccessingArray) {
+            tmpDeviceIdentifire = [peripheralProccessing objectForKey:DEVICE_IDENTIFIRE];
+            if ([peripheral.name isEqualToString:tmpDeviceIdentifire]) {
+                [peripheralProccessing setObject:[NSNumber numberWithBool:true] forKey:BATTERY_READ];
+                break;
+            }
+        }
         
         // save battery level to local database
         [self.delegate updateBatteryLevel:[batteryLevelString integerValue] ofDevice:peripheral.name];

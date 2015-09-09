@@ -84,6 +84,24 @@
     _deviceKeyDic = (NSDictionary *)tmpDeviceKeyDic;
 }
 
+- (void)manulUnlock
+{
+    if (_manulUnlockModel != nil) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_manulUnlockModel startScan];
+            [self performSelector:@selector(forceStopUnlockAction) withObject:nil afterDelay:10.0];
+        });
+    }
+}
+
+- (void)forceStopUnlockAction
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_manulUnlockModel stopScan];
+        //[self.delegate forceStopUnlockAction];
+    });
+    
+}
 
 #pragma mark - unlock delegate
 - (void)tooLowSemaphoreToUnlock

@@ -24,5 +24,6 @@ diviceKeyDictionary = {
 - (void)uploadUnlockRecord;
 
 
+- (void)manulUnlock;
 
 @end
