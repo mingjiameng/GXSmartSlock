@@ -17,4 +17,8 @@
 
 @interface GXSynchronizeUnlockRecordModel : NSObject
 
+@property (nonatomic, weak) id<GXSynchronizeUnlockRecordModelDelegate> delegate;
+
+- (void)synchronizeUnlockRecord;
+
 @end

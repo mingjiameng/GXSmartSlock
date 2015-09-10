@@ -20,6 +20,7 @@
 + (void)insertDeviceIntoDatabase:(NSArray *)deviceArray;
 + (void)insertDeviceUserMappingItemIntoDatabase:(NSArray *)deviceUserMappingArray;
 + (void)insertUserIntoDatabase:(NSArray *)userArray;
++ (void)insertUnlockRecordIntoDatabase:(NSArray *)unlockRecordArray;
 
 /************************seperator*********************************/
 

@@ -112,11 +112,6 @@
 }
 
 #pragma mark - table view delegate
-- (CGFloat)tableView:(zkeyTableViewWithPullFresh *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 60.0f;
-}
-
 - (void)tableViewRequestNewData:(zkeyTableViewWithPullFresh *)tableView
 {
     if (_synchronizeDeviceUserModel == nil) {

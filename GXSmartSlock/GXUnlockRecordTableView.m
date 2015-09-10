@@ -32,8 +32,8 @@
         cell = [[GXUnlockRecordTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"unlockRecord"];
     }
     
-    cell.textLabel.text = cellData.userNickname;
-    cell.detailTextLabel.text = cellData.deviceNickname;
+    cell.textLabel.text = cellData.deviceNickname;
+    cell.detailTextLabel.text = cellData.event;
     
     if (_profileImage == nil) {
         _profileImage = [UIImage imageNamed:DEFAULT_PROFILE_IMG];
@@ -49,6 +49,7 @@
 - (NSString *)unlockDateString:(NSDate *)date
 {
     NSTimeInterval timeInterval = [date timeIntervalSinceNow];
+    timeInterval = fabs(timeInterval);
     
     if (timeInterval < 60.0f) {
         return [NSString stringWithFormat:@"%.0lf秒前", timeInterval];
@@ -63,6 +64,9 @@
     return nil;
 }
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80.0f;
+}
 
 @end

@@ -21,6 +21,7 @@
 #import "GXChangeDeviceImageViewController.h"
 #import "GXChangeDeviceNicknameViewController.h"
 #import "GXDeviceAuthorizedUserListViewController.h"
+#import "GXUnlockRecordViewController.h"
 
 @interface GXDeviceDetailViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, GXDeleteDeviceModelDelegate>
 {
@@ -215,6 +216,11 @@
             authorizedUserVC.deviceIdentifire = self.deviceEntity.deviceIdentifire;
             [self.navigationController pushViewController:authorizedUserVC animated:YES];
             
+        } else if (indexPath.row == 1) {
+            GXUnlockRecordViewController *unlockRecordVC = [[GXUnlockRecordViewController alloc] init];
+            unlockRecordVC.viewType = UnlockRecordViewTypeFromDeviceDetailView;
+            unlockRecordVC.deviceIdentifire = self.deviceEntity.deviceIdentifire;
+            [self.navigationController pushViewController:unlockRecordVC animated:YES];
         }
     } else if (indexPath.section == 2) {
         

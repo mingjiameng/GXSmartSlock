@@ -1,23 +1,24 @@
 //
-//  GXDatabaseEntityRecord.m
+//  GXDatabaseEntityUnlockRecord.m
 //  GXSmartSlock
 //
-//  Created by zkey on 8/21/15.
+//  Created by zkey on 9/10/15.
 //  Copyright (c) 2015 guosim. All rights reserved.
 //
 
-#import "GXDatabaseEntityRecord.h"
+#import "GXDatabaseEntityUnlockRecord.h"
 #import "GXDatabaseEntityDevice.h"
 #import "GXDatabaseEntityUser.h"
 
 
-@implementation GXDatabaseEntityRecord
+@implementation GXDatabaseEntityUnlockRecord
 
 @dynamic date;
 @dynamic deviceIdentifire;
 @dynamic event;
 @dynamic eventType;
-@dynamic senderUserName;
+@dynamic recordID;
+@dynamic relatedUserName;
 @dynamic device;
 @dynamic user;
 

@@ -34,7 +34,7 @@
     
     self.detailTextLabel.frame = CGRectMake(85.0f, 50.0f, self.frame.size.width - 160.0f, 20.0f);
     
-    self.dateLabel.frame = CGRectMake(self.frame.size.width - 80.0f, 30.0f, 80.0f, 20.0f);
+    self.dateLabel.frame = CGRectMake(self.frame.size.width - 80.0f, 30.0f, 60.0f, 20.0f);
 }
 
 @end

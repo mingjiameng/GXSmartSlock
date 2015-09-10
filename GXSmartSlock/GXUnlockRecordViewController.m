@@ -13,15 +13,21 @@
 #import "GXDatabaseHelper.h"
 #import "GXDatabaseEntityDevice.h"
 #import "GXUnlockRecordTableViewCellData.h"
+#import "GXSynchronizeUnlockRecordModel.h"
+#import "GXDatabaseEntityUnlockRecord.h"
+#import "GXDatabaseEntityUser.h"
 
 #import "GXUnlockRecordTableView.h"
+#import "zkeyViewHelper.h"
 
 #import "GXSelectValidDeviceViewController.h"
 
-@interface GXUnlockRecordViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate>
+@interface GXUnlockRecordViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, GXSynchronizeUnlockRecordModelDelegate>
 {
     UIButton *_selectUnlockModeButton;
     GXDatabaseEntityDevice *_selectedDeviceEntity;
+    GXSynchronizeUnlockRecordModel *_synchronizeUnlockRecordModel;
+
 }
 @property (nonatomic, strong) GXUnlockRecordTableView *tableView;
 @property (nonatomic, strong) NSArray *validDeviceArray;
@@ -50,10 +56,8 @@
 - (void)buildUI
 {
     [self configNavigationBarTitleView];
-    
-    [self addUnlockRecordTableView];
-    
     [self configDataSource];
+    [self addUnlockRecordTableView];
 }
 
 - (void)configNavigationBarTitleView
@@ -62,6 +66,7 @@
         _selectUnlockModeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100.0f, 30.0f)];
         _selectUnlockModeButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0];
         [_selectUnlockModeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_selectUnlockModeButton setTitle:[self currentDeviceDescription] forState:UIControlStateNormal];
         [_selectUnlockModeButton addTarget:self action:@selector(selectDevice) forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.title = nil;
         self.navigationItem.titleView = _selectUnlockModeButton;
@@ -73,10 +78,13 @@
 - (NSString *)currentDeviceDescription
 {
     if (_selectedDeviceEntity == nil) {
-        return @"所有开锁记录";
+        return @"所有开锁记录 ▾";
     }
     
-    return _selectedDeviceEntity.deviceNickname;
+    NSString *title = _selectedDeviceEntity.deviceNickname;
+    title = [title stringByAppendingString:@" ▾"];
+    
+    return title;
 }
 
 - (void)addUnlockRecordTableView
@@ -91,6 +99,7 @@
     _tableView = [[GXUnlockRecordTableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - TOP_SPACE_IN_NAVIGATION_MODE)];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.view addSubview:_tableView];
 }
@@ -135,6 +144,14 @@
 - (NSObject *)tableView:(zkeyTableViewWithPullFresh *)tableView cellDataForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GXUnlockRecordTableViewCellData *cellData = [[GXUnlockRecordTableViewCellData alloc] init];
+    GXDatabaseEntityUnlockRecord *unlockRecordEntity = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    cellData.deviceNickname = unlockRecordEntity.device.deviceNickname;
+    cellData.event = unlockRecordEntity.event;
+    cellData.date = unlockRecordEntity.date;
+    if (unlockRecordEntity.user != nil) {
+        cellData.profileImageURL = unlockRecordEntity.user.headImageURL;
+    }
     
     return cellData;
 }
@@ -142,7 +159,12 @@
 #pragma mark - table view delegate
 - (void)tableViewRequestNewData:(zkeyTableViewWithPullFresh *)tableView
 {
+    if (_synchronizeUnlockRecordModel == nil) {
+        _synchronizeUnlockRecordModel = [[GXSynchronizeUnlockRecordModel alloc] init];
+        _synchronizeUnlockRecordModel.delegate = self;
+    }
     
+    [_synchronizeUnlockRecordModel synchronizeUnlockRecord];
 }
 
 - (void)selectDevice
@@ -183,6 +205,24 @@
     _validDeviceArray = [GXDatabaseHelper managedDeviceArray];
     
     return _validDeviceArray;
+}
+
+#pragma mark - 
+- (void)noNetwork
+{
+    [self alertWithMessage:@"无法连接服务器"];
+    
+    [self.tableView didEndLoadingData];
+}
+
+
+- (void)alertWithMessage:(NSString *)message
+{
+    [zkeyViewHelper alertWithMessage:message inView:self.view withFrame:self.view.frame];
+}
+- (void)synchronizeRecordSuccessful:(BOOL)successful
+{
+    [self.tableView didEndLoadingData];
 }
 
 #pragma mark - database change

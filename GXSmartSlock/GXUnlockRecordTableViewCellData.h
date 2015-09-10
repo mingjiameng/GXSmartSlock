@@ -11,7 +11,7 @@
 @interface GXUnlockRecordTableViewCellData : NSObject
 
 // the preson who unlock the unlock
-@property (nonatomic, strong) NSString *userNickname;
+@property (nonatomic, strong) NSString *event;
 
 @property (nonatomic, strong) NSString *profileImageURL;
 

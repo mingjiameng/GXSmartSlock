@@ -119,11 +119,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.dataSource respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)]) {
-        return [self.delegate tableView:self heightForRowAtIndexPath:indexPath];
-    }
-    
-    return 44.0;
+    return 44.0f;
 }
 
 #pragma mark - UITableViewDelegate

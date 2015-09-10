@@ -14,6 +14,7 @@
 #import "GXDeviceModel.h"
 #import "GXDeviceUserMappingModel.h"
 #import "GXUserModel.h"
+#import "GXUnlockRecordModel.h"
 
 #import "GXDatabaseHelper.h"
 #import "zkeyMiPushPackage.h"
@@ -99,7 +100,31 @@
 
 + (void)insertUnlockRecordIntoDatabase:(NSArray *)unlockRecordArray
 {
+    NSMutableArray *unlockRecordModelArray = [NSMutableArray array];
     
+    for (NSDictionary *unlockRecordDic in unlockRecordArray) {
+        GXUnlockRecordModel *unlockRecordModel = [[GXUnlockRecordModel alloc] init];
+        
+        unlockRecordModel.unlockRecordID = [[unlockRecordDic objectForKey:UNLOCK_RECORD_KEY_ID] integerValue];
+        unlockRecordModel.deviceIdentifire = [unlockRecordDic objectForKey:UNLOCK_RECORD_KEY_DEVICE_IDENTIFIRE];
+        unlockRecordModel.event = [unlockRecordDic objectForKey:UNLOCK_RECORD_KEY_EVENT];
+        
+        NSTimeInterval timeInterval = [[unlockRecordDic objectForKey:UNLOCK_RECORD_KEY_TIME_INTERVAL] doubleValue];
+        timeInterval /= 1000.0f;
+        unlockRecordModel.date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+        
+        NSInteger eventType = [[unlockRecordDic objectForKey:UNLOCK_RECORD_KEY_EVENT_TYPE] integerValue];
+        if (eventType == 1 || eventType == 2 || eventType == 3 || eventType == 4 || eventType == 5 || eventType == 8 || eventType == 9 || eventType == 10) {
+            unlockRecordModel.relatedUserName = [unlockRecordDic objectForKey:UNLOCK_RECORD_KEY_RECEIVER_EMAIL];
+        } else if (eventType == 6 || eventType == 7) {
+            unlockRecordModel.relatedUserName = [unlockRecordDic objectForKey:UNLOCK_RECORD_KEY_SENDER_EMAIL];
+        }
+        unlockRecordModel.eventType = eventType;
+        
+        [unlockRecordModelArray addObject:unlockRecordModel];
+    }
+    
+    [GXDatabaseHelper insertUnlockRecordIntoDatabase:unlockRecordModelArray];
 }
 
 

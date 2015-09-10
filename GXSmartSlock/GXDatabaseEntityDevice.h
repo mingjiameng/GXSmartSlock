@@ -2,14 +2,14 @@
 //  GXDatabaseEntityDevice.h
 //  GXSmartSlock
 //
-//  Created by zkey on 8/23/15.
+//  Created by zkey on 9/10/15.
 //  Copyright (c) 2015 guosim. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class GXDatabaseEntityDeviceUserMappingItem, GXDatabaseEntityRecord;
+@class GXDatabaseEntityDeviceUserMappingItem, GXDatabaseEntityUnlockRecord;
 
 @interface GXDatabaseEntityDevice : NSManagedObject
 
@@ -33,8 +33,8 @@
 - (void)addDeviceUsers:(NSSet *)values;
 - (void)removeDeviceUsers:(NSSet *)values;
 
-- (void)addUnlockRecordsObject:(GXDatabaseEntityRecord *)value;
-- (void)removeUnlockRecordsObject:(GXDatabaseEntityRecord *)value;
+- (void)addUnlockRecordsObject:(GXDatabaseEntityUnlockRecord *)value;
+- (void)removeUnlockRecordsObject:(GXDatabaseEntityUnlockRecord *)value;
 - (void)addUnlockRecords:(NSSet *)values;
 - (void)removeUnlockRecords:(NSSet *)values;
 

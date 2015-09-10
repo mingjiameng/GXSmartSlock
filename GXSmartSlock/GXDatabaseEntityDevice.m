@@ -2,13 +2,13 @@
 //  GXDatabaseEntityDevice.m
 //  GXSmartSlock
 //
-//  Created by zkey on 8/23/15.
+//  Created by zkey on 9/10/15.
 //  Copyright (c) 2015 guosim. All rights reserved.
 //
 
 #import "GXDatabaseEntityDevice.h"
 #import "GXDatabaseEntityDeviceUserMappingItem.h"
-#import "GXDatabaseEntityRecord.h"
+#import "GXDatabaseEntityUnlockRecord.h"
 
 
 @implementation GXDatabaseEntityDevice

@@ -39,8 +39,8 @@
     if (self.viewType == SelectValidDeviceViewTypeSendKey) {
         self.title = @"选择要发送的钥匙";
     } else if (self.viewType == SelectValidDeviceViewTypeUnlockRecord) {
-        self.title = @"选择要查看的门锁";
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissViewControllerAnimated:completion:)];
+        self.navigationItem.title = @"选择要查看的门锁";
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissView)];
     }
     
 }
@@ -118,7 +118,14 @@
         self.deviceSelected(device);
     }
     
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.viewType == SelectValidDeviceViewTypeSendKey) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else if (self.viewType == SelectValidDeviceViewTypeUnlockRecord) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -126,5 +133,10 @@
     return 60.0f;
 }
 
-
+- (void)dismissView
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 @end

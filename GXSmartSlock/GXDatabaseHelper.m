@@ -20,10 +20,12 @@
 #import "GXDeviceModel.h"
 #import "GXDeviceUserMappingModel.h"
 #import "GXUserModel.h"
+#import "GXUnlockRecordModel.h"
 
 #import "GXDatabaseEntityDevice.h"
 #import "GXDatabaseEntityDeviceUserMappingItem.h"
 #import "GXDatabaseEntityUser.h"
+#import "GXDatabaseEntityUnlockRecord.h"
 
 #import <Foundation/Foundation.h>
 
@@ -345,6 +347,47 @@
     NSLog(@"successfullt insert user");
 }
 
++ (void)insertUnlockRecordIntoDatabase:(NSArray *)unlockRecordArray
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    for (GXUnlockRecordModel *unlockRecordModel in unlockRecordArray) {
+        GXDatabaseEntityUnlockRecord *newRecordEntity = [self unlockRecordEntityWithID:unlockRecordModel.unlockRecordID];
+        
+        if (newRecordEntity != nil) {
+            continue;
+        }
+        
+        GXDatabaseEntityDevice *correspondDevice = [self deviceEntityWithDeviceIdentifire:unlockRecordModel.deviceIdentifire];
+        if (correspondDevice == nil) {
+            NSLog(@"error: unlock record has no correspond device");
+            continue;
+        }
+        
+        GXDatabaseEntityUser *correspondUser = [self userEntityWithUserName:unlockRecordModel.relatedUserName];
+        if (correspondUser == nil) {
+            NSLog(@"error: unlock record has no correspond user");
+        }
+        
+        newRecordEntity = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_RECORD inManagedObjectContext:managedObjectContext];
+        
+        newRecordEntity.recordID = [NSNumber numberWithInteger:unlockRecordModel.unlockRecordID];
+        newRecordEntity.deviceIdentifire = unlockRecordModel.deviceIdentifire;
+        newRecordEntity.relatedUserName = unlockRecordModel.relatedUserName;
+        newRecordEntity.event = unlockRecordModel.event;
+        newRecordEntity.date = unlockRecordModel.date;
+        newRecordEntity.eventType = [NSNumber numberWithInteger:unlockRecordModel.eventType];
+        
+        newRecordEntity.device = correspondDevice;
+        if (correspondUser != nil) {
+            newRecordEntity.user = correspondUser;
+        }
+    }
+    
+    [self saveContext];
+    NSLog(@"successfully insert unlock record");
+}
+
 /*
  * the following method provide data for runtime application
  */
@@ -446,6 +489,34 @@
     return managedDevice;
 }
 
++ (NSFetchedResultsController *)unlockRecordOfDevice:(NSString *)deviceIdentifire
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityRecord = [NSEntityDescription entityForName:ENTITY_RECORD inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityRecord];
+    
+    if (deviceIdentifire != nil) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceIdentifire == %@", deviceIdentifire];
+        [fetchRequest setPredicate:predicate];
+    }
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    
+    NSError *error = nil;
+    if (![fetchedResultsController performFetch:&error]) {
+        NSLog(@"fetch unlock record error:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    return fetchedResultsController;
+}
 
 + (NSFetchedResultsController *)deviceUserMappingModelFetchedResultsController:(NSString *)deviceIdentifire
 {
@@ -666,7 +737,7 @@
     }
     
     if (correspondUserArray.count <= 0) {
-        NSLog(@"database has no such user with userName:%@", userName);
+        //NSLog(@"database has no such user with userName:%@", userName);
         return nil;
     }
     
@@ -678,6 +749,41 @@
     return user;
 }
 
++ (GXDatabaseEntityUnlockRecord *)unlockRecordEntityWithID:(NSInteger)unlockRecordID
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityRecord = [NSEntityDescription entityForName:ENTITY_RECORD inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityRecord];
+    
+    NSNumber *recordIdParam = [NSNumber numberWithInteger:unlockRecordID];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"recordID == %@", recordIdParam];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *correspondRecordArray = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"bad fetch request: request record with recordID:%@", recordIdParam);
+        abort();
+    }
+    
+    if (correspondRecordArray.count <= 0) {
+        //NSLog(@"database has no such record with the recordID:%@", recordIdParam);
+        return nil;
+    }
+    
+    if (correspondRecordArray.count > 1) {
+        NSLog(@"error: mutiple record with the same recordID:%@", recordIdParam);
+    }
+    
+    GXDatabaseEntityUnlockRecord *record = [correspondRecordArray objectAtIndex:0];
+    return record;
+}
+
+#pragma mark - change data in database
 + (void)changeDeviceNickname:(NSString *)deviceIdentifire deviceNickname:(NSString *)nickname
 {
     GXDatabaseEntityDevice *deviceEntity = [self deviceEntityWithDeviceIdentifire:deviceIdentifire];

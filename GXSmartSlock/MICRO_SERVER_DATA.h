@@ -38,4 +38,14 @@
 #define USER_KEY_NICKNAME @"nickname"
 #define USER_KEY_USER_NAME @"email"
 
+
+#define UNLOCK_RECORD_KEY_ID @"id"
+#define UNLOCK_RECORD_KEY_DEVICE_IDENTIFIRE @"deviceId"
+#define UNLOCK_RECORD_KEY_EVENT @"event"
+#define UNLOCK_RECORD_KEY_EVENT_TYPE @"event_type"
+#define UNLOCK_RECORD_KEY_RECEIVER_EMAIL @"receiver_email"
+#define UNLOCK_RECORD_KEY_SENDER_EMAIL @"sender_email"
+#define UNLOCK_RECORD_KEY_TIME_INTERVAL @"timeVal"
+
+
 #endif

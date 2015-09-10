@@ -22,6 +22,7 @@
 #import "GXUserSettingViewController.h"
 #import "GXAddNewDeviceViewController.h"
 #import "GXSendKeyViewController.h"
+#import "GXUnlockRecordViewController.h"
 
 #import <CoreData/CoreData.h>
 
@@ -310,7 +311,10 @@
 
 - (void)unlockRecord:(UIButton *)sender
 {
+    GXUnlockRecordViewController *unlockRecordVC = [[GXUnlockRecordViewController alloc] init];
+    unlockRecordVC.viewType = UnlockRecordViewTypeFromRootView;
     
+    [self.navigationController pushViewController:unlockRecordVC animated:YES];
 }
 
 - (void)personalSetting:(UIButton *)sender
