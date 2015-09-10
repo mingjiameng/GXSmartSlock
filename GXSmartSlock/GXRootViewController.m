@@ -279,6 +279,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self reloadView];
+    [_unlockTool updateUnlockMode];
 }
 
 - (void)manulUnlock:(UIButton *)sender

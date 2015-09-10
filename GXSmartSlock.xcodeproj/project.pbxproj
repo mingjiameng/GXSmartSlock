@@ -163,6 +163,7 @@
 		44F354FB1BA0561500B33D19 /* GXManagePermanentPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F354FA1BA0561500B33D19 /* GXManagePermanentPasswordViewController.m */; };
 		44F354FE1BA0772900B33D19 /* NSData+ToNSString.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F354FD1BA0772900B33D19 /* NSData+ToNSString.m */; };
 		44F355011BA07C6500B33D19 /* NSData+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F355001BA07C6500B33D19 /* NSData+AES.m */; };
+		44F355041BA1395700B33D19 /* GXAutoUnlockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F355031BA1395700B33D19 /* GXAutoUnlockModel.m */; };
 		44F63B951B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F63B941B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.m */; };
 		44F63B981B8F2F3700F5335B /* GXChangeDeviceNicknameParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F63B971B8F2F3700F5335B /* GXChangeDeviceNicknameParam.m */; };
 		44F63B9B1B8F4BF200F5335B /* GXChangeDeviceNicknameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F63B9A1B8F4BF200F5335B /* GXChangeDeviceNicknameModel.m */; };
@@ -463,6 +464,8 @@
 		44F354FD1BA0772900B33D19 /* NSData+ToNSString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ToNSString.m"; sourceTree = "<group>"; };
 		44F354FF1BA07C6500B33D19 /* NSData+AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES.h"; sourceTree = "<group>"; };
 		44F355001BA07C6500B33D19 /* NSData+AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AES.m"; sourceTree = "<group>"; };
+		44F355021BA1395700B33D19 /* GXAutoUnlockModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXAutoUnlockModel.h; sourceTree = "<group>"; };
+		44F355031BA1395700B33D19 /* GXAutoUnlockModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXAutoUnlockModel.m; sourceTree = "<group>"; };
 		44F63B931B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXChangeDeviceNicknameViewController.h; sourceTree = "<group>"; };
 		44F63B941B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXChangeDeviceNicknameViewController.m; sourceTree = "<group>"; };
 		44F63B961B8F2F3700F5335B /* GXChangeDeviceNicknameParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXChangeDeviceNicknameParam.h; sourceTree = "<group>"; };
@@ -509,6 +512,8 @@
 				44F354F61BA04ED700B33D19 /* GXManulUnlockModel.m */,
 				44F354F21BA04E3800B33D19 /* MICRO_UNLOCK.h */,
 				44F354F81BA053B900B33D19 /* GXUnlockModelDelegate.h */,
+				44F355021BA1395700B33D19 /* GXAutoUnlockModel.h */,
+				44F355031BA1395700B33D19 /* GXAutoUnlockModel.m */,
 			);
 			name = UnlockBLETool;
 			sourceTree = "<group>";
@@ -1319,6 +1324,7 @@
 				44E916F01B87880300EF9C38 /* zkeyIdentifierValidator.m in Sources */,
 				44ED1D6D1B8DAF5700F1A7F4 /* GXDeviceDetailViewController.m in Sources */,
 				44E6F2701B93EFA200A38DF9 /* UIImageView+FHProfileDownload.m in Sources */,
+				44F355041BA1395700B33D19 /* GXAutoUnlockModel.m in Sources */,
 				44ED1D601B8C454900F1A7F4 /* GXDeviceListTableView.m in Sources */,
 				44E8F5C71B9C3EB600B90035 /* GXSelectContactViewController.m in Sources */,
 				44ED41901B896B9700079207 /* AFHTTPSessionManager.m in Sources */,

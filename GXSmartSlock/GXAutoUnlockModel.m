@@ -1,12 +1,12 @@
 //
-//  GXManulUnlockModel.m
-//  GXBLESmartHomeFurnishing
+//  GXAutoUnlockModel.m
+//  GXSmartSlock
 //
-//  Created by zkey on 6/17/15.
+//  Created by zkey on 9/10/15.
 //  Copyright (c) 2015 guosim. All rights reserved.
 //
 
-#import "GXManulUnlockModel.h"
+#import "GXAutoUnlockModel.h"
 
 #import "MICRO_COMMON.h"
 #import "MICRO_UNLOCK.h"
@@ -16,11 +16,12 @@
 #import "NSString+StringHexToData.h"
 #import "NSData+AES.h"
 
+
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@interface GXManulUnlockModel () <CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface GXAutoUnlockModel () <CBCentralManagerDelegate, CBPeripheralDelegate>
 {
-    CBCentralManager *_manulUnlockCentralManager;
+    CBCentralManager *_autoUnlockCentralManager;
     
     //    store the connected pheripheral and the mathching device
     //    ({
@@ -39,14 +40,15 @@
 @end
 
 
-@implementation GXManulUnlockModel
-#pragma mark - initialize
+
+@implementation GXAutoUnlockModel
+
 - (instancetype)init
 {
     self = [super init];
     
     if (self) {
-        _manulUnlockCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
+        _autoUnlockCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
         _peripheralProccessingArray = [NSMutableArray array];
     }
     
@@ -59,17 +61,14 @@
     if (central.state != CBCentralManagerStatePoweredOn) {
         return;
     }
-}
-
-- (void)startScan
-{
-    //NSLog(@"manul unlock start scan");
-    [_manulUnlockCentralManager scanForPeripheralsWithServices:@[GX_UNLOCK_SERVICE_CBUUID_IDENTIFY] options:nil];
+    
+    [_autoUnlockCentralManager scanForPeripheralsWithServices:@[GX_UNLOCK_SERVICE_CBUUID_IDENTIFY] options:nil];
 }
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    //NSLog(@"manul unlock advertisement data:%@", advertisementData);
+    
+    //NSLog(@"auto unlock advertisement data:%@", advertisementData);
     // get peripheral name
     NSString *deviceIdentifire = peripheral.name;
     if (deviceIdentifire == nil) {
@@ -96,9 +95,9 @@
     
     // remark peripheral which is to connect
     NSDictionary *tmpNewReadyPeripheral = @{PERIPHERAL : peripheral,
-                                         DEVICE_IDENTIFIRE : deviceIdentifire,
-                                         SECRET_KEY :  correspondSecretKey,
-                                         RSSI_NUMBER : RSSI};
+                                            DEVICE_IDENTIFIRE : deviceIdentifire,
+                                            SECRET_KEY :  correspondSecretKey,
+                                            RSSI_NUMBER : RSSI};
     NSMutableDictionary *newReadyPeripheral = [NSMutableDictionary dictionaryWithDictionary:tmpNewReadyPeripheral];
     
     [_peripheralProccessingArray addObject:newReadyPeripheral];
@@ -275,13 +274,11 @@
 {
     if (error != nil) {
         [self.delegate unlockTheDevice:peripheral.name successful:NO];
-        [self cancelHandleWithDevice:peripheral.name];
-        return;
+    } else {
+        [self.delegate unlockTheDevice:peripheral.name successful:YES];
     }
-    
-    //NSLog(@"successfully write unlock");
-    [self.delegate unlockTheDevice:peripheral.name successful:YES];
-    [self stopScan];
+
+    [self cancelHandleWithDevice:peripheral.name];
 }
 
 #pragma mark - helper function
@@ -311,13 +308,13 @@
         
         // do not check RSSI under manul unlock mode
         
-//        NSInteger rssi = [deviceRSSI integerValue];
-//        rssi = labs(rssi);
-//        if (rssi > MAX_UNLOCK_RSSI) {
-//            [self.delegate tooLowSemaphoreToUnlock];
-//            [self cancelHandleWithDevice:peripheral.name];
-//            return;
-//        }
+        //        NSInteger rssi = [deviceRSSI integerValue];
+        //        rssi = labs(rssi);
+        //        if (rssi > MAX_UNLOCK_RSSI) {
+        //            [self.delegate tooLowSemaphoreToUnlock];
+        //            [self cancelHandleWithDevice:peripheral.name];
+        //            return;
+        //        }
         
         NSString *key_convert = [deviceSecrectKey ConvertToString];
         NSString *token_convert = [deviceToken ConvertToNSString];
@@ -337,12 +334,12 @@
 
 - (void)stopScan
 {
-    [_manulUnlockCentralManager stopScan];
+    [_autoUnlockCentralManager stopScan];
     
     CBPeripheral *correspondPeripheral;
     for (NSMutableDictionary *connectedPeripheral in _peripheralProccessingArray) {
         correspondPeripheral = [connectedPeripheral objectForKey:PERIPHERAL];
-        [_manulUnlockCentralManager cancelPeripheralConnection:correspondPeripheral];
+        [_autoUnlockCentralManager cancelPeripheralConnection:correspondPeripheral];
     }
     
     [_peripheralProccessingArray removeAllObjects];
@@ -355,16 +352,19 @@
         tmpDeviceIdentifire = [peripheralProccessing objectForKey:DEVICE_IDENTIFIRE];
         if ([deviceIdentifire isEqualToString:tmpDeviceIdentifire]) {
             CBPeripheral *pheripheral = [peripheralProccessing objectForKey:PERIPHERAL];
-            [_manulUnlockCentralManager cancelPeripheralConnection:pheripheral];
+            [_autoUnlockCentralManager cancelPeripheralConnection:pheripheral];
             
             [_peripheralProccessingArray removeObject:peripheralProccessing];
         }
     }
+    
+    [_autoUnlockCentralManager scanForPeripheralsWithServices:@[GX_UNLOCK_SERVICE_CBUUID_IDENTIFY] options:nil];
 }
 
 - (void)dealloc
 {
-    _manulUnlockCentralManager = nil;
+    _autoUnlockCentralManager = nil;
 }
+
 
 @end
