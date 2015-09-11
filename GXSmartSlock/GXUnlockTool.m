@@ -16,13 +16,14 @@
 
 #import "GXManulUnlockModel.h"
 #import "GXAutoUnlockModel.h"
+#import "GXShakeUnlockModel.h"
 
 @interface GXUnlockTool () <GXUnlockModelDelegate>
 {
     NSDictionary *_deviceKeyDic;
     GXManulUnlockModel *_manulUnlockModel;
     GXAutoUnlockModel *_autoUnlockModel;
-//    GXShakeUnlockModel *_shakeUnlockModel;
+    GXShakeUnlockModel *_shakeUnlockModel;
 }
 @end
 
@@ -45,7 +46,7 @@
     DefaultUnlockMode unlockMode = [[[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_UNLOCK_MODE] integerValue];
     if (unlockMode == DefaultUnlockModeManul) {
         _autoUnlockModel = nil;
-//        _shakeUnlockModel = nil;
+        _shakeUnlockModel = nil;
         if (_manulUnlockModel == nil) {
             _manulUnlockModel = [[GXManulUnlockModel alloc] init];
             _manulUnlockModel.delegate = self;
@@ -53,20 +54,20 @@
     
     } else if (unlockMode == DefaultUnlockModeAuto) {
         _manulUnlockModel = nil;
-//        _shakeUnlockModel = nil;
+        _shakeUnlockModel = nil;
         if (_autoUnlockModel == nil) {
             _autoUnlockModel = [[GXAutoUnlockModel alloc] init];
             _autoUnlockModel.delegate = self;
         }
+        
+    } else if (unlockMode == DefaultUnlockModeShake) {
+        _manulUnlockModel = nil;
+        _autoUnlockModel = nil;
+        if (_shakeUnlockModel == nil) {
+            _shakeUnlockModel = [[GXShakeUnlockModel alloc] init];
+            _shakeUnlockModel.delegate = self;
+        }
     }
-//    } else if (unlockMode == DefaultUnlockModeShake) {
-//        _manulUnlockModel = nil;
-//        _autoUnlockModel = nil;
-//        if (_shakeUnlockModel == nil) {
-//            _shakeUnlockModel = [[GXShakeUnlockModel alloc] init];
-//            _shakeUnlockModel.delegate = self;
-//        }
-//    }
 }
 
 - (void)updateDeviceKeyDictionary

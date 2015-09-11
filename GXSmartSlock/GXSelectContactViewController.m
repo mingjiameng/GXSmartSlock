@@ -18,7 +18,7 @@
 {
     UITableView *_tableView;
     NSMutableArray *_contanctArray;
-    bool *_isContactAtRowSelected;
+    bool _isContactAtRowSelected[10001];
 }
 @end
 
@@ -111,7 +111,6 @@
         [_contanctArray addObject:contactModel];
     }
     
-    _isContactAtRowSelected = malloc(sizeof(bool) * _contanctArray.count);
     memset(_isContactAtRowSelected, 0, sizeof(_isContactAtRowSelected));
     
     [self addUserListTableView];
