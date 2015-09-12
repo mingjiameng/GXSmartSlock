@@ -12,6 +12,7 @@
 
 #import "zkeyMiPushPackage.h"
 #import "WXApi.h"
+#import "GXDatabaseHelper.h"
 
 #import "zkeyViewHelper.h"
 
@@ -199,6 +200,15 @@
         NSString *localDeviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_DEVICE_TOKEN];
         if ([localDeviceToken isEqual:remoteDeviceToken]) {
             //[self forceToLogout];
+        }
+    }
+    
+    // 有钥匙被删除
+    NSString *contentType = [data objectForKey:@"contentType"];
+    if (contentType != nil && [contentType isEqualToString:@"keyDeleted"]) {
+        NSString *deviceIdentifire = [data objectForKey:@"device_id"];
+        if (deviceIdentifire != nil) {
+            [GXDatabaseHelper deleteDeviceWithIdentifire:deviceIdentifire];
         }
     }
     

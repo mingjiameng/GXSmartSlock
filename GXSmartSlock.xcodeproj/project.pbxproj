@@ -166,6 +166,9 @@
 		44F3550D1BA1CED500B33D19 /* GXDatabaseEntityDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F3550C1BA1CED500B33D19 /* GXDatabaseEntityDevice.m */; };
 		44F355101BA1CF2000B33D19 /* GXDatabaseEntityUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F3550F1BA1CF2000B33D19 /* GXDatabaseEntityUser.m */; };
 		44F355151BA2F0A300B33D19 /* GXShakeUnlockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F355141BA2F0A300B33D19 /* GXShakeUnlockModel.m */; };
+		44F355181BA32AFA00B33D19 /* GXPasswordManagerCollect.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F355171BA32AFA00B33D19 /* GXPasswordManagerCollect.m */; };
+		44F3551E1BA3DE7A00B33D19 /* GXDevicePermanentPsswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F3551D1BA3DE7A00B33D19 /* GXDevicePermanentPsswordModel.m */; };
+		44F355231BA3E3B800B33D19 /* SharkfoodMuteSwitchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F355221BA3E3B800B33D19 /* SharkfoodMuteSwitchDetector.m */; };
 		44F63B951B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F63B941B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.m */; };
 		44F63B981B8F2F3700F5335B /* GXChangeDeviceNicknameParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F63B971B8F2F3700F5335B /* GXChangeDeviceNicknameParam.m */; };
 		44F63B9B1B8F4BF200F5335B /* GXChangeDeviceNicknameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F63B9A1B8F4BF200F5335B /* GXChangeDeviceNicknameModel.m */; };
@@ -472,6 +475,15 @@
 		44F3550F1BA1CF2000B33D19 /* GXDatabaseEntityUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDatabaseEntityUser.m; sourceTree = "<group>"; };
 		44F355131BA2F0A300B33D19 /* GXShakeUnlockModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXShakeUnlockModel.h; sourceTree = "<group>"; };
 		44F355141BA2F0A300B33D19 /* GXShakeUnlockModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXShakeUnlockModel.m; sourceTree = "<group>"; };
+		44F355161BA32AFA00B33D19 /* GXPasswordManagerCollect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXPasswordManagerCollect.h; sourceTree = "<group>"; };
+		44F355171BA32AFA00B33D19 /* GXPasswordManagerCollect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXPasswordManagerCollect.m; sourceTree = "<group>"; };
+		44F3551C1BA3DE7A00B33D19 /* GXDevicePermanentPsswordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDevicePermanentPsswordModel.h; sourceTree = "<group>"; };
+		44F3551D1BA3DE7A00B33D19 /* GXDevicePermanentPsswordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDevicePermanentPsswordModel.m; sourceTree = "<group>"; };
+		44F3551F1BA3E2C000B33D19 /* NSUUID+help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUUID+help.h"; sourceTree = "<group>"; };
+		44F355201BA3E31E00B33D19 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		44F355211BA3E3B800B33D19 /* SharkfoodMuteSwitchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharkfoodMuteSwitchDetector.h; sourceTree = "<group>"; };
+		44F355221BA3E3B800B33D19 /* SharkfoodMuteSwitchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharkfoodMuteSwitchDetector.m; sourceTree = "<group>"; };
+		44F355241BA3E46A00B33D19 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		44F63B931B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXChangeDeviceNicknameViewController.h; sourceTree = "<group>"; };
 		44F63B941B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXChangeDeviceNicknameViewController.m; sourceTree = "<group>"; };
 		44F63B961B8F2F3700F5335B /* GXChangeDeviceNicknameParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXChangeDeviceNicknameParam.h; sourceTree = "<group>"; };
@@ -1034,6 +1046,8 @@
 		44ED1D521B8C15C000F1A7F4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				44F355161BA32AFA00B33D19 /* GXPasswordManagerCollect.h */,
+				44F355171BA32AFA00B33D19 /* GXPasswordManagerCollect.m */,
 				44ED1D4F1B8C157200F1A7F4 /* GXDeviceListViewController.h */,
 				44ED1D501B8C157200F1A7F4 /* GXDeviceListViewController.m */,
 				44F63B9C1B8F539A00F5335B /* GXChangeDeviceImageViewController.h */,
@@ -1072,6 +1086,11 @@
 		44ED1D541B8C15CC00F1A7F4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				44F355241BA3E46A00B33D19 /* Common.h */,
+				44F355201BA3E31E00B33D19 /* Singleton.h */,
+				44F3551F1BA3E2C000B33D19 /* NSUUID+help.h */,
+				44F355211BA3E3B800B33D19 /* SharkfoodMuteSwitchDetector.h */,
+				44F355221BA3E3B800B33D19 /* SharkfoodMuteSwitchDetector.m */,
 				44ED1D611B8C45CF00F1A7F4 /* MICRO_DEVICE_LIST.h */,
 				44ED1D621B8C464C00F1A7F4 /* GXDeviceListTableViewCellDataModel.h */,
 				44ED1D631B8C464C00F1A7F4 /* GXDeviceListTableViewCellDataModel.m */,
@@ -1091,6 +1110,8 @@
 				44E6F2CB1B99B86300A38DF9 /* GXRejectKeyModel.m */,
 				44E6F2CD1B99BE7700A38DF9 /* GXReceiveKeyModel.h */,
 				44E6F2CE1B99BE7700A38DF9 /* GXReceiveKeyModel.m */,
+				44F3551C1BA3DE7A00B33D19 /* GXDevicePermanentPsswordModel.h */,
+				44F3551D1BA3DE7A00B33D19 /* GXDevicePermanentPsswordModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1302,6 +1323,7 @@
 				44E916C31B86F42300EF9C38 /* GXLoginViewController.m in Sources */,
 				44ED419F1B8A1B7300079207 /* GXVerifyCodeParam.m in Sources */,
 				44ED41741B8969EE00079207 /* GXSystemInfoHelper.m in Sources */,
+				44F355181BA32AFA00B33D19 /* GXPasswordManagerCollect.m in Sources */,
 				44E6F2DD1B9B144B00A38DF9 /* GXAddNewDeviceView.m in Sources */,
 				44E435241B92C16800430351 /* GXSelectDeviceTableViewCell.m in Sources */,
 				44E6F2E81B9B21F000A38DF9 /* NSString+ConvertToString.m in Sources */,
@@ -1334,8 +1356,10 @@
 				44ED41901B896B9700079207 /* AFHTTPSessionManager.m in Sources */,
 				44E9F8001B85E00100165234 /* GXGuidePageViewController.m in Sources */,
 				44ED41911B896B9700079207 /* AFNetworkReachabilityManager.m in Sources */,
+				44F355231BA3E3B800B33D19 /* SharkfoodMuteSwitchDetector.m in Sources */,
 				44E6F2E91B9B21F000A38DF9 /* NSString+StringHexToData.m in Sources */,
 				44E917041B884B9000EF9C38 /* GXServerDataAnalyst.m in Sources */,
+				44F3551E1BA3DE7A00B33D19 /* GXDevicePermanentPsswordModel.m in Sources */,
 				44E6F2971B957F2700A38DF9 /* GesturePasswordButton.m in Sources */,
 				44ED41931B896B9700079207 /* AFURLConnectionOperation.m in Sources */,
 				44F354F71BA04ED700B33D19 /* GXManulUnlockModel.m in Sources */,

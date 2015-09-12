@@ -10,4 +10,6 @@
 
 @interface GXManagePermanentPasswordViewController : UIViewController
 
+@property (nonatomic, strong) NSString *deviceIdentifire;
+
 @end

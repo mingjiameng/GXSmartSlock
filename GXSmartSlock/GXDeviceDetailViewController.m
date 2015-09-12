@@ -22,6 +22,7 @@
 #import "GXChangeDeviceNicknameViewController.h"
 #import "GXDeviceAuthorizedUserListViewController.h"
 #import "GXUnlockRecordViewController.h"
+#import "GXManagePermanentPasswordViewController.h"
 
 @interface GXDeviceDetailViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, GXDeleteDeviceModelDelegate>
 {
@@ -223,7 +224,11 @@
             [self.navigationController pushViewController:unlockRecordVC animated:YES];
         }
     } else if (indexPath.section == 2) {
-        
+        if (indexPath.row == 0) {
+            GXManagePermanentPasswordViewController *permanentPasswordVC = [[GXManagePermanentPasswordViewController alloc] init];
+            permanentPasswordVC.deviceIdentifire = self.deviceEntity.deviceIdentifire;
+            [self.navigationController pushViewController:permanentPasswordVC animated:YES];
+        }
     }
     
 }
