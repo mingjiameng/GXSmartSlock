@@ -18,6 +18,8 @@
 #import "GXAutoUnlockModel.h"
 #import "GXShakeUnlockModel.h"
 
+#import "zkeyViewHelper.h"
+
 @interface GXUnlockTool () <GXUnlockModelDelegate>
 {
     NSDictionary *_deviceKeyDic;
@@ -107,17 +109,17 @@
 #pragma mark - unlock delegate
 - (void)tooLowSemaphoreToUnlock
 {
-    
+    [zkeyViewHelper presentLocalNotificationWithMessage:@"信号弱，请您靠近门锁"];
 }
 
 - (void)updateBatteryLevel:(NSInteger)batteryLevel ofDevice:(NSString *)deviceIdentifire
 {
-
+    
 }
 
 - (void)lowBatteryAlert
 {
-    
+    [zkeyViewHelper presentLocalNotificationWithMessage:@"⚠低电量，请尽快更换电池"];
 }
 
 - (NSString *)secretKeyForDevice:(NSString *)deviceIdentifire
@@ -139,14 +141,16 @@
 
 - (BOOL)uploadUnlockRecordOfDevice:(NSString *)deviceIdentifire successful:(BOOL)successful
 {
-    return YES;
+    __block BOOL updateSuccessful = NO;
+    
+    return NO;
 }
 
-// upload local unlock record
-- (void)uploadUnlockRecord
+// upload local unlock record when server is available
+- (void)uploadLocalUnlockRecord
 {
-    if ([self serverAvailable]) {
-        
+    if (![self serverAvailable]) {
+        return;
     }
 }
 

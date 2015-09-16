@@ -450,7 +450,7 @@
     NSEntityDescription *entityDevice = [NSEntityDescription entityForName:ENTITY_DEVICE inManagedObjectContext:managedObjectContext];
     [fetchRequest setEntity:entityDevice];
     
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"deviceID" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"deviceStatus" ascending:NO];
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     
     NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
@@ -799,7 +799,9 @@
     
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
     
-    [managedObjectContext deleteObject:deviceEntity];
+    if (deviceEntity != nil) {
+        [managedObjectContext deleteObject:deviceEntity];
+    }
     
     [self saveContext];
 }

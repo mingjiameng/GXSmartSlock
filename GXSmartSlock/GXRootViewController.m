@@ -55,7 +55,7 @@
     [self addUnlockTool];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setHeadImage) name:NOTIFICATION_UPDATE_PROFILE_IMAGE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:_unlockTool selector:@selector(uploadUnlockRecord) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:_unlockTool selector:@selector(uploadLocalUnlockRecord) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)configNavigationBar

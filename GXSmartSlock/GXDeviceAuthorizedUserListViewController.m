@@ -9,6 +9,7 @@
 #import "GXDeviceAuthorizedUserListViewController.h"
 
 #import "MICRO_COMMON.h"
+#import "MICRO_DEVICE_LIST.h"
 
 #import "GXAuthorizedUserTableViewCellDataModel.h"
 #import "GXDatabaseHelper.h"
@@ -106,6 +107,16 @@
     } else {
         cellData.nickname = user.nickname;
         cellData.profileImageURL = user.headImageURL;
+    }
+    
+    if ([deviceUserMappingEntity.deviceStatus isEqualToString:DEVICE_STATUS_INVALID]) {
+        cellData.detailText = @"等待接受";
+    } else {
+        if ([deviceUserMappingEntity.deviceAuthority isEqualToString:DEVICE_AUTHORITY_ADMIN]) {
+            cellData.detailText = @"管理员";
+        } else if ([deviceUserMappingEntity.deviceAuthority isEqualToString:DEVICE_AUTHORITY_NORMAL]) {
+            cellData.detailText = @"普通用户";
+        }
     }
     
     return cellData;

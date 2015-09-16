@@ -21,5 +21,6 @@
 @property (nonatomic, weak) id<GXDeleteDeviceModelDelegate> delegate;
 
 - (void)deleteDeviceWithIdentifire:(NSString *)deviceIdentifire authorityStatus:(NSString *)deviceAuthority;
+- (void)deleteDeviceWithIdentifireFromDatabase:(NSString *)deviceIdentifire;
 
 @end

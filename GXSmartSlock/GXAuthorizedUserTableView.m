@@ -28,7 +28,7 @@
     
     GXAuthorizedUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"authorizedUser"];
     if (cell == nil) {
-        cell = [[GXAuthorizedUserTableViewCell alloc] init];
+        cell = [[GXAuthorizedUserTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"authorizedUser"];
     }
     
     GXAuthorizedUserTableViewCellDataModel *cellData = (GXAuthorizedUserTableViewCellDataModel *)[self.dataSource tableView:self cellDataForRowAtIndexPath:indexPath];
@@ -40,6 +40,8 @@
     [cell.imageView setProfileWithUrlString:cellData.profileImageURL placeholderImage:_profilePalceholder];
     
     cell.textLabel.text = cellData.nickname;
+    cell.detailTextLabel.text = cellData.detailText;
+    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

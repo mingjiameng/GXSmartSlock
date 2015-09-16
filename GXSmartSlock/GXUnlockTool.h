@@ -21,7 +21,7 @@ diviceKeyDictionary = {
 - (void)updateUnlockMode;
 
 // when the application enter foreground, upload exist unlock information
-- (void)uploadUnlockRecord;
+- (void)uploadLocalUnlockRecord;
 
 
 - (void)manulUnlock;

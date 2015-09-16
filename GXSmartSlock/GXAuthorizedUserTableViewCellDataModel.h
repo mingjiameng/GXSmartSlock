@@ -11,6 +11,7 @@
 @interface GXAuthorizedUserTableViewCellDataModel : NSObject
 
 @property (nonatomic, strong) NSString *nickname;
+@property (nonatomic, strong) NSString *detailText;
 @property (nonatomic, strong) NSString *profileImageURL;
 
 @end

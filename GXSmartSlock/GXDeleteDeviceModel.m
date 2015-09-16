@@ -29,14 +29,17 @@
             [self.delegate deleteDeviceSuccessful:NO];
         } else if (status == 1) {
             [self.delegate deleteDeviceSuccessful:YES];
-            [GXDatabaseHelper deleteDeviceWithIdentifire:deviceIdentifire];
         } else if (status == 3) {
             [self.delegate deviceHasBeenDeleted];
-            [GXDatabaseHelper deleteDeviceWithIdentifire:deviceIdentifire];
         }
     } failure:^(NSError *error) {
         [self.delegate noNetwork];
     }];
+}
+
+- (void)deleteDeviceWithIdentifireFromDatabase:(NSString *)deviceIdentifire
+{
+    [GXDatabaseHelper deleteDeviceWithIdentifire:deviceIdentifire];
 }
 
 @end

@@ -233,6 +233,15 @@
     
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    if (section == 2) {
+        return @"常用密码是长期有效的密码，轻触门锁，输入常用密码即可打开门锁；临时密码是一次性密码，使用后即失效。";
+    }
+    
+    return nil;
+}
+
 #pragma mark - user action
 - (void)deleteDevice:(UIButton *)sender
 {
@@ -290,6 +299,8 @@
     
     if (successful) {
         [self.navigationController popViewControllerAnimated:YES];
+        [_deleteDeviceModel deleteDeviceWithIdentifireFromDatabase:self.deviceEntity.deviceIdentifire];
+        
     } else {
         [self alertWithMessage:@"删除失败 请重新尝试"];
         [self activeUI];
@@ -305,6 +316,7 @@
     
     [self alertWithMessage:@"该门锁已被删除"];
     [self.navigationController popViewControllerAnimated:YES];
+    [_deleteDeviceModel deleteDeviceWithIdentifireFromDatabase:self.deviceEntity.deviceIdentifire];
 }
 
 - (void)alertWithMessage:(NSString *)message

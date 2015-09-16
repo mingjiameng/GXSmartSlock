@@ -130,6 +130,11 @@
         return;
     }
     
+    if (_activityIndicator == nil) {
+        _activityIndicator = [[zkeyActivityIndicatorView alloc] initWithFrame:self.view.frame title:@"正在处理中..."];
+    }
+    [self.view addSubview:_activityIndicator];
+    
     if (_receiveKeyModel == nil) {
         _receiveKeyModel = [[GXReceiveKeyModel alloc] init];
         _receiveKeyModel.delegate = self;

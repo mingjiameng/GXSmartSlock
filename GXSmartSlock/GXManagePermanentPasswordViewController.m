@@ -14,6 +14,9 @@
 #import "zkeyViewHelper.h"
 #import "zkeyActivityIndicatorView.h"
 
+#import "GXAddNewPermanentPasswordViewController.h"
+
+
 @interface GXManagePermanentPasswordViewController () <GXUserPasswordDelegate, UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 {
     UILabel *_tipsLabel;
@@ -103,7 +106,12 @@
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addPassword)];
     }
-
+    
+    if (_activityIndicator != nil) {
+        [_activityIndicator removeFromSuperview];
+        _activityIndicator = nil;
+    }
+    
     if ([self passwordExistInArray:passwordID]) {
         return;
     }
@@ -140,9 +148,12 @@
     
     if (_alertLabel == nil) {
         _alertLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 30.0f, self.view.frame.size.width - 40.0f, 50.0f)];
-        _alertLabel.text = @"没用常用密码，请点击左上角添加密码";
+        _alertLabel.text = @"没用常用密码，请点击右上角添加密码";
         _alertLabel.textColor = [UIColor lightGrayColor];
+        _alertLabel.font = [UIFont systemFontOfSize:15.0f];
         [self.view addSubview:_alertLabel];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addPassword)];
     }
 }
 
@@ -155,6 +166,8 @@
     
     [_passwordModelArray removeObjectAtIndex:_indexPathOfRowNeedToDelete.row];
     [_tableView deleteRowsAtIndexPaths:@[_indexPathOfRowNeedToDelete] withRowAnimation:UITableViewRowAnimationMiddle];
+    
+    self.view.userInteractionEnabled = YES;
 }
 
 #pragma mark - table view data source
@@ -207,6 +220,8 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == actionSheet.destructiveButtonIndex) {
+        self.view.userInteractionEnabled = NO;
+        
         _activityIndicator = [[zkeyActivityIndicatorView alloc] initWithFrame:self.view.frame title:@"正在删除..."];
         [self.view addSubview:_activityIndicator];
         
@@ -217,6 +232,17 @@
 #pragma mark - add password
 - (void)addPassword
 {
+    GXAddNewPermanentPasswordViewController *addNewPasswordVC = [[GXAddNewPermanentPasswordViewController alloc] init];
+    addNewPasswordVC.addNewPassword = ^(GXDevicePermanentPsswordModel *passwordModel) {
+        _activityIndicator = [[zkeyActivityIndicatorView alloc] initWithFrame:self.view.frame title:@"正在添加钥匙..."];
+        [self.view addSubview:_activityIndicator];
+        
+        [_passwordManagerCollect addNewPassword:passwordModel.nickname password:passwordModel.password];
+    };
     
+    UINavigationController *navigator = [[UINavigationController alloc] initWithRootViewController:addNewPasswordVC];
+    [self presentViewController:navigator animated:YES completion:^{
+        
+    }];
 }
 @end

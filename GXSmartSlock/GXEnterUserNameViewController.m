@@ -75,7 +75,7 @@
         _userNameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _userNameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
         _userNameTextField.returnKeyType = UIReturnKeyDone;
-        _userNameTextField.placeholder = @"请输入对方的用户名";
+        _userNameTextField.placeholder = @"手机号或邮箱";
         _userNameTextField.delegate = self;
         cell.accessoryView = _userNameTextField;
     }
@@ -90,7 +90,7 @@
     
     NSString *userName = _userNameTextField.text;
     if (![zkeyIdentifierValidator isValidChinesePhoneNumber:userName] && ![zkeyIdentifierValidator isValidEmailAddress:userName]) {
-        [self alertWithMessage:@"请输入正确的用户名"];
+        [self alertWithMessage:@"请输入正确的手机号或邮箱"];
         return;
     }
     

@@ -11,6 +11,7 @@
 @protocol GXUnlockModelDelegate <NSObject>
 
 @required
+
 - (void)tooLowSemaphoreToUnlock;
 - (NSString *)secretKeyForDevice:(NSString *)deviceIdentifire;
 - (void)unlockTheDevice:(NSString *)deviceIdentifire successful:(BOOL)successful;

@@ -47,7 +47,7 @@
 		44E6F2D21B9A89A300A38DF9 /* GXReceiveKeyParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2D11B9A89A300A38DF9 /* GXReceiveKeyParam.m */; };
 		44E6F2DC1B9B144B00A38DF9 /* GXAddNewDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2D51B9B144B00A38DF9 /* GXAddNewDeviceModel.m */; };
 		44E6F2DD1B9B144B00A38DF9 /* GXAddNewDeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2D71B9B144B00A38DF9 /* GXAddNewDeviceView.m */; };
-		44E6F2DE1B9B144B00A38DF9 /* GXAddNewDeviceViewControlelr.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2D81B9B144B00A38DF9 /* GXAddNewDeviceViewControlelr.m */; };
+		44E6F2DE1B9B144B00A38DF9 /* GXAddNewDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2D81B9B144B00A38DF9 /* GXAddNewDeviceViewController.m */; };
 		44E6F2DF1B9B144B00A38DF9 /* GXPairBluetoothModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2DB1B9B144B00A38DF9 /* GXPairBluetoothModel.m */; };
 		44E6F2E21B9B1EC500A38DF9 /* GXAddNewDeviceParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2E11B9B1EC500A38DF9 /* GXAddNewDeviceParam.m */; };
 		44E6F2E81B9B21F000A38DF9 /* NSString+ConvertToString.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2E51B9B21F000A38DF9 /* NSString+ConvertToString.m */; };
@@ -169,6 +169,8 @@
 		44F355181BA32AFA00B33D19 /* GXPasswordManagerCollect.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F355171BA32AFA00B33D19 /* GXPasswordManagerCollect.m */; };
 		44F3551E1BA3DE7A00B33D19 /* GXDevicePermanentPsswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F3551D1BA3DE7A00B33D19 /* GXDevicePermanentPsswordModel.m */; };
 		44F355231BA3E3B800B33D19 /* SharkfoodMuteSwitchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F355221BA3E3B800B33D19 /* SharkfoodMuteSwitchDetector.m */; };
+		44F355271BA4488600B33D19 /* GXAddNewPermanentPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F355261BA4488600B33D19 /* GXAddNewPermanentPasswordViewController.m */; };
+		44F3552A1BA46A7F00B33D19 /* GXUpdateUnlockRecordParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F355291BA46A7F00B33D19 /* GXUpdateUnlockRecordParam.m */; };
 		44F63B951B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F63B941B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.m */; };
 		44F63B981B8F2F3700F5335B /* GXChangeDeviceNicknameParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F63B971B8F2F3700F5335B /* GXChangeDeviceNicknameParam.m */; };
 		44F63B9B1B8F4BF200F5335B /* GXChangeDeviceNicknameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F63B9A1B8F4BF200F5335B /* GXChangeDeviceNicknameModel.m */; };
@@ -257,7 +259,7 @@
 		44E6F2D51B9B144B00A38DF9 /* GXAddNewDeviceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXAddNewDeviceModel.m; sourceTree = "<group>"; };
 		44E6F2D61B9B144B00A38DF9 /* GXAddNewDeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXAddNewDeviceView.h; sourceTree = "<group>"; };
 		44E6F2D71B9B144B00A38DF9 /* GXAddNewDeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXAddNewDeviceView.m; sourceTree = "<group>"; };
-		44E6F2D81B9B144B00A38DF9 /* GXAddNewDeviceViewControlelr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXAddNewDeviceViewControlelr.m; sourceTree = "<group>"; };
+		44E6F2D81B9B144B00A38DF9 /* GXAddNewDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXAddNewDeviceViewController.m; sourceTree = "<group>"; };
 		44E6F2D91B9B144B00A38DF9 /* GXAddNewDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXAddNewDeviceViewController.h; sourceTree = "<group>"; };
 		44E6F2DA1B9B144B00A38DF9 /* GXPairBluetoothModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXPairBluetoothModel.h; sourceTree = "<group>"; };
 		44E6F2DB1B9B144B00A38DF9 /* GXPairBluetoothModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXPairBluetoothModel.m; sourceTree = "<group>"; };
@@ -484,6 +486,10 @@
 		44F355211BA3E3B800B33D19 /* SharkfoodMuteSwitchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharkfoodMuteSwitchDetector.h; sourceTree = "<group>"; };
 		44F355221BA3E3B800B33D19 /* SharkfoodMuteSwitchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharkfoodMuteSwitchDetector.m; sourceTree = "<group>"; };
 		44F355241BA3E46A00B33D19 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		44F355251BA4488600B33D19 /* GXAddNewPermanentPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXAddNewPermanentPasswordViewController.h; sourceTree = "<group>"; };
+		44F355261BA4488600B33D19 /* GXAddNewPermanentPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXAddNewPermanentPasswordViewController.m; sourceTree = "<group>"; };
+		44F355281BA46A7F00B33D19 /* GXUpdateUnlockRecordParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUpdateUnlockRecordParam.h; sourceTree = "<group>"; };
+		44F355291BA46A7F00B33D19 /* GXUpdateUnlockRecordParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUpdateUnlockRecordParam.m; sourceTree = "<group>"; };
 		44F63B931B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXChangeDeviceNicknameViewController.h; sourceTree = "<group>"; };
 		44F63B941B8F29DF00F5335B /* GXChangeDeviceNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXChangeDeviceNicknameViewController.m; sourceTree = "<group>"; };
 		44F63B961B8F2F3700F5335B /* GXChangeDeviceNicknameParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXChangeDeviceNicknameParam.h; sourceTree = "<group>"; };
@@ -519,6 +525,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		440E2E151BA9414700388051 /* PasswordManager */ = {
+			isa = PBXGroup;
+			children = (
+				44F355161BA32AFA00B33D19 /* GXPasswordManagerCollect.h */,
+				44F355171BA32AFA00B33D19 /* GXPasswordManagerCollect.m */,
+				44F354F91BA0561500B33D19 /* GXManagePermanentPasswordViewController.h */,
+				44F354FA1BA0561500B33D19 /* GXManagePermanentPasswordViewController.m */,
+				44F355251BA4488600B33D19 /* GXAddNewPermanentPasswordViewController.h */,
+				44F355261BA4488600B33D19 /* GXAddNewPermanentPasswordViewController.m */,
+			);
+			name = PasswordManager;
+			sourceTree = "<group>";
+		};
 		441DAB8D1B9F1130004F710D /* UnlockBLETool */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,7 +639,7 @@
 				44E6F2D51B9B144B00A38DF9 /* GXAddNewDeviceModel.m */,
 				44E6F2D61B9B144B00A38DF9 /* GXAddNewDeviceView.h */,
 				44E6F2D71B9B144B00A38DF9 /* GXAddNewDeviceView.m */,
-				44E6F2D81B9B144B00A38DF9 /* GXAddNewDeviceViewControlelr.m */,
+				44E6F2D81B9B144B00A38DF9 /* GXAddNewDeviceViewController.m */,
 				44E6F2D91B9B144B00A38DF9 /* GXAddNewDeviceViewController.h */,
 				44E6F2DA1B9B144B00A38DF9 /* GXPairBluetoothModel.h */,
 				44E6F2DB1B9B144B00A38DF9 /* GXPairBluetoothModel.m */,
@@ -1023,6 +1042,7 @@
 		44ED1D431B8C06D400F1A7F4 /* DeviceList */ = {
 			isa = PBXGroup;
 			children = (
+				440E2E151BA9414700388051 /* PasswordManager */,
 				44ED1D541B8C15CC00F1A7F4 /* Model */,
 				44ED1D531B8C15C700F1A7F4 /* View */,
 				44ED1D521B8C15C000F1A7F4 /* Controller */,
@@ -1046,8 +1066,6 @@
 		44ED1D521B8C15C000F1A7F4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				44F355161BA32AFA00B33D19 /* GXPasswordManagerCollect.h */,
-				44F355171BA32AFA00B33D19 /* GXPasswordManagerCollect.m */,
 				44ED1D4F1B8C157200F1A7F4 /* GXDeviceListViewController.h */,
 				44ED1D501B8C157200F1A7F4 /* GXDeviceListViewController.m */,
 				44F63B9C1B8F539A00F5335B /* GXChangeDeviceImageViewController.h */,
@@ -1060,8 +1078,6 @@
 				44EA13411B91F73F00D4FD64 /* GXDeviceAuthorizedUserListViewController.m */,
 				44E6F2C41B99548D00A38DF9 /* GXAcceptKeyViewController.h */,
 				44E6F2C51B99548D00A38DF9 /* GXAcceptKeyViewController.m */,
-				44F354F91BA0561500B33D19 /* GXManagePermanentPasswordViewController.h */,
-				44F354FA1BA0561500B33D19 /* GXManagePermanentPasswordViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1171,6 +1187,8 @@
 				44EB634E1B9D27A2008BF8BE /* GXSendKeyParam.m */,
 				44F354EB1B9F1FDB00B33D19 /* GXUploadUnlockRecordParam.h */,
 				44F354EC1B9F1FDB00B33D19 /* GXUploadUnlockRecordParam.m */,
+				44F355281BA46A7F00B33D19 /* GXUpdateUnlockRecordParam.h */,
+				44F355291BA46A7F00B33D19 /* GXUpdateUnlockRecordParam.m */,
 			);
 			name = Param;
 			sourceTree = "<group>";
@@ -1321,6 +1339,7 @@
 				44ED418F1B896B9700079207 /* AFHTTPRequestOperationManager.m in Sources */,
 				44E6F2F11B9BF92400A38DF9 /* GXEnterAndSelectUserViewController.m in Sources */,
 				44E916C31B86F42300EF9C38 /* GXLoginViewController.m in Sources */,
+				44F355271BA4488600B33D19 /* GXAddNewPermanentPasswordViewController.m in Sources */,
 				44ED419F1B8A1B7300079207 /* GXVerifyCodeParam.m in Sources */,
 				44ED41741B8969EE00079207 /* GXSystemInfoHelper.m in Sources */,
 				44F355181BA32AFA00B33D19 /* GXPasswordManagerCollect.m in Sources */,
@@ -1336,6 +1355,7 @@
 				44E6F2891B948A1100A38DF9 /* GXUpdateNicknameModel.m in Sources */,
 				44F355151BA2F0A300B33D19 /* GXShakeUnlockModel.m in Sources */,
 				44E6F27E1B9400D800A38DF9 /* GXUpdateProfileImageParam.m in Sources */,
+				44F3552A1BA46A7F00B33D19 /* GXUpdateUnlockRecordParam.m in Sources */,
 				44E9F7CB1B84D4AC00165234 /* AppDelegate.m in Sources */,
 				44ED41711B89695100079207 /* GXHttpTool.m in Sources */,
 				44EE9A3A1B9DE67A0095EFAC /* GXUnlockRecordViewController.m in Sources */,
@@ -1364,7 +1384,7 @@
 				44ED41931B896B9700079207 /* AFURLConnectionOperation.m in Sources */,
 				44F354F71BA04ED700B33D19 /* GXManulUnlockModel.m in Sources */,
 				44E916C21B86F42300EF9C38 /* GXRegisterFirstViewController.m in Sources */,
-				44E6F2DE1B9B144B00A38DF9 /* GXAddNewDeviceViewControlelr.m in Sources */,
+				44E6F2DE1B9B144B00A38DF9 /* GXAddNewDeviceViewController.m in Sources */,
 				44E9B8091B860CC600D289F0 /* zkeyViewHelper.m in Sources */,
 				44EA133C1B913EC200D4FD64 /* GXDeleteDeviceModel.m in Sources */,
 				44F63BA11B8F556700F5335B /* zkeySandboxHelper.m in Sources */,

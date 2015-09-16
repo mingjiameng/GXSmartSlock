@@ -11,8 +11,11 @@
 #import "MICRO_COMMON.h"
 #import "GXAddNewDeviceModel.h"
 
+#import "zkeyActivityIndicatorView.h"
+
 @interface GXAddNewDeviceViewController () <GXAddNewDeviceModelDelegate, GXAddNewDeviceViewDelegate>
 {
+    zkeyActivityIndicatorView *_activityIndicator;
     GXAddNewDeviceView *_addNewDeviceView;
     GXAddNewDeviceModel *_addNewDeviceModel;
 }
@@ -54,6 +57,13 @@
 #pragma mark - GXAddNewDeviceView delegate
 - (void)setNewDeviceName:(NSString *)deviceName
 {
+    self.navigationController.navigationBar.userInteractionEnabled = NO;
+    
+    if (_activityIndicator == nil) {
+        _activityIndicator = [[zkeyActivityIndicatorView alloc] initWithFrame:self.view.frame title:@"正在添加设备..."];
+        [self.view addSubview:_activityIndicator];
+    }
+    
     [_addNewDeviceModel setNewDeviceName:deviceName];
 }
 
@@ -75,6 +85,11 @@
 
 - (void)successfullyPaired:(BOOL)success
 {
+    if (_activityIndicator != nil) {
+        [_activityIndicator removeFromSuperview];
+        _activityIndicator = nil;
+    }
+    
     if (!success) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"配对失败 请重试" message:nil delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil];
         [alert show];
