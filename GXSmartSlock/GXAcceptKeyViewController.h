@@ -11,5 +11,6 @@
 @interface GXAcceptKeyViewController : UIViewController
 
 @property (nonatomic, strong) NSString *deviceIdentifire;
+@property (nonatomic, strong) NSString *defaultDeviceNickname;
 
 @end

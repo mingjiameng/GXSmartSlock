@@ -23,7 +23,7 @@
 
 + (void)login:(NSDictionary *)data
 {
-    NSLog(@"%@", data);
+    //NSLog(@"%@", data);
     
     GXUserModel *defaultUser = [[GXUserModel alloc] init];
     defaultUser.userName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];

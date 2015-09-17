@@ -2,7 +2,7 @@
 //  GXDatabaseEntityDevice.h
 //  GXSmartSlock
 //
-//  Created by zkey on 9/10/15.
+//  Created by zkey on 9/17/15.
 //  Copyright (c) 2015 guosim. All rights reserved.
 //
 
@@ -22,6 +22,7 @@
 @property (nonatomic, retain) NSString * deviceNickname;
 @property (nonatomic, retain) NSString * deviceStatus;
 @property (nonatomic, retain) NSNumber * deviceVersion;
+@property (nonatomic, retain) NSNumber * firewareDownloadVersion;
 @property (nonatomic, retain) NSSet *deviceUsers;
 @property (nonatomic, retain) NSSet *unlockRecords;
 @end

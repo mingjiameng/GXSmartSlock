@@ -10,6 +10,7 @@
         <attribute name="deviceNickname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceStatus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceVersion" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="firewareDownloadVersion" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="deviceUsers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXDevice_User_Mapping" inverseName="device" inverseEntity="GXDevice_User_Mapping" syncable="YES"/>
         <relationship name="unlockRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXRecord" inverseName="device" inverseEntity="GXRecord" syncable="YES"/>
     </entity>
@@ -42,7 +43,7 @@
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GXRecord" inverseName="user" inverseEntity="GXRecord" syncable="YES"/>
     </entity>
     <elements>
-        <element name="GXDevice" positionX="-36" positionY="45" width="128" height="210"/>
+        <element name="GXDevice" positionX="-36" positionY="45" width="128" height="225"/>
         <element name="GXDevice_User_Mapping" positionX="-18" positionY="90" width="128" height="165"/>
         <element name="GXRecord" positionX="-54" positionY="18" width="128" height="165"/>
         <element name="GXUser" positionX="-63" positionY="-18" width="128" height="135"/>

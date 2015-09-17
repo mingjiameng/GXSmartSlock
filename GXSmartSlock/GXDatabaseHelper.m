@@ -99,10 +99,12 @@
 //            }
             
             // update version number
-            NSNumber *versionNumber = deviceEntity.deviceVersion;
-            if ([versionNumber integerValue] != deviceModel.deviceVersion) {
-                versionNumber = [NSNumber numberWithInteger:deviceModel.deviceVersion];
-                deviceEntity.deviceVersion = versionNumber;
+            if ([deviceEntity.deviceVersion integerValue] != deviceModel.deviceVersion) {
+                deviceEntity.deviceVersion = [NSNumber numberWithInteger:deviceModel.deviceVersion];
+            }
+            
+            if ([deviceEntity.firewareDownloadVersion integerValue] < deviceModel.deviceVersion) {
+                deviceEntity.firewareDownloadVersion = [NSNumber numberWithInteger:deviceModel.deviceVersion];
             }
             
             ++index01;
@@ -135,7 +137,7 @@
         newDeviceEntity.deviceIdentifire = deviceModel.deviceIdentifire;
         newDeviceEntity.deviceKey = deviceModel.deviceKey;
         newDeviceEntity.deviceVersion = [NSNumber numberWithInteger:deviceModel.deviceVersion];
-        
+        newDeviceEntity.firewareDownloadVersion = [NSNumber numberWithInteger:deviceModel.deviceVersion];
         // set the default value for some info
         newDeviceEntity.deviceStatus = DEVICE_STATUS_INVALID;
         newDeviceEntity.deviceAuthority = DEVICE_AUTHORITY_NORMAL;

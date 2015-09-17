@@ -101,6 +101,7 @@
         _nicknameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _nicknameTextField.returnKeyType = UIReturnKeyDone;
         _nicknameTextField.placeholder = @"2-10位中英字符";
+        _nicknameTextField.text = self.defaultDeviceNickname;
         _nicknameTextField.delegate = self;
         cell.accessoryView = _nicknameTextField;
     }

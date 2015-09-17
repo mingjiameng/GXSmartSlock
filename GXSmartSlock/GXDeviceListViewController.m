@@ -130,6 +130,7 @@
     if ([deviceEntity.deviceStatus isEqualToString:DEVICE_STATUS_INVALID]) {
         GXAcceptKeyViewController *acceptKeyVC = [[GXAcceptKeyViewController alloc] init];
         acceptKeyVC.deviceIdentifire = deviceEntity.deviceIdentifire;
+        acceptKeyVC.defaultDeviceNickname = deviceEntity.deviceNickname;
         [self.navigationController pushViewController:acceptKeyVC animated:YES];
         
     } else {

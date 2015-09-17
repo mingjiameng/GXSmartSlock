@@ -47,6 +47,7 @@
 
 #define GXSendKeyURL [NSString stringWithFormat:@"%@send_key", GXBaseURL]
 
+#define GXLastFirewareVersionURL [NSString stringWithFormat:@"%@fw_version", GXBaseURL]
 
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"
