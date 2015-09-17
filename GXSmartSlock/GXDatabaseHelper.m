@@ -107,6 +107,10 @@
                 deviceEntity.firewareDownloadVersion = [NSNumber numberWithInteger:deviceModel.deviceVersion];
             }
             
+            if (![deviceEntity.deviceCategory isEqualToString:deviceModel.deviceCategory]) {
+                deviceEntity.deviceCategory = deviceModel.deviceCategory;
+            }
+            
             ++index01;
             ++index02;
             continue;

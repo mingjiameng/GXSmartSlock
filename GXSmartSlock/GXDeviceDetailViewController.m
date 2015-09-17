@@ -121,6 +121,12 @@
         cell.detailTextLabel.text = self.deviceEntity.deviceNickname;
     }
     
+    if (indexPath.section == 2) {
+        if ([self.deviceEntity.deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD]) {
+            cell.userInteractionEnabled = NO;
+        }
+    }
+    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -212,7 +218,6 @@
         }
         
     } else if (indexPath.section == 1) {
-        
         if (indexPath.row == 0) {
             GXDeviceAuthorizedUserListViewController *authorizedUserVC = [[GXDeviceAuthorizedUserListViewController alloc] init];
             authorizedUserVC.deviceIdentifire = self.deviceEntity.deviceIdentifire;
@@ -240,6 +245,15 @@
         }
     }
     
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 2) {
+        return @"门禁锁不支持密码管理";
+    }
+    
+    return nil;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section

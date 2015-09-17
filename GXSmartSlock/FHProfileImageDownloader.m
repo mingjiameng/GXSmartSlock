@@ -10,6 +10,12 @@
 
 #import "zkeyWebImageCache.h"
 
+@interface FHProfileImageDownloader ()
+
+@end
+
+
+
 @implementation FHProfileImageDownloader
 
 + (FHProfileImageDownloader *)shareImageDownloader

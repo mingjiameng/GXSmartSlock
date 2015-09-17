@@ -9,6 +9,7 @@
 #import "GXUnlockTool.h"
 
 #import "MICRO_COMMON.h"
+#import "MICRO_DEVICE_LIST.h"
 
 #import "GXDatabaseEntityDevice.h"
 #import "GXDatabaseHelper.h"
@@ -23,6 +24,9 @@
 @interface GXUnlockTool () <GXUnlockModelDelegate>
 {
     NSDictionary *_deviceKeyDic;
+    NSDictionary *_deviceCategoryDic;
+    DefaultUnlockMode _currentUnlockModel;
+    
     GXManulUnlockModel *_manulUnlockModel;
     GXAutoUnlockModel *_autoUnlockModel;
     GXShakeUnlockModel *_shakeUnlockModel;
@@ -46,6 +50,8 @@
 - (void)updateUnlockMode
 {
     DefaultUnlockMode unlockMode = [[[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_UNLOCK_MODE] integerValue];
+    _currentUnlockModel = unlockMode;
+    
     if (unlockMode == DefaultUnlockModeManul) {
         _autoUnlockModel = nil;
         _shakeUnlockModel = nil;
@@ -80,11 +86,14 @@
     }
     
     NSMutableDictionary *tmpDeviceKeyDic = [NSMutableDictionary dictionary];
+    NSMutableDictionary *tmpDeviceCategoryDic = [NSMutableDictionary dictionary];
     for (GXDatabaseEntityDevice *deviceEntity in validDeviceArray) {
         [tmpDeviceKeyDic setObject:deviceEntity.deviceKey forKey:deviceEntity.deviceIdentifire];
+        [tmpDeviceCategoryDic setObject:deviceEntity.deviceCategory forKey:deviceEntity.deviceIdentifire];
     }
     
     _deviceKeyDic = (NSDictionary *)tmpDeviceKeyDic;
+    _deviceCategoryDic = (NSDictionary *)tmpDeviceCategoryDic;
 }
 
 - (void)manulUnlock
@@ -125,6 +134,19 @@
 - (NSString *)secretKeyForDevice:(NSString *)deviceIdentifire
 {
     NSString *secretKey = [_deviceKeyDic objectForKey:deviceIdentifire];
+    
+    if (secretKey != nil) {
+        // 门紧锁不支持感应开锁
+        NSString *deviceCategory = [_deviceKeyDic objectForKey:deviceIdentifire];
+        if (deviceCategory == nil) {
+            return nil;
+        }
+        
+        if ([deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD] && _currentUnlockModel == DefaultUnlockModeAuto) {
+            return nil;
+        }
+    }
+    
     return secretKey;
 }
 
