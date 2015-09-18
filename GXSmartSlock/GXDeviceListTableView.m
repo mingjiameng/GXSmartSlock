@@ -22,13 +22,10 @@
 {
     GXDeviceListTableViewCellDataModel *cellData = (GXDeviceListTableViewCellDataModel *)[self.dataSource tableView:self cellDataForRowAtIndexPath:indexPath];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:DEVICE_LIST_TABLE_VIEW_CELL_REUSE_IDENTIFIRE];
+    GXDeviceListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:DEVICE_LIST_TABLE_VIEW_CELL_REUSE_IDENTIFIRE];
     if (cell == nil) {
         cell = [[GXDeviceListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:DEVICE_LIST_TABLE_VIEW_CELL_REUSE_IDENTIFIRE];
     }
-    
-    cell.imageView.layer.masksToBounds = YES;
-    cell.imageView.layer.cornerRadius = cell.imageView.frame.size.width / 2.0f;
     
     cell.imageView.image = [self deviceImageNameAccordingDeviceCategory:cellData.deviceCategory andDeviceIdentifire:cellData.deviceIdentifire];
     
@@ -37,9 +34,10 @@
     cell.detailTextLabel.text = cellData.subtitle;
     cell.detailTextLabel.textColor = [UIColor darkGrayColor];
     
-    cell.accessoryView = [[GXDeviceListTableViewCellBatteryLevelLabel alloc] initWithFrame:CGRectMake(0, 0, 60.0f, 21.0f) andBatteryLevel:cellData.batteryLevel];
+    cell.deviceCategoryLabel.text = [self descriptionForDeviceCategory:cellData.deviceCategory];
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.batteryLabel.text = [self descriptionForBatteryLevel:cellData.batteryLevel];
+    cell.batteryLabel.indicatorView.backgroundColor = [self indicationColorForBatteryLevel:cellData.batteryLevel];
     
     return cell;
 }
@@ -64,6 +62,53 @@
     }
     
     return [UIImage imageNamed:imageName];
+}
+
+- (UIColor *)indicationColorForBatteryLevel:(NSInteger)batteryLevel
+{
+    UIColor *indicatorViewBackgroundColor = nil;
+    
+    if (batteryLevel < 350.0f) {
+        indicatorViewBackgroundColor = [UIColor redColor];
+    } else if (batteryLevel < 485.0f) {
+        indicatorViewBackgroundColor = [UIColor yellowColor];
+    } else {
+        indicatorViewBackgroundColor = [UIColor greenColor];
+    }
+    
+    return indicatorViewBackgroundColor;
+}
+
+- (NSString *)descriptionForBatteryLevel:(NSInteger)batteryLevel
+{
+    NSString *title = nil;
+    
+    if (batteryLevel < 350.0f) {
+        title = @"低电量";
+    } else if (batteryLevel < 485.0f) {
+        title = @"中等电量";
+    } else {
+        title = @"电量充足";
+    }
+    
+    return title;
+}
+
+- (NSString *)descriptionForDeviceCategory:(NSString *)deviceCategory
+{
+    NSString *title = @"普通锁";
+    
+    if ([deviceCategory isEqualToString:DEVICE_CATEGORY_DEFAULT]) {
+        return @"普通锁";
+    } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_ELECTRIC]) {
+        return @"电机锁";
+    } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD]) {
+        return @"门禁锁";
+    } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_IN_DOOR]) {
+        return @"室内所";
+    }
+    
+    return title;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

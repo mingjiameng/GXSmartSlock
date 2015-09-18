@@ -10,6 +10,6 @@
 
 @interface GXDeviceListTableViewCellBatteryLevelLabel : UILabel
 
-- (instancetype)initWithFrame:(CGRect)frame andBatteryLevel:(NSInteger)batteryLevel;
+@property (nonatomic, strong) UIView *indicatorView;
 
 @end

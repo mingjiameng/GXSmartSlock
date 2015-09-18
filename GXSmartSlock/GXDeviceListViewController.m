@@ -125,6 +125,8 @@
 #pragma mark - table view delegate
 - (void)tableView:(zkeyTableViewWithPullFresh *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     GXDatabaseEntityDevice *deviceEntity = [_fetchedResultsController objectAtIndexPath:indexPath];
     
     if ([deviceEntity.deviceStatus isEqualToString:DEVICE_STATUS_INVALID]) {

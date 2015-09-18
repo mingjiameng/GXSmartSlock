@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "GXDeviceListTableViewCellBatteryLevelLabel.h"
+
 @interface GXDeviceListTableViewCell : UITableViewCell
+
+@property (nonatomic, strong) GXDeviceListTableViewCellBatteryLevelLabel *batteryLabel;
+@property (nonatomic, strong) UILabel *deviceCategoryLabel;
 
 @end
