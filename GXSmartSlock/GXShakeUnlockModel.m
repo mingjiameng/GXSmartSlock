@@ -22,6 +22,8 @@
 
 #define UNLOCK_LIMIT_LOW 0.5
 #define UNLOCK_LIMIT_HIGH 1.0
+#define UNLOCK_ANGLE_WAVE_X 0.2
+#define UNLOCK_ANGLE_WAVE_Y 0.5
 
 @interface GXShakeUnlockModel () <CBCentralManagerDelegate, CBPeripheralDelegate>
 {
@@ -423,7 +425,6 @@
     CMAcceleration gravityAcceleration = _motionManager.deviceMotion.gravity;
 
     double angle = atan2(gravityAcceleration.x, gravityAcceleration.y);
-    NSLog(@"angle:%lf", angle);
     
     if (_angle > 100.0f) {
         _angle = angle;
@@ -442,8 +443,10 @@
         }
     }
     
-    if ([self pendingShakingWithPreviousAngle:_angle currentAngle:angle]) {
-        NSLog(@"shaking!!!!!!");
+    //NSLog(@"x:%lf y:%lf", gravityAcceleration.x, gravityAcceleration.y);
+    
+    if ([self pendingShakingWithPreviousAngle:_angle currentAngle:angle] && [self isCurrentGestureValid:gravityAcceleration]) {
+        //NSLog(@"shaking!!!!!!");
         _angle = 0x3f3f3f3f;
         _previousUnlockAngle = angle;
         
@@ -457,6 +460,7 @@
     _angle = angle;
 }
 
+// 瞬时转过的角度是否符合要求
 - (BOOL)pendingShakingWithPreviousAngle:(double)angle1 currentAngle:(double)angle2
 {
     double rotation = 0.0f;
@@ -469,9 +473,23 @@
         rotation = 2 * M_PI - angle1 - angle2;
     }
     
-    NSLog(@"rotation:%lf", rotation);
+    //NSLog(@"rotation:%lf", rotation);
     
-    if (rotation > UNLOCK_LIMIT_LOW && rotation < UNLOCK_LIMIT_HIGH) {
+    if (rotation > UNLOCK_LIMIT_LOW && rotation < UNLOCK_LIMIT_HIGH ) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+// 瞬时停留的角度是否符合要求
+- (BOOL)isCurrentGestureValid:(CMAcceleration)gravityAcceleration
+{
+    if ( fabs(gravityAcceleration.x - 1) < UNLOCK_ANGLE_WAVE_X && fabs(gravityAcceleration.y) < UNLOCK_ANGLE_WAVE_Y ) {
+        return YES;
+    }
+    
+    if (fabs(gravityAcceleration.x + 1) < UNLOCK_ANGLE_WAVE_X && fabs(gravityAcceleration.y) < UNLOCK_ANGLE_WAVE_Y) {
         return YES;
     }
     

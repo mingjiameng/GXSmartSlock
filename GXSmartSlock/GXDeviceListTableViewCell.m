@@ -21,7 +21,7 @@
         self.deviceCategoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 10.0f, 10.0f)];
         self.deviceCategoryLabel.textColor = [UIColor lightGrayColor];
         self.deviceCategoryLabel.font = [UIFont systemFontOfSize:10.0f];
-        self.deviceCategoryLabel.textAlignment = NSTextAlignmentCenter;
+        self.deviceCategoryLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:self.deviceCategoryLabel];
     }
     
@@ -42,11 +42,11 @@
     self.detailTextLabel.frame = CGRectMake(100.0f, 50.0f, self.frame.size.width - 80.0f, 15.0f);
     
     CGFloat deviceCategoryLabelWidth = 40.0f;
-    self.deviceCategoryLabel.frame = CGRectMake(self.frame.size.width - deviceCategoryLabelWidth - 10.0f, 10.0f, deviceCategoryLabelWidth, 21.0f);
+    self.deviceCategoryLabel.frame = CGRectMake(self.frame.size.width - deviceCategoryLabelWidth - 10.0f, 20.0f, deviceCategoryLabelWidth, 21.0f);
     
-    CGFloat batteryLabelWidth = 60.0f;
-    CGFloat batteryLabelHeight = 21.0f;
-    self.batteryLabel.frame = CGRectMake(self.frame.size.width - deviceCategoryLabelWidth - 10.0f, self.frame.size.height - 10.0f - batteryLabelHeight ,batteryLabelWidth, batteryLabelHeight);
+    CGFloat batteryLabelWidth = 53.0f;
+    CGFloat batteryLabelHeight = 10.0f;
+    self.batteryLabel.frame = CGRectMake(self.frame.size.width - deviceCategoryLabelWidth - 20.0f, self.frame.size.height - 10.0f - batteryLabelHeight ,batteryLabelWidth, batteryLabelHeight);
 }
 
 @end

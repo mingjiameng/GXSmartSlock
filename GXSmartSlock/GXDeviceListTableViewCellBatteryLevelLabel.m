@@ -17,11 +17,11 @@
     if (self) {
         self.textColor = [UIColor lightGrayColor];
         self.font = [UIFont systemFontOfSize:10.0f];
-        self.textAlignment = NSTextAlignmentLeft;
+        self.textAlignment = NSTextAlignmentRight;
         
         // indicate battery level by color
-        self.indicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10.0f, 10.0f)];
-        self.indicatorView.center = CGPointMake(frame.size.width - 12.0f, frame.size.height / 2.0f);
+        CGFloat indicatorViewHeight = 10.0f;
+        self.indicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, (frame.size.height - indicatorViewHeight) / 2.0f, indicatorViewHeight, indicatorViewHeight)];
         self.indicatorView.backgroundColor = [UIColor greenColor];
         self.indicatorView.layer.masksToBounds = YES;
         self.indicatorView.layer.cornerRadius = self.indicatorView.frame.size.width / 2.0f;
