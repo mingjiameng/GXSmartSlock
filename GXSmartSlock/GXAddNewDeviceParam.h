@@ -18,5 +18,6 @@
 @property (nonatomic, strong) NSString *batteryLevel;
 @property (nonatomic, strong) NSString *deviceLocation;
 @property (nonatomic, strong) NSString *deviceVersion;
+@property (nonatomic, strong) NSString *deviceCategory;
 
 @end

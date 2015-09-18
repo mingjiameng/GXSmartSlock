@@ -64,6 +64,7 @@
 #define KEY_DEVICE_VERSION @"device_version"
 #define KEY_DEVICE_LOCATION @"device_location"
 #define KEY_DEVICE_BATTERY @"device_battery"
+#define KEY_DEVICE_CATEGORY @"device_typecode"
 #define KEY_AUTHORITY_TYPE @"key_type"
 #define KEY_RECEIVER_USER_NAME @"contact"
 

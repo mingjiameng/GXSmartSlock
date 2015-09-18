@@ -175,6 +175,7 @@
     for (CBService *service in peripheral.services) {
         NSLog(@"did discovery service: %@", service.UUID);
         if ([service.UUID isEqual:GX_PAIR_SERVICE_CBUUID_MAIN]) {
+            
             // task related with characteristic in GX_PAIR_SERVICE_CBUUID_MAIN should be performed after reading the device version
             CBPeripheral *correspondPeripheral;
             for (NSMutableDictionary *connectedPeripheral in _connectedPeripheralArray) {
@@ -305,6 +306,24 @@
         return;
     }
     
+    // 3. read device category
+    if ([characteristic.UUID isEqual:GX_PAIR_CHARACTERISTIC_READ_DEVICE_CATEGORY]) {
+        CBPeripheral *correspondPeripheral;
+        for (NSMutableDictionary *connectedPeripheral in _connectedPeripheralArray) {
+            correspondPeripheral = [connectedPeripheral objectForKey:PERIPHERAL];
+            if ([correspondPeripheral isEqual:peripheral]) {
+                // read battery level after reading secret key
+                if ([connectedPeripheral objectForKey:BATTERY_LEVEL] != nil && [connectedPeripheral objectForKey:DEVICE_CATEGORY] == nil) {
+                    NSLog(@"begin to read device category");
+                    [peripheral readValueForCharacteristic:characteristic];
+                }
+                break;
+            }
+        }
+        
+        return;
+    }
+    
     // 3. prepare for initialize
     if ([characteristic.UUID isEqual:GX_PAIR_CHARACTERISTIC_PREPARE_FOR_INITIALIZATION]) {
         CBPeripheral *correspondPeripheral;
@@ -312,7 +331,7 @@
             correspondPeripheral = [connectedPeripheral objectForKey:PERIPHERAL];
             if ([correspondPeripheral isEqual:peripheral]) {
                 // initialize the device after reading the battery level
-                if ([connectedPeripheral objectForKey:BATTERY_LEVEL] && ![connectedPeripheral objectForKey:DEVICE_NAME]) {
+                if ([connectedPeripheral objectForKey:DEVICE_CATEGORY] && ![connectedPeripheral objectForKey:DEVICE_NAME]) {
                     [peripheral setNotifyValue:YES forCharacteristic:characteristic];
                 }
                 break;
@@ -414,7 +433,7 @@
             if ([correspondPeripheral isEqual:peripheral]) {
                 [connectedPeripheral setValue:deviceSecretKey forKey:SECRET_KEY];
                 NSLog(@"set secret key");
-                [peripheral discoverCharacteristics:@[GX_PAIR_CHARACTERISTIC_READ_BATTERY_LEVEL] forService:characteristic.service];
+                [peripheral discoverCharacteristics:@[GX_PAIR_CHARACTERISTIC_READ_BATTERY_LEVEL, GX_PAIR_CHARACTERISTIC_READ_DEVICE_CATEGORY] forService:characteristic.service];
                 break;
             }
         }
@@ -432,6 +451,43 @@
             correspondPeripheral = [connectedPeripheral objectForKey:PERIPHERAL];
             if ([correspondPeripheral isEqual:peripheral]) {
                 [connectedPeripheral setValue:batteryLevelNumber forKey:BATTERY_LEVEL];
+                
+                // check whether property FFF8(deviceCategory) exists in the service FFF0
+                bool deviceCategoryExist = false;
+                for (CBCharacteristic *characteristicExist in characteristic.service.characteristics) {
+                    if ([characteristicExist.UUID isEqual:GX_PAIR_CHARACTERISTIC_READ_DEVICE_CATEGORY]) {
+                        deviceCategoryExist = true;
+                        break;
+                    }
+                }
+                
+                if (deviceCategoryExist) {
+                    [peripheral discoverCharacteristics:@[GX_PAIR_CHARACTERISTIC_READ_DEVICE_CATEGORY] forService:characteristic.service];
+                } else {
+                    [connectedPeripheral setObject:GX_PAIR_DEFAULT_DEVICE_CATEGORY forKey:DEVICE_CATEGORY];
+                    [peripheral discoverCharacteristics:@[GX_PAIR_CHARACTERISTIC_PREPARE_FOR_INITIALIZATION] forService:characteristic.service];
+                }
+                
+                break;
+            }
+        }
+        
+        return;
+    }
+    
+    // 4. read device category
+    if ([characteristic.UUID isEqual:GX_PAIR_CHARACTERISTIC_READ_DEVICE_CATEGORY]) {
+        NSString *deviceCategory = [characteristicValue stringByTrimmingCharactersInSet:[NSCharacterSet symbolCharacterSet]];
+        if (deviceCategory.length == 2) {
+            deviceCategory = [deviceCategory stringByAppendingString:@"01"];
+        }
+        NSLog(@"device category readed:%@", deviceCategory);
+        
+        CBPeripheral *correspondPeripheral;
+        for (NSMutableDictionary *connectedPeripheral in _connectedPeripheralArray) {
+            correspondPeripheral = [connectedPeripheral objectForKey:PERIPHERAL];
+            if ([correspondPeripheral isEqual:peripheral]) {
+                [connectedPeripheral setValue:deviceCategory forKey:DEVICE_CATEGORY];
                 [peripheral discoverCharacteristics:@[GX_PAIR_CHARACTERISTIC_PREPARE_FOR_INITIALIZATION] forService:characteristic.service];
                 break;
             }
@@ -440,7 +496,7 @@
         return;
     }
     
-    // 4. prepare for initialization - the status of the device
+    // 5. prepare for initialization - the status of the device
     // device has been initialized ?
     if ([characteristic.UUID isEqual:GX_PAIR_CHARACTERISTIC_PREPARE_FOR_INITIALIZATION]) {
         if ([characteristicValue isEqualToString:GX_PAIR_DEVICE_STATUS_WAIT_FOR_INITIALIZATION]) {
@@ -549,6 +605,7 @@
     param.deviceIdentifire = peripheral.name;
     param.deviceVersion = [peripheralData objectForKey:DEVICE_VERSION];
     param.deviceLocation = @"北京市";
+    param.deviceCategory = [peripheralData objectForKey:DEVICE_CATEGORY];
     
     [GXDefaultHttpHelper postWithAddNewDeviceParam:param success:^(NSDictionary *result) {
         NSInteger status = [[result objectForKey:@"status"] integerValue];

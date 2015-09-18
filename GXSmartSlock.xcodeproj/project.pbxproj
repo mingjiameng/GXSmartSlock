@@ -687,18 +687,18 @@
 		44E6F2D31B9B143A00A38DF9 /* AddDevice */ = {
 			isa = PBXGroup;
 			children = (
+				44E6F2EA1B9B326B00A38DF9 /* AddNewDeviceAnimationImage.plist */,
+				44E6F2E31B9B20B900A38DF9 /* MICRO_ADD_NEW_DEVICE.h */,
 				44E6F2E41B9B21F000A38DF9 /* NSString+ConvertToString.h */,
 				44E6F2E51B9B21F000A38DF9 /* NSString+ConvertToString.m */,
 				44E6F2E61B9B21F000A38DF9 /* NSString+StringHexToData.h */,
 				44E6F2E71B9B21F000A38DF9 /* NSString+StringHexToData.m */,
-				44E6F2E31B9B20B900A38DF9 /* MICRO_ADD_NEW_DEVICE.h */,
 				44E6F2D41B9B144B00A38DF9 /* GXAddNewDeviceModel.h */,
-				44E6F2EA1B9B326B00A38DF9 /* AddNewDeviceAnimationImage.plist */,
 				44E6F2D51B9B144B00A38DF9 /* GXAddNewDeviceModel.m */,
 				44E6F2D61B9B144B00A38DF9 /* GXAddNewDeviceView.h */,
 				44E6F2D71B9B144B00A38DF9 /* GXAddNewDeviceView.m */,
-				44E6F2D81B9B144B00A38DF9 /* GXAddNewDeviceViewController.m */,
 				44E6F2D91B9B144B00A38DF9 /* GXAddNewDeviceViewController.h */,
+				44E6F2D81B9B144B00A38DF9 /* GXAddNewDeviceViewController.m */,
 				44E6F2DA1B9B144B00A38DF9 /* GXPairBluetoothModel.h */,
 				44E6F2DB1B9B144B00A38DF9 /* GXPairBluetoothModel.m */,
 			);

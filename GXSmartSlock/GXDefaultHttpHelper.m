@@ -290,7 +290,8 @@
                                KEY_DEVICE_SECRET_KEY : param.secretKey,
                                KEY_DEVICE_VERSION : param.deviceVersion,
                                KEY_DEVICE_LOCATION : param.deviceLocation,
-                               KEY_DEVICE_BATTERY : param.batteryLevel};
+                               KEY_DEVICE_BATTERY : param.batteryLevel,
+                               KEY_DEVICE_CATEGORY : param.deviceCategory};
     
     
     [GXHttpTool postWithServerURL:GXAddNewDeviceURL params:paramDic success:^(NSDictionary *result) {
