@@ -845,6 +845,18 @@
     [self saveContext];
 }
 
++ (void)updateDonwloadedFirewareVersion:(NSInteger)newVersion ofDevice:(NSString *)deviceIdentifire
+{
+    GXDatabaseEntityDevice *device = [self deviceEntityWithDeviceIdentifire:deviceIdentifire];
+    if (device == nil) {
+        return;
+    }
+    
+    device.firewareDownloadVersion = [NSNumber numberWithInteger:newVersion];
+    
+    [self saveContext];
+}
+
 + (void)logout
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];

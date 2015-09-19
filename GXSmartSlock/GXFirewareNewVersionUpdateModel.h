@@ -27,10 +27,10 @@
 @property (nonatomic, copy) NSString *deviceIdentifire;
 @property (nonatomic) NSInteger currentVersion;
 @property (nonatomic) NSInteger downloadedVersion;
+@property (nonatomic, copy) NSString *deviceCategory;
+@property (nonatomic) NSInteger latestVersion;
 
 @property (nonatomic, weak) id<GXFirewareNewVersionUpdateModelDelegate> delegate;
-
-- (instancetype)initWithDeviceIdentifire:(NSString *)deviceIdentifire;
 
 - (void)checkNewVersion;
 

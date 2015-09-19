@@ -241,6 +241,8 @@
             updateFirewareVC.deviceIdentifire = self.deviceEntity.deviceIdentifire;
             updateFirewareVC.downloadedVersion = [self.deviceEntity.firewareDownloadVersion integerValue];
             updateFirewareVC.currentVersion = [self.deviceEntity.deviceVersion integerValue];
+            updateFirewareVC.deviceCategory = self.deviceEntity.deviceCategory;
+            
             [self.navigationController pushViewController:updateFirewareVC animated:YES];
         }
     }

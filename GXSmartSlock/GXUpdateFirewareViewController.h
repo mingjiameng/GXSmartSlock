@@ -10,8 +10,9 @@
 
 @interface GXUpdateFirewareViewController : UIViewController
 
-@property (nonatomic, strong) NSString *deviceIdentifire;
+@property (nonatomic, copy) NSString *deviceIdentifire;
 @property (nonatomic) NSInteger downloadedVersion; // 本地下载的固件的版本号
 @property (nonatomic) NSInteger currentVersion; // 设备当前的版本号
+@property (nonatomic, copy) NSString *deviceCategory;
 
 @end

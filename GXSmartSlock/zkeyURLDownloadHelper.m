@@ -22,6 +22,7 @@
     if (self) {
         self.totalLength = 0;
         self.currentLength = 0;
+        self.httpMethod = HTTP_METHOD_GET;
     }
     
     return self;
@@ -29,28 +30,64 @@
 
 - (void)start
 {
-    _Downloading = YES;
+    
     // create a request
-    NSURL *fileURL = [NSURL URLWithString:_urlString];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:fileURL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:_urlString]];
+    
+    // set http method
+    if (self.httpMethod == HTTP_METHOD_GET) {
+        [request setHTTPMethod:@"GET"];
+    } else {
+        [request setHTTPMethod:@"POST"];
+        
+        // set http body - param list
+        [request setHTTPBody:[self httpBodyWithParamDictionary:self.paramDic]];
+    }
+    
     // set request header information
+    
     // reread from self.currentLength;
     NSString *value = [NSString stringWithFormat:@"bytes=%lld-", self.currentLength];
     [request setValue:value forHTTPHeaderField:@"Range"];
     
     self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
-    //NSLog(@"connection");
+    
+    _downloading = YES;
 }
 
-- (void)pause
+- (void)stop
 {
-    _Downloading = NO;
+    _downloading = NO;
     
     [self.connection cancel];
     self.connection = nil;
 }
 
-// URL connection delegate
+- (NSData *)httpBodyWithParamDictionary:(NSDictionary *)paramDic
+{
+    if (paramDic == nil) {
+        return [@"" dataUsingEncoding:NSUTF8StringEncoding];
+    }
+    
+    NSString *bodyString = @"";
+    for (NSString *key in [paramDic allKeys]) {
+        bodyString = [bodyString stringByAppendingFormat:@"%@=%@&", key, [paramDic objectForKey:key]];
+    }
+    
+    if (bodyString.length > 1) {
+        bodyString = [bodyString substringToIndex:(bodyString.length - 1)];
+    }
+    
+    NSData *bodyData = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    return bodyData;
+}
+
+#pragma mark - URL connection delegate
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+    [challenge.sender performDefaultHandlingForAuthenticationChallenge:challenge];
+}
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -114,4 +151,5 @@
         //        }
     }
 }
+
 @end

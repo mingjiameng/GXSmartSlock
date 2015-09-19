@@ -108,7 +108,10 @@
     [_messageLabel setHidden:NO];
     
     [_actionButton setTitle:@"检查固件更新" forState:UIControlStateNormal];
-    [_actionButton addTarget:self.delegate action:@selector(checkNewVersion) forControlEvents:UIControlEventTouchUpInside];
+    
+    // 检查新版本后没有网络 无需更新button对应的action
+    //[_actionButton addTarget:self.delegate action:@selector(checkNewVersion) forControlEvents:UIControlEventTouchUpInside];
+    
     [_actionButton setHidden:NO];
     
 }
@@ -138,6 +141,9 @@
 {
     [_progressBar setHidden:YES];
     [_messageLabel setHidden:YES];
+    
+    // 移除之前的action
+    [_actionButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     
     if (needed) {
         [_actionButton setTitle:@"下载新版本固件" forState:UIControlStateNormal];
@@ -173,8 +179,11 @@
     _messageLabel.text = @"下载完毕";
     [_messageLabel setHidden:NO];
     
+    // 移除之前的action
+    [_actionButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+    
     [_actionButton setTitle:@"开始更新固件" forState:UIControlStateNormal];
-    [_actionButton addTarget:self action:@selector(updateFireware) forControlEvents:UIControlEventTouchUpInside];
+    [_actionButton addTarget:self.delegate action:@selector(updateFireware) forControlEvents:UIControlEventTouchUpInside];
     [_actionButton setHidden:NO];
 }
 
@@ -186,7 +195,9 @@
     [_messageLabel setHidden:NO];
     
     [_actionButton setTitle:@"下载新版本固件" forState:UIControlStateNormal];
-    [_actionButton addTarget:self.delegate action:@selector(downloadNewVersion) forControlEvents:UIControlEventTouchUpInside];
+    
+    // 之前的action就是downloadNewVersion 无需重复添加
+    //[_actionButton addTarget:self.delegate action:@selector(downloadNewVersion) forControlEvents:UIControlEventTouchUpInside];
 }
 
 /*
@@ -244,7 +255,9 @@
     [_messageLabel setHidden:NO];
     
     [_actionButton setTitle:@"开始更新固件" forState:UIControlStateNormal];
-    [_actionButton addTarget:self action:@selector(updateFireware) forControlEvents:UIControlEventTouchUpInside];
+    
+    // ...之前的action就是updateFireware 无需重复添加
+    //[_actionButton addTarget:self action:@selector(updateFireware) forControlEvents:UIControlEventTouchUpInside];
     [_actionButton setHidden:NO];
 }
 

@@ -8,9 +8,12 @@
 
 #import "GXFirewareNewVersionUpdateModel.h"
 
+#import "MICRO_COMMON.h"
+
 #import "AFNetworking.h"
 #import "zkeyURLDownloadHelper.h"
 #import "zkeySandboxHelper.h"
+#import "GXDatabaseHelper.h"
 
 @interface GXFirewareNewVersionUpdateModel ()
 {
@@ -18,21 +21,13 @@
 }
 @end
 
+
 @implementation GXFirewareNewVersionUpdateModel
-
-- (instancetype)initWithDeviceIdentifire:(NSString *)deviceIdentifire
-{
-    self = [super init];
-    
-    if (self) {
-        self.deviceIdentifire = deviceIdentifire;
-    }
-    
-    return self;
-}
-
 - (void)checkNewVersion
 {
+    self.currentVersion = 12;
+    self.downloadedVersion = 12;
+    
     [self.delegate beginCheckNewVersion];
     
     AFHTTPRequestOperationManager * requestOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"https://115.28.226.149/fw_version"]];
@@ -45,11 +40,13 @@
     requestOperationManager.securityPolicy = securityPolicy;
     
     id __weak weakDelegate = self.delegate;
+    GXFirewareNewVersionUpdateModel *__weak weakSelf = self;
     NSInteger __block newVersion = -1;
     [requestOperationManager GET:@"https://115.28.226.149/fw_version" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = (NSDictionary *)operation.responseObject;
         NSLog(@"result:%@", result);
         newVersion = [[result objectForKey:@"fw_version"] integerValue];
+        weakSelf.latestVersion = newVersion;
         if (newVersion <= self.currentVersion) {
             [weakDelegate firewareUpdateNeeded:NO];
         } else {
@@ -66,15 +63,27 @@
 
 - (void)downloadNewVersion
 {
-    NSString *urlString = [NSString stringWithFormat:@"http://115.28.226.149/source_file?latest=%ld&current=%ld", (long)_lastVersion, (long)self.currentVersion];
     NSString *filePath = [NSString stringWithFormat:@"%@/%@", [zkeySandboxHelper pathOfDocuments], self.deviceIdentifire];
+    
     [zkeySandboxHelper deleteFileAtPath:filePath];
     
     id __weak weakDelegate = self.delegate;;
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_PASSWORD];
     
     zkeyURLDownloadHelper *downloader = [[zkeyURLDownloadHelper alloc] init];
-    downloader.urlString = urlString;
+    downloader.urlString = @"http://115.28.226.149/source_file?";
     downloader.destinationPath = filePath;
+    downloader.httpMethod = HTTP_METHOD_POST;
+    downloader.paramDic = @{@"username" : userName,
+                            @"password" : password,
+                            @"typecode" : self.deviceCategory,
+                            @"current" : @(self.currentVersion),
+                            @"latest" : @(self.latestVersion)};
+
+    
+    //NSLog(@"download param dic:%@", downloader.paramDic);
+    
     
     downloader.progressHandler = ^(double progress) {
         [weakDelegate newVersionDownloadProgress:progress];
@@ -82,11 +91,15 @@
     
     downloader.completionHandler = ^{
         [weakDelegate newVersionDownloadComplete];
+        [GXDatabaseHelper updateDonwloadedFirewareVersion:self.latestVersion ofDevice:self.deviceIdentifire];
     };
     
     downloader.failureHandler = ^(NSError *error){
         [weakDelegate newVersionDownloadFailed];
     };
+    
+    [self.delegate beginDownloadNewVersion];
+    [downloader start];
 }
 
 @end

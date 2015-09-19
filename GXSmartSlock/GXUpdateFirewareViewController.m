@@ -44,6 +44,7 @@
     _newVersionUpdateModel.deviceIdentifire = self.deviceIdentifire;
     _newVersionUpdateModel.downloadedVersion = self.downloadedVersion;
     _newVersionUpdateModel.currentVersion = self.currentVersion;
+    _newVersionUpdateModel.deviceCategory = self.deviceCategory;
     _newVersionUpdateModel.delegate = self;
 }
 
@@ -79,7 +80,7 @@
 
 - (void)beginDownloadNewVersion
 {
-    [_updateFirewareView beginCheckNewVersion];
+    [_updateFirewareView beginDownloadNewVersion];
 }
 
 - (void)newVersionDownloadProgress:(double)progress
