@@ -21,6 +21,8 @@ typedef NS_ENUM(NSInteger, HTTP_METHOD) {
 // post时的参数字典
 @property (nonatomic, strong) NSDictionary *paramDic;
 
+@property (nonatomic, strong) NSString *contentType;
+
 //下载的远程url(连接到服务器的路径)
 @property (nonatomic, strong) NSString *urlString;
 

@@ -1,12 +1,12 @@
 //
-//  GXFirewareNewVersionUpdateModel.m
+//  GXFirewareNewVersionDownloadModel.m
 //  GXSmartSlock
 //
 //  Created by zkey on 9/17/15.
 //  Copyright (c) 2015 guosim. All rights reserved.
 //
 
-#import "GXFirewareNewVersionUpdateModel.h"
+#import "GXFirewareNewVersionDownloadModel.h"
 
 #import "MICRO_COMMON.h"
 
@@ -15,18 +15,17 @@
 #import "zkeySandboxHelper.h"
 #import "GXDatabaseHelper.h"
 
-@interface GXFirewareNewVersionUpdateModel ()
+@interface GXFirewareNewVersionDownloadModel ()
 {
     NSInteger _lastVersion;
 }
 @end
 
 
-@implementation GXFirewareNewVersionUpdateModel
+@implementation GXFirewareNewVersionDownloadModel
 - (void)checkNewVersion
 {
-    self.currentVersion = 12;
-    self.downloadedVersion = 12;
+    self.currentVersion = 12.0f;
     
     [self.delegate beginCheckNewVersion];
     
@@ -40,7 +39,7 @@
     requestOperationManager.securityPolicy = securityPolicy;
     
     id __weak weakDelegate = self.delegate;
-    GXFirewareNewVersionUpdateModel *__weak weakSelf = self;
+    GXFirewareNewVersionDownloadModel *__weak weakSelf = self;
     NSInteger __block newVersion = -1;
     [requestOperationManager GET:@"https://115.28.226.149/fw_version" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = (NSDictionary *)operation.responseObject;
@@ -80,7 +79,8 @@
                             @"typecode" : self.deviceCategory,
                             @"current" : @(self.currentVersion),
                             @"latest" : @(self.latestVersion)};
-
+    downloader.contentType = @"application/x-download";
+    
     
     //NSLog(@"download param dic:%@", downloader.paramDic);
     

@@ -20,10 +20,14 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CoreMotion/CoreMotion.h>
 
-#define UNLOCK_LIMIT_LOW 0.5
-#define UNLOCK_LIMIT_HIGH 1.0
-#define UNLOCK_ANGLE_WAVE_X 0.2
-#define UNLOCK_ANGLE_WAVE_Y 0.5
+#define UNLOCK_ANGLE_LIMIT_LOW 0.4
+#define UNLOCK_ANGLE_LIMIT_HIGH 0.8
+
+#define UNLOCK_ANGLE_WAVE_LANDSCAPE_X 0.3
+#define UNLOCK_ANGLE_WAVE_LANDSCAPE_Y 0.5
+
+#define UNLOCK_ANGLE_WAVE_PORTRAIT_X 0.5
+#define UNLOCK_ANGLE_WAVE_PORTRAIT_Y 0.3
 
 @interface GXShakeUnlockModel () <CBCentralManagerDelegate, CBPeripheralDelegate>
 {
@@ -68,7 +72,7 @@
         _previousUnlockAngle = _angle = 0x3f3f3f3f;
         _angleBeginChange = true;
         _motionManager = [[CMMotionManager alloc] init];
-        _motionManager.deviceMotionUpdateInterval = 0.03;
+        _motionManager.deviceMotionUpdateInterval = 0.02;
     }
     
     return self;
@@ -475,23 +479,30 @@
     
     //NSLog(@"rotation:%lf", rotation);
     
-    if (rotation > UNLOCK_LIMIT_LOW && rotation < UNLOCK_LIMIT_HIGH ) {
+    if (rotation > UNLOCK_ANGLE_LIMIT_LOW && rotation < UNLOCK_ANGLE_LIMIT_HIGH ) {
         return YES;
     }
     
     return NO;
 }
 
-// 瞬时停留的角度是否符合要求
+// 瞬时所在的角度是否符合要求
 - (BOOL)isCurrentGestureValid:(CMAcceleration)gravityAcceleration
 {
-    if ( fabs(gravityAcceleration.x - 1) < UNLOCK_ANGLE_WAVE_X && fabs(gravityAcceleration.y) < UNLOCK_ANGLE_WAVE_Y ) {
+    // 手机处于landscap状态
+    if (fabs(gravityAcceleration.x - 1) < UNLOCK_ANGLE_WAVE_LANDSCAPE_X && fabs(gravityAcceleration.y) < UNLOCK_ANGLE_WAVE_LANDSCAPE_Y ) {
         return YES;
     }
     
-    if (fabs(gravityAcceleration.x + 1) < UNLOCK_ANGLE_WAVE_X && fabs(gravityAcceleration.y) < UNLOCK_ANGLE_WAVE_Y) {
+    if (fabs(gravityAcceleration.x + 1) < UNLOCK_ANGLE_WAVE_LANDSCAPE_X && fabs(gravityAcceleration.y) < UNLOCK_ANGLE_WAVE_LANDSCAPE_Y) {
         return YES;
     }
+    
+    // 不能支持portrait 因为用户在接听手机的时候 手机就处于portrait状态
+//    // 手机处于portrait状态
+//    if (fabs(gravityAcceleration.x) < UNLOCK_ANGLE_WAVE_PORTRAIT_X && fabs(gravityAcceleration.y - 1) < UNLOCK_ANGLE_WAVE_PORTRAIT_Y) {
+//        return YES;
+//    }
     
     return NO;
 }

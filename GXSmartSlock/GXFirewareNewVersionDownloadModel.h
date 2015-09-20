@@ -1,5 +1,5 @@
 //
-//  GXFirewareNewVersionUpdateModel.h
+//  GXFirewareNewVersionDownloadModel.h
 //  GXSmartSlock
 //
 //  Created by zkey on 9/17/15.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol GXFirewareNewVersionUpdateModelDelegate <NSObject>
+@protocol GXFirewareNewVersionDownloadModelDelegate <NSObject>
 @required
 - (void)noNetwork;
 - (void)beginCheckNewVersion;
@@ -22,7 +22,7 @@
 @end
 
 
-@interface GXFirewareNewVersionUpdateModel : NSObject
+@interface GXFirewareNewVersionDownloadModel : NSObject
 
 @property (nonatomic, copy) NSString *deviceIdentifire;
 @property (nonatomic) NSInteger currentVersion;
@@ -30,7 +30,7 @@
 @property (nonatomic, copy) NSString *deviceCategory;
 @property (nonatomic) NSInteger latestVersion;
 
-@property (nonatomic, weak) id<GXFirewareNewVersionUpdateModelDelegate> delegate;
+@property (nonatomic, weak) id<GXFirewareNewVersionDownloadModelDelegate> delegate;
 
 - (void)checkNewVersion;
 

@@ -7,11 +7,11 @@
 //
 
 #import "GXDefaultHttpHelper.h"
-#import "GXHttpTool.h"
 
 #import "MICRO_HTTP.h"
 
-
+#import "GXHttpTool.h"
+#import "GXReachability.h"
 
 @implementation GXDefaultHttpHelper
 
@@ -335,6 +335,12 @@
             failure(error);
         }
     }];
+}
+
++ (BOOL)isServerAvailable
+{
+    GXReachability *server = [GXReachability reachabilityWithHostName:@"115.28.226.149:443"];
+    return ([server currentReachabilityStatus] != NotReachable);
 }
 
 @end

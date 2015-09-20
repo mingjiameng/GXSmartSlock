@@ -40,7 +40,7 @@
         _messageLabel.textColor = [UIColor lightGrayColor];
         _messageLabel.font = [UIFont systemFontOfSize:15.0f];
         _messageLabel.textAlignment = NSTextAlignmentCenter;
-        [_messageLabel setHidden:YES];
+        _messageLabel.text = @"固件升级过程中请打开蓝牙 保持网络畅通";
         [self addSubview:_messageLabel];
         
         // action button - may be binded with different action
@@ -107,13 +107,14 @@
     _messageLabel.text = @"无法连接服务器";
     [_messageLabel setHidden:NO];
     
-    [_actionButton setTitle:@"检查固件更新" forState:UIControlStateNormal];
+    // noNetwork可能是在“下载固件”时被调用 也可能是在“固件更新时被调用
+    // 因此我们需要移除所有action
+    [_actionButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     
-    // 检查新版本后没有网络 无需更新button对应的action
-    //[_actionButton addTarget:self.delegate action:@selector(checkNewVersion) forControlEvents:UIControlEventTouchUpInside];
+    [_actionButton setTitle:@"检查固件更新" forState:UIControlStateNormal];
+    [_actionButton addTarget:self.delegate action:@selector(checkNewVersion) forControlEvents:UIControlEventTouchUpInside];
     
     [_actionButton setHidden:NO];
-    
 }
 
 - (void)beginCheckNewVersion
@@ -149,7 +150,10 @@
         [_actionButton setTitle:@"下载新版本固件" forState:UIControlStateNormal];
         [_actionButton addTarget:self.delegate action:@selector(downloadNewVersion) forControlEvents:UIControlEventTouchUpInside];
     } else {
-        [_actionButton setTitle:@"开始更新固件" forState:UIControlStateNormal];
+        _messageLabel.text = @"您已下载了新版本固件";
+        [_messageLabel setHidden:NO];
+        
+        [_actionButton setTitle:@"更新固件" forState:UIControlStateNormal];
         [_actionButton addTarget:self.delegate action:@selector(updateFireware) forControlEvents:UIControlEventTouchUpInside];
     }
     
@@ -182,7 +186,7 @@
     // 移除之前的action
     [_actionButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     
-    [_actionButton setTitle:@"开始更新固件" forState:UIControlStateNormal];
+    [_actionButton setTitle:@"更新固件" forState:UIControlStateNormal];
     [_actionButton addTarget:self.delegate action:@selector(updateFireware) forControlEvents:UIControlEventTouchUpInside];
     [_actionButton setHidden:NO];
 }
@@ -219,6 +223,23 @@
     [self addAnimation:animationFrame];
 }
 
+- (void)noBluetooth
+{
+    [_tipsTextView setHidden:YES];
+    [_animationView setHidden:YES];
+    
+    [_logoImageView setHidden:NO];
+    
+    _messageLabel.text = @"请打开蓝牙";
+    [_messageLabel setHidden:NO];
+    
+    [_progressBar setHidden:YES];
+    
+    [_actionButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+    [_actionButton setTitle:@"更新固件" forState:UIControlStateNormal];
+    [_actionButton addTarget:self.delegate action:@selector(updateFireware) forControlEvents:UIControlEventTouchUpInside];
+}
+
 - (void)beginUpdateFireware
 {
     [_tipsTextView setHidden:YES];
@@ -251,13 +272,12 @@
 {
     [_progressBar setHidden:YES];
     
-    _messageLabel.text = @"固件升级失败 请重试...";
+    _messageLabel.text = @"固件升级失败 请重试";
     [_messageLabel setHidden:NO];
     
-    [_actionButton setTitle:@"开始更新固件" forState:UIControlStateNormal];
-    
-    // ...之前的action就是updateFireware 无需重复添加
-    //[_actionButton addTarget:self action:@selector(updateFireware) forControlEvents:UIControlEventTouchUpInside];
+    [_actionButton setTitle:@"更新固件" forState:UIControlStateNormal];
+    [_actionButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+    [_actionButton addTarget:self.delegate action:@selector(updateFireware) forControlEvents:UIControlEventTouchUpInside];
     [_actionButton setHidden:NO];
 }
 

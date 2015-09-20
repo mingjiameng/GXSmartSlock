@@ -53,4 +53,7 @@ typedef void(^HttpFailure)(NSError *error);
 + (void)postWithSynchronizeUnlockRecordParam:(GXSynchronizeUnlockRecordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
 + (void)postWithSendKeyParam:(GXSendKeyParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;;
 
+
++ (BOOL)isServerAvailable;
+
 @end

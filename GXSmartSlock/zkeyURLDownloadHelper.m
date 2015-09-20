@@ -44,6 +44,8 @@
         [request setHTTPBody:[self httpBodyWithParamDictionary:self.paramDic]];
     }
     
+    [request addValue:self.contentType forHTTPHeaderField:@"Content-Type"];
+    
     // set request header information
     
     // reread from self.currentLength;

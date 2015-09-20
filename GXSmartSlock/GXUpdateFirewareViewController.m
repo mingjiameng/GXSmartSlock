@@ -10,13 +10,16 @@
 
 #import "MICRO_COMMON.h"
 
-#import "GXFirewareNewVersionUpdateModel.h"
+#import "GXFirewareNewVersionDownloadModel.h"
+#import "GXFirewareUpdateModel.h"
 
 #import "GXUpdateFirewareView.h"
 
-@interface GXUpdateFirewareViewController () <GXFirewareNewVersionUpdateModelDelegate, GXUpdateFirewareViewDelegate>
+@interface GXUpdateFirewareViewController () <GXFirewareNewVersionDownloadModelDelegate, GXUpdateFirewareViewDelegate, GXFirewareUpdateModelDelegate>
 {
-    GXFirewareNewVersionUpdateModel *_newVersionUpdateModel;
+    GXFirewareNewVersionDownloadModel *_newVersionUpdateModel;
+    GXFirewareUpdateModel *_updateFirewareModel;
+    
     GXUpdateFirewareView *_updateFirewareView;
 }
 @end
@@ -40,12 +43,16 @@
 
 - (void)addLogicModel
 {
-    _newVersionUpdateModel = [[GXFirewareNewVersionUpdateModel alloc] init];
+    _newVersionUpdateModel = [[GXFirewareNewVersionDownloadModel alloc] init];
     _newVersionUpdateModel.deviceIdentifire = self.deviceIdentifire;
     _newVersionUpdateModel.downloadedVersion = self.downloadedVersion;
     _newVersionUpdateModel.currentVersion = self.currentVersion;
     _newVersionUpdateModel.deviceCategory = self.deviceCategory;
     _newVersionUpdateModel.delegate = self;
+    
+    _updateFirewareModel = [[GXFirewareUpdateModel alloc] init];
+    _updateFirewareModel.deviceIdentifire = self.deviceIdentifire;
+    _updateFirewareModel.delegate = self;
 }
 
 - (void)addUpdateFirewareView:(CGRect)frame
@@ -57,7 +64,7 @@
 }
 
 
-#pragma mark - GXFirewareNewVersionUpdateModelDelegate
+#pragma mark - GXFirewareNewVersionDownloadModelDelegate
 - (void)noNetwork
 {
     [_updateFirewareView noNetwork];
@@ -98,6 +105,37 @@
     [_updateFirewareView newVersionDownloadFailed];
 }
 
+
+#pragma mark - GXFirewareUpdateModelDelegate
+- (void)beginScanForCertainDevice
+{
+    [_updateFirewareView beginScanForCertainDevice];
+}
+
+- (void)noBluetooth
+{
+    [_updateFirewareView noBluetooth];
+}
+
+- (void)beginUpdateFireware
+{
+    [_updateFirewareView beginUpdateFireware];
+}
+
+- (void)firewareUpdateProgress:(double)progress
+{
+    [_updateFirewareView firewareUpdateProgress:progress];
+}
+
+- (void)firewareUpdateComplete
+{
+    [_updateFirewareView firewareUpdateComplete];
+}
+
+- (void)firewareUpdateFailed
+{
+    [_updateFirewareView firewareUpdateFailed];
+}
 
 #pragma mark -  user action
 - (void)checkNewVersion

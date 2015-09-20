@@ -23,9 +23,13 @@
 @property (nonatomic, weak) id<GXUpdateFirewareViewDelegate> delegate;
 
 /*
- * action methods for fireware download
+ * universal action
  */
 - (void)noNetwork;
+
+/*
+ * action methods for fireware download
+ */
 - (void)beginCheckNewVersion;
 - (void)firewareUpdateNeeded:(BOOL)needed;
 - (void)newVersionDownloadNeeded:(BOOL)needed;
@@ -34,11 +38,11 @@
 - (void)newVersionDownloadComplete;
 - (void)newVersionDownloadFailed;
 
+
 /*
  * action methods for fireware update
  */
-
-
+- (void)noBluetooth;
 - (void)beginScanForCertainDevice;
 - (void)beginUpdateFireware;
 - (void)firewareUpdateProgress:(double)progress;
