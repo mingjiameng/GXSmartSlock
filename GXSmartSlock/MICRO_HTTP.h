@@ -49,6 +49,8 @@
 
 #define GXLastFirewareVersionURL [NSString stringWithFormat:@"%@fw_version", GXBaseURL]
 
+#define GXUpdateDeviceBatteryURL [NSString stringWithFormat:@"%@update_device_battery", GXBaseURL]
+
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"
 #define KEY_PHONE_INFO @"phone_info"

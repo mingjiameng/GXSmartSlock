@@ -127,5 +127,14 @@
     [GXDatabaseHelper insertUnlockRecordIntoDatabase:unlockRecordModelArray];
 }
 
+// 当前用户给其他用户设置的备注名称
++ (void)insertUserRemarkIntoDatabase:(NSArray *)remarkNameArray
+{
+    NSMutableArray *remarkNameModelArray = [NSMutableArray array];
+    
+    for (NSDictionary *remarkNameDic in remarkNameArray) {
+        
+    }
+}
 
 @end

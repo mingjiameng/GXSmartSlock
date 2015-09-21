@@ -25,6 +25,7 @@
 @interface GXFirewareUpdateModel : NSObject
 
 @property (nonatomic, copy) NSString *deviceIdentifire;
+@property (nonatomic) NSInteger downloadedVersion;
 @property (nonatomic, weak) id<GXFirewareUpdateModelDelegate> delegate;
 
 // connect the guosim device, write the new fireware into device

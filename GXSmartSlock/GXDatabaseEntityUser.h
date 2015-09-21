@@ -2,7 +2,7 @@
 //  GXDatabaseEntityUser.h
 //  GXSmartSlock
 //
-//  Created by zkey on 9/10/15.
+//  Created by zkey on 9/20/15.
 //  Copyright (c) 2015 guosim. All rights reserved.
 //
 
@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString * nickname;
 @property (nonatomic, retain) NSNumber * userID;
 @property (nonatomic, retain) NSString * userName;
+@property (nonatomic, retain) NSString * remarkName;
 @property (nonatomic, retain) NSSet *devices;
 @property (nonatomic, retain) NSSet *records;
 @end

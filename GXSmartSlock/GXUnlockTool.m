@@ -14,10 +14,13 @@
 #import "GXDatabaseEntityDevice.h"
 #import "GXDatabaseHelper.h"
 #import "GXReachability.h"
+#import "GXDefaultHttpHelper.h"
+#import "GXUpdateDeviceBatteryLevelParam.h"
 
 #import "GXManulUnlockModel.h"
 #import "GXAutoUnlockModel.h"
 #import "GXShakeUnlockModel.h"
+
 
 #import "zkeyViewHelper.h"
 
@@ -123,7 +126,11 @@
 
 - (void)updateBatteryLevel:(NSInteger)batteryLevel ofDevice:(NSString *)deviceIdentifire
 {
+    // save to local
+    [GXDatabaseHelper device:deviceIdentifire updateBatteryLevel:batteryLevel];
     
+    // send to server
+    [self uploadBatteryLevel:batteryLevel ofDevice:deviceIdentifire];
 }
 
 - (void)lowBatteryAlert
@@ -152,34 +159,48 @@
 
 - (void)unlockTheDevice:(NSString *)deviceIdentifire successful:(BOOL)successful
 {
-    if ([self serverAvailable]) {
-        if ([self uploadUnlockRecordOfDevice:deviceIdentifire successful:successful]) {
-            return;
-        }
-    }
-    
     // save to local
+    NSString *event = 
+    if () {
+        <#statements#>
+    }
 }
 
-- (BOOL)uploadUnlockRecordOfDevice:(NSString *)deviceIdentifire successful:(BOOL)successful
+/*
+ * something about synchronizing battery level and unlock record
+ */
+
+/*
+ * STRATEGY OF SYNCHRONIZING BATTERY LEVEL
+ * Battery level is not a crucial value for user, so user has no need to know the latest value of battery level
+ * As a result, we only need to update battery level to server every time we unlock the door && server is avaiable
+ * For that the user who just login should know battery level of each device
+ */
+- (void)uploadBatteryLevel:(NSInteger)batteryLevel ofDevice:(NSString *)deviceIdentifire
 {
-    __block BOOL updateSuccessful = NO;
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_PASSWORD];
     
-    return NO;
+    GXUpdateDeviceBatteryLevelParam *param = [GXUpdateDeviceBatteryLevelParam paramWithUserName:userName password:password deviceIdentifire:deviceIdentifire batteryLevel:batteryLevel];
+    
+    [GXDefaultHttpHelper postWithUpdateBatteryLevelParam:param success:^(NSDictionary *result) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
-// upload local unlock record when server is available
+/*
+ * STRATEGY OF SYNCHRONIZE UNLOCK RECORD
+ * upload unlock record as soon as possible should be the principle
+ * so we need to observer the change of local database (need record may be created)
+ * and try to upload local unlock record every time user open the APP
+ * or the network condition change (user turn on the network)
+ */
+
 - (void)uploadLocalUnlockRecord
 {
-    if (![self serverAvailable]) {
-        return;
-    }
-}
-
-- (BOOL)serverAvailable
-{
-    GXReachability *server = [GXReachability reachabilityWithHostName:@"https://115.28.226.149"];
-    return ([server currentReachabilityStatus] != NotReachable);
+    
 }
 
 @end

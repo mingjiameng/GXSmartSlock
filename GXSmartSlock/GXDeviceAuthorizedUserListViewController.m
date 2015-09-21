@@ -22,6 +22,8 @@
 #import "zkeyViewHelper.h"
 #import "zkeyActivityIndicatorView.h"
 
+#import "GXChangeRemarkOfAuthorizedUserViewController.h"
+
 #import <CoreData/CoreData.h>
 
 @interface GXDeviceAuthorizedUserListViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, UIActionSheetDelegate, GXDeleteAuthorizedUserModelDelegate, GXSynchronizeDeviceUserModelDelegate, NSFetchedResultsControllerDelegate>
@@ -70,7 +72,7 @@
     _tableView = [[GXAuthorizedUserTableView alloc] initWithFrame:frame];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.tableView.separatorInset = UIEdgeInsetsMake(0, 80.0f, 0, 0);
+    _tableView.tableView.separatorInset = UIEdgeInsetsMake(0, 0.0f, 0, 0);
     
     [self.view addSubview:_tableView];
 }
@@ -139,6 +141,12 @@
         _deletedIndexPath = indexPath;
         UIActionSheet *deleteActionSheet = [[UIActionSheet alloc] initWithTitle:@"删除该授权用户后，该用户将无法打开对应的门锁，确定要删除该用户吗？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确认删除" otherButtonTitles:nil];
         [deleteActionSheet showInView:self.view];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        GXDatabaseEntityDeviceUserMappingItem *deviceUserMappingEntity = [_fetchedResultsController objectAtIndexPath:indexPath];
+        GXDatabaseEntityUser *user = deviceUserMappingEntity.user;
+        
+        GXChangeRemarkOfAuthorizedUserViewController *changeRemarkVC = [[GXChangeRemarkOfAuthorizedUserViewController alloc] init];
+        changeRemarkVC.remarkName = user.remarkName;
     }
     
 }

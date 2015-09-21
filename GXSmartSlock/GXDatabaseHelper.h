@@ -35,6 +35,7 @@
 + (NSFetchedResultsController *)unlockRecordOfDevice:(NSString *)deviceIdentifire;
 + (NSArray *)validDeviceArray;
 
+
 /*
  * change data
  */
@@ -44,5 +45,6 @@
 + (void)deleteUser:(NSString *)userName fromDevice:(NSString *)deviceIdentifire;
 + (void)logout;
 + (void)updateDonwloadedFirewareVersion:(NSInteger)newVersion ofDevice:(NSString *)deviceIdentifire;
++ (void)device:(NSString *)deviceIdentifire updateBatteryLevel:(NSInteger)batteryLevel;
 
 @end

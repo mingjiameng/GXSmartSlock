@@ -47,5 +47,8 @@
 #define UNLOCK_RECORD_KEY_SENDER_EMAIL @"sender_email"
 #define UNLOCK_RECORD_KEY_TIME_INTERVAL @"timeVal"
 
+#define USER_REMARK_NAME_KEY_ID @"id"
+#define USER_REMARK_NAME_KEY_CONTACT @"account_contact"
+#define USER_REMARK_NAME_KEY_ALIAS @"alias"
 
 #endif

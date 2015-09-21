@@ -20,8 +20,11 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CoreMotion/CoreMotion.h>
 
-#define UNLOCK_ANGLE_LIMIT_LOW 0.4
-#define UNLOCK_ANGLE_LIMIT_HIGH 0.8
+#define DEVICE_MOTION_UPDATE_TIME_INTERVAL 0.02
+#define SHAKE_PENDING_TIME_INTERVAL 0.05
+
+#define UNLOCK_ANGLE_LIMIT_LOW 0.3
+#define UNLOCK_ANGLE_LIMIT_HIGH 0.6
 
 #define UNLOCK_ANGLE_WAVE_LANDSCAPE_X 0.3
 #define UNLOCK_ANGLE_WAVE_LANDSCAPE_Y 0.5
@@ -72,7 +75,7 @@
         _previousUnlockAngle = _angle = 0x3f3f3f3f;
         _angleBeginChange = true;
         _motionManager = [[CMMotionManager alloc] init];
-        _motionManager.deviceMotionUpdateInterval = 0.02;
+        _motionManager.deviceMotionUpdateInterval = DEVICE_MOTION_UPDATE_TIME_INTERVAL;
     }
     
     return self;
@@ -414,7 +417,7 @@
         
         [_motionManager startDeviceMotionUpdates];
         
-        _updateTimer = [NSTimer timerWithTimeInterval:0.1 target:self selector:@selector(pendingShake) userInfo:nil repeats:YES];
+        _updateTimer = [NSTimer timerWithTimeInterval:SHAKE_PENDING_TIME_INTERVAL target:self selector:@selector(pendingShake) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_updateTimer forMode:NSDefaultRunLoopMode];
         [_updateTimer fire];
         

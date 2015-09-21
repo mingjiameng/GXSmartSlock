@@ -857,6 +857,19 @@
     [self saveContext];
 }
 
++ (void)device:(NSString *)deviceIdentifire updateBatteryLevel:(NSInteger)batteryLevel
+{
+    GXDatabaseEntityDevice *deviceEntity = [self deviceEntityWithDeviceIdentifire:deviceIdentifire];
+    
+    if (deviceEntity == nil) {
+        return;
+    }
+    
+    deviceEntity.deviceBattery = [NSNumber numberWithInteger:batteryLevel];
+    
+    [self saveContext];
+}
+
 + (void)logout
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];

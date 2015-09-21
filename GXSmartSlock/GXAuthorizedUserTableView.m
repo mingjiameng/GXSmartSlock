@@ -15,7 +15,7 @@
 #import "GXAuthorizedUserTableViewCell.h"
 #import "UIImageView+FHProfileDownload.h"
 
-@interface GXAuthorizedUserTableView ()
+@interface GXAuthorizedUserTableView () //<UITableViewDelegate, UITableViewDataSource>
 {
     UIImage *_profilePalceholder;
 }
@@ -67,6 +67,19 @@
     if ([self.delegate respondsToSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)]) {
         [self.delegate tableView:self commitEditingStyle:editingStyle forRowAtIndexPath:indexPath];
     }
+}
+
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        [self.delegate tableView:self commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
+    }];
+    
+    UITableViewRowAction *editNicknameRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"备注" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        [self.delegate tableView:self commitEditingStyle:UITableViewCellEditingStyleInsert forRowAtIndexPath:indexPath];
+    }];
+    
+    return @[deleteRowAction, editNicknameRowAction];
 }
 
 @end

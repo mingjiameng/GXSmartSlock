@@ -42,6 +42,7 @@
 
 @property (nonatomic, weak) id<zkeyTableViewWithPullFreshDelegate> delegate;
 @property (nonatomic, weak) id<zkeyTableViewWithPullFreshDataSource> dataSource;
+
 @property (nonatomic, strong) UITableView *tableView;
 
 - (void)forceToRefresh;

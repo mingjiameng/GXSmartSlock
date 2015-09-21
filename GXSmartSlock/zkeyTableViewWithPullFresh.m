@@ -12,9 +12,9 @@
 #import "zkeyViewHelper.h"
 
 @interface zkeyTableViewWithPullFresh () <UITableViewDelegate, UITableViewDataSource, zkeyRefreshHeaderViewDelegate>
-{
-    zkeyRefreshHeaderView *_refreshHeaderView;
-}
+
+@property (nonatomic, strong) zkeyRefreshHeaderView *refreshHeaderView;
+
 @end
 
 
@@ -130,5 +130,6 @@
     }
     
 }
+
 
 @end

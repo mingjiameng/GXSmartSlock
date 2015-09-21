@@ -25,8 +25,6 @@
 @implementation GXFirewareNewVersionDownloadModel
 - (void)checkNewVersion
 {
-    self.currentVersion = 12.0f;
-    
     [self.delegate beginCheckNewVersion];
     
     AFHTTPRequestOperationManager * requestOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"https://115.28.226.149/fw_version"]];
@@ -40,7 +38,7 @@
     
     id __weak weakDelegate = self.delegate;
     GXFirewareNewVersionDownloadModel *__weak weakSelf = self;
-    NSInteger __block newVersion = -1;
+    __block NSInteger newVersion = -1;
     [requestOperationManager GET:@"https://115.28.226.149/fw_version" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = (NSDictionary *)operation.responseObject;
         NSLog(@"result:%@", result);
@@ -62,7 +60,7 @@
 
 - (void)downloadNewVersion
 {
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@", [zkeySandboxHelper pathOfDocuments], self.deviceIdentifire];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@.bin", [zkeySandboxHelper pathOfDocuments], self.deviceIdentifire];
     
     [zkeySandboxHelper deleteFileAtPath:filePath];
     

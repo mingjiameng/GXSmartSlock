@@ -337,9 +337,27 @@
     }];
 }
 
++ (void)postWithUpdateBatteryLevelParam:(GXUpdateDeviceBatteryLevelParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_DEVICE_IDENTIFIRE : param.deviceIdentifire,
+                               KEY_DEVICE_BATTERY : param.batteryLevelString};
+    
+    [GXHttpTool postWithServerURL:GXUpdateDeviceBatteryURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"上传电量失败");
+            failure(error);
+        }
+    }];
+}
+
+
 + (BOOL)isServerAvailable
 {
-    GXReachability *server = [GXReachability reachabilityWithHostName:@"115.28.226.149:443"];
+    GXReachability *server = [GXReachability reachabilityWithHostName:@"115.28.226.149"];
     return ([server currentReachabilityStatus] != NotReachable);
 }
 
