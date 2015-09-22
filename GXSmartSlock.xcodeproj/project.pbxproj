@@ -17,11 +17,19 @@
 		440E2E2C1BAAD45000388051 /* zkeyURLDownloadHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 440E2E2B1BAAD45000388051 /* zkeyURLDownloadHelper.m */; };
 		441DAB901B9F11BD004F710D /* GXUnlockTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 441DAB8F1B9F11BD004F710D /* GXUnlockTool.m */; };
 		448BE17D1B903B3900DC6FD0 /* GXDeviceListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 448BE17C1B903B3900DC6FD0 /* GXDeviceListTableViewCell.m */; };
+		44A2B6581BB0260100622726 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A2B6571BB0260100622726 /* libsqlite3.0.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		44A2B65D1BB0285C00622726 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A2B6591BB0285C00622726 /* libWeChatSDK.a */; settings = {ASSET_TAGS = (); }; };
+		44A2B65E1BB0285C00622726 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 44A2B65A1BB0285C00622726 /* read_me.txt */; settings = {ASSET_TAGS = (); }; };
+		44A2B6611BB037AA00622726 /* GXLocalUnlockRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B6601BB037AA00622726 /* GXLocalUnlockRecordModel.m */; settings = {ASSET_TAGS = (); }; };
+		44A2B6661BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B6631BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		44A2B6671BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B6651BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord.m */; settings = {ASSET_TAGS = (); }; };
+		44A2B66A1BB04A7400622726 /* GXUploadUnlockRecordParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B6691BB04A7400622726 /* GXUploadUnlockRecordParam.m */; settings = {ASSET_TAGS = (); }; };
 		44DE14DE1BAD83D900DF3746 /* GXFirewareUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DE14DD1BAD83D900DF3746 /* GXFirewareUpdateModel.m */; };
 		44E2D2BE1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E2D2BD1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.m */; };
 		44E2D2C31B92F6D90021EB9F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E2D2C21B92F6D90021EB9F /* AddressBook.framework */; };
 		44E435241B92C16800430351 /* GXSelectDeviceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E435231B92C16800430351 /* GXSelectDeviceTableViewCell.m */; };
 		44E62E181BAFE0B100EC2C48 /* GXUpdateDeviceBatteryLevelParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E62E171BAFE0B100EC2C48 /* GXUpdateDeviceBatteryLevelParam.m */; settings = {ASSET_TAGS = (); }; };
+		44E62E261BB01BE900EC2C48 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E62E251BB01BE900EC2C48 /* libz.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		44E6F2671B93DE4800A38DF9 /* GXUserSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F2661B93DE4800A38DF9 /* GXUserSettingViewController.m */; };
 		44E6F26F1B93EFA200A38DF9 /* FHProfileImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F26A1B93EFA200A38DF9 /* FHProfileImageDownloader.m */; };
 		44E6F2701B93EFA200A38DF9 /* UIImageView+FHProfileDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6F26C1B93EFA200A38DF9 /* UIImageView+FHProfileDownload.m */; };
@@ -121,7 +129,6 @@
 		44E9F82C1B85E0C700165234 /* guidePage04@6plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E9F8271B85E0C700165234 /* guidePage04@6plus.png */; };
 		44E9F82D1B85E0C700165234 /* guidePage05@6plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E9F8281B85E0C700165234 /* guidePage05@6plus.png */; };
 		44E9F8341B85EAB800165234 /* zkeyButtonWithImageAndTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E9F8331B85EAB800165234 /* zkeyButtonWithImageAndTitle.m */; };
-		44E9F8391B85EB6200165234 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F8361B85EB6200165234 /* libWeChatSDK.a */; };
 		44E9F83D1B85F00400165234 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F83C1B85F00400165234 /* libz.dylib */; };
 		44E9F83F1B85F01800165234 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F83E1B85F01800165234 /* libsqlite3.0.dylib */; };
 		44E9F8411B85F02500165234 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E9F8401B85F02500165234 /* libc++.dylib */; };
@@ -165,7 +172,6 @@
 		44ED41A21B8A1F9E00079207 /* GXResetPasswordParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED41A11B8A1F9E00079207 /* GXResetPasswordParam.m */; };
 		44ED41A51B8A214300079207 /* GXRegisterParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED41A41B8A214300079207 /* GXRegisterParam.m */; };
 		44EE9A3A1B9DE67A0095EFAC /* GXUnlockRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EE9A391B9DE67A0095EFAC /* GXUnlockRecordViewController.m */; };
-		44F354ED1B9F1FDB00B33D19 /* GXUploadUnlockRecordParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F354EC1B9F1FDB00B33D19 /* GXUploadUnlockRecordParam.m */; };
 		44F354F71BA04ED700B33D19 /* GXManulUnlockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F354F61BA04ED700B33D19 /* GXManulUnlockModel.m */; };
 		44F354FB1BA0561500B33D19 /* GXManagePermanentPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F354FA1BA0561500B33D19 /* GXManagePermanentPasswordViewController.m */; };
 		44F354FE1BA0772900B33D19 /* NSData+ToNSString.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F354FD1BA0772900B33D19 /* NSData+ToNSString.m */; };
@@ -207,6 +213,19 @@
 		441DAB8F1B9F11BD004F710D /* GXUnlockTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUnlockTool.m; sourceTree = "<group>"; };
 		448BE17B1B903B3900DC6FD0 /* GXDeviceListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDeviceListTableViewCell.h; sourceTree = "<group>"; };
 		448BE17C1B903B3900DC6FD0 /* GXDeviceListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDeviceListTableViewCell.m; sourceTree = "<group>"; };
+		44A2B6571BB0260100622726 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		44A2B6591BB0285C00622726 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		44A2B65A1BB0285C00622726 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		44A2B65B1BB0285C00622726 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		44A2B65C1BB0285C00622726 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		44A2B65F1BB037AA00622726 /* GXLocalUnlockRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXLocalUnlockRecordModel.h; sourceTree = "<group>"; };
+		44A2B6601BB037AA00622726 /* GXLocalUnlockRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXLocalUnlockRecordModel.m; sourceTree = "<group>"; };
+		44A2B6621BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GXDatabaseEntityLocalUnlockRecord+CoreDataProperties.h"; sourceTree = "<group>"; };
+		44A2B6631BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GXDatabaseEntityLocalUnlockRecord+CoreDataProperties.m"; sourceTree = "<group>"; };
+		44A2B6641BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDatabaseEntityLocalUnlockRecord.h; sourceTree = "<group>"; };
+		44A2B6651BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDatabaseEntityLocalUnlockRecord.m; sourceTree = "<group>"; };
+		44A2B6681BB04A7400622726 /* GXUploadUnlockRecordParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUploadUnlockRecordParam.h; sourceTree = "<group>"; };
+		44A2B6691BB04A7400622726 /* GXUploadUnlockRecordParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUploadUnlockRecordParam.m; sourceTree = "<group>"; };
 		44DE14DC1BAD83D900DF3746 /* GXFirewareUpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXFirewareUpdateModel.h; sourceTree = "<group>"; };
 		44DE14DD1BAD83D900DF3746 /* GXFirewareUpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXFirewareUpdateModel.m; sourceTree = "<group>"; };
 		44E2D2BC1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSelectValidDeviceViewController.h; sourceTree = "<group>"; };
@@ -216,6 +235,7 @@
 		44E435231B92C16800430351 /* GXSelectDeviceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXSelectDeviceTableViewCell.m; sourceTree = "<group>"; };
 		44E62E161BAFE0B100EC2C48 /* GXUpdateDeviceBatteryLevelParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUpdateDeviceBatteryLevelParam.h; sourceTree = "<group>"; };
 		44E62E171BAFE0B100EC2C48 /* GXUpdateDeviceBatteryLevelParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUpdateDeviceBatteryLevelParam.m; sourceTree = "<group>"; };
+		44E62E251BB01BE900EC2C48 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		44E6F2651B93DE4800A38DF9 /* GXUserSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUserSettingViewController.h; sourceTree = "<group>"; };
 		44E6F2661B93DE4800A38DF9 /* GXUserSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUserSettingViewController.m; sourceTree = "<group>"; };
 		44E6F2691B93EFA200A38DF9 /* FHProfileImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FHProfileImageDownloader.h; sourceTree = "<group>"; };
@@ -391,9 +411,6 @@
 		44E9F8281B85E0C700165234 /* guidePage05@6plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guidePage05@6plus.png"; sourceTree = "<group>"; };
 		44E9F8321B85EAB800165234 /* zkeyButtonWithImageAndTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyButtonWithImageAndTitle.h; sourceTree = "<group>"; };
 		44E9F8331B85EAB800165234 /* zkeyButtonWithImageAndTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyButtonWithImageAndTitle.m; sourceTree = "<group>"; };
-		44E9F8361B85EB6200165234 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		44E9F8371B85EB6200165234 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		44E9F8381B85EB6200165234 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		44E9F83C1B85F00400165234 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		44E9F83E1B85F01800165234 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		44E9F8401B85F02500165234 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -481,8 +498,6 @@
 		44ED41A41B8A214300079207 /* GXRegisterParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRegisterParam.m; sourceTree = "<group>"; };
 		44EE9A381B9DE67A0095EFAC /* GXUnlockRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUnlockRecordViewController.h; sourceTree = "<group>"; };
 		44EE9A391B9DE67A0095EFAC /* GXUnlockRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUnlockRecordViewController.m; sourceTree = "<group>"; };
-		44F354EB1B9F1FDB00B33D19 /* GXUploadUnlockRecordParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUploadUnlockRecordParam.h; sourceTree = "<group>"; };
-		44F354EC1B9F1FDB00B33D19 /* GXUploadUnlockRecordParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUploadUnlockRecordParam.m; sourceTree = "<group>"; };
 		44F354F21BA04E3800B33D19 /* MICRO_UNLOCK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MICRO_UNLOCK.h; sourceTree = "<group>"; };
 		44F354F51BA04ED700B33D19 /* GXManulUnlockModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXManulUnlockModel.h; sourceTree = "<group>"; };
 		44F354F61BA04ED700B33D19 /* GXManulUnlockModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXManulUnlockModel.m; sourceTree = "<group>"; };
@@ -531,6 +546,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44A2B65D1BB0285C00622726 /* libWeChatSDK.a in Frameworks */,
+				44A2B6581BB0260100622726 /* libsqlite3.0.tbd in Frameworks */,
+				44E62E261BB01BE900EC2C48 /* libz.tbd in Frameworks */,
 				44E2D2C31B92F6D90021EB9F /* AddressBook.framework in Frameworks */,
 				44E9B7FD1B86053800D289F0 /* CoreTelephony.framework in Frameworks */,
 				44E9B7FB1B86052D00D289F0 /* CFNetwork.framework in Frameworks */,
@@ -541,7 +559,6 @@
 				44E9B7F31B86048600D289F0 /* SystemConfiguration.framework in Frameworks */,
 				44E9F8411B85F02500165234 /* libc++.dylib in Frameworks */,
 				44E9F83F1B85F01800165234 /* libsqlite3.0.dylib in Frameworks */,
-				44E9F8391B85EB6200165234 /* libWeChatSDK.a in Frameworks */,
 				44E9F7F61B85D44600165234 /* libMiPushSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -816,6 +833,10 @@
 				440E2E1E1BAA63B700388051 /* GXDatabaseEntityDevice.m */,
 				44044F4E1BAEB0E3007B608C /* GXDatabaseEntityUser.h */,
 				44044F4F1BAEB0E3007B608C /* GXDatabaseEntityUser.m */,
+				44A2B6621BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord+CoreDataProperties.h */,
+				44A2B6631BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord+CoreDataProperties.m */,
+				44A2B6641BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord.h */,
+				44A2B6651BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord.m */,
 			);
 			name = Local;
 			sourceTree = "<group>";
@@ -836,6 +857,8 @@
 				44F355061BA1773F00B33D19 /* GXUnlockRecordModel.m */,
 				44044F511BAEB342007B608C /* GXRemarkNameModel.h */,
 				44044F521BAEB342007B608C /* GXRemarkNameModel.m */,
+				44A2B65F1BB037AA00622726 /* GXLocalUnlockRecordModel.h */,
+				44A2B6601BB037AA00622726 /* GXLocalUnlockRecordModel.m */,
 			);
 			name = ServerDataAnalyst;
 			sourceTree = "<group>";
@@ -1007,9 +1030,10 @@
 		44E9F8351B85EB5700165234 /* zkeyWeiXinSDK */ = {
 			isa = PBXGroup;
 			children = (
-				44E9F8361B85EB6200165234 /* libWeChatSDK.a */,
-				44E9F8371B85EB6200165234 /* WXApi.h */,
-				44E9F8381B85EB6200165234 /* WXApiObject.h */,
+				44A2B6591BB0285C00622726 /* libWeChatSDK.a */,
+				44A2B65A1BB0285C00622726 /* read_me.txt */,
+				44A2B65B1BB0285C00622726 /* WXApi.h */,
+				44A2B65C1BB0285C00622726 /* WXApiObject.h */,
 			);
 			name = zkeyWeiXinSDK;
 			sourceTree = "<group>";
@@ -1037,6 +1061,8 @@
 		44E9F8421B85F04100165234 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				44A2B6571BB0260100622726 /* libsqlite3.0.tbd */,
+				44E62E251BB01BE900EC2C48 /* libz.tbd */,
 				44E2D2C21B92F6D90021EB9F /* AddressBook.framework */,
 				44E9B7FC1B86053800D289F0 /* CoreTelephony.framework */,
 				44E9B7FA1B86052D00D289F0 /* CFNetwork.framework */,
@@ -1279,12 +1305,12 @@
 				44EB63481B9D1BCB008BF8BE /* GXSynchronizeUnlockRecordParam.m */,
 				44EB634D1B9D27A2008BF8BE /* GXSendKeyParam.h */,
 				44EB634E1B9D27A2008BF8BE /* GXSendKeyParam.m */,
-				44F354EB1B9F1FDB00B33D19 /* GXUploadUnlockRecordParam.h */,
-				44F354EC1B9F1FDB00B33D19 /* GXUploadUnlockRecordParam.m */,
 				44F355281BA46A7F00B33D19 /* GXUpdateUnlockRecordParam.h */,
 				44F355291BA46A7F00B33D19 /* GXUpdateUnlockRecordParam.m */,
 				44E62E161BAFE0B100EC2C48 /* GXUpdateDeviceBatteryLevelParam.h */,
 				44E62E171BAFE0B100EC2C48 /* GXUpdateDeviceBatteryLevelParam.m */,
+				44A2B6681BB04A7400622726 /* GXUploadUnlockRecordParam.h */,
+				44A2B6691BB04A7400622726 /* GXUploadUnlockRecordParam.m */,
 			);
 			name = Param;
 			sourceTree = "<group>";
@@ -1407,6 +1433,7 @@
 				44E9F8091B85E03100165234 /* guidePage02@4s.png in Resources */,
 				44E9F8151B85E08A00165234 /* guidePage03@5s.png in Resources */,
 				44E9F8171B85E08A00165234 /* guidePage05@5s.png in Resources */,
+				44A2B65E1BB0285C00622726 /* read_me.txt in Resources */,
 				44E916811B86CDE200EF9C38 /* Voicemail.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1481,6 +1508,7 @@
 				44E6F2E91B9B21F000A38DF9 /* NSString+StringHexToData.m in Sources */,
 				44E917041B884B9000EF9C38 /* GXServerDataAnalyst.m in Sources */,
 				44F3551E1BA3DE7A00B33D19 /* GXDevicePermanentPsswordModel.m in Sources */,
+				44A2B6671BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord.m in Sources */,
 				44E6F2971B957F2700A38DF9 /* GesturePasswordButton.m in Sources */,
 				44ED41931B896B9700079207 /* AFURLConnectionOperation.m in Sources */,
 				44F354F71BA04ED700B33D19 /* GXManulUnlockModel.m in Sources */,
@@ -1513,14 +1541,15 @@
 				44ED1D411B8B15C200F1A7F4 /* zkeyLoginView.m in Sources */,
 				44E6F2DF1B9B144B00A38DF9 /* GXPairBluetoothModel.m in Sources */,
 				44E6F2961B957F2700A38DF9 /* FHGesturePasswordViewController.m in Sources */,
+				44A2B6661BB03F5500622726 /* GXDatabaseEntityLocalUnlockRecord+CoreDataProperties.m in Sources */,
 				44EB634F1B9D27A2008BF8BE /* GXSendKeyParam.m in Sources */,
 				44ED41971B896B9700079207 /* GXReachability.m in Sources */,
 				44E6F2811B94012100A38DF9 /* GXUpdateProfileImageModel.m in Sources */,
 				44E6F2B11B95F52000A38DF9 /* GXAuthorizedUserTableViewCellDataModel.m in Sources */,
-				44F354ED1B9F1FDB00B33D19 /* GXUploadUnlockRecordParam.m in Sources */,
 				44E6F2E21B9B1EC500A38DF9 /* GXAddNewDeviceParam.m in Sources */,
 				44ED416E1B89682500079207 /* GXLoginParam.m in Sources */,
 				44044F501BAEB0E3007B608C /* GXDatabaseEntityUser.m in Sources */,
+				44A2B6611BB037AA00622726 /* GXLocalUnlockRecordModel.m in Sources */,
 				44ED41631B89654600079207 /* GXDatabaseEntityDeviceUserMappingItem.m in Sources */,
 				44E6F29C1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.m in Sources */,
 				44E6F2A51B959A5300A38DF9 /* GXUpdatePasswordParam.m in Sources */,
@@ -1554,6 +1583,7 @@
 				44E6F2711B93EFA200A38DF9 /* zkeyWebImageCache.m in Sources */,
 				44F354FE1BA0772900B33D19 /* NSData+ToNSString.m in Sources */,
 				44E6F2671B93DE4800A38DF9 /* GXUserSettingViewController.m in Sources */,
+				44A2B66A1BB04A7400622726 /* GXUploadUnlockRecordParam.m in Sources */,
 				44E6F2AB1B95F3C200A38DF9 /* GXAuthorizedUserTableViewCell.m in Sources */,
 				44E9B8001B860B0900D289F0 /* GXRootViewController.m in Sources */,
 				44E6F2771B93F4FE00A38DF9 /* GXLogoutModel.m in Sources */,
@@ -1671,13 +1701,15 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: xu li (6DP8VA4CHX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = GXSmartSlock/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/GXSmartSlock",
 					"$(PROJECT_DIR)/GXSmartSlock/zkeyWeiXinSDK",
+					"$(PROJECT_DIR)/GXSmartSlock",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "616f8952-878a-48ca-a8db-df5c905f5ec5";
@@ -1692,13 +1724,15 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: xu li (Z59QGLWNHK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = GXSmartSlock/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/GXSmartSlock",
 					"$(PROJECT_DIR)/GXSmartSlock/zkeyWeiXinSDK",
+					"$(PROJECT_DIR)/GXSmartSlock",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c180e9bf-8194-4825-873b-f80dfbc846c4";

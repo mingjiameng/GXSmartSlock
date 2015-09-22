@@ -51,6 +51,8 @@
 
 #define GXUpdateDeviceBatteryURL [NSString stringWithFormat:@"%@update_device_battery", GXBaseURL]
 
+#define GXUploadUnlockRecordURL [NSString stringWithFormat:@"%@push_old_record", GXBaseURL]
+
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"
 #define KEY_PHONE_INFO @"phone_info"
@@ -69,5 +71,9 @@
 #define KEY_DEVICE_CATEGORY @"device_typecode"
 #define KEY_AUTHORITY_TYPE @"key_type"
 #define KEY_RECEIVER_USER_NAME @"contact"
+#define KEY_UNLOCK_EVENT @"event"
+#define KEY_UNLOCK_EVENT_TYPE @"event_type"
+#define KEY_UNLOCK_DATE @"date"
+
 
 #endif

@@ -21,11 +21,13 @@
 #import "GXDeviceUserMappingModel.h"
 #import "GXUserModel.h"
 #import "GXUnlockRecordModel.h"
+#import "GXLocalUnlockRecordModel.h"
 
 #import "GXDatabaseEntityDevice.h"
 #import "GXDatabaseEntityDeviceUserMappingItem.h"
 #import "GXDatabaseEntityUser.h"
 #import "GXDatabaseEntityUnlockRecord.h"
+#import "GXDatabaseEntityLocalUnlockRecord.h"
 
 #import <Foundation/Foundation.h>
 
@@ -394,9 +396,66 @@
     NSLog(@"successfully insert unlock record");
 }
 
++ (void)addLocalUnlockRecordIntoDatabase:(NSArray *)unlockRecordArray
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    for (GXLocalUnlockRecordModel *unlockRecordModel in unlockRecordArray) {
+        GXDatabaseEntityLocalUnlockRecord *newLocalUnlockRecord = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_LOCAL_UNLOCK_RECORD inManagedObjectContext:managedObjectContext];
+        
+        newLocalUnlockRecord.deviceIdentifire = unlockRecordModel.deviceIdentifire;
+        newLocalUnlockRecord.date = unlockRecordModel.date;
+        newLocalUnlockRecord.eventType = [NSNumber numberWithInteger:unlockRecordModel.eventType];
+        newLocalUnlockRecord.event = unlockRecordModel.event;
+    }
+}
+
 /*
  * the following method provide data for runtime application
  */
++ (NSFetchedResultsController *)allLocalUnlockRecordFetchedResultsController
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityLocalUnlockRecord = [NSEntityDescription entityForName:ENTITY_LOCAL_UNLOCK_RECORD inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityLocalUnlockRecord];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    
+    NSError *error = nil;
+    if (![fetchedResultsController performFetch:&error]) {
+        NSLog(@"fetch local unlock record error:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    return fetchedResultsController;
+}
+
++ (NSArray *)allLocalUnlockRecordArray
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityLocalUnlockRecord = [NSEntityDescription entityForName:ENTITY_LOCAL_UNLOCK_RECORD inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityLocalUnlockRecord];
+    
+    NSError *error = nil;
+    NSArray *unlockRecordArray = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (error != nil) {
+        NSLog(@"fetch local unlock record array error:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    return unlockRecordArray;
+}
+
 + (NSFetchedResultsController *)validDeviceFetchedResultsController
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
@@ -868,6 +927,13 @@
     deviceEntity.deviceBattery = [NSNumber numberWithInteger:batteryLevel];
     
     [self saveContext];
+}
+
++ (void)deleteLocalUnlockRecordEntity:(GXDatabaseEntityLocalUnlockRecord *)record
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    [managedObjectContext deleteObject:record];
 }
 
 + (void)logout

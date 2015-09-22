@@ -354,10 +354,29 @@
     }];
 }
 
++ (void)postWithUploadLocalUnlockRecordParam:(GXUploadUnlockRecordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_DEVICE_IDENTIFIRE : param.deviceIdentifire,
+                               KEY_UNLOCK_EVENT : param.event,
+                               KEY_UNLOCK_EVENT_TYPE : param.eventType,
+                               KEY_UNLOCK_DATE : param.timeIntervalString};
+    
+    
+    [GXHttpTool postWithServerURL:GXUploadUnlockRecordURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"上传开锁记录失败");
+            failure(error);
+        }
+    }];
+}
 
 + (BOOL)isServerAvailable
 {
-    GXReachability *server = [GXReachability reachabilityWithHostName:@"115.28.226.149"];
+    GXReachability *server = [GXReachability reachabilityWithHostName:@"www.baidu.com"];
     return ([server currentReachabilityStatus] != NotReachable);
 }
 

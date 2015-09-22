@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
 /*! @brief 错误码
  *
@@ -20,6 +19,7 @@ enum  WXErrCode {
     WXErrCodeAuthDeny   = -4,   /**< 授权失败    */
     WXErrCodeUnsupport  = -5,   /**< 微信不支持    */
 };
+
 
 
 /*! @brief 请求发送场景

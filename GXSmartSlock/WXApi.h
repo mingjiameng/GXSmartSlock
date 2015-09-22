@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "WXApiObject.h"
-#import <UIKit/UIKit.h>
+
 
 #pragma mark - WXApiDelegate
 /*! @brief 接收并处理来自微信终端程序的事件消息
@@ -114,6 +114,8 @@
  */
 +(NSString *) getApiVersion;
 
+
+
 /*! @brief 打开微信
  *
  * @return 成功返回YES，失败返回NO。
@@ -139,7 +141,7 @@
  * @param delegate  WXApiDelegate对象，用来接收微信触发的消息。
  * @return 成功返回YES，失败返回NO。
  */
-+(BOOL) sendAuthReq:(SendAuthReq*)req viewController:(UIViewController *)viewController delegate:(id<WXApiDelegate>) delegate;
++(BOOL) sendAuthReq:(SendAuthReq*) req viewController : (UIViewController*) viewController delegate:(id<WXApiDelegate>) delegate;
 
 
 /*! @brief 收到微信onReq的请求，发送对应的应答给微信，并切换到微信界面

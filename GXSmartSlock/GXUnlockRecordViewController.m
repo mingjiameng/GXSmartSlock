@@ -22,7 +22,7 @@
 
 #import "GXSelectValidDeviceViewController.h"
 
-@interface GXUnlockRecordViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, GXSynchronizeUnlockRecordModelDelegate>
+@interface GXUnlockRecordViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, GXSynchronizeUnlockRecordModelDelegate, NSFetchedResultsControllerDelegate>
 {
     UIButton *_selectUnlockModeButton;
     GXDatabaseEntityDevice *_selectedDeviceEntity;
@@ -123,6 +123,8 @@
     } else if (self.viewType == UnlockRecordViewTypeFromRootView) {
         _fetchedResultsController = [GXDatabaseHelper unlockRecordOfDevice:nil];
     }
+    
+    _fetchedResultsController.delegate = self;
 }
 
 #pragma mark - table view data source
@@ -192,6 +194,8 @@
     } else {
         self.fetchedResultsController = [GXDatabaseHelper unlockRecordOfDevice:_selectedDeviceEntity.deviceIdentifire];
     }
+    
+    _fetchedResultsController.delegate = self;
     
     [_tableView.tableView reloadData];
 }

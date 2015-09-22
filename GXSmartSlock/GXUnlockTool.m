@@ -12,19 +12,25 @@
 #import "MICRO_DEVICE_LIST.h"
 
 #import "GXDatabaseEntityDevice.h"
+#import "GXDatabaseEntityUser.h"
+#import "GXDatabaseEntityLocalUnlockRecord.h"
+
 #import "GXDatabaseHelper.h"
 #import "GXReachability.h"
 #import "GXDefaultHttpHelper.h"
 #import "GXUpdateDeviceBatteryLevelParam.h"
+#import "GXLocalUnlockRecordModel.h"
+#import "GXUploadUnlockRecordParam.h"
 
 #import "GXManulUnlockModel.h"
 #import "GXAutoUnlockModel.h"
 #import "GXShakeUnlockModel.h"
 
-
 #import "zkeyViewHelper.h"
 
-@interface GXUnlockTool () <GXUnlockModelDelegate>
+#import <CoreData/CoreData.h>
+
+@interface GXUnlockTool () <GXUnlockModelDelegate, NSFetchedResultsControllerDelegate>
 {
     NSDictionary *_deviceKeyDic;
     NSDictionary *_deviceCategoryDic;
@@ -33,7 +39,11 @@
     GXManulUnlockModel *_manulUnlockModel;
     GXAutoUnlockModel *_autoUnlockModel;
     GXShakeUnlockModel *_shakeUnlockModel;
+    
+    BOOL _isUploadingUnlockRecord;
 }
+@property (nonatomic, strong) NSFetchedResultsController *localUnlockRecordFetchedResultsController;
+
 @end
 
 @implementation GXUnlockTool
@@ -43,8 +53,10 @@
     self = [super init];
     
     if (self) {
+        _isUploadingUnlockRecord = NO;
         [self updateUnlockMode];
         [self updateDeviceKeyDictionary];
+        [self trackLocalUnlockRecord];
     }
     
     return self;
@@ -97,6 +109,12 @@
     
     _deviceKeyDic = (NSDictionary *)tmpDeviceKeyDic;
     _deviceCategoryDic = (NSDictionary *)tmpDeviceCategoryDic;
+}
+
+- (void)trackLocalUnlockRecord
+{
+    _localUnlockRecordFetchedResultsController = [GXDatabaseHelper allLocalUnlockRecordFetchedResultsController];
+    _localUnlockRecordFetchedResultsController.delegate = self;
 }
 
 - (void)manulUnlock
@@ -159,16 +177,25 @@
 
 - (void)unlockTheDevice:(NSString *)deviceIdentifire successful:(BOOL)successful
 {
+    GXDatabaseEntityDevice *device = [GXDatabaseHelper deviceEntityWithDeviceIdentifire:deviceIdentifire];
+    GXDatabaseEntityUser *user = [GXDatabaseHelper defaultUser];
+    
+    GXLocalUnlockRecordModel *unlockRecord = [[GXLocalUnlockRecordModel alloc] init];
     // save to local
-    NSString *event = 
-    if () {
-        <#statements#>
+    if (successful) {
+        unlockRecord.event = [NSString stringWithFormat:@"%@开锁%@成功", user.nickname, device.deviceNickname];
+        unlockRecord.eventType = 1;
+    } else {
+        unlockRecord.event = [NSString stringWithFormat:@"%@开锁%@失败", user.nickname, device.deviceNickname];
+        unlockRecord.eventType = 2;
     }
+    
+    unlockRecord.deviceIdentifire = deviceIdentifire;
+    unlockRecord.date = [NSDate date];
+    
+    [GXDatabaseHelper addLocalUnlockRecordIntoDatabase:@[unlockRecord]];
 }
 
-/*
- * something about synchronizing battery level and unlock record
- */
 
 /*
  * STRATEGY OF SYNCHRONIZING BATTERY LEVEL
@@ -198,9 +225,69 @@
  * or the network condition change (user turn on the network)
  */
 
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    if (type == NSFetchedResultsChangeInsert) {
+        if (!_isUploadingUnlockRecord) {
+            [self uploadLocalUnlockRecord];
+        }
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    if (type == NSFetchedResultsChangeInsert) {
+        if (!_isUploadingUnlockRecord) {
+            [self uploadLocalUnlockRecord];
+        }
+    }
+}
+
 - (void)uploadLocalUnlockRecord
 {
+    if (_isUploadingUnlockRecord) {
+        return;
+    }
     
+    _isUploadingUnlockRecord = YES;
+    
+    if (![GXDefaultHttpHelper isServerAvailable]) {
+        NSLog(@"上传开锁记录没有网络");
+        _isUploadingUnlockRecord = NO;
+        return;
+    }
+    
+    NSArray *localUnlockRecordArray = [GXDatabaseHelper allLocalUnlockRecordArray];
+    if (localUnlockRecordArray == nil || localUnlockRecordArray.count <= 0) {
+        _isUploadingUnlockRecord = NO;
+        return;
+    }
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_PASSWORD];
+    
+    for (GXDatabaseEntityLocalUnlockRecord *unlockRecordEntity in localUnlockRecordArray) {
+        GXUploadUnlockRecordParam *param = [[GXUploadUnlockRecordParam alloc] init];
+        
+        param.userName = userName;
+        param.password = password;
+        param.deviceIdentifire = unlockRecordEntity.deviceIdentifire;
+        param.event = unlockRecordEntity.event;
+        param.eventType = [NSString stringWithFormat:@"%@", unlockRecordEntity.eventType];
+        param.timeIntervalString = [NSString stringWithFormat:@"%.0lf", [unlockRecordEntity.date timeIntervalSince1970] * 1000];
+        
+        [GXDefaultHttpHelper postWithUploadLocalUnlockRecordParam:param success:^(NSDictionary *result) {
+            NSInteger status = [[result objectForKey:@"status"] integerValue];
+            if (status == 1) {
+                [GXDatabaseHelper deleteLocalUnlockRecordEntity:unlockRecordEntity];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+    
+    _isUploadingUnlockRecord = NO;
+    return;
 }
 
 @end

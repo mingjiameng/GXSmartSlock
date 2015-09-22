@@ -30,6 +30,7 @@ typedef void(^HttpFailure)(NSError *error);
 #import "GXSynchronizeUnlockRecordParam.h"
 #import "GXSendKeyParam.h"
 #import "GXUpdateDeviceBatteryLevelParam.h"
+#import "GXUploadUnlockRecordParam.h"
 
 #import "GXGetVerificationCodeParam.h"
 
@@ -54,7 +55,7 @@ typedef void(^HttpFailure)(NSError *error);
 + (void)postWithSynchronizeUnlockRecordParam:(GXSynchronizeUnlockRecordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
 + (void)postWithSendKeyParam:(GXSendKeyParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;;
 + (void)postWithUpdateBatteryLevelParam:(GXUpdateDeviceBatteryLevelParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
-
++ (void)postWithUploadLocalUnlockRecordParam:(GXUploadUnlockRecordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
 
 + (BOOL)isServerAvailable;
 
