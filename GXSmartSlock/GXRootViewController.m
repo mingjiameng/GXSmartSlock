@@ -26,16 +26,17 @@
 
 #import <CoreData/CoreData.h>
 
-
 #define BOTTOM_TOOL_BAR_HEIGHT 100.0F
 
-@interface GXRootViewController () <NSFetchedResultsControllerDelegate, UIActionSheetDelegate>
+@interface GXRootViewController () <NSFetchedResultsControllerDelegate, UIActionSheetDelegate, GXUnlockToolDelegate>
 {
     UIButton *_selectUnlockModeButton;
     NSFetchedResultsController *_validKeyFetchedResultsController;
     UIButton *_centralButton;
     UIActionSheet *_unlockModeActionSheet;
     UIImageView *_headImageView;
+    UIWebView *_animationView;
+    
     
     GXUnlockTool *_unlockTool;
 }
@@ -111,9 +112,7 @@
         [self.view addSubview:_centralButton];
     }
     
-    [_centralButton removeTarget:self action:@selector(autoUnlockGuide:) forControlEvents:UIControlEventTouchUpInside];
-    [_centralButton removeTarget:self action:@selector(shakeUnlockGuide:) forControlEvents:UIControlEventTouchUpInside];
-    [_centralButton removeTarget:self action:@selector(manulUnlock:) forControlEvents:UIControlEventTouchUpInside];
+    [_centralButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     
     NSString *backgroundImageName = CENTRAL_BUTTON_TYPE_NONE;
     if ([self isThereValidDevice]) {
@@ -124,14 +123,17 @@
         } else if (unlockMode == DefaultUnlockModeAuto) {
             backgroundImageName = CENTRAL_BUTTON_TYPE_AUTO;
             [_centralButton addTarget:self action:@selector(autoUnlockGuide:) forControlEvents:UIControlEventTouchUpInside];
+            _animationView = nil;
         } else if (unlockMode == DefaultUnlockModeShake) {
             backgroundImageName = CENTRAL_BUTTON_TYPE_SHAKE;
             [_centralButton addTarget:self action:@selector(shakeUnlockGuide:) forControlEvents:UIControlEventTouchUpInside];
+            _animationView = nil;
         } else {
             NSLog(@"invalid unlock mode");
         }
     } else {
         backgroundImageName = CENTRAL_BUTTON_TYPE_NONE;
+        _animationView = nil;
     }
     
     [_centralButton setBackgroundImage:[UIImage imageNamed:backgroundImageName] forState:UIControlStateNormal];
@@ -140,6 +142,7 @@
 - (void)addUnlockTool
 {
     _unlockTool = [[GXUnlockTool alloc] init];
+    _unlockTool.delegate = self;
 }
 
 - (void)configNavigationBarTitleView
@@ -285,16 +288,47 @@
 
 - (void)manulUnlock:(UIButton *)sender
 {
+    if (_animationView == nil) {
+        // animation view
+        _animationView = [[UIWebView alloc] initWithFrame:_centralButton.frame];
+        _animationView.scalesPageToFit = YES;
+        _animationView.backgroundColor = [UIColor clearColor];
+        _animationView.userInteractionEnabled = NO;
+        
+        NSString *animationFilePath = [[NSBundle mainBundle] pathForResource:@"manulUnlockAnimation" ofType:@"gif"];
+        NSData *animationData = [NSData dataWithContentsOfFile:animationFilePath];
+        [_animationView loadData:animationData MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+        
+        _animationView.hidden = YES;
+        
+        [self.view addSubview:_animationView];
+    }
+    
+    _animationView.hidden = NO;
     NSLog(@"点击手动开锁");
     [_unlockTool manulUnlock];
 }
 
 
+#pragma mark - 
+- (void)successfullyUnlockDevice:(NSString *)deviceIdentifire
+{
+    if (_animationView != nil) {
+        _animationView.hidden = YES;
+    }
+}
+
+- (void)forceStopUnlock
+{
+    if (_animationView != nil) {
+        _animationView.hidden = YES;
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - Navigation
 - (void)showDeviceList:(UIButton *)sender

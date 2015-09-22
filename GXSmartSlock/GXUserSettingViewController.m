@@ -45,7 +45,7 @@
 - (void)configNavigationBar
 {
     self.navigationItem.title = @"用户设置";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissVC)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(dismissVC)];
 }
 
 - (void)addUserSettingTableView:(CGRect)frame

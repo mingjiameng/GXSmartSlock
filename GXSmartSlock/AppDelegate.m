@@ -13,6 +13,7 @@
 #import "zkeyMiPushPackage.h"
 #import "WXApi.h"
 #import "GXDatabaseHelper.h"
+#import "GXLogoutModel.h"
 
 #import "zkeyViewHelper.h"
 
@@ -201,7 +202,7 @@
     if (remoteDeviceToken != nil) {
         NSString *localDeviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_DEVICE_TOKEN];
         if ([localDeviceToken isEqual:remoteDeviceToken]) {
-            //[self forceToLogout];
+            [self forceLogout];
         }
     }
     
@@ -214,6 +215,18 @@
         }
     }
     
+}
+
+
+- (void)forceLogout
+{
+    [GXLogoutModel logout];
+ 
+    GXLoginViewController *loginVC = [[GXLoginViewController alloc] init];
+    UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    
+    _window.rootViewController = navigation;
+
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo

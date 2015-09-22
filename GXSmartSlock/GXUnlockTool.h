@@ -8,7 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol GXUnlockToolDelegate <NSObject>
+
+@optional
+- (void)successfullyUnlockDevice:(NSString *)deviceIdentifire;
+- (void)forceStopUnlock;
+
+@end
+
 @interface GXUnlockTool : NSObject
+
+@property (nonatomic, weak) id<GXUnlockToolDelegate> delegate;
 
 /*
 diviceKeyDictionary = {
@@ -17,12 +27,10 @@ diviceKeyDictionary = {
  */
 - (void)updateDeviceKeyDictionary;
 
-
 - (void)updateUnlockMode;
 
 // when the application enter foreground, upload exist unlock information
 - (void)uploadLocalUnlockRecord;
-
 
 - (void)manulUnlock;
 

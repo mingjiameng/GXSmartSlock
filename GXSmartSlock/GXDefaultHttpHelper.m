@@ -13,6 +13,7 @@
 #import "GXHttpTool.h"
 #import "GXReachability.h"
 
+
 @implementation GXDefaultHttpHelper
 
 + (void)postWithLoginParam:(GXLoginParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
@@ -369,6 +370,23 @@
     } failure:^(NSError *error) {
         if (error != nil) {
             NSLog(@"上传开锁记录失败");
+            failure(error);
+        }
+    }];
+}
+
++ (void)postWithUploadDeviceVersionParam:(GXUploadDeviceVersionParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_USER_NAME : param.userName,
+                               KEY_PASSWORD : param.password,
+                               KEY_DEVICE_IDENTIFIRE : param.deviceIdentifire,
+                               KEY_DEVICE_VERSION : param.deviceVersion};
+    
+    [GXHttpTool postWithServerURL:GXUploadDeviceVersionURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"上传固件版本");
             failure(error);
         }
     }];

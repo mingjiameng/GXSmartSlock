@@ -118,6 +118,7 @@
         
         cell.imageView.image = [self deviceImageNameAccordingDeviceCategory:_selectedDeviceEntity.deviceCategory andDeviceIdentifire:_selectedDeviceEntity.deviceIdentifire];
         cell.textLabel.text = _selectedDeviceEntity.deviceNickname;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (indexPath.section == 1) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
         

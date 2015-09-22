@@ -53,6 +53,8 @@
 
 #define GXUploadUnlockRecordURL [NSString stringWithFormat:@"%@push_old_record", GXBaseURL]
 
+#define GXUploadDeviceVersionURL [NSString stringWithFormat:@"%@update_device_version", GXBaseURL]
+
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"
 #define KEY_PHONE_INFO @"phone_info"

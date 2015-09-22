@@ -28,6 +28,10 @@
 @property (nonatomic) NSInteger downloadedVersion;
 @property (nonatomic, weak) id<GXFirewareUpdateModelDelegate> delegate;
 
+
+@property (nonatomic) BOOL isConnected;
+@property (nonatomic) BOOL inProgramming;
+
 // connect the guosim device, write the new fireware into device
 - (void)updateFireware;
 

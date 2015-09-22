@@ -129,11 +129,11 @@
 
 - (void)forceStopUnlockAction
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [_manulUnlockModel stopScan];
-        //[self.delegate forceStopUnlockAction];
-    });
+    [_manulUnlockModel stopScan];
     
+    if ([self.delegate respondsToSelector:@selector(forceStopUnlock)]) {
+        [self.delegate forceStopUnlock];
+    }
 }
 
 #pragma mark - unlock delegate
@@ -177,6 +177,13 @@
 
 - (void)unlockTheDevice:(NSString *)deviceIdentifire successful:(BOOL)successful
 {
+    // stop the animation if the current unlock mode is manulUnlock
+    if (successful) {
+        if ([self.delegate respondsToSelector:@selector(successfullyUnlockDevice:)]) {
+            [self.delegate successfullyUnlockDevice:deviceIdentifire];
+        }
+    }
+    
     GXDatabaseEntityDevice *device = [GXDatabaseHelper deviceEntityWithDeviceIdentifire:deviceIdentifire];
     GXDatabaseEntityUser *user = [GXDatabaseHelper defaultUser];
     
@@ -195,7 +202,6 @@
     
     [GXDatabaseHelper addLocalUnlockRecordIntoDatabase:@[unlockRecord]];
 }
-
 
 /*
  * STRATEGY OF SYNCHRONIZING BATTERY LEVEL
