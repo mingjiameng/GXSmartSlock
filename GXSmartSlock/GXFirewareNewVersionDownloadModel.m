@@ -62,6 +62,12 @@
 {
     NSString *filePath = [NSString stringWithFormat:@"%@/%@.bin", [zkeySandboxHelper pathOfDocuments], self.deviceIdentifire];
     
+//    if ([zkeySandboxHelper fileExitAtPath:filePath]) {
+//        NSData *data = [NSData dataWithContentsOfFile:filePath];
+//        NSLog(@"file length:%ld", (long)data.length);
+//        return;
+//    }
+    
     [zkeySandboxHelper deleteFileAtPath:filePath];
     
     id __weak weakDelegate = self.delegate;;
@@ -77,7 +83,7 @@
                             @"typecode" : self.deviceCategory,
                             @"current" : @(self.currentVersion),
                             @"latest" : @(self.latestVersion)};
-    downloader.contentType = @"application/x-download";
+    //downloader.contentType = @"application/x-download";
     
     
     //NSLog(@"download param dic:%@", downloader.paramDic);

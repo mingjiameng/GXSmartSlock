@@ -26,6 +26,7 @@
 		44A2B66A1BB04A7400622726 /* GXUploadUnlockRecordParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B6691BB04A7400622726 /* GXUploadUnlockRecordParam.m */; settings = {ASSET_TAGS = (); }; };
 		44A2B66E1BB1829600622726 /* GXUploadDeviceVersionParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B66D1BB1829600622726 /* GXUploadDeviceVersionParam.m */; settings = {ASSET_TAGS = (); }; };
 		44A2B6701BB1960E00622726 /* manulUnlockAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 44A2B66F1BB1960E00622726 /* manulUnlockAnimation.gif */; settings = {ASSET_TAGS = (); }; };
+		44A2B6761BB2F02C00622726 /* GXFirmwareConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B6751BB2F02C00622726 /* GXFirmwareConnect.m */; settings = {ASSET_TAGS = (); }; };
 		44DE14DE1BAD83D900DF3746 /* GXFirewareUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DE14DD1BAD83D900DF3746 /* GXFirewareUpdateModel.m */; };
 		44E2D2BE1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E2D2BD1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.m */; };
 		44E2D2C31B92F6D90021EB9F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E2D2C21B92F6D90021EB9F /* AddressBook.framework */; };
@@ -232,6 +233,8 @@
 		44A2B66C1BB1829600622726 /* GXUploadDeviceVersionParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUploadDeviceVersionParam.h; sourceTree = "<group>"; };
 		44A2B66D1BB1829600622726 /* GXUploadDeviceVersionParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUploadDeviceVersionParam.m; sourceTree = "<group>"; };
 		44A2B66F1BB1960E00622726 /* manulUnlockAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = manulUnlockAnimation.gif; sourceTree = "<group>"; };
+		44A2B6741BB2F02C00622726 /* GXFirmwareConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXFirmwareConnect.h; sourceTree = "<group>"; };
+		44A2B6751BB2F02C00622726 /* GXFirmwareConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXFirmwareConnect.m; sourceTree = "<group>"; };
 		44DE14DC1BAD83D900DF3746 /* GXFirewareUpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXFirewareUpdateModel.h; sourceTree = "<group>"; };
 		44DE14DD1BAD83D900DF3746 /* GXFirewareUpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXFirewareUpdateModel.m; sourceTree = "<group>"; };
 		44E2D2BC1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSelectValidDeviceViewController.h; sourceTree = "<group>"; };
@@ -619,6 +622,8 @@
 				44A2B66B1BB17F8900622726 /* oad.h */,
 				440E2E231BAA6BE800388051 /* GXFirewareNewVersionDownloadModel.h */,
 				440E2E241BAA6BE800388051 /* GXFirewareNewVersionDownloadModel.m */,
+				44A2B6741BB2F02C00622726 /* GXFirmwareConnect.h */,
+				44A2B6751BB2F02C00622726 /* GXFirmwareConnect.m */,
 				44DE14DC1BAD83D900DF3746 /* GXFirewareUpdateModel.h */,
 				44DE14DD1BAD83D900DF3746 /* GXFirewareUpdateModel.m */,
 			);
@@ -1508,6 +1513,7 @@
 				44044F531BAEB342007B608C /* GXRemarkNameModel.m in Sources */,
 				44E916F01B87880300EF9C38 /* zkeyIdentifierValidator.m in Sources */,
 				44ED1D6D1B8DAF5700F1A7F4 /* GXDeviceDetailViewController.m in Sources */,
+				44A2B6761BB2F02C00622726 /* GXFirmwareConnect.m in Sources */,
 				44E6F2701B93EFA200A38DF9 /* UIImageView+FHProfileDownload.m in Sources */,
 				44F355041BA1395700B33D19 /* GXAutoUnlockModel.m in Sources */,
 				44ED1D601B8C454900F1A7F4 /* GXDeviceListTableView.m in Sources */,

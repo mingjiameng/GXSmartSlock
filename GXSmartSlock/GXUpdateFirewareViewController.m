@@ -11,14 +11,14 @@
 #import "MICRO_COMMON.h"
 
 #import "GXFirewareNewVersionDownloadModel.h"
-#import "GXFirewareUpdateModel.h"
+#import "GXFirmwareConnect.h"
 
 #import "GXUpdateFirewareView.h"
 
-@interface GXUpdateFirewareViewController () <GXFirewareNewVersionDownloadModelDelegate, GXUpdateFirewareViewDelegate, GXFirewareUpdateModelDelegate>
+@interface GXUpdateFirewareViewController () <GXFirewareNewVersionDownloadModelDelegate, GXUpdateFirewareViewDelegate, GXFirewareUpdateDelegate>
 {
     GXFirewareNewVersionDownloadModel *_newVersionDownloadModel;
-    GXFirewareUpdateModel *_updateFirewareModel;
+    GXFirmwareConnect *_firewareUpdateModel;
     
     GXUpdateFirewareView *_updateFirewareView;
 }
@@ -49,10 +49,6 @@
     _newVersionDownloadModel.currentVersion = self.currentVersion;
     _newVersionDownloadModel.deviceCategory = self.deviceCategory;
     _newVersionDownloadModel.delegate = self;
-    
-    _updateFirewareModel = [[GXFirewareUpdateModel alloc] init];
-    _updateFirewareModel.deviceIdentifire = self.deviceIdentifire;
-    _updateFirewareModel.delegate = self;
 }
 
 - (void)addUpdateFirewareView:(CGRect)frame
@@ -130,6 +126,9 @@
 - (void)firewareUpdateComplete
 {
     [_updateFirewareView firewareUpdateComplete];
+    
+    [_firewareUpdateModel disconnect];
+    _firewareUpdateModel = nil;
 }
 
 - (void)firewareUpdateFailed
@@ -150,15 +149,15 @@
 
 - (void)updateFireware
 {
-    if (_updateFirewareModel == nil) {
-        _updateFirewareModel = [[GXFirewareUpdateModel alloc] init];
-        _updateFirewareModel.deviceIdentifire = self.deviceIdentifire;
-        _updateFirewareModel.downloadedVersion = MAX(_newVersionDownloadModel.latestVersion, _newVersionDownloadModel.downloadedVersion);
+    [self beginScanForCertainDevice];
+    
+    if (_firewareUpdateModel == nil) {
+        _firewareUpdateModel = [[GXFirmwareConnect alloc] initWithCurrentDeviceName:self.deviceIdentifire];
+        _firewareUpdateModel.delegate = self;
+        _firewareUpdateModel.fw_version = MAX(_newVersionDownloadModel.latestVersion, _newVersionDownloadModel.downloadedVersion);
     }
     
-    _updateFirewareModel.isConnected = NO;
-    _updateFirewareModel.inProgramming = NO;
-    [_updateFirewareModel updateFireware];
+    [_firewareUpdateModel startScan];
 }
 
 - (void)didReceiveMemoryWarning {

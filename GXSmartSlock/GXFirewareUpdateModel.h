@@ -13,10 +13,17 @@
 - (void)noNetwork;
 - (void)beginScanForCertainDevice;
 - (void)noBluetooth;
+
 - (void)beginUpdateFireware;
 - (void)firewareUpdateProgress:(double)progress;
 - (void)firewareUpdateComplete;
 - (void)firewareUpdateFailed;
+
+//- (void) getUploadTotalTime:(GXFirmwareConnect *)firmware totalTime:(NSString *)totalTime processValue:(CGFloat)value;
+//
+//- (void) canUploadFirmware:(GXFirmwareConnect *)firmware enable:(BOOL)enable;
+//
+//- (void) uploadSucceed;
 
 @end
 
@@ -34,5 +41,9 @@
 
 // connect the guosim device, write the new fireware into device
 - (void)updateFireware;
+
+-(id)initWithCurrentDeviceName:(NSString *)currentDeviceName;
+- (void)disconnect;
+- (void)uploadStart;
 
 @end

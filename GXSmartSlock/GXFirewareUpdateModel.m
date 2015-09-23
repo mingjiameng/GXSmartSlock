@@ -108,32 +108,6 @@ typedef enum{
     [self.delegate firewareUpdateProgress:processValue];
 }
 
-
-- (CBCentralManagerState)centralManagerState
-{
-    return _updateFirewareCenterManager.state;
-}
-
-- (void)disconnect
-{
-    [_updateFirewareCenterManager stopScan];
-    if (_connectedPeripheral !=nil) {
-        [_updateFirewareCenterManager cancelPeripheralConnection:_connectedPeripheral];
-    }
-}
-
-- (void)refreshPeripheral
-{
-    [_updateFirewareCenterManager stopScan];
-    
-    if (_connectedPeripheral != nil) {
-        
-        [_updateFirewareCenterManager cancelPeripheralConnection:_connectedPeripheral];
-        _connectedPeripheral = nil;
-    }
-    [_updateFirewareCenterManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @(YES)}];
-}
-
 #pragma mark - CBCentralManager代理
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
@@ -147,66 +121,7 @@ typedef enum{
 //    [central stopScan];
 }
 
-
 //开始上传任务
--(void)uploadStart
-{
-    _peripheralState = PeripheralStateIsUploadVersion;
-    [_connectedPeripheral discoverCharacteristics:@[GX_OAD_BlockRequest_UUID] forService:_mainService];
-}
-/**
- * setNotifyValue 回调
- */
-
-- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-    if ([characteristic.UUID isEqual:GX_OAD_ImageNotify_UUID] && characteristic.isNotifying) {
-        NSData *data = [@"00" hexToBytes:2];
-        [peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-    }
-    
-}
-
-- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-    if ([characteristic.UUID isEqual:GX_OAD_ImageNotify_UUID]) {
-        [peripheral readValueForCharacteristic:characteristic];
-    }
-    GXLog(@"Firmware: WriteKeyResponse:    %@ Error:    %@",characteristic.UUID,error);
-}
-
-//返回的蓝牙特征值通过代理实现
-
-
-
-
-
--(void)updateVersion:(NSString *)imageVersion
-{
-//    NSInteger version;
-//    BOOL isEven = ([imageVersion integerValue] %2 == 0) ?YES:NO;
-//    if (isEven) {
-//        version = self.downloadedVersion  + 1;
-//    }else{
-//        version = self.downloadedVersion;
-//    }
-    
-    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
-    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_PASSWORD];
-    GXUploadDeviceVersionParam *param = [GXUploadDeviceVersionParam paramWithUserName:userName password:password deviceIdentifire:self.deviceIdentifire deviceVersion:self.downloadedVersion];
-    [GXDefaultHttpHelper postWithUploadDeviceVersionParam:param success:^(NSDictionary *result) {
-        NSInteger status = [[result objectForKey:@"status"] integerValue];
-        if (status == 0) {
-            [self.delegate firewareUpdateFailed];
-        } else if (status == 1) {
-            [self.delegate firewareUpdateComplete];
-        }
-    } failure:^(NSError *error) {
-        [self.delegate noNetwork];
-    }];
-}
-
-
 
 - (void)updateFireware
 {
@@ -257,6 +172,7 @@ typedef enum{
     _inProgramming = YES;
     _peripheralState = PeripheralStateIsReadingVersion;
     peripheral.delegate = self;
+    
     [peripheral discoverServices:@[GX_OAD_Service_UUID]];
     
     [central stopScan];
@@ -274,6 +190,11 @@ typedef enum{
         if ([service.UUID isEqual:GX_OAD_Service_UUID]) {
             _mainService = service;
             [_connectedPeripheral discoverCharacteristics:@[GX_OAD_ImageNotify_UUID] forService:_mainService];
+            
+            [self uploadStart];
+            
+            [self.delegate beginUpdateFireware];
+            
             break;
         }
     }
@@ -288,24 +209,46 @@ typedef enum{
         return;
     }
     
-    for (CBCharacteristic *chara in service.characteristics) {
-        if ([service.UUID isEqual:GX_OAD_Service_UUID]) {
-            [self serviceMainWithPeripheral:peripheral chara:chara];
-        }
+    if ([service.UUID isEqual:GX_OAD_Service_UUID]) {
+        return;
+    }
+    
+    for (CBCharacteristic *characteristic in service.characteristics) {
+        [self serviceMainWithPeripheral:peripheral chara:characteristic];
     }
     
     return;
 }
 
--(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    if ([characteristic.UUID isEqual:GX_OAD_ImageNotify_UUID] && characteristic.isNotifying) {
+        NSData *data = [@"00" hexToBytes:2];
+        [peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+    
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error != nil) {
-        [_updateFirewareCenterManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @(YES)}];
+        [self startScan];
         return;
     }
     
     if ([characteristic.UUID isEqual:GX_OAD_ImageNotify_UUID]) {
-        
+        [peripheral readValueForCharacteristic:characteristic];
+    }
+}
+
+-(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    if (error != nil) {
+        [self startScan];
+        return;
+    }
+    
+    if ([characteristic.UUID isEqual:GX_OAD_ImageNotify_UUID]) {
         unsigned char data[characteristic.value.length];
         [characteristic.value getBytes:&data];
         uint16_t imgVersion = ((uint16_t)data[1] << 8 & 0xff00) | ((uint16_t)data[0] & 0xff);
@@ -344,9 +287,10 @@ typedef enum{
             self.iBlocks = 0;
             self.iBytes = 0;
             [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(programmingTimerTick:) userInfo:nil repeats:NO];
-        } else {
-            [self updateVersion:self.imgVersion];
         }
+//        } else {
+//            [self updateVersion:self.imgVersion];
+//        }
     }
 }
 
@@ -359,8 +303,6 @@ typedef enum{
         [peripheral setNotifyValue:YES forCharacteristic:character];
     } else if ([character.UUID isEqual:GX_OAD_BlockRequest_UUID] && _peripheralState == PeripheralStateIsUploadVersion) {
         // 更新固件
-        [self.delegate beginUpdateFireware];
-        
         _peripheralState = PeripheralStateIsStopUpload;
         _inProgramming = YES;
         unsigned char imageFileData[self.fileData.length];
@@ -409,7 +351,13 @@ typedef enum{
     }
 }
 
-
+-(void)uploadStart
+{
+    _peripheralState = PeripheralStateIsUploadVersion;
+    [_connectedPeripheral discoverCharacteristics:@[GX_OAD_BlockRequest_UUID] forService:_mainService];
+    
+    [self.delegate beginUpdateFireware];
+}
 
 
 -(BOOL)peripheralIsEqualCurrentDevice:(NSString *)deviceIdentifire
@@ -433,5 +381,40 @@ typedef enum{
     
     return _fileData;
 }
+
+- (void)disconnect
+{
+    [_updateFirewareCenterManager stopScan];
+    if (_connectedPeripheral !=nil) {
+        [_updateFirewareCenterManager cancelPeripheralConnection:_connectedPeripheral];
+    }
+}
+
+// 向服务器上传最新版本的代码
+-(void)updateVersion:(NSString *)imageVersion
+{
+    //    NSInteger version;
+    //    BOOL isEven = ([imageVersion integerValue] %2 == 0) ?YES:NO;
+    //    if (isEven) {
+    //        version = self.downloadedVersion  + 1;
+    //    }else{
+    //        version = self.downloadedVersion;
+    //    }
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_PASSWORD];
+    GXUploadDeviceVersionParam *param = [GXUploadDeviceVersionParam paramWithUserName:userName password:password deviceIdentifire:self.deviceIdentifire deviceVersion:self.downloadedVersion];
+    [GXDefaultHttpHelper postWithUploadDeviceVersionParam:param success:^(NSDictionary *result) {
+        NSInteger status = [[result objectForKey:@"status"] integerValue];
+        if (status == 0) {
+            [self.delegate firewareUpdateFailed];
+        } else if (status == 1) {
+            [self.delegate firewareUpdateComplete];
+        }
+    } failure:^(NSError *error) {
+        [self.delegate noNetwork];
+    }];
+}
+
 
 @end

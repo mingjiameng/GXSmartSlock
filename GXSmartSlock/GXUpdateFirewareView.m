@@ -238,6 +238,7 @@
     [_actionButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     [_actionButton setTitle:@"更新固件" forState:UIControlStateNormal];
     [_actionButton addTarget:self.delegate action:@selector(updateFireware) forControlEvents:UIControlEventTouchUpInside];
+    [_actionButton setHidden:NO];
 }
 
 - (void)beginUpdateFireware
@@ -263,6 +264,7 @@
 - (void)firewareUpdateComplete
 {
     [_progressBar setHidden:YES];
+    [_actionButton setHidden:YES];
     
     _messageLabel.text = @"固件升级完成";
     [_messageLabel setHidden:NO];

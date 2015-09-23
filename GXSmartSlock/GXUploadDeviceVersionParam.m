@@ -17,7 +17,7 @@
     param.userName = userName;
     param.password = password;
     param.deviceIdentifire = deviceIdentifire;
-    param.deviceVersion = [NSString stringWithFormat:@"%ld", deviceVersion];
+    param.deviceVersion = [NSString stringWithFormat:@"%ld", (long)deviceVersion];
     
     return param;
 }
