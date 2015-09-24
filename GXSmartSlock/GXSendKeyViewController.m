@@ -68,10 +68,9 @@
     _alertLabel.textColor = [UIColor lightGrayColor];
     _alertLabel.textAlignment = NSTextAlignmentCenter;
     _alertLabel.numberOfLines = 2;
-    _alertLabel.text = @"您不是任何一把门锁的管理员\n无法向其他用户发送钥匙";
+    _alertLabel.text = @"您不是任何设备的管理员\n无法向其他用户发送钥匙";
     
     [self.view addSubview:_alertLabel];
-    
 }
 
 - (void)addSendKeyTableView:(CGRect)frame

@@ -549,11 +549,11 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceIdentifire == %@", deviceIdentifire];
     [fetchRequest setPredicate:predicate];
     
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"password" ascending:NO];
-    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    NSSortDescriptor *sortDescriptor01 = [NSSortDescriptor sortDescriptorWithKey:@"validity" ascending:NO];
+    NSSortDescriptor *sortDescriptor02 = [NSSortDescriptor sortDescriptorWithKey:@"password" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor01, sortDescriptor02]];
     
     NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    
     
     NSError *error = nil;
     if (![fetchedResultsController performFetch:&error]) {
@@ -1029,6 +1029,32 @@
     
     [self saveContext];
 
+}
+
++ (void)device:(NSString *)deviceIdentifire turnOneTimePassword:(NSString *)password toState:(BOOL)valid
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityOneTimePassword = [NSEntityDescription entityForName:ENTITY_ONE_TIME_PASSWORD inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityOneTimePassword];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceIdentifire == %@ AND password == %@", deviceIdentifire, password];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *oneTimePasswordArray = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"fetch specific one-time password error:%@, %@", error, [error userInfo]);
+        return;
+    }
+    
+    for (GXDatabaseEntityOneTimePassword *oneTimePassword in oneTimePasswordArray) {
+        oneTimePassword.validity = [NSNumber numberWithBool:valid];
+    }
+    
 }
 
 + (void)logout

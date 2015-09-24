@@ -80,7 +80,7 @@
 - (NSString *)currentDeviceDescription
 {
     if (_selectedDeviceEntity == nil) {
-        return @"所有开锁记录 ▾";
+        return @"所有通知 ▾";
     }
     
     NSString *title = _selectedDeviceEntity.deviceNickname;
@@ -112,7 +112,7 @@
     alertLabel.textColor = [UIColor lightGrayColor];
     alertLabel.textAlignment = NSTextAlignmentCenter;
     alertLabel.numberOfLines = 2;
-    alertLabel.text = @"您不是任何一把门锁的管理员\n无法向其他用户发送钥匙";
+    alertLabel.text = @"您不是任何设备的管理员\n无法查看设备的历史记录";
     
     [self.view addSubview:alertLabel];
     

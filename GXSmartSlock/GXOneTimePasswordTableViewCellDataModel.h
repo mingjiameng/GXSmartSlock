@@ -11,5 +11,6 @@
 @interface GXOneTimePasswordTableViewCellDataModel : NSObject
 
 @property (nonatomic, strong) NSString *password;
+@property (nonatomic, strong) NSString *validityString;
 
 @end

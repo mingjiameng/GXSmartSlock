@@ -36,6 +36,9 @@
 		44A2B6911BB4337300622726 /* GXOneTimePasswordTableViewCellDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B6901BB4337300622726 /* GXOneTimePasswordTableViewCellDataModel.m */; settings = {ASSET_TAGS = (); }; };
 		44A2B69C1BB43F4800622726 /* GXDatabaseEntityOneTimePassword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B6991BB43F4800622726 /* GXDatabaseEntityOneTimePassword+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		44A2B69D1BB43F4800622726 /* GXDatabaseEntityOneTimePassword.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B69B1BB43F4800622726 /* GXDatabaseEntityOneTimePassword.m */; settings = {ASSET_TAGS = (); }; };
+		44A2B6A01BB470D700622726 /* zkeyShareContentToWeiXin.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B69F1BB470D700622726 /* zkeyShareContentToWeiXin.m */; settings = {ASSET_TAGS = (); }; };
+		44A2B6A31BB4776A00622726 /* GXRefreshOneTimePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B6A21BB4776A00622726 /* GXRefreshOneTimePasswordViewController.m */; settings = {ASSET_TAGS = (); }; };
+		44A2B6A61BB4798C00622726 /* GXSynchronizeOneTimePasswordWithDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B6A51BB4798C00622726 /* GXSynchronizeOneTimePasswordWithDeviceViewController.m */; settings = {ASSET_TAGS = (); }; };
 		44DE14DE1BAD83D900DF3746 /* GXFirewareUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DE14DD1BAD83D900DF3746 /* GXFirewareUpdateModel.m */; };
 		44E2D2BE1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E2D2BD1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.m */; };
 		44E2D2C31B92F6D90021EB9F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E2D2C21B92F6D90021EB9F /* AddressBook.framework */; };
@@ -262,6 +265,12 @@
 		44A2B6991BB43F4800622726 /* GXDatabaseEntityOneTimePassword+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GXDatabaseEntityOneTimePassword+CoreDataProperties.m"; sourceTree = "<group>"; };
 		44A2B69A1BB43F4800622726 /* GXDatabaseEntityOneTimePassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDatabaseEntityOneTimePassword.h; sourceTree = "<group>"; };
 		44A2B69B1BB43F4800622726 /* GXDatabaseEntityOneTimePassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDatabaseEntityOneTimePassword.m; sourceTree = "<group>"; };
+		44A2B69E1BB470D700622726 /* zkeyShareContentToWeiXin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyShareContentToWeiXin.h; sourceTree = "<group>"; };
+		44A2B69F1BB470D700622726 /* zkeyShareContentToWeiXin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyShareContentToWeiXin.m; sourceTree = "<group>"; };
+		44A2B6A11BB4776A00622726 /* GXRefreshOneTimePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXRefreshOneTimePasswordViewController.h; sourceTree = "<group>"; };
+		44A2B6A21BB4776A00622726 /* GXRefreshOneTimePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRefreshOneTimePasswordViewController.m; sourceTree = "<group>"; };
+		44A2B6A41BB4798C00622726 /* GXSynchronizeOneTimePasswordWithDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSynchronizeOneTimePasswordWithDeviceViewController.h; sourceTree = "<group>"; };
+		44A2B6A51BB4798C00622726 /* GXSynchronizeOneTimePasswordWithDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXSynchronizeOneTimePasswordWithDeviceViewController.m; sourceTree = "<group>"; };
 		44DE14DC1BAD83D900DF3746 /* GXFirewareUpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXFirewareUpdateModel.h; sourceTree = "<group>"; };
 		44DE14DD1BAD83D900DF3746 /* GXFirewareUpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXFirewareUpdateModel.m; sourceTree = "<group>"; };
 		44E2D2BC1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSelectValidDeviceViewController.h; sourceTree = "<group>"; };
@@ -691,6 +700,10 @@
 				44F355261BA4488600B33D19 /* GXAddNewPermanentPasswordViewController.m */,
 				44A2B6891BB42E8800622726 /* GXManageOneTimePasswordViewController.h */,
 				44A2B68A1BB42E8800622726 /* GXManageOneTimePasswordViewController.m */,
+				44A2B6A11BB4776A00622726 /* GXRefreshOneTimePasswordViewController.h */,
+				44A2B6A21BB4776A00622726 /* GXRefreshOneTimePasswordViewController.m */,
+				44A2B6A41BB4798C00622726 /* GXSynchronizeOneTimePasswordWithDeviceViewController.h */,
+				44A2B6A51BB4798C00622726 /* GXSynchronizeOneTimePasswordWithDeviceViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1108,6 +1121,8 @@
 		44E9F8351B85EB5700165234 /* zkeyWeiXinSDK */ = {
 			isa = PBXGroup;
 			children = (
+				44A2B69E1BB470D700622726 /* zkeyShareContentToWeiXin.h */,
+				44A2B69F1BB470D700622726 /* zkeyShareContentToWeiXin.m */,
 				44A2B6591BB0285C00622726 /* libWeChatSDK.a */,
 				44A2B65A1BB0285C00622726 /* read_me.txt */,
 				44A2B65B1BB0285C00622726 /* WXApi.h */,
@@ -1593,6 +1608,7 @@
 				44E9F8001B85E00100165234 /* GXGuidePageViewController.m in Sources */,
 				44ED41911B896B9700079207 /* AFNetworkReachabilityManager.m in Sources */,
 				44F355231BA3E3B800B33D19 /* SharkfoodMuteSwitchDetector.m in Sources */,
+				44A2B6A31BB4776A00622726 /* GXRefreshOneTimePasswordViewController.m in Sources */,
 				44E6F2E91B9B21F000A38DF9 /* NSString+StringHexToData.m in Sources */,
 				44E917041B884B9000EF9C38 /* GXServerDataAnalyst.m in Sources */,
 				44F3551E1BA3DE7A00B33D19 /* GXDevicePermanentPsswordModel.m in Sources */,
@@ -1608,6 +1624,7 @@
 				44F63BA11B8F556700F5335B /* zkeySandboxHelper.m in Sources */,
 				44E916F51B880EA300EF9C38 /* GXDeviceModel.m in Sources */,
 				441DAB901B9F11BD004F710D /* GXUnlockTool.m in Sources */,
+				44A2B6A61BB4798C00622726 /* GXSynchronizeOneTimePasswordWithDeviceViewController.m in Sources */,
 				44E9170B1B8883B700EF9C38 /* GXUserModel.m in Sources */,
 				44E6F2861B9473AD00A38DF9 /* GXSetNicknameViewController.m in Sources */,
 				44E6F26F1B93EFA200A38DF9 /* FHProfileImageDownloader.m in Sources */,
@@ -1671,6 +1688,7 @@
 				44E916E21B87158800EF9C38 /* GXDatabaseHelper.m in Sources */,
 				440E2E2C1BAAD45000388051 /* zkeyURLDownloadHelper.m in Sources */,
 				44EB634C1B9D1FB8008BF8BE /* GXUnlockRecordTableView.m in Sources */,
+				44A2B6A01BB470D700622726 /* zkeyShareContentToWeiXin.m in Sources */,
 				44F63B981B8F2F3700F5335B /* GXChangeDeviceNicknameParam.m in Sources */,
 				44A2B6911BB4337300622726 /* GXOneTimePasswordTableViewCellDataModel.m in Sources */,
 				44A2B69D1BB43F4800622726 /* GXDatabaseEntityOneTimePassword.m in Sources */,

@@ -62,7 +62,10 @@
             GXOneTimePasswordModel *passwordModel = [[GXOneTimePasswordModel alloc] init];
             passwordModel.deviceIdentifre = [NSString stringWithUTF8String:(const char *)deviceIdentifire];
             passwordModel.password = [NSString stringWithUTF8String:(const char *)password];
-            passwordModel.validity = [[NSString stringWithUTF8String:(const char *)validity] boolValue];
+            
+            NSString *validityString = [NSString stringWithUTF8String:(const char *)validity];
+            //NSLog(@"validity : %@", validityString);
+            passwordModel.validity = ([validityString integerValue] == 0) ? true : false;
             
             [passwordModelArray addObject:passwordModel];
         }

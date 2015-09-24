@@ -16,12 +16,13 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"oneTimePassword"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"oneTimePassword"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"oneTimePassword"];
     }
     
     GXOneTimePasswordTableViewCellDataModel *cellData = (GXOneTimePasswordTableViewCellDataModel *)[self.dataSource tableView:self cellDataForRowAtIndexPath:indexPath];
     
     cell.textLabel.text = cellData.password;
+    cell.detailTextLabel.text = cellData.validityString;
     
     return cell;
 }
@@ -33,7 +34,7 @@
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return UITableViewCellEditingStyleNone;
+    return UITableViewCellEditingStyleDelete;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -46,7 +47,10 @@
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewRowAction *markAsUsedRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"已用" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        [self.delegate tableView:self commitEditingStyle:UITableViewCellEditingStyleInsert forRowAtIndexPath:indexPath];
+        if ([self.delegate respondsToSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)]) {
+            [self.delegate tableView:self commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
+        }
+        
     }];
 
     return @[markAsUsedRowAction];

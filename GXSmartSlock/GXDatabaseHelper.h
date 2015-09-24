@@ -38,7 +38,11 @@
 + (NSFetchedResultsController *)allLocalUnlockRecordFetchedResultsController;
 + (NSArray *)allLocalUnlockRecordArray;
 + (NSFetchedResultsController *)oneTimePasswordFetchedResultsControllerOfDevice:(NSString *)deviceIdentifire;
+
+// the previous one-time password will be deleted once you insert the new one-time password array
 + (void)device:(NSString *)deviceIdentifire insertNewOneTimePasswordIntoDatabase:(NSArray *)oneTimePasswordArray;
+
+// this interface is sepcifically for data migration(from SQL to CoreData)
 + (void)addOneTimePasswordIntoDatabase:(NSArray *)oneTimePasswordArray;
 
 /*
@@ -53,5 +57,6 @@
 + (void)device:(NSString *)deviceIdentifire updateBatteryLevel:(NSInteger)batteryLevel;
 + (void)addLocalUnlockRecordIntoDatabase:(NSArray *)unlockRecordArray;
 + (void)deleteLocalUnlockRecordEntity:(GXDatabaseEntityLocalUnlockRecord *)record;
++ (void)device:(NSString *)deviceIdentifire turnOneTimePassword:(NSString *)password toState:(BOOL)valid;
 
 @end
