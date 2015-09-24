@@ -63,17 +63,23 @@
     CGFloat leadingSpace = 15.0f;
     UIButton *rejectButton = [[UIButton alloc] initWithFrame:CGRectMake(leadingSpace, 20.0f, frame.size.width - 2 * leadingSpace, 40.0f)];
     [rejectButton setTitle:@"拒绝钥匙" forState:UIControlStateNormal];
-    [rejectButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [rejectButton addTarget:self action:@selector(rejectKey:) forControlEvents:UIControlEventTouchUpInside];
     [rejectButton setBackgroundColor:[UIColor redColor]];
+    rejectButton.layer.masksToBounds = YES;
+    rejectButton.layer.cornerRadius = DEFAULT_ROUND_RECTANGLE_CORNER_RADIUS;
+    [rejectButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     
     [view addSubview:rejectButton];
     
+    
     UIButton *acceptButton = [[UIButton alloc] initWithFrame:CGRectMake(leadingSpace, 70.0f, frame.size.width - 2 * leadingSpace, 40.0f)];
     [acceptButton setTitle:@"接受钥匙" forState:UIControlStateNormal];
-    [acceptButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [acceptButton setBackgroundColor:[UIColor whiteColor]];
     [acceptButton addTarget:self action:@selector(acceptKey:) forControlEvents:UIControlEventTouchUpInside];
+    acceptButton.layer.masksToBounds = YES;
+    acceptButton.layer.cornerRadius = DEFAULT_ROUND_RECTANGLE_CORNER_RADIUS;
+    [acceptButton setTitleColor:MAIN_COLOR forState:UIControlStateNormal];
+    
     [view addSubview:acceptButton];
 }
 

@@ -112,9 +112,8 @@
     if (indexPath.section == 0) {
         cell.textLabel.text = @"用户名";
         
-        // 手机号输入框
+        // 用户名输入框
         _userNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width - 110.0f, 30.0)];
-        _userNameTextField.keyboardType = UIKeyboardTypeNumberPad;
         _userNameTextField.borderStyle = UITextBorderStyleNone;
         _userNameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _userNameTextField.returnKeyType = UIReturnKeyDone;
@@ -178,7 +177,7 @@
             return YES;
         } else {
             _userName = _userNameTextField.text;
-            if (![zkeyIdentifierValidator isValidChinesePhoneNumber:_userName]) {
+            if (![zkeyIdentifierValidator isValidChinesePhoneNumber:_userName] && ![zkeyIdentifierValidator isValidEmailAddress:_userName]) {
                 [self alertWithMessage:@"请输入正确的手机号或邮箱"];
                 return NO;
             }
