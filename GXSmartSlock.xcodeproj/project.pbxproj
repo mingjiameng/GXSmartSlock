@@ -39,6 +39,7 @@
 		44A2B6A01BB470D700622726 /* zkeyShareContentToWeiXin.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B69F1BB470D700622726 /* zkeyShareContentToWeiXin.m */; settings = {ASSET_TAGS = (); }; };
 		44A2B6A31BB4776A00622726 /* GXRefreshOneTimePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B6A21BB4776A00622726 /* GXRefreshOneTimePasswordViewController.m */; settings = {ASSET_TAGS = (); }; };
 		44A2B6A61BB4798C00622726 /* GXSynchronizeOneTimePasswordWithDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B6A51BB4798C00622726 /* GXSynchronizeOneTimePasswordWithDeviceViewController.m */; settings = {ASSET_TAGS = (); }; };
+		44A2B6A91BB4801D00622726 /* GXOccasionalPasswordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A2B6A81BB4801D00622726 /* GXOccasionalPasswordManager.m */; settings = {ASSET_TAGS = (); }; };
 		44DE14DE1BAD83D900DF3746 /* GXFirewareUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DE14DD1BAD83D900DF3746 /* GXFirewareUpdateModel.m */; };
 		44E2D2BE1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E2D2BD1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.m */; };
 		44E2D2C31B92F6D90021EB9F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E2D2C21B92F6D90021EB9F /* AddressBook.framework */; };
@@ -271,6 +272,8 @@
 		44A2B6A21BB4776A00622726 /* GXRefreshOneTimePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXRefreshOneTimePasswordViewController.m; sourceTree = "<group>"; };
 		44A2B6A41BB4798C00622726 /* GXSynchronizeOneTimePasswordWithDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSynchronizeOneTimePasswordWithDeviceViewController.h; sourceTree = "<group>"; };
 		44A2B6A51BB4798C00622726 /* GXSynchronizeOneTimePasswordWithDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXSynchronizeOneTimePasswordWithDeviceViewController.m; sourceTree = "<group>"; };
+		44A2B6A71BB4801D00622726 /* GXOccasionalPasswordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXOccasionalPasswordManager.h; sourceTree = "<group>"; };
+		44A2B6A81BB4801D00622726 /* GXOccasionalPasswordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXOccasionalPasswordManager.m; sourceTree = "<group>"; };
 		44DE14DC1BAD83D900DF3746 /* GXFirewareUpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXFirewareUpdateModel.h; sourceTree = "<group>"; };
 		44DE14DD1BAD83D900DF3746 /* GXFirewareUpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXFirewareUpdateModel.m; sourceTree = "<group>"; };
 		44E2D2BC1B92E7BF0021EB9F /* GXSelectValidDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSelectValidDeviceViewController.h; sourceTree = "<group>"; };
@@ -711,6 +714,8 @@
 		44A2B6841BB42D3900622726 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				44A2B6A71BB4801D00622726 /* GXOccasionalPasswordManager.h */,
+				44A2B6A81BB4801D00622726 /* GXOccasionalPasswordManager.m */,
 				44F355161BA32AFA00B33D19 /* GXPasswordManagerCollect.h */,
 				44F355171BA32AFA00B33D19 /* GXPasswordManagerCollect.m */,
 				44A2B68F1BB4337300622726 /* GXOneTimePasswordTableViewCellDataModel.h */,
@@ -1662,6 +1667,7 @@
 				44E6F29C1B957FA500A38DF9 /* FHUserSetting+HandGestureSecretViewController.m in Sources */,
 				44E6F2A51B959A5300A38DF9 /* GXUpdatePasswordParam.m in Sources */,
 				44E6F2B41B96E11D00A38DF9 /* GXDeleteAuthorizedUserModel.m in Sources */,
+				44A2B6A91BB4801D00622726 /* GXOccasionalPasswordManager.m in Sources */,
 				44E6F2981B957F2700A38DF9 /* GesturePasswordView.m in Sources */,
 				440E2E251BAA6BE800388051 /* GXFirewareNewVersionDownloadModel.m in Sources */,
 				44EB63461B9D1BAF008BF8BE /* GXSynchronizeUnlockRecordModel.m in Sources */,

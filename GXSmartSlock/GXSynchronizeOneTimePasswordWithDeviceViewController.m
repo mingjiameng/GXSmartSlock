@@ -8,10 +8,16 @@
 
 #import "GXSynchronizeOneTimePasswordWithDeviceViewController.h"
 
-@interface GXSynchronizeOneTimePasswordWithDeviceViewController ()
+#import "GXDatabaseHelper.h"
+#import "GXOccasionalPasswordManager.h"
 
+@interface GXSynchronizeOneTimePasswordWithDeviceViewController () <GXOccasionalPwdDelegate>
+{
+    NSMutableArray *_validPasswordArray;
+}
 @property (nonatomic, strong) UIImageView *animationView;
 @property (nonatomic, strong) UILabel *tipsLabel;
+@property (nonatomic, strong) GXOccasionalPasswordManager *oneTimePasswordManager;
 
 @end
 
@@ -21,18 +27,84 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"获取新密码";
     
+    [self configNavigationBar];
     [self.view addSubview:self.tipsLabel];
     [self.view addSubview:self.animationView];
+    [self synchronizePassword];
+}
+
+- (void)configNavigationBar
+{
+    self.navigationItem.title = @"同步密码";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(dismissVC)];
 }
 
 - (void)synchronizePassword
 {
+    [self.oneTimePasswordManager syncOccasionalPassword];
+}
+
+- (void)dismissVC
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+#pragma mark - delegate
+// return the one-time password that has not been used
+- (void)addOccasionalPassword:(GXOccasionalPasswordManager *)occasionPassword password:(NSString *)password password_used:(BOOL)passwordUsed cout:(NSInteger)passwordCount
+{
+    //NSLog(@"password:%@ used:%@ count:%ld", password, @(passwordUsed), (long)passwordCount);
+    if (_validPasswordArray == nil) {
+        _validPasswordArray = [NSMutableArray array];
+    }
     
+    [_validPasswordArray addObject:password];
+    
+    if (_validPasswordArray.count >= passwordCount) {
+        [occasionPassword disconnect];
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+            if (self.passwordArrayReceived) {
+                self.passwordArrayReceived(_validPasswordArray);
+            }
+        }];
+    }
+}
+
+- (void)addOccasionalPassword:(GXOccasionalPasswordManager *)occasionPassword  count:(NSInteger)passwordCount
+{
+    if (_validPasswordArray == nil) {
+        _validPasswordArray = [NSMutableArray array];
+    }
+    
+    if (passwordCount == 0) {
+        // the device has no valid password currently
+        [self dismissViewControllerAnimated:YES completion:^{
+            if (self.passwordArrayReceived) {
+                self.passwordArrayReceived(_validPasswordArray);
+            }
+        }];
+    }
 }
 
 #pragma mark - view
+- (GXOccasionalPasswordManager *)oneTimePasswordManager
+{
+    if (!_oneTimePasswordManager) {
+        _oneTimePasswordManager = ({
+            _oneTimePasswordManager = [[GXOccasionalPasswordManager alloc] initWithCurrentDeviceName:self.deviceIdentifire];
+            _oneTimePasswordManager.delegate = self;
+            
+            _oneTimePasswordManager;
+        });
+    }
+    
+    return _oneTimePasswordManager;
+}
+
 - (UILabel *)tipsLabel
 {
     if (!_tipsLabel) {

@@ -40,11 +40,13 @@
 + (NSFetchedResultsController *)oneTimePasswordFetchedResultsControllerOfDevice:(NSString *)deviceIdentifire;
 
 // the previous one-time password will be deleted once you insert the new one-time password array
+// the param - oneTimePasswordArray contains object GXOneTimePasswordModel
 + (void)device:(NSString *)deviceIdentifire insertNewOneTimePasswordIntoDatabase:(NSArray *)oneTimePasswordArray;
 
 // this interface is sepcifically for data migration(from SQL to CoreData)
 + (void)addOneTimePasswordIntoDatabase:(NSArray *)oneTimePasswordArray;
 
++ (void)device:(NSString *)deviceIdentifire reserveThePasswordArray:(NSArray *)passwordArray;
 /*
  * change data
  */

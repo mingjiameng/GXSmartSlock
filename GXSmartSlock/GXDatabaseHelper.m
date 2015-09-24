@@ -1028,7 +1028,6 @@
     }
     
     [self saveContext];
-
 }
 
 + (void)device:(NSString *)deviceIdentifire turnOneTimePassword:(NSString *)password toState:(BOOL)valid
@@ -1055,6 +1054,46 @@
         oneTimePassword.validity = [NSNumber numberWithBool:valid];
     }
     
+}
+
++ (NSArray *)oneTimePasswordOfDevice:(NSString *)deviceIdentifire
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityOneTimePassword = [NSEntityDescription entityForName:ENTITY_ONE_TIME_PASSWORD inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityOneTimePassword];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceIdentifire == %@", deviceIdentifire];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *passwordArray = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"fetch one time password array error:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    return passwordArray;
+}
+
++ (void)device:(NSString *)deviceIdentifire reserveThePasswordArray:(NSArray *)passwordArray
+{
+    NSArray *allPaswordEntityArray = [self oneTimePasswordOfDevice:deviceIdentifire];
+    
+    for (GXDatabaseEntityOneTimePassword *passwordEntity in allPaswordEntityArray) {
+        if ([passwordArray containsObject:passwordEntity.password]) {
+            if (![passwordEntity.validity boolValue]) {
+                passwordEntity.validity = [NSNumber numberWithBool:true];
+            }
+        } else {
+            if ([passwordEntity.validity boolValue]) {
+                passwordEntity.validity = [NSNumber numberWithBool:false];
+            }
+        }
+    }
 }
 
 + (void)logout

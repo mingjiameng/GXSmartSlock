@@ -149,7 +149,16 @@
     
     if (actionSheet.tag == ACTION_SHEET_PRODUCE_NEW_PASSWORD) {
         if (buttonIndex == actionSheet.destructiveButtonIndex) {
+            GXRefreshOneTimePasswordViewController *refreshPasswordVC = [[GXRefreshOneTimePasswordViewController alloc] init];
+            refreshPasswordVC.deviceIdentifire = self.deviceIdentifire;
+            refreshPasswordVC.passwordArrayReceived = ^ (NSArray *passwordArray) {
+                [GXDatabaseHelper device:self.deviceIdentifire insertNewOneTimePasswordIntoDatabase:passwordArray];
+            };
             
+            UINavigationController *navigator = [[UINavigationController alloc] initWithRootViewController:refreshPasswordVC];
+            [self presentViewController:navigator animated:YES completion:^{
+                
+            }];
         }
     }
     
@@ -163,7 +172,14 @@
     
     GXSynchronizeOneTimePasswordWithDeviceViewController *synchornizePasswordVC = [[GXSynchronizeOneTimePasswordWithDeviceViewController alloc] init];
     synchornizePasswordVC.deviceIdentifire = self.deviceIdentifire;
+    synchornizePasswordVC.passwordArrayReceived = ^(NSArray *passwordArray) {
+        [GXDatabaseHelper device:self.deviceIdentifire reserveThePasswordArray:passwordArray];
+    };
     
+    UINavigationController *navigator = [[UINavigationController alloc] initWithRootViewController:synchornizePasswordVC];
+    [self presentViewController:navigator animated:YES completion:^{
+        
+    }];
 }
 
 
@@ -244,7 +260,7 @@
 {
     if (!_refreshPasswordBarButtonItem) {
         _refreshPasswordBarButtonItem = ({
-            UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"生成临时密码" style:UIBarButtonItemStylePlain target:self action:@selector(synchronizePassword)];
+            UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"生成临时密码" style:UIBarButtonItemStylePlain target:self action:@selector(refreshPassword)];
             item.tintColor = MAIN_COLOR;
             
             item;
