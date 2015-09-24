@@ -35,7 +35,7 @@
 
 - (void)configNavigationBar
 {
-    self.navigationItem.title = @"添加门锁";
+    self.navigationItem.title = @"添加设备";
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelAddNewDevice)];
     

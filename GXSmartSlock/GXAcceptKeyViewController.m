@@ -64,10 +64,10 @@
     UIButton *rejectButton = [[UIButton alloc] initWithFrame:CGRectMake(leadingSpace, 20.0f, frame.size.width - 2 * leadingSpace, 40.0f)];
     [rejectButton setTitle:@"拒绝钥匙" forState:UIControlStateNormal];
     [rejectButton addTarget:self action:@selector(rejectKey:) forControlEvents:UIControlEventTouchUpInside];
-    [rejectButton setBackgroundColor:[UIColor redColor]];
+    [rejectButton setBackgroundColor:[UIColor whiteColor]];
     rejectButton.layer.masksToBounds = YES;
     rejectButton.layer.cornerRadius = DEFAULT_ROUND_RECTANGLE_CORNER_RADIUS;
-    [rejectButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [rejectButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     
     [view addSubview:rejectButton];
     
