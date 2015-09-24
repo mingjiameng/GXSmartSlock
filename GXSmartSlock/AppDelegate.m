@@ -14,6 +14,7 @@
 #import "WXApi.h"
 #import "GXDatabaseHelper.h"
 #import "GXLogoutModel.h"
+#import "GXDataMigrationHelper.h"
 
 #import "zkeyViewHelper.h"
 
@@ -42,14 +43,14 @@
     // set navigationBar and tabBar style
     [self setBarColor];
     
-    // whether need to lunch guide page
-    BOOL needToLaunchGuidePage = [self whetherNeedToLauchGuidePage];
-    needToLaunchGuidePage = NO;
-
-    if (needToLaunchGuidePage) {
-        GXGuidePageViewController *guidePageVC = [[GXGuidePageViewController alloc] init];
-        _window.rootViewController = guidePageVC;
-    } else {
+//    // whether need to lunch guide page
+//    BOOL needToLaunchGuidePage = [self whetherNeedToLauchGuidePage];
+//    needToLaunchGuidePage = NO;
+//
+//    if (needToLaunchGuidePage) {
+//        GXGuidePageViewController *guidePageVC = [[GXGuidePageViewController alloc] init];
+//        _window.rootViewController = guidePageVC;
+//    } else {
         UINavigationController *navigation = nil;
         if ([[NSUserDefaults standardUserDefaults] boolForKey:DEFAULT_LOGIN_STATUS]) {
             GXRootViewController *rootVC = [[GXRootViewController alloc] init];
@@ -61,12 +62,16 @@
         }
         
         _window.rootViewController = navigation;
-    }
+//    }
     
     [_window makeKeyAndVisible];
     
     // request system rights
     [self requestSystemNotificationServcie];
+    
+    // migrate data from sql to core data(>= 2.3.0)
+    // remove unuseful key-value in user infoDictionary
+    [self migrateDataIfNeeded];
     
     // register WeiXin service
     [WXApi registerApp:WEIXIN_GUOSIM_ID];
@@ -97,6 +102,16 @@
     }
     
     return YES;
+}
+
+- (void)migrateDataIfNeeded
+{
+    NSString *currentAppVersionString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    if ([currentAppVersionString compare:@"2.3.0"] == NSOrderedAscending) {
+        [GXDataMigrationHelper migrateData];
+    }
+    
+    return;
 }
 
 
@@ -292,7 +307,6 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-
     [self openGestureSecretViewIfNeccessary];
 }
 
@@ -311,8 +325,28 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_GESTURE_PASSWORD]) {
         FHGesturePasswordViewController *gesturePasswordVerifyVC = [[FHGesturePasswordViewController alloc] init];
         gesturePasswordVerifyVC.viewType = GesturePasswordViewTypeVerification;
-        [self.window.rootViewController presentViewController:gesturePasswordVerifyVC animated:YES completion:nil];
+        [[self topViewController] presentViewController:gesturePasswordVerifyVC animated:YES completion:nil];
     }
+}
+
+- (UIViewController *)topViewController{
+    return [self topViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+}
+
+- (UIViewController *)topViewController:(UIViewController *)rootViewController
+{
+    if (rootViewController.presentedViewController == nil) {
+        return rootViewController;
+    }
+    
+    if ([rootViewController.presentedViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navigationController = (UINavigationController *)rootViewController.presentedViewController;
+        UIViewController *lastViewController = [[navigationController viewControllers] lastObject];
+        return [self topViewController:lastViewController];
+    }
+    
+    UIViewController *presentedViewController = (UIViewController *)rootViewController.presentedViewController;
+    return [self topViewController:presentedViewController];
 }
 
 #pragma mark - Core Data stack

@@ -252,7 +252,9 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section == 2) {
-        return @"门禁锁不支持密码管理";
+        if ([self.deviceEntity.deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD]) {
+            return @"门禁锁不支持密码管理";
+        }
     }
     
     return nil;

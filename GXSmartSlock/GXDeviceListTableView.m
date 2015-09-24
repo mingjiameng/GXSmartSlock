@@ -99,7 +99,7 @@
     NSString *title = @"普通锁";
     
     if ([deviceCategory isEqualToString:DEVICE_CATEGORY_DEFAULT]) {
-        return @"普通锁";
+        return @"智能锁";
     } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_ELECTRIC]) {
         return @"电机锁";
     } else if ([deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD]) {

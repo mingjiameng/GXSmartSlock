@@ -29,7 +29,7 @@
 
 #define GXUpdateUserNicknameURL [NSString stringWithFormat:@"%@update_nickname", GXBaseURL]
 
-#define GXUpdateUserPasswordURL [NSString stringWithFormat:@"%@", GXBaseURL]
+#define GXUpdateUserPasswordURL [NSString stringWithFormat:@"%@update_password", GXBaseURL]
 
 #define GXDeleteAuthorizedUserURL [NSString stringWithFormat:@"%@delete_key", GXBaseURL]
 

@@ -158,6 +158,7 @@
 - (void)setGesturePassword:(NSString *)password
 {
     [[NSUserDefaults standardUserDefaults] setObject:_newPassword forKey:DEFAULT_GESTURE_PASSWORD];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     if (self.gesturePasswordChanged) {
         self.gesturePasswordChanged(YES);

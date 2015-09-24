@@ -99,7 +99,7 @@
         cell.accessoryView = _oldPasswordTextField;
     } else if (indexPath.row == 1) {
         if (_newPasswordOnceTextField == nil) {
-            _newPasswordOnceTextField = [self passwordTextField:CGRectMake(0, 0, tableView.frame.size.width - 110.0f, 30.0) withPlaceHolder:@"8-20位数字或字母"];
+            _newPasswordOnceTextField = [self passwordTextField:CGRectMake(0, 0, tableView.frame.size.width - 110.0f, 30.0) withPlaceHolder:@"8-20位数字和字母"];
         }
         
         cell.accessoryView = _newPasswordOnceTextField;
@@ -160,7 +160,7 @@
     NSString *newPassword = _newPasswordOnceTextField.text;
     if (newPassword.length < 8 || newPassword.length > 20 || ![zkeyIdentifierValidator isStringWithNumberAndAlphabet:newPassword]) {
         [_activityIndicator removeFromSuperview];
-        [self alertWithMessage:@"密码应为8-20位数字或字母"];
+        [self alertWithMessage:@"密码应为8-20位数字和字母"];
         self.view.userInteractionEnabled = YES;
         return;
     }

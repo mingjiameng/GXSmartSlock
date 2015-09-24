@@ -47,7 +47,7 @@
 
 - (void)configNavigationBar
 {
-    self.title = @"修改门锁昵称";
+    self.title = @"新的钥匙";
 }
 
 - (void)addNicknameTableView:(CGRect)frame

@@ -359,6 +359,8 @@
     [self presentViewController:navigationVC animated:YES completion:^{
         
     }];
+    
+    //[self.navigationController pushViewController:userSettingVC animated:YES];
 }
 
 - (void)addDevice

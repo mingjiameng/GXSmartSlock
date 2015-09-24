@@ -215,5 +215,7 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
     }];
+    
+    //[self.navigationController popViewControllerAnimated:YES];
 }
 @end
