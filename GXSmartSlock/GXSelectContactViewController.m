@@ -60,37 +60,6 @@
     for (NSInteger i = 0; i < CFArrayGetCount(allPeople); ++i) {
         ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
         
-        ABMultiValueRef phoneArray = ABRecordCopyValue(person, kABPersonPhoneProperty);
-        NSString *guosimUserName = nil;
-        for (CFIndex index = 0; index < ABMultiValueGetCount(phoneArray); ++index) {
-            NSString *phoneNumber = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phoneArray, index);
-            if (phoneNumber != nil) {
-                phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
-                phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
-                phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"+86" withString:@""];
-                
-                guosimUserName = phoneNumber;
-                
-                break;
-            }
-        }
-        
-        if (guosimUserName == nil) {
-            ABMultiValueRef emailArray = ABRecordCopyValue(person, kABPersonEmailProperty);
-            for (CFIndex index = 0; index < ABMultiValueGetCount(emailArray); ++index) {
-                NSString *emailAddress = (__bridge NSString *)ABMultiValueCopyValueAtIndex(emailArray, index);
-                if (emailAddress != nil) {
-                    guosimUserName = emailAddress;
-                    
-                    break;
-                }
-            }
-        }
-        
-        if (guosimUserName == nil) {
-            continue;
-        }
-        
         NSString *firstName = (__bridge NSString*)ABRecordCopyValue(person, kABPersonFirstNameProperty);
         if (firstName == nil) {
             firstName = @"";
@@ -107,8 +76,27 @@
         
         NSString *userNickname= [firstName stringByAppendingString:lastName];
         
-        GXContactModel *contactModel = [GXContactModel modelWithUserName:guosimUserName nickname:userNickname];
-        [_contanctArray addObject:contactModel];
+        ABMultiValueRef phoneArray = ABRecordCopyValue(person, kABPersonPhoneProperty);
+        for (CFIndex index = 0; index < ABMultiValueGetCount(phoneArray); ++index) {
+            NSString *phoneNumber = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phoneArray, index);
+            if (phoneNumber != nil) {
+                phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+                phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
+                phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@"+86" withString:@""];
+                
+                GXContactModel *contactModel = [GXContactModel modelWithUserName:phoneNumber nickname:userNickname];
+                [_contanctArray addObject:contactModel];
+            }
+        }
+        
+        ABMultiValueRef emailArray = ABRecordCopyValue(person, kABPersonEmailProperty);
+        for (CFIndex index = 0; index < ABMultiValueGetCount(emailArray); ++index) {
+            NSString *emailAddress = (__bridge NSString *)ABMultiValueCopyValueAtIndex(emailArray, index);
+            if (emailAddress != nil) {
+                GXContactModel *contactModel = [GXContactModel modelWithUserName:emailAddress nickname:userNickname];
+                [_contanctArray addObject:contactModel];
+            }
+        }
     }
     
     memset(_isContactAtRowSelected, 0, sizeof(_isContactAtRowSelected));
@@ -145,6 +133,8 @@
     GXContactModel *contactModel = [_contanctArray objectAtIndex:indexPath.row];
     
     cell.textLabel.text = contactModel.nickname;
+    
+    cell.accessoryType = (_isContactAtRowSelected[indexPath.row]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     
     return cell;
 }

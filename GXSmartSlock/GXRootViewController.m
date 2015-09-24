@@ -36,7 +36,7 @@
     UIActionSheet *_unlockModeActionSheet;
     UIImageView *_headImageView;
     UIWebView *_animationView;
-    
+    UILabel *_unlockProcessingLabel;
     
     GXUnlockTool *_unlockTool;
 }
@@ -288,24 +288,39 @@
 
 - (void)manulUnlock:(UIButton *)sender
 {
-    if (_animationView == nil) {
-        // animation view
-        _animationView = [[UIWebView alloc] initWithFrame:_centralButton.frame];
-        _animationView.scalesPageToFit = YES;
-        _animationView.backgroundColor = [UIColor clearColor];
-        _animationView.userInteractionEnabled = NO;
+//    if (_animationView == nil) {
+//        // animation view
+//        _animationView = [[UIWebView alloc] initWithFrame:_centralButton.frame];
+//        _animationView.scalesPageToFit = YES;
+//        _animationView.backgroundColor = [UIColor clearColor];
+//        _animationView.userInteractionEnabled = NO;
+//        
+//        NSString *animationFilePath = [[NSBundle mainBundle] pathForResource:@"manulUnlockAnimation" ofType:@"gif"];
+//        NSData *animationData = [NSData dataWithContentsOfFile:animationFilePath];
+//        [_animationView loadData:animationData MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+//        
+//        _animationView.hidden = YES;
+//        
+//        [self.view addSubview:_animationView];
+//    }
+//    
+//    _animationView.hidden = NO;
+    
+    
+    if (_unlockProcessingLabel == nil) {
+        _unlockProcessingLabel = [[UILabel alloc] initWithFrame:_centralButton.frame];
+        _unlockProcessingLabel.text = @"正在开锁...";
+        _unlockProcessingLabel.textColor = [UIColor lightGrayColor];
+        _unlockProcessingLabel.backgroundColor = [UIColor whiteColor];
+        _unlockProcessingLabel.textAlignment = NSTextAlignmentCenter;
         
-        NSString *animationFilePath = [[NSBundle mainBundle] pathForResource:@"manulUnlockAnimation" ofType:@"gif"];
-        NSData *animationData = [NSData dataWithContentsOfFile:animationFilePath];
-        [_animationView loadData:animationData MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+        _unlockProcessingLabel.hidden = YES;
         
-        _animationView.hidden = YES;
-        
-        [self.view addSubview:_animationView];
+        [self.view addSubview:_unlockProcessingLabel];
     }
     
-    _animationView.hidden = NO;
-    NSLog(@"点击手动开锁");
+    _unlockProcessingLabel.hidden = NO;
+    
     [_unlockTool manulUnlock];
 }
 
@@ -313,15 +328,22 @@
 #pragma mark - 
 - (void)successfullyUnlockDevice:(NSString *)deviceIdentifire
 {
-    if (_animationView != nil) {
-        _animationView.hidden = YES;
+//    if (_animationView != nil) {
+//        _animationView.hidden = YES;
+//    }
+    
+    if (_unlockProcessingLabel != nil) {
+        _unlockProcessingLabel.hidden = YES;
     }
 }
 
 - (void)forceStopUnlock
 {
-    if (_animationView != nil) {
-        _animationView.hidden = YES;
+//    if (_animationView != nil) {
+//        _animationView.hidden = YES;
+//    }
+    if (_unlockProcessingLabel != nil) {
+        _unlockProcessingLabel.hidden = YES;
     }
 }
 

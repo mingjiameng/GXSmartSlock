@@ -24,6 +24,7 @@
 #import "GXUnlockRecordViewController.h"
 #import "GXManagePermanentPasswordViewController.h"
 #import "GXUpdateFirewareViewController.h"
+#import "GXManageOneTimePasswordViewController.h"
 
 @interface GXDeviceDetailViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, GXDeleteDeviceModelDelegate>
 {
@@ -234,6 +235,10 @@
             GXManagePermanentPasswordViewController *permanentPasswordVC = [[GXManagePermanentPasswordViewController alloc] init];
             permanentPasswordVC.deviceIdentifire = self.deviceEntity.deviceIdentifire;
             [self.navigationController pushViewController:permanentPasswordVC animated:YES];
+        } else if (indexPath.row == 1) {
+            GXManageOneTimePasswordViewController *oneTimePasswordVC = [[GXManageOneTimePasswordViewController alloc] init];
+            oneTimePasswordVC.deviceIdentifire = self.deviceEntity.deviceIdentifire;
+            [self.navigationController pushViewController:oneTimePasswordVC animated:YES];
         }
     } else if (indexPath.section == 3) {
         if (indexPath.row == 0) {

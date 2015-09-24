@@ -39,7 +39,7 @@
     if (self.viewType == SelectValidDeviceViewTypeSendKey) {
         self.title = @"选择要发送的钥匙";
     } else if (self.viewType == SelectValidDeviceViewTypeUnlockRecord) {
-        self.navigationItem.title = @"选择要查看的门锁";
+        self.navigationItem.title = @"选择要查看的设备";
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissView)];
     }
     

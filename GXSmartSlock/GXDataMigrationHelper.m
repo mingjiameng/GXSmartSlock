@@ -10,6 +10,7 @@
 
 #import "zkeySandboxHelper.h"
 #import "GXOneTimePasswordModel.h"
+#import "GXDatabaseHelper.h"
 
 #import <sqlite3.h>
 
@@ -68,6 +69,9 @@
     }
     
     // send to database
+    [GXDatabaseHelper addOneTimePasswordIntoDatabase:passwordModelArray];
+    
+    [zkeySandboxHelper deleteFileAtPath:sqlFilePath];
 }
 
 @end

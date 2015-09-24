@@ -37,6 +37,10 @@
 + (GXDatabaseEntityDevice *)deviceEntityWithDeviceIdentifire:(NSString *)deviceIdentifire;
 + (NSFetchedResultsController *)allLocalUnlockRecordFetchedResultsController;
 + (NSArray *)allLocalUnlockRecordArray;
++ (NSFetchedResultsController *)oneTimePasswordFetchedResultsControllerOfDevice:(NSString *)deviceIdentifire;
++ (void)device:(NSString *)deviceIdentifire insertNewOneTimePasswordIntoDatabase:(NSArray *)oneTimePasswordArray;
++ (void)addOneTimePasswordIntoDatabase:(NSArray *)oneTimePasswordArray;
+
 /*
  * change data
  */

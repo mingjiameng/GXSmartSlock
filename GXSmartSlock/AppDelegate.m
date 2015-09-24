@@ -43,14 +43,18 @@
     // set navigationBar and tabBar style
     [self setBarColor];
     
-//    // whether need to lunch guide page
-//    BOOL needToLaunchGuidePage = [self whetherNeedToLauchGuidePage];
-//    needToLaunchGuidePage = NO;
-//
-//    if (needToLaunchGuidePage) {
-//        GXGuidePageViewController *guidePageVC = [[GXGuidePageViewController alloc] init];
-//        _window.rootViewController = guidePageVC;
-//    } else {
+    // migrate data from sql to core data(>= 2.3.0)
+    // remove unuseful key-value in user infoDictionary
+    [self migrateDataIfNeeded];
+    
+    // whether need to lunch guide page
+    BOOL needToLaunchGuidePage = [self whetherNeedToLauchGuidePage];
+    needToLaunchGuidePage = NO;
+
+    if (needToLaunchGuidePage) {
+        GXGuidePageViewController *guidePageVC = [[GXGuidePageViewController alloc] init];
+        _window.rootViewController = guidePageVC;
+    } else {
         UINavigationController *navigation = nil;
         if ([[NSUserDefaults standardUserDefaults] boolForKey:DEFAULT_LOGIN_STATUS]) {
             GXRootViewController *rootVC = [[GXRootViewController alloc] init];
@@ -62,16 +66,12 @@
         }
         
         _window.rootViewController = navigation;
-//    }
+    }
     
     [_window makeKeyAndVisible];
     
     // request system rights
     [self requestSystemNotificationServcie];
-    
-    // migrate data from sql to core data(>= 2.3.0)
-    // remove unuseful key-value in user infoDictionary
-    [self migrateDataIfNeeded];
     
     // register WeiXin service
     [WXApi registerApp:WEIXIN_GUOSIM_ID];
@@ -106,8 +106,10 @@
 
 - (void)migrateDataIfNeeded
 {
-    NSString *currentAppVersionString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    if ([currentAppVersionString compare:@"2.3.0"] == NSOrderedAscending) {
+    NSString *historyAppVersionString = [[NSUserDefaults standardUserDefaults] objectForKey:APP_VERSION];
+    //NSLog(@"history viersion:%@", historyAppVersionString);
+    if (historyAppVersionString == nil || [historyAppVersionString compare:@"2.3.0"] == NSOrderedAscending) {
+        //NSLog(@"数据迁移");
         [GXDataMigrationHelper migrateData];
     }
     

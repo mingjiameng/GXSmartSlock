@@ -22,12 +22,14 @@
 #import "GXUserModel.h"
 #import "GXUnlockRecordModel.h"
 #import "GXLocalUnlockRecordModel.h"
+#import "GXOneTimePasswordModel.h"
 
 #import "GXDatabaseEntityDevice.h"
 #import "GXDatabaseEntityDeviceUserMappingItem.h"
 #import "GXDatabaseEntityUser.h"
 #import "GXDatabaseEntityUnlockRecord.h"
 #import "GXDatabaseEntityLocalUnlockRecord.h"
+#import "GXDatabaseEntityOneTimePassword.h"
 
 #import <Foundation/Foundation.h>
 
@@ -410,9 +412,13 @@
     }
 }
 
+
+
 /*
  * the following method provide data for runtime application
  */
+
+
 + (NSFetchedResultsController *)allLocalUnlockRecordFetchedResultsController
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
@@ -515,7 +521,35 @@
     NSEntityDescription *entityDevice = [NSEntityDescription entityForName:ENTITY_DEVICE inManagedObjectContext:managedObjectContext];
     [fetchRequest setEntity:entityDevice];
     
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"deviceStatus" ascending:NO];
+    NSSortDescriptor *sortDescriptor01 = [NSSortDescriptor sortDescriptorWithKey:@"deviceStatus" ascending:NO];
+    NSSortDescriptor *sortDescriptor02 = [NSSortDescriptor sortDescriptorWithKey:@"deviceIdentifire" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor01, sortDescriptor02]];
+    
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    
+    NSError *error = nil;
+    if (![fetchedResultsController performFetch:&error]) {
+        NSLog(@"fetch valid device error:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    return fetchedResultsController;
+}
+
++ (NSFetchedResultsController *)oneTimePasswordFetchedResultsControllerOfDevice:(NSString *)deviceIdentifire
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityOneTimePassword = [NSEntityDescription entityForName:ENTITY_ONE_TIME_PASSWORD inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityOneTimePassword];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceIdentifire == %@", deviceIdentifire];
+    [fetchRequest setPredicate:predicate];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"password" ascending:NO];
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     
     NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
@@ -528,6 +562,29 @@
     }
     
     return fetchedResultsController;
+}
+
++ (NSArray *)oneTimePasswordArrayOfDevice:(NSString *)deviceIdentifire
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityOneTimePassword = [NSEntityDescription entityForName:ENTITY_ONE_TIME_PASSWORD inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityOneTimePassword];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceIdentifire == %@", deviceIdentifire];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *oneTimePasswordArray = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"fetch one time password array error:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    return oneTimePasswordArray;
 }
 
 // defaultUser is the administrator
@@ -934,6 +991,44 @@
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
     
     [managedObjectContext deleteObject:record];
+}
+
++ (void)device:(NSString *)deviceIdentifire insertNewOneTimePasswordIntoDatabase:(NSArray *)oneTimePasswordArray
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSArray *oneTimePasswordEntityArray = [self oneTimePasswordArrayOfDevice:deviceIdentifire];
+    if (oneTimePasswordEntityArray != nil) {
+        for (GXDatabaseEntityOneTimePassword *oneTimePasswordEntity in oneTimePasswordEntityArray) {
+            [managedObjectContext deleteObject:oneTimePasswordEntity];
+        }
+    }
+    
+    for (GXOneTimePasswordModel *oneTimePasswordModel in oneTimePasswordArray) {
+        GXDatabaseEntityOneTimePassword *oneTimePasswordEntity = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_ONE_TIME_PASSWORD inManagedObjectContext:managedObjectContext];
+        
+        oneTimePasswordEntity.password = oneTimePasswordModel.password;
+        oneTimePasswordEntity.deviceIdentifire = oneTimePasswordModel.deviceIdentifre;
+        oneTimePasswordEntity.validity = [NSNumber numberWithBool:oneTimePasswordModel.validity];
+    }
+    
+    [self saveContext];
+}
+
++ (void)addOneTimePasswordIntoDatabase:(NSArray *)oneTimePasswordArray
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    for (GXOneTimePasswordModel *oneTimePasswordModel in oneTimePasswordArray) {
+        GXDatabaseEntityOneTimePassword *oneTimePasswordEntity = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_ONE_TIME_PASSWORD inManagedObjectContext:managedObjectContext];
+        
+        oneTimePasswordEntity.password = oneTimePasswordModel.password;
+        oneTimePasswordEntity.deviceIdentifire = oneTimePasswordModel.deviceIdentifre;
+        oneTimePasswordEntity.validity = [NSNumber numberWithBool:oneTimePasswordModel.validity];
+    }
+    
+    [self saveContext];
+
 }
 
 + (void)logout

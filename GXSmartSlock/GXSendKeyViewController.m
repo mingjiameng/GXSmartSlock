@@ -19,6 +19,7 @@
 
 #import "GXSelectDeviceTableViewCell.h"
 #import "zkeyActivityIndicatorView.h"
+#import "zkeyViewHelper.h"
 
 #import "GXSelectValidDeviceViewController.h"
 #import "GXEnterAndSelectUserViewController.h"
@@ -34,8 +35,6 @@
 @property (nonatomic, strong) UILabel *alertLabel;
 @property (nonatomic, strong) UISwitch *adminAuthoritySwitch;
 @end
-
-
 
 @implementation GXSendKeyViewController
 
@@ -86,6 +85,8 @@
     _tableView.tableFooterView = view;
     
     UIButton *sendKeyButton = [[UIButton alloc] initWithFrame:CGRectMake(20.0f, 25.0f, frame.size.width - 40.0f, 40.0f)];
+    sendKeyButton.layer.masksToBounds = YES;
+    sendKeyButton.layer.cornerRadius = DEFAULT_ROUND_RECTANGLE_CORNER_RADIUS;
     [sendKeyButton setBackgroundColor:MAIN_COLOR];
     [sendKeyButton setTitle:@"发送钥匙" forState:UIControlStateNormal];
     [sendKeyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -215,6 +216,11 @@
 #pragma mark - user action
 - (void)sendKey
 {
+    if (_contactModelArray == nil || _contactModelArray.count <= 0) {
+        [self alertWithMessage:@"请选择或输入对方的用户名"];
+        return;
+    }
+    
     zkeyActivityIndicatorView *activityIndicator = [[zkeyActivityIndicatorView alloc] initWithFrame:self.view.frame title:@"正在发送钥匙..."];
     [self.view addSubview:activityIndicator];
     
@@ -238,6 +244,12 @@
     }
     
 }
+
+- (void)alertWithMessage:(NSString *)message
+{
+    [zkeyViewHelper alertWithMessage:message inView:self.view withFrame:self.view.frame];
+}
+
 
 - (NSArray *)validDeviceArray
 {

@@ -62,6 +62,8 @@
     return UITableViewCellEditingStyleDelete;
 }
 
+
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.delegate respondsToSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)]) {
@@ -69,17 +71,17 @@
     }
 }
 
-- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        [self.delegate tableView:self commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
-    }];
-    
-    UITableViewRowAction *editNicknameRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"备注" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        [self.delegate tableView:self commitEditingStyle:UITableViewCellEditingStyleInsert forRowAtIndexPath:indexPath];
-    }];
-    
-    return @[deleteRowAction, editNicknameRowAction];
-}
+//- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//        [self.delegate tableView:self commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
+//    }];
+//    
+//    UITableViewRowAction *editNicknameRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"备注" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//        [self.delegate tableView:self commitEditingStyle:UITableViewCellEditingStyleInsert forRowAtIndexPath:indexPath];
+//    }];
+//    
+//    return @[deleteRowAction, editNicknameRowAction];
+//}
 
 @end

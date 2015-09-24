@@ -16,11 +16,13 @@
 #import "GXSynchronizeUnlockRecordModel.h"
 #import "GXDatabaseEntityUnlockRecord.h"
 #import "GXDatabaseEntityUser.h"
+#import "GXUnlockRecordDetailViewDataModel.h"
 
 #import "GXUnlockRecordTableView.h"
 #import "zkeyViewHelper.h"
 
 #import "GXSelectValidDeviceViewController.h"
+#import "GXUnlockRecordDetailViewController.h"
 
 @interface GXUnlockRecordViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, GXSynchronizeUnlockRecordModelDelegate, NSFetchedResultsControllerDelegate>
 {
@@ -167,6 +169,30 @@
     }
     
     [_synchronizeUnlockRecordModel synchronizeUnlockRecord];
+}
+
+- (void)tableView:(zkeyTableViewWithPullFresh *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // ...
+    GXUnlockRecordDetailViewDataModel *viewData = [[GXUnlockRecordDetailViewDataModel alloc] init];
+    GXDatabaseEntityUnlockRecord *unlockRecordEntity = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    viewData.deviceIdentifire = unlockRecordEntity.device.deviceIdentifire;
+    viewData.deviceNickname = unlockRecordEntity.device.deviceNickname;
+    viewData.deviceCategory = unlockRecordEntity.device.deviceCategory;
+    viewData.date = unlockRecordEntity.date;
+    viewData.event = unlockRecordEntity.event;
+    if (unlockRecordEntity.user != nil) {
+        viewData.relatedUserNickname = unlockRecordEntity.user.nickname;
+    }
+    
+    // ...
+    GXUnlockRecordDetailViewController *unlockRecordDetailVC = [[GXUnlockRecordDetailViewController alloc] init];
+    unlockRecordDetailVC.viewData = viewData;
+    
+    [self.navigationController pushViewController:unlockRecordDetailVC animated:YES];
 }
 
 - (void)selectDevice
