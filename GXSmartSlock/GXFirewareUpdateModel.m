@@ -17,6 +17,7 @@
 #import "GXDefaultHttpHelper.h"
 #import "zkeySandboxHelper.h"
 #import "GXUploadDeviceVersionParam.h"
+#import "GXDatabaseHelper.h"
 
 #import <CoreBluetooth/CoreBluetooth.h>
 
@@ -410,6 +411,7 @@ typedef enum{
             [self.delegate firewareUpdateFailed];
         } else if (status == 1) {
             [self.delegate firewareUpdateComplete];
+            
         }
     } failure:^(NSError *error) {
         [self.delegate noNetwork];

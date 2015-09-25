@@ -46,7 +46,7 @@
 
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewRowAction *markAsUsedRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"已用" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+    UITableViewRowAction *markAsUsedRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"标记为已使用" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         if ([self.delegate respondsToSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)]) {
             [self.delegate tableView:self commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
         }

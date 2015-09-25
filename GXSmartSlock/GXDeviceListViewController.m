@@ -54,7 +54,7 @@
 
 - (void)configNavigationBar
 {
-    self.title = @"我的门锁";
+    self.title = @"设备列表";
 }
 
 - (void)addDeviceList:(CGRect)frame

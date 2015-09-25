@@ -60,5 +60,6 @@
 + (void)addLocalUnlockRecordIntoDatabase:(NSArray *)unlockRecordArray;
 + (void)deleteLocalUnlockRecordEntity:(GXDatabaseEntityLocalUnlockRecord *)record;
 + (void)device:(NSString *)deviceIdentifire turnOneTimePassword:(NSString *)password toState:(BOOL)valid;
++ (void)device:(NSString *)deviceIdentifire updateFirewareVersion:(NSInteger)newVerison;
 
 @end

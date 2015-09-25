@@ -1096,6 +1096,17 @@
     }
 }
 
++ (void)device:(NSString *)deviceIdentifire updateFirewareVersion:(NSInteger)newVerison
+{
+    GXDatabaseEntityDevice *device = [self deviceEntityWithDeviceIdentifire:deviceIdentifire];
+    
+    if ([device.deviceVersion integerValue] !=  newVerison) {
+        device.deviceVersion = [NSNumber numberWithInteger:newVerison];
+    }
+    
+    [self saveContext];
+}
+
 + (void)logout
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];

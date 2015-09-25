@@ -161,8 +161,8 @@
     NSString *secretKey = [_deviceKeyDic objectForKey:deviceIdentifire];
     
     if (secretKey != nil) {
-        // 门紧锁不支持感应开锁
-        NSString *deviceCategory = [_deviceKeyDic objectForKey:deviceIdentifire];
+        // 门禁锁不支持感应开锁
+        NSString *deviceCategory = [_deviceCategoryDic objectForKey:deviceIdentifire];
         if (deviceCategory == nil) {
             return nil;
         }

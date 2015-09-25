@@ -191,7 +191,7 @@
     GXDevicePermanentPsswordModel *passwordModel = [_passwordModelArray objectAtIndex:indexPath.row];
     
     cell.textLabel.text = passwordModel.nickname;
-    cell.detailTextLabel.text = passwordModel.password;
+    //cell.detailTextLabel.text = passwordModel.password;
     
     return cell;
 }

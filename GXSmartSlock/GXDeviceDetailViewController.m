@@ -54,12 +54,12 @@
 
 - (void)configNavigationBar
 {
-    self.title = @"门锁详情";
+    self.title = @"设备详情";
 }
 
 - (void)addDeviceDetailTableView:(CGRect)frame
 {
-    _titleNameArray = @[ @[@"门锁图片", @"门锁昵称"], @[@"授权用户", @"开锁记录"], @[@"常用密码管理", @"临时密码管理"], @[@"固件升级"] ];
+    _titleNameArray = @[ @[@"设备图片", @"设备昵称"], @[@"授权用户", @"通知中心"], @[@"常用密码管理", @"临时密码管理"], @[@"固件升级"] ];
     
     _tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     _tableView.dataSource = self;

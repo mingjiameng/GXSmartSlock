@@ -253,7 +253,7 @@
 - (void)selectUnlockMode:(UIButton *)sender
 {
     if (_unlockModeActionSheet == nil) {
-        _unlockModeActionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择开锁模式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"手动开锁", @"感应开锁", @"摇一摇开锁", nil];
+        _unlockModeActionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择开锁模式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"手动开锁", @"感应开锁", nil]; //@"摇一摇开锁", nil];
     }
     
     [_unlockModeActionSheet showInView:self.view];

@@ -301,12 +301,12 @@
         case NSFetchedResultsChangeInsert:
             //让tableView在newIndexPath位置插入一个cell
             [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-                             withRowAnimation:UITableViewRowAnimationMiddle];
+                             withRowAnimation:UITableViewRowAnimationLeft];
             break;
             
         case NSFetchedResultsChangeDelete:
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                             withRowAnimation:UITableViewRowAnimationMiddle];
+                             withRowAnimation:UITableViewRowAnimationRight];
             break;
             
         case NSFetchedResultsChangeUpdate:

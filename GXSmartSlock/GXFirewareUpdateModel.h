@@ -42,7 +42,7 @@
 // connect the guosim device, write the new fireware into device
 - (void)updateFireware;
 
--(id)initWithCurrentDeviceName:(NSString *)currentDeviceName;
+//-(id)initWithCurrentDeviceName:(NSString *)currentDeviceName;
 - (void)disconnect;
 - (void)uploadStart;
 

@@ -13,7 +13,7 @@
 #import "MICRO_COMMON.h"
 
 #import "NSString+StringHexToData.h"
-
+#import "GXDatabaseHelper.h"
 #import "GXDefaultHttpHelper.h"
 #import "zkeySandboxHelper.h"
 #import "GXUploadDeviceVersionParam.h"
@@ -461,6 +461,7 @@ typedef enum{
         } else if (status == 1) {
             [weakSelf.delegate firewareUpdateComplete];
             [weakSelf disconnect];
+            [GXDatabaseHelper device:self.currentDeviceName updateFirewareVersion:version];
         }
     } failure:^(NSError *error) {
         [weakSelf.delegate noNetwork];
