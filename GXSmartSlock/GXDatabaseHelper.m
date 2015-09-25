@@ -1050,9 +1050,18 @@
         return;
     }
     
-    for (GXDatabaseEntityOneTimePassword *oneTimePassword in oneTimePasswordArray) {
-        oneTimePassword.validity = [NSNumber numberWithBool:valid];
+    if (oneTimePasswordArray.count > 1) {
+        NSLog(@"error: same password for device");
     }
+    
+    for (GXDatabaseEntityOneTimePassword *oneTimePasswordEntity in oneTimePasswordArray) {
+        [managedObjectContext deleteObject:oneTimePasswordEntity];
+    }
+    
+    GXDatabaseEntityOneTimePassword *newPasswordEntity = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_ONE_TIME_PASSWORD inManagedObjectContext:managedObjectContext];
+    newPasswordEntity.password = password;
+    newPasswordEntity.deviceIdentifire = deviceIdentifire;
+    newPasswordEntity.validity = [NSNumber numberWithBool:valid];
     
 }
 
@@ -1077,23 +1086,6 @@
     }
     
     return passwordArray;
-}
-
-+ (void)device:(NSString *)deviceIdentifire reserveThePasswordArray:(NSArray *)passwordArray
-{
-    NSArray *allPaswordEntityArray = [self oneTimePasswordOfDevice:deviceIdentifire];
-    
-    for (GXDatabaseEntityOneTimePassword *passwordEntity in allPaswordEntityArray) {
-        if ([passwordArray containsObject:passwordEntity.password]) {
-            if (![passwordEntity.validity boolValue]) {
-                passwordEntity.validity = [NSNumber numberWithBool:true];
-            }
-        } else {
-            if ([passwordEntity.validity boolValue]) {
-                passwordEntity.validity = [NSNumber numberWithBool:false];
-            }
-        }
-    }
 }
 
 + (void)device:(NSString *)deviceIdentifire updateFirewareVersion:(NSInteger)newVerison

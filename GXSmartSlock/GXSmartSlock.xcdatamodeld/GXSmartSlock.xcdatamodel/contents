@@ -35,6 +35,10 @@
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="validity" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
+    <entity name="GXPermanentPassword" syncable="YES">
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="GXRecord" representedClassName="GXDatabaseEntityUnlockRecord" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="deviceIdentifire" optional="YES" attributeType="String" syncable="YES"/>
@@ -61,5 +65,6 @@
         <element name="GXRecord" positionX="-54" positionY="18" width="128" height="165"/>
         <element name="GXUser" positionX="-63" positionY="-18" width="128" height="150"/>
         <element name="GXOneTimePassword" positionX="-45" positionY="108" width="128" height="90"/>
+        <element name="GXPermanentPassword" positionX="-27" positionY="126" width="128" height="75"/>
     </elements>
 </model>

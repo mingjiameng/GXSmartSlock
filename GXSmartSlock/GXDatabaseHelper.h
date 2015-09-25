@@ -46,7 +46,6 @@
 // this interface is sepcifically for data migration(from SQL to CoreData)
 + (void)addOneTimePasswordIntoDatabase:(NSArray *)oneTimePasswordArray;
 
-+ (void)device:(NSString *)deviceIdentifire reserveThePasswordArray:(NSArray *)passwordArray;
 /*
  * change data
  */

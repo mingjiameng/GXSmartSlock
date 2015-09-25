@@ -446,7 +446,7 @@ typedef enum{
     if (isEven) {
         version = _fw_version  + 1;
     }else{
-        version = _fw_version;
+        version = _fw_version; 
     }
     
     GXFirmwareConnect *__weak weakSelf = self;

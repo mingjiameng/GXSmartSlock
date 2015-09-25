@@ -109,7 +109,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // mark as used
-        NSLog(@"mark as used");
+       // NSLog(@"mark as used");
         GXDatabaseEntityOneTimePassword *passwordEntity = [self.passwordFetchedResultsController objectAtIndexPath:indexPath];
         
         [GXDatabaseHelper device:passwordEntity.deviceIdentifire turnOneTimePassword:passwordEntity.password toState:NO];
@@ -118,11 +118,13 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    //NSLog(@"button index:%ld actionSheetTag:%ld", (long)buttonIndex, (long)actionSheet.tag);
+    
     if (actionSheet.tag == ACTION_SHEET_ACTION) {
         if (buttonIndex == actionSheet.cancelButtonIndex) {
             return;
         }
-        
+            
         GXDatabaseEntityOneTimePassword *passwordEntity = [self.passwordFetchedResultsController objectAtIndexPath:_indexPathOfSelectedRow];
         
         if (buttonIndex == actionSheet.destructiveButtonIndex) {
@@ -147,6 +149,8 @@
         return;
     }
     
+    NSLog(@"execute");
+    
     if (actionSheet.tag == ACTION_SHEET_PRODUCE_NEW_PASSWORD) {
         if (buttonIndex == actionSheet.destructiveButtonIndex) {
             GXRefreshOneTimePasswordViewController *refreshPasswordVC = [[GXRefreshOneTimePasswordViewController alloc] init];
@@ -160,6 +164,8 @@
                 
             }];
         }
+        
+        return;
     }
     
     
@@ -173,7 +179,7 @@
     GXSynchronizeOneTimePasswordWithDeviceViewController *synchornizePasswordVC = [[GXSynchronizeOneTimePasswordWithDeviceViewController alloc] init];
     synchornizePasswordVC.deviceIdentifire = self.deviceIdentifire;
     synchornizePasswordVC.passwordArrayReceived = ^(NSArray *passwordArray) {
-        [GXDatabaseHelper device:self.deviceIdentifire reserveThePasswordArray:passwordArray];
+        [GXDatabaseHelper device:self.deviceIdentifire insertNewOneTimePasswordIntoDatabase:passwordArray];
     };
     
     UINavigationController *navigator = [[UINavigationController alloc] initWithRootViewController:synchornizePasswordVC];
@@ -293,7 +299,6 @@
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    
     UITableView *tableView = self.passwordTableView.tableView;
     
     switch(type) {

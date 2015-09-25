@@ -32,6 +32,8 @@
     GXDeleteAuthorizedUserModel *_deleteUserModel;
     zkeyActivityIndicatorView *_activityIndicator;
     GXSynchronizeDeviceUserModel *_synchronizeDeviceUserModel;
+    
+    NSString *_defaultUserName;
 }
 
 @property (nonatomic, strong) GXAuthorizedUserTableView *tableView;
@@ -65,6 +67,8 @@
 {
     _fetchedResultsController = [GXDatabaseHelper deviceUserMappingModelFetchedResultsController:self.deviceIdentifire];
     _fetchedResultsController.delegate = self;
+    
+    _defaultUserName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
 }
 
 - (void)addUserListTableView:(CGRect)frame
@@ -138,6 +142,13 @@
 - (void)tableView:(zkeyTableViewWithPullFresh *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // you can't deleate yourself
+        GXDatabaseEntityDeviceUserMappingItem *deviceUserMappingEntity = [_fetchedResultsController objectAtIndexPath:indexPath];
+        if ([deviceUserMappingEntity.user.userName isEqualToString:_defaultUserName]) {
+            [self alertWithMessage:@"您不能删除自己"];
+            return;
+        }
+        
         _deletedIndexPath = indexPath;
         UIActionSheet *deleteActionSheet = [[UIActionSheet alloc] initWithTitle:@"删除该授权用户后，该用户将无法打开对应的门锁，确定要删除该用户吗？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确认删除" otherButtonTitles:nil];
         [deleteActionSheet showInView:self.view];

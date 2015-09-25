@@ -10,6 +10,8 @@
 
 #import "GXDatabaseHelper.h"
 #import "GXOccasionalPasswordManager.h"
+#import "GXOneTimePasswordModel.h"
+
 
 @interface GXSynchronizeOneTimePasswordWithDeviceViewController () <GXOccasionalPwdDelegate>
 {
@@ -56,12 +58,17 @@
 // return the one-time password that has not been used
 - (void)addOccasionalPassword:(GXOccasionalPasswordManager *)occasionPassword password:(NSString *)password password_used:(BOOL)passwordUsed cout:(NSInteger)passwordCount
 {
-    //NSLog(@"password:%@ used:%@ count:%ld", password, @(passwordUsed), (long)passwordCount);
+    NSLog(@"password:%@ used:%@ count:%ld", password, @(passwordUsed), (long)passwordCount);
     if (_validPasswordArray == nil) {
         _validPasswordArray = [NSMutableArray array];
     }
     
-    [_validPasswordArray addObject:password];
+    GXOneTimePasswordModel *oneTimePasswordModel = [[GXOneTimePasswordModel alloc] init];
+    oneTimePasswordModel.password = password;
+    oneTimePasswordModel.deviceIdentifre = self.deviceIdentifire;
+    oneTimePasswordModel.validity = YES;
+    
+    [_validPasswordArray addObject:oneTimePasswordModel];
     
     if (_validPasswordArray.count >= passwordCount) {
         [occasionPassword disconnect];
