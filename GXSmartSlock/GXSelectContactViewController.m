@@ -127,12 +127,13 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"contact"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"contact"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"contact"];
     }
     
     GXContactModel *contactModel = [_contanctArray objectAtIndex:indexPath.row];
     
     cell.textLabel.text = contactModel.nickname;
+    cell.detailTextLabel.text = contactModel.phoneNumber;
     
     cell.accessoryType = (_isContactAtRowSelected[indexPath.row]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     

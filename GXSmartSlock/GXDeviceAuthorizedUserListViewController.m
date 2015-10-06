@@ -34,6 +34,7 @@
     GXSynchronizeDeviceUserModel *_synchronizeDeviceUserModel;
     
     NSString *_defaultUserName;
+    BOOL _dataSynchronized;
 }
 
 @property (nonatomic, strong) GXAuthorizedUserTableView *tableView;
@@ -51,6 +52,7 @@
     [super viewDidLoad];
     // do something...
     self.view.backgroundColor = [UIColor whiteColor];
+    _dataSynchronized = NO;
     
     [self addDatasource];
     [self configNavigationBar];
@@ -60,7 +62,7 @@
 - (void)configNavigationBar
 {
     self.title = @"授权用户";
-    //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addUser)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addUser)];
 }
 
 - (void)addDatasource
@@ -298,5 +300,20 @@
 - (void)addUser
 {
     
+}
+
+#pragma mark - 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // ...
+    if (!_dataSynchronized) {
+        if (self.tableView) {
+            [self.tableView forceToRefresh];
+        }
+        
+        _dataSynchronized = YES;
+    }
 }
 @end

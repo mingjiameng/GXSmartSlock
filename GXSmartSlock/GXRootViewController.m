@@ -362,6 +362,7 @@
 - (void)sendKey:(UIButton *)sender
 {
     GXSendKeyViewController *sendKeyVC = [[GXSendKeyViewController alloc] init];
+    sendKeyVC.viewType = GXSendKeyViewTypeMutipleDevice;
     [self.navigationController pushViewController:sendKeyVC animated:YES];
 }
 

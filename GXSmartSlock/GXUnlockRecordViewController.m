@@ -29,7 +29,8 @@
     UIButton *_selectUnlockModeButton;
     GXDatabaseEntityDevice *_selectedDeviceEntity;
     GXSynchronizeUnlockRecordModel *_synchronizeUnlockRecordModel;
-
+    
+    BOOL _dataSynchronized;
 }
 @property (nonatomic, strong) GXUnlockRecordTableView *tableView;
 @property (nonatomic, strong) NSArray *validDeviceArray;
@@ -51,6 +52,7 @@
     [super viewDidLoad];
     // do something...
     self.view.backgroundColor = [UIColor whiteColor];
+    _dataSynchronized = NO;
     
     [self buildUI];
 }
@@ -311,6 +313,21 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView.tableView endUpdates];
+}
+
+#pragma mark -
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // ...
+    if (!_dataSynchronized) {
+        if (self.tableView) {
+            [self.tableView forceToRefresh];
+        }
+        
+        _dataSynchronized = YES;
+    }
 }
 
 @end

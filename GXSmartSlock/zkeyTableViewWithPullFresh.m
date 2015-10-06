@@ -93,9 +93,10 @@
 {
     if ([self.delegate respondsToSelector:@selector(tableViewRequestNewData:)]) {
         [self.delegate tableViewRequestNewData:self];
+        [self performSelector:@selector(didEndLoadingData) withObject:nil afterDelay:10.0f];
     } else {
         [self didEndLoadingData];
-    }
+    } 
 }
 
 #pragma mark - UITableViewDataSource
@@ -119,6 +120,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([self.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)]) {
+        return [self.delegate tableView:self heightForRowAtIndexPath:indexPath];
+    }
+    
     return 44.0f;
 }
 

@@ -10,6 +10,15 @@
 
 #import <CoreData/CoreData.h>
 
+typedef NS_ENUM(NSInteger, GXSendKeyViewType) {
+    GXSendKeyViewTypeMutipleDevice = 10,
+    GXSendKeyViewTypeCertainDevice = 20
+};
+
 @interface GXSendKeyViewController : UIViewController
+
+@property (nonatomic) GXSendKeyViewType viewType;
+
+@property (nonatomic, copy, nullable) NSString *deviceIdentifire;
 
 @end

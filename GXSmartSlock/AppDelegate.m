@@ -243,6 +243,9 @@
     UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:loginVC];
     
     _window.rootViewController = navigation;
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"警告" message:@"您的帐号已在另一台手机上登录，如非本人操作，请尽快修改密码。" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+    [alertView show];
 
 }
 

@@ -127,7 +127,7 @@
 
 + (BOOL)isValidChinesePhoneNumber:(NSString *)phoneNumber
 {
-    NSString *regex = @"^((13[0-9])|(147)|(17[0,1])|(15[^4,\\D])|(18[0,2,3,5-9]))\\d{8}$";
+    NSString *regex = @"^((13[0-9])|(147)|(17[0,1,6])|(15[^4,\\D])|(18[0,2,3,5-9]))\\d{8}$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return [predicate evaluateWithObject:phoneNumber];
 }

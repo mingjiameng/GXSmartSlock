@@ -55,11 +55,16 @@
 
 - (void)buildUI
 {
-    if (self.validDeviceArray.count <= 0) {
-        [self addNoDeviceAlertLabel:CGRectMake(15.0f, 30.0f, self.view.frame.size.width - 30.0f, 60.0f)];
-    } else {
+    if (self.viewType == GXSendKeyViewTypeMutipleDevice) {
+        if (self.validDeviceArray.count <= 0) {
+            [self addNoDeviceAlertLabel:CGRectMake(15.0f, 30.0f, self.view.frame.size.width - 30.0f, 60.0f)];
+        } else {
+            [self addSendKeyTableView:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - TOP_SPACE_IN_NAVIGATION_MODE)];
+        }
+    } else if (self.viewType == GXSendKeyViewTypeCertainDevice) {
         [self addSendKeyTableView:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - TOP_SPACE_IN_NAVIGATION_MODE)];
     }
+    
 }
 
 - (void)addNoDeviceAlertLabel:(CGRect)frame
@@ -112,13 +117,20 @@
     if (indexPath.section == 0) {
         cell = [[GXSelectDeviceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         
-        if (_selectedDeviceEntity == nil) {
-            _selectedDeviceEntity = [self.validDeviceArray objectAtIndex:0];
+        if (self.viewType == GXSendKeyViewTypeMutipleDevice) {
+            if (_selectedDeviceEntity == nil) {
+                _selectedDeviceEntity = [self.validDeviceArray objectAtIndex:0];
+            }
+            
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        } else if (self.viewType == GXSendKeyViewTypeCertainDevice) {
+            _selectedDeviceEntity = [GXDatabaseHelper deviceEntityWithDeviceIdentifire:self.deviceIdentifire];
+            cell.userInteractionEnabled = NO;
         }
         
         cell.imageView.image = [self deviceImageNameAccordingDeviceCategory:_selectedDeviceEntity.deviceCategory andDeviceIdentifire:_selectedDeviceEntity.deviceIdentifire];
         cell.textLabel.text = _selectedDeviceEntity.deviceNickname;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
     } else if (indexPath.section == 1) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
         
