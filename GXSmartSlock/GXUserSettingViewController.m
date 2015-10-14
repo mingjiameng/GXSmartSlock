@@ -192,7 +192,7 @@
 #pragma mark - user action
 - (void)clickLogoutButton:(UIButton *)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"登出后当前账号的相关数据将会被清除，确定要登出吗？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"登出" otherButtonTitles:nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"登出后当前账号的相关数据将会被清除，确定要登出吗？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定要登出吗" otherButtonTitles:nil];
     [actionSheet showInView:self.view];
 }
 

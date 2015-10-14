@@ -295,7 +295,7 @@
         // save battery level to local database
         [self.delegate updateBatteryLevel:[batteryLevelString integerValue] ofDevice:peripheral.name];
         if (batteryLevel <= LOW_BATTERY_LEVEL) {
-            [self.delegate lowBatteryAlert];
+            [self.delegate lowBatteryAlert:peripheral.name];
         }
         
         // discover unlock service

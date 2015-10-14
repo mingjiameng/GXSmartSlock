@@ -151,9 +151,17 @@
     [self uploadBatteryLevel:batteryLevel ofDevice:deviceIdentifire];
 }
 
-- (void)lowBatteryAlert
+- (void)lowBatteryAlert:(NSString *)deviceIdentifire
 {
     [zkeyViewHelper presentLocalNotificationWithMessage:@"⚠低电量，请尽快更换电池"];
+    
+    GXLocalUnlockRecordModel *unlockRecord = [[GXLocalUnlockRecordModel alloc] init];
+    unlockRecord.event = @"⚠低电量，请尽快更换电池";
+    unlockRecord.eventType = 11;
+    unlockRecord.deviceIdentifire = deviceIdentifire;
+    unlockRecord.date = [NSDate date];
+    
+    [GXDatabaseHelper addLocalUnlockRecordIntoDatabase:@[unlockRecord]];
 }
 
 - (NSString *)secretKeyForDevice:(NSString *)deviceIdentifire
@@ -258,7 +266,7 @@
     _isUploadingUnlockRecord = YES;
     
     if (![GXDefaultHttpHelper isServerAvailable]) {
-        NSLog(@"上传开锁记录没有网络");
+        //NSLog(@"上传开锁记录没有网络");
         _isUploadingUnlockRecord = NO;
         return;
     }

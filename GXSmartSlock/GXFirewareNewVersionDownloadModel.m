@@ -27,7 +27,8 @@
 {
     [self.delegate beginCheckNewVersion];
     
-    AFHTTPRequestOperationManager * requestOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"https://115.28.226.149/fw_version"]];
+    NSString *urlString = [NSString stringWithFormat:@"https://115.28.226.149/fw_version?typecode=%@", self.deviceCategory];
+    AFHTTPRequestOperationManager * requestOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
     
     AFSecurityPolicy * securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
     [AFHTTPRequestOperationManager manager].securityPolicy = securityPolicy;
@@ -47,7 +48,7 @@
         if (newVersion <= self.currentVersion) {
             [weakDelegate firewareUpdateNeeded:NO];
         } else {
-            if (newVersion <= self.downloadedVersion) {
+            if (newVersion <= self.downloadedVersion && [zkeySandboxHelper fileExitAtPath:[self firewareFilePath]]) {
                 [weakDelegate newVersionDownloadNeeded:NO];
             } else {
                 [weakDelegate newVersionDownloadNeeded:YES];
@@ -60,7 +61,7 @@
 
 - (void)downloadNewVersion
 {
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@.bin", [zkeySandboxHelper pathOfDocuments], self.deviceIdentifire];
+    NSString *filePath = [self firewareFilePath];
     
 //    if ([zkeySandboxHelper fileExitAtPath:filePath]) {
 //        NSData *data = [NSData dataWithContentsOfFile:filePath];
@@ -104,6 +105,13 @@
     
     [self.delegate beginDownloadNewVersion];
     [downloader start];
+}
+
+- (NSString *)firewareFilePath
+{
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@.bin", [zkeySandboxHelper pathOfDocuments], self.deviceIdentifire];
+    
+    return filePath;
 }
 
 @end
