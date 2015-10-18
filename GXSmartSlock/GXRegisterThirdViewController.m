@@ -63,7 +63,15 @@
     UIView *_withdrawView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 60)];
     _nextStepButton = [[UIButton alloc] initWithFrame:CGRectMake(15.0f, 10, frame.size.width - 30.0f, 40.0f)];
     _nextStepButton.backgroundColor = MAIN_COLOR;
-    [_nextStepButton setTitle:@"下一步" forState:UIControlStateNormal];
+    
+    NSString *title = @"注册";
+    if (self.viewType == RegisterViewTypeRegister) {
+        title = @"注册";
+    } else if (self.viewType == RegisterViewTypeForgetPassword) {
+        title = @"重置密码";
+    }
+    
+    [_nextStepButton setTitle:title forState:UIControlStateNormal];
     [_nextStepButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _nextStepButton.layer.masksToBounds = YES;
     _nextStepButton.layer.cornerRadius = 3.0;
@@ -189,9 +197,8 @@
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     } else if (self.viewType == RegisterViewTypeRegister) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            
-        }];
+        GXRootViewController *rootVC = [[GXRootViewController alloc] init];
+        self.view.window.rootViewController = rootVC;
     }
 }
 

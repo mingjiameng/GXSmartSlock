@@ -52,4 +52,7 @@
 // deviceVersion is a integer which indicate the verson of door lock hardware
 @property (nonatomic) NSInteger deviceVersion;
 
+
+@property (nonatomic) BOOL repeaterSupported;
+
 @end

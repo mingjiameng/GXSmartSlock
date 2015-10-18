@@ -65,7 +65,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [GXServerDataAnalyst login:result];
-        
+    
     });
     
 }

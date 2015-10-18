@@ -102,7 +102,7 @@
         if (status == 0 || status == 2) {
             [self.delegate registerOrResetFailed];
         } else if (status == 1) {
-            [self initializeDatabaseWithData:result userName:userName password:password];
+            [GXLoginModel initializeDatabaseWithData:result userName:userName password:password];
         } else {
             [self.delegate registerOrResetFailed];
         }
@@ -110,11 +110,6 @@
         [self.delegate noNetwork];
     }];
     
-}
-
-- (void)initializeDatabaseWithData:(NSDictionary *)result userName:(NSString *)userName password:(NSString *)password
-{
-    [GXLoginModel initializeDatabaseWithData:result userName:userName password:password];
 }
 
 @end

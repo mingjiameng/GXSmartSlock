@@ -16,7 +16,7 @@
 /*
  * insert data
  */
-+ (void)setDefaultUser:(GXUserModel *)user;
++ (void)setDefaultUser:(nonnull GXUserModel *)user;
 + (void)insertDeviceIntoDatabase:(NSArray *)deviceArray;
 + (void)insertDeviceUserMappingItemIntoDatabase:(NSArray *)deviceUserMappingArray;
 + (void)insertUserIntoDatabase:(NSArray *)userArray;
@@ -46,19 +46,22 @@
 // this interface is sepcifically for data migration(from SQL to CoreData)
 + (void)addOneTimePasswordIntoDatabase:(NSArray *)oneTimePasswordArray;
 
+
++ (NSFetchedResultsController *)passwordFetchedResultsContrllerWithPasswordType:(nullable NSString *)passwordType addedFrom:(nonnull NSString *)addedApproach;
+
 /*
  * change data
  */
-+ (void)changeDeviceNickname:(NSString *)deviceIdentifire deviceNickname:(NSString *)nickname;
-+ (void)deleteDeviceWithIdentifire:(NSString *)deviceIdentifire;
-+ (void)updateDefaultUserNickname:(NSString *)nickname;
-+ (void)deleteUser:(NSString *)userName fromDevice:(NSString *)deviceIdentifire;
++ (void)changeDeviceNickname:(nonnull NSString *)deviceIdentifire deviceNickname:(nonnull NSString *)nickname;
++ (void)deleteDeviceWithIdentifire:(nonnull NSString *)deviceIdentifire;
++ (void)updateDefaultUserNickname:(nonnull NSString *)nickname;
++ (void)deleteUser:(nonnull NSString *)userName fromDevice:(nonnull NSString *)deviceIdentifire;
 + (void)logout;
-+ (void)updateDonwloadedFirewareVersion:(NSInteger)newVersion ofDevice:(NSString *)deviceIdentifire;
-+ (void)device:(NSString *)deviceIdentifire updateBatteryLevel:(NSInteger)batteryLevel;
-+ (void)addLocalUnlockRecordIntoDatabase:(NSArray *)unlockRecordArray;
-+ (void)deleteLocalUnlockRecordEntity:(GXDatabaseEntityLocalUnlockRecord *)record;
-+ (void)device:(NSString *)deviceIdentifire turnOneTimePassword:(NSString *)password toState:(BOOL)valid;
-+ (void)device:(NSString *)deviceIdentifire updateFirewareVersion:(NSInteger)newVerison;
++ (void)updateDonwloadedFirewareVersion:(NSInteger)newVersion ofDevice:(nonnull NSString *)deviceIdentifire;
++ (void)device:(nonnull NSString *)deviceIdentifire updateBatteryLevel:(NSInteger)batteryLevel;
++ (void)addLocalUnlockRecordIntoDatabase:(nonnull NSArray *)unlockRecordArray;
++ (void)deleteLocalUnlockRecordEntity:(nonnull GXDatabaseEntityLocalUnlockRecord *)record;
++ (void)device:(nonnull NSString *)deviceIdentifire turnOneTimePassword:(nonnull NSString *)password toState:(BOOL)valid;
++ (void)device:(nonnull NSString *)deviceIdentifire updateFirewareVersion:(NSInteger)newVerison;
 
 @end

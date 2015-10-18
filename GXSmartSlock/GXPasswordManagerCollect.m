@@ -46,10 +46,10 @@ typedef enum {
 -(id)initWithCurrentDeviceName:(NSString *)currentDeviceName
 {
     if (self = [super init]) {
+         _currentDeviceName = currentDeviceName;
         _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
     }
-    _currentDeviceName = currentDeviceName;
-    
+   
     return self;
 }
 
@@ -143,10 +143,10 @@ typedef enum {
         [self refreshPeripheral];
         return;
     }
+    
     //GXLog(@"设备 = %@",_currentDeviceName);
     //GXLog(@"搜索到的设备 = %@",advertisementData[@"kCBAdvDataLocalName"]);
-    if ([self peripheralIsEqualCurrentDevice:advertisementData[@"kCBAdvDataLocalName"]]) {
-         _connectedPeripheral = peripheral;
+    if ([self peripheralIsEqualCurrentDevice:peripheral.name]) {
         [_centralManager connectPeripheral:peripheral options:nil];
         return;
     }
@@ -162,6 +162,7 @@ typedef enum {
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
+    _connectedPeripheral = peripheral;
     GXLog(@"Connected to nearby peripheral:%@",peripheral.name);
     peripheral.delegate = self;
     _peripheralState = PeripheralStateIsConnected;
@@ -357,7 +358,7 @@ typedef enum {
 -(NSMutableData *)StringToData:(NSString *)password
 {
     NSMutableData* data = [NSMutableData data];
-    for (int index = 0; index+1 <= password.length; index+=1) {
+    for (int index = 0; index < password.length; index++) {
         NSRange range = NSMakeRange(index, 1);
         NSString* hexStr = [password substringWithRange:range];
         NSScanner* scanner = [NSScanner scannerWithString:hexStr];
