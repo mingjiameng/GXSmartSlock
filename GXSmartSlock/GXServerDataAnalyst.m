@@ -15,6 +15,7 @@
 #import "GXDeviceUserMappingModel.h"
 #import "GXUserModel.h"
 #import "GXUnlockRecordModel.h"
+#import "GXPasswordModel.h"
 
 #import "GXDatabaseHelper.h"
 #import "zkeyMiPushPackage.h"
@@ -54,6 +55,7 @@
         deviceModel.deviceIdentifire = [deviceDic objectForKey:DEVICE_KEY_IDENTIFIRE];
         deviceModel.deviceKey = [deviceDic objectForKey:DEVICE_KEY_UNLOCK_KEY];
         deviceModel.deviceVersion = [[deviceDic objectForKey:DEVICE_KEY_VERSION] integerValue];
+        deviceModel.hasRepeater = [[deviceDic objectForKey:DEVICE_KEY_HAS_REPEATER] boolValue];
         
         [deviceModelArray addObject:deviceModel];
     }
@@ -136,5 +138,34 @@
         
     }
 }
+
++ (void)insertPasswordIntoDatabase:(NSArray *)passwordArray
+{
+    NSMutableArray *passwordModelArray = [NSMutableArray array];
+    
+    for (NSDictionary *passwordDic in passwordArray) {
+        GXPasswordModel *passwordModel = [[GXPasswordModel alloc] init];
+        
+        passwordModel.passwordID = [[passwordDic objectForKey:PASSWORD_KEY_ID] integerValue];
+        passwordModel.passwordNickname = [passwordDic objectForKey:PASSWORD_KEY_NICKNAME];
+        passwordModel.passwordTypeString = [passwordDic objectForKey:PASSWORD_KEY_TYPE];
+        passwordModel.actived = [[passwordDic objectForKey:PASSWORD_KEY_ACTIVED] boolValue];
+        
+        NSTimeInterval startDateTimeInterval = [[passwordDic objectForKey:PASSWORD_KEY_START_DATE] doubleValue] / 1000.0f;
+        NSTimeInterval endDateTimeInterval = [[passwordDic objectForKey:PASSWORD_KEY_END_DATE] doubleValue] / 1000.0f;
+        passwordModel.startDate = [NSDate dateWithTimeIntervalSince1970:startDateTimeInterval];
+        passwordModel.endDate = [NSDate dateWithTimeIntervalSince1970:endDateTimeInterval];
+        
+        passwordModel.addedApproach = [passwordDic objectForKey:PASSWORD_KEY_ADDED_APPROACH];
+        passwordModel.passwordStatus = [[passwordDic objectForKey:PASSWORD_KEY_STATUS] integerValue];
+        passwordModel.password = [passwordDic objectForKey:PASSWORD_KEY_PASSWORD];
+        
+        [passwordModelArray addObject:passwordModel];
+    }
+    
+    
+}
+
+
 
 @end

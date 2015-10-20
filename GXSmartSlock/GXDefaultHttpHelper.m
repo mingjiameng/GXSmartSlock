@@ -392,6 +392,22 @@
     }];
 }
 
++ (void)postWithSynchronizePasswordParam:(GXSynchronizePasswordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_ACCESS_TOKEN : param.accessToken,
+                               KEY_DEVICE_IDENTIFIRE : param.deviceIdentifire};
+    
+    [GXHttpTool postWithServerURL:GXSynchronizePasswordURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"同步密码失败");
+            failure(error);
+        }
+    }];
+
+}
+
 + (BOOL)isServerAvailable
 {
     GXReachability *server = [GXReachability reachabilityWithHostName:@"www.baidu.com"];

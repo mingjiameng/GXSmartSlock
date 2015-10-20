@@ -35,12 +35,6 @@
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="validity" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
-    <entity name="GXPassword" syncable="YES">
-        <attribute name="addedApproach" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="passwordID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="passwordNickname" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="passwordType" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
     <entity name="GXPermanentPassword" syncable="YES">
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
@@ -72,6 +66,5 @@
         <element name="GXPermanentPassword" positionX="-27" positionY="126" width="128" height="75"/>
         <element name="GXRecord" positionX="-54" positionY="18" width="128" height="165"/>
         <element name="GXUser" positionX="-63" positionY="-18" width="128" height="150"/>
-        <element name="GXPassword" positionX="-45" positionY="108" width="128" height="105"/>
     </elements>
 </model>

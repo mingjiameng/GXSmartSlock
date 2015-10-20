@@ -44,10 +44,10 @@
 + (void)device:(NSString *)deviceIdentifire insertNewOneTimePasswordIntoDatabase:(NSArray *)oneTimePasswordArray;
 
 // this interface is sepcifically for data migration(from SQL to CoreData)
-+ (void)addOneTimePasswordIntoDatabase:(NSArray *)oneTimePasswordArray;
++ (void)addOneTimePasswordIntoDatabase:(nonnull NSArray *)oneTimePasswordArray;
 
 
-+ (NSFetchedResultsController *)passwordFetchedResultsContrllerWithPasswordType:(nullable NSString *)passwordType addedFrom:(nonnull NSString *)addedApproach;
++ (nullable NSFetchedResultsController *)device:(NSString *)deviceIdentifire passwordFetchedResultsContrllerWithPasswordType:(nullable NSString *)passwordType addedFrom:(nullable NSString *)addedApproach;
 
 /*
  * change data

@@ -33,6 +33,7 @@ typedef void(^HttpFailure)(NSError *error);
 #import "GXUploadUnlockRecordParam.h"
 #import "GXUploadDeviceVersionParam.h"
 #import "GXGetVerificationCodeParam.h"
+#import "GXSynchronizePasswordParam.h"
 
 @interface GXDefaultHttpHelper : NSObject
 
@@ -57,7 +58,9 @@ typedef void(^HttpFailure)(NSError *error);
 + (void)postWithUpdateBatteryLevelParam:(GXUpdateDeviceBatteryLevelParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
 + (void)postWithUploadLocalUnlockRecordParam:(GXUploadUnlockRecordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
 + (void)postWithUploadDeviceVersionParam:(GXUploadDeviceVersionParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
-
++ (void)postWithSynchronizePasswordParam:(GXSynchronizePasswordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
+                                          
+                                          
 + (BOOL)isServerAvailable;
 
 @end

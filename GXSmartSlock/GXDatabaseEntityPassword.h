@@ -1,5 +1,5 @@
 //
-//  GXDatabaseEntityDevice.h
+//  GXDatabaseEntityPassword.h
 //  GXSmartSlock
 //
 //  Created by zkey on 10/19/15.
@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class GXDatabaseEntityDeviceUserMappingItem, GXDatabaseEntityUnlockRecord;
+@class GXDatabaseEntityDevice;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GXDatabaseEntityDevice : NSManagedObject
+@interface GXDatabaseEntityPassword : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "GXDatabaseEntityDevice+CoreDataProperties.h"
+#import "GXDatabaseEntityPassword+CoreDataProperties.h"

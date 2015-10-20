@@ -24,6 +24,7 @@
 #define DEVICE_KEY_UNLOCK_KEY @"device_key"
 #define DEVICE_KEY_VERSION @"device_version"
 #define DEVICE_KEY_IDENTIFIRE @"device_id"
+#define DEVICE_KEY_HAS_REPEATER @"hasBridge"
 
 // key in dictionary "mappings"
 #define MAPPING_KEY_DEVICE_IDENTIFIRE @"device_id"
@@ -51,6 +52,14 @@
 #define USER_REMARK_NAME_KEY_CONTACT @"account_contact"
 #define USER_REMARK_NAME_KEY_ALIAS @"alias"
 
-
+#define PASSWORD_KEY_ID @"id"
+#define PASSWORD_KEY_NICKNAME @"name"
+#define PASSWORD_KEY_TYPE @"type"
+#define PASSWORD_KEY_ACTIVED @"active"
+#define PASSWORD_KEY_START_DATE @"start_date"
+#define PASSWORD_KEY_END_DATE @"end_date"
+#define PASSWORD_KEY_ADDED_APPROACH @"op_type"
+#define PASSWORD_KEY_PASSWORD @"password"
+#define PASSWORD_KEY_STATUS @"status"
 
 #endif

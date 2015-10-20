@@ -53,6 +53,7 @@
 @property (nonatomic) NSInteger deviceVersion;
 
 
-@property (nonatomic) BOOL repeaterSupported;
+// whether the device has a repeater
+@property (nonatomic) BOOL hasRepeater;
 
 @end

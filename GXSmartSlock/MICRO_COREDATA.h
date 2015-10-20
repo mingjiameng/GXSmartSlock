@@ -15,4 +15,6 @@
 #define ENTITY_DEVICE_USER_MAPPING @"GXDevice_User_Mapping"
 #define ENTITY_LOCAL_UNLOCK_RECORD @"GXLocalUnlockRecord"
 #define ENTITY_ONE_TIME_PASSWORD @"GXOneTimePassword"
+#define ENTITY_PASSWORD @"GXPassword"
+
 #endif

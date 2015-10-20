@@ -13,12 +13,15 @@
 #import "GXPasswordTableView.h"
 #import "GXPasswordManagerModel.h"
 
+#import "zkeyViewHelper.h"
+
 #import <CoreData/CoreData.h>
 
-@interface GXPasswordManagerViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate>
+@interface GXPasswordManagerViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, GXPasswordManagerModelDelegate>
 
 @property (nonatomic, strong) GXPasswordTableView *passwordTableView;
 @property (nonatomic, strong) GXPasswordManagerModel *passwordManagerModel;
+@property (nonatomic, strong) UISegmentedControl *passwordTypeSegmentControl;
 
 @end
 
@@ -33,13 +36,12 @@
     
     [self.view addSubview:self.passwordTableView];
     
+    [self.passwordTypeSegmentControl setSelectedSegmentIndex:0];
 }
 
 - (void)configNavigationBar
 {
-    UISegmentedControl *segmentControl = [[UISegmentedControl alloc] initWithItems:[self.passwordManagerModel availablePasswordTypeArray]];
-    [segmentControl addTarget:self action:@selector(selectPasswordType:) forControlEvents:UIControlEventValueChanged];
-    self.navigationItem.titleView = segmentControl;
+    self.navigationItem.titleView = self.passwordTypeSegmentControl;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addPassword)];
 }
@@ -79,7 +81,9 @@
 
 - (void)selectPasswordType:(UISegmentedControl *)sender
 {
+    NSString *passwordType = [self.passwordTypeSegmentControl titleForSegmentAtIndex:sender.selectedSegmentIndex];
     
+    [self.passwordManagerModel selectPasswordType:passwordType];
 }
 
 - (void)addPassword
@@ -92,6 +96,21 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UISegmentedControl *)passwordTypeSegmentControl
+{
+    if (!_passwordTypeSegmentControl) {
+        _passwordTypeSegmentControl = ({
+            UISegmentedControl *segmentControl = [[UISegmentedControl alloc] initWithItems:[self.passwordManagerModel availablePasswordTypeArray]];
+            
+            [segmentControl addTarget:self action:@selector(selectPasswordType:) forControlEvents:UIControlEventValueChanged];
+            
+            segmentControl;
+        });
+    }
+    
+    return _passwordTypeSegmentControl;
 }
 
 - (GXPasswordTableView *)passwordTableView
@@ -117,6 +136,7 @@
             GXPasswordManagerModel *manager = [[GXPasswordManagerModel alloc] init];
             
             manager.deviceModel = self.deviceModel;
+            manager.delegate = self;
             
             manager;
         });
@@ -125,6 +145,46 @@
     return _passwordManagerModel;
 }
 
+#pragma mark - delegate
+- (void)beginUpdates
+{
+    [self.passwordTableView.tableView beginUpdates];
+}
+
+- (void)insertSection:(NSUInteger)sectionIndex
+{
+    [self.passwordTableView.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)deleteSection:(NSUInteger)sectionIndex
+{
+    [self.passwordTableView.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)insertRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    [self.passwordTableView.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)deleteRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    [self.passwordTableView.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)reloadRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    [self.passwordTableView.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)endUpdates
+{
+    [self.passwordTableView.tableView endUpdates];
+}
+
+- (void)reloadTableView
+{
+    [self.passwordTableView.tableView reloadData];
+}
 
 
 /*
