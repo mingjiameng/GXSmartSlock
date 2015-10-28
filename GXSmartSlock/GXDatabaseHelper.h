@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class GXUserModel, GXDatabaseEntityUser, GXDatabaseEntityDevice, GXDatabaseEntityLocalUnlockRecord;
+@class GXUserModel, GXDatabaseEntityUser, GXDatabaseEntityDevice, GXDatabaseEntityLocalUnlockRecord, GXDatabaseEntityPassword, GXPasswordModel;
 
 @interface GXDatabaseHelper : NSObject
 
@@ -38,6 +38,7 @@
 + (NSFetchedResultsController *)allLocalUnlockRecordFetchedResultsController;
 + (NSArray *)allLocalUnlockRecordArray;
 + (NSFetchedResultsController *)oneTimePasswordFetchedResultsControllerOfDevice:(NSString *)deviceIdentifire;
++ (void)device:(nonnull NSString *)deviceIdentifire insertPasswordIntoDatabase:(nullable NSArray<GXPasswordModel *> *)passwordModelArray;
 
 // the previous one-time password will be deleted once you insert the new one-time password array
 // the param - oneTimePasswordArray contains object GXOneTimePasswordModel
@@ -47,7 +48,9 @@
 + (void)addOneTimePasswordIntoDatabase:(nonnull NSArray *)oneTimePasswordArray;
 
 
-+ (nullable NSFetchedResultsController *)device:(NSString *)deviceIdentifire passwordFetchedResultsContrllerWithPasswordType:(nullable NSString *)passwordType addedFrom:(nullable NSString *)addedApproach;
++ (nullable NSFetchedResultsController *)device:(nonnull NSString *)deviceIdentifire passwordFetchedResultsContrllerWithPasswordType:(nullable NSString *)passwordType addedFrom:(nullable NSString *)addedApproach;
+
++ (nullable GXDatabaseEntityPassword *)device:(nonnull NSString *)deviceIdentifire passwordEntity:(NSInteger)passwordID;
 
 /*
  * change data

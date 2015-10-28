@@ -2,7 +2,7 @@
 //  GXPasswordDetailViewController.h
 //  GXSmartSlock
 //
-//  Created by zkey on 10/19/15.
+//  Created by zkey on 10/20/15.
 //  Copyright © 2015 guosim. All rights reserved.
 //
 
@@ -12,6 +12,8 @@
 
 @interface GXPasswordDetailViewController : UIViewController
 
-@property (nonatomic, strong, nonnull) GXPasswordModel *passwordModel;
+@property (nonatomic) NSInteger passwordID;
+@property (nonatomic, strong, nonnull) NSString *deviceIdentifire;
+
 
 @end

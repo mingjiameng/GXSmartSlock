@@ -15,6 +15,8 @@
 
 #import "zkeyViewHelper.h"
 
+#import "GXPasswordDetailViewController.h"
+
 #import <CoreData/CoreData.h>
 
 @interface GXPasswordManagerViewController () <zkeyTableViewWithPullFreshDataSource, zkeyTableViewWithPullFreshDelegate, GXPasswordManagerModelDelegate>
@@ -65,7 +67,13 @@
 #pragma mark - table view delegate
 - (void)tableView:(zkeyTableViewWithPullFresh *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    GXPasswordModel *passwordModel = [self.passwordManagerModel passwordModelForRowAtIndexPath:indexPath];
     
+    GXPasswordDetailViewController *detailVC = [[GXPasswordDetailViewController alloc] init];
+    detailVC.passwordID = passwordModel.passwordID;
+    detailVC.deviceIdentifire = passwordModel.deviceIdentifire;
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (void)tableViewRequestNewData:(zkeyTableViewWithPullFresh *)tableView
@@ -73,7 +81,10 @@
     typeof(self) weakSelf = self;
     
     [self.passwordManagerModel synchronizeData:^(NSInteger status) {
-        
+        [weakSelf.passwordTableView didEndLoadingData];
+        if (status == -1) {
+            [weakSelf alertWithMessage:@"无法连接服务器"];
+        }
     }];
 }
 
@@ -92,6 +103,10 @@
 }
 
 #pragma mark -
+- (void)alertWithMessage:(NSString *)message
+{
+    [zkeyViewHelper alertWithMessage:message inView:self.view withFrame:self.view.frame];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

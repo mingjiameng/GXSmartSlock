@@ -34,6 +34,7 @@ typedef void(^HttpFailure)(NSError *error);
 #import "GXUploadDeviceVersionParam.h"
 #import "GXGetVerificationCodeParam.h"
 #import "GXSynchronizePasswordParam.h"
+#import "GXDeletePasswordParam.h"
 
 @interface GXDefaultHttpHelper : NSObject
 
@@ -59,7 +60,7 @@ typedef void(^HttpFailure)(NSError *error);
 + (void)postWithUploadLocalUnlockRecordParam:(GXUploadUnlockRecordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
 + (void)postWithUploadDeviceVersionParam:(GXUploadDeviceVersionParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
 + (void)postWithSynchronizePasswordParam:(GXSynchronizePasswordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
-                                          
++ (void)postWithDeletePasswordParam:(GXDeletePasswordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure;
                                           
 + (BOOL)isServerAvailable;
 

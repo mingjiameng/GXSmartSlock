@@ -10,6 +10,7 @@
 #define GXSmartSlock_MICRO_HTTP_h
 
 #define GXBaseURL @"https://115.28.226.149:443/"
+#define GXBaseURL_TEST_HTTPS @"https://115.28.226.149:9000/"
 
 #define GXLoginURL [NSString stringWithFormat:@"%@user_exist", GXBaseURL]
 #define GXGetVerificationCodeForRegisetURL [NSString stringWithFormat:@"%@submit_account", GXBaseURL]
@@ -57,6 +58,7 @@
 
 #define GXSynchronizePasswordURL [NSString stringWithFormat:@"%@get_pwdinfo", GXBaseURL]
 
+#define GXDeletePasswordURL [NSString stringWithFormat:@"%@del_pwd", GXBaseURL]
 
 #define KEY_USER_NAME @"username"
 #define KEY_PASSWORD @"password"
@@ -79,6 +81,8 @@
 #define KEY_UNLOCK_EVENT @"event"
 #define KEY_UNLOCK_EVENT_TYPE @"event_type"
 #define KEY_UNLOCK_DATE @"date"
+#define KEY_PASSWORD_ID @"pwd_id"
+#define KEY_PASSWORD_OPERATION_TYPE @"op_type"
 
 #define KEY_ACCESS_TOKEN @"access_token"
 

@@ -117,9 +117,9 @@
                 deviceEntity.deviceCategory = deviceModel.deviceCategory;
             }
             
-            if ([deviceEntity.supportedByRepeater boolValue] != deviceModel.hasRepeater) {
-                deviceEntity.supportedByRepeater = [NSNumber numberWithBool:deviceModel.hasRepeater];
-            }
+//            if ([deviceEntity.supportedByRepeater boolValue] != deviceModel.hasRepeater) {
+//                deviceEntity.supportedByRepeater = [NSNumber numberWithBool:deviceModel.hasRepeater];
+//            }
             
             ++index01;
             ++index02;
@@ -156,7 +156,7 @@
         newDeviceEntity.deviceStatus = DEVICE_STATUS_INVALID;
         newDeviceEntity.deviceAuthority = DEVICE_AUTHORITY_NORMAL;
         newDeviceEntity.deviceNickname = @"nickname";
-        newDeviceEntity.supportedByRepeater = [NSNumber numberWithBool:deviceModel.hasRepeater];
+        //newDeviceEntity.supportedByRepeater = [NSNumber numberWithBool:deviceModel.hasRepeater];
     }
     
     [self saveContext];
@@ -425,6 +425,11 @@
         return;
     }
     
+    GXDatabaseEntityDevice *device = [self deviceEntityWithDeviceIdentifire:deviceIdentifire];
+    if (device == nil) {
+        return;
+    }
+    
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
     
     passwordModelArray = [passwordModelArray sortedArrayUsingComparator:^NSComparisonResult(GXPasswordModel *obj1, GXPasswordModel *obj2) {
@@ -463,6 +468,10 @@
                 passwordEntity.passwordStatus = [NSNumber numberWithInteger:passwordModel.passwordStatus];
             }
             
+            if (passwordModel.actived != [passwordEntity.actived boolValue]) {
+                passwordEntity.actived = [NSNumber numberWithBool:passwordModel.actived];
+            }
+            
             ++ index01;
             ++ index02;
             continue;
@@ -497,6 +506,9 @@
         newPasswordEntity.endDate = passwordModel.endDate;
         newPasswordEntity.password = passwordModel.password;
         newPasswordEntity.passwordStatus = [NSNumber numberWithInteger:passwordModel.passwordStatus];
+        newPasswordEntity.deviceIdentifire = passwordModel.deviceIdentifire;
+        
+        newPasswordEntity.device = device;
     }
     
     [self saveContext];
@@ -755,7 +767,7 @@
     return fetchedResultsController;
 }
 
-+ (nullable NSFetchedResultsController *)device:(NSString *)deviceIdentifire passwordFetchedResultsContrllerWithPasswordType:(nullable NSString *)passwordType addedFrom:(nullable NSString *)addedApproach
++ (nullable NSFetchedResultsController *)device:(nonnull NSString *)deviceIdentifire passwordFetchedResultsContrllerWithPasswordType:(nullable NSString *)passwordType addedFrom:(nullable NSString *)addedApproach
 {
     NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
     
@@ -944,6 +956,9 @@
     NSEntityDescription *entityPassword = [NSEntityDescription entityForName:ENTITY_PASSWORD inManagedObjectContext:managedObjectContext];
     [fetchRequest setEntity:entityPassword];
     
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceIdentifire == %@", deviceIdentifire];
+    [fetchRequest setPredicate:predicate];
+    
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"passwordID" ascending:ascending];
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     
@@ -956,6 +971,38 @@
     }
     
     return devicePasswordArray;
+}
+
++ (nullable GXDatabaseEntityPassword *)device:(nonnull NSString *)deviceIdentifire passwordEntity:(NSInteger)passwordID
+{
+    NSManagedObjectContext *managedObjectContext = [self defaultManagedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityPassword = [NSEntityDescription entityForName:ENTITY_PASSWORD inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entityPassword];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deviceIdentifire == %@ && passwordID == %@", deviceIdentifire, @(passwordID)];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *devicePasswordArray = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error != nil) {
+        NSLog(@"error: fetch all device password:%@, %@", error, [error userInfo]);
+        return nil;
+    }
+    
+    if (devicePasswordArray.count > 1) {
+        NSLog(@"error: mutiple password with same ID:%ld of device:%@", (long)passwordID, deviceIdentifire);
+    }
+    
+    if (devicePasswordArray.count <= 0) {
+        return nil;
+    }
+    
+    GXDatabaseEntityPassword *passwordEntiy = [devicePasswordArray objectAtIndex:0];
+    return passwordEntiy;
 }
 
 + (NSArray *)allUserEntityArray

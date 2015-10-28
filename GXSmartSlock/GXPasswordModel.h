@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-
+#import "GXDatabaseEntityPassword.h"
 
 typedef NS_ENUM(NSInteger, GXPasswordType) {
     GXPasswordTypeNormal = 10,
@@ -17,9 +17,21 @@ typedef NS_ENUM(NSInteger, GXPasswordType) {
 };
 
 typedef NS_ENUM(NSInteger, GXPasswordStatus) {
-    GXPasswordStatusSuccess = 0,
-    GXPasswordStatusWaitingForProccessing = 1
-    
+    GXPasswordStatusSuccessToSet = 0,
+    GXPasswordStatusWaitingForProccessing = 1,
+    GXPasswordStatusFailToSet = 2,
+    GXPasswordStatusIsProcessing = 3,
+    GXPasswordStatusIsDeleting = 4,
+    GXPasswordStatusIsActiving = 5,
+    GXPasswordStatusIsFreezing = 6,
+    GXPasswordStatusIsUpdating = 7,
+    GXPasswordStatusWrongCommand = 8,
+    GXPasswordStatusFailedToAdd = 103,
+    GXPasswordStatusFailedToDelete = 104,
+    GXPasswordStatusFailedToActive = 105,
+    GXPasswordStatusFailedToFreeze = 106,
+    GXPasswordStatusFailedToUpdating = 107,
+    GXPasswordStatusFailed = 108
 //    0：成功
 //    1：正在等待处理
 //    2：设置失败，异常
@@ -37,6 +49,11 @@ typedef NS_ENUM(NSInteger, GXPasswordStatus) {
 //    108：失败
 };
 
+typedef NS_ENUM(NSInteger, GXPasswordAddedApproach) {
+    GXPasswordAddedApproachRemote = 10,
+    GXPasswordAddedApproachBluetooth = 20
+};
+
 @interface GXPasswordModel : NSObject
 
 @property (nonatomic) NSInteger passwordID;
@@ -48,7 +65,11 @@ typedef NS_ENUM(NSInteger, GXPasswordStatus) {
 @property (nonatomic, strong, nullable) NSString *password;
 @property (nonatomic, strong, nonnull) NSString *addedApproach;
 @property (nonatomic) NSInteger passwordStatus;
+@property (nonatomic, strong, nonnull) NSString *deviceIdentifire;
 
 + (GXPasswordType)passwordTypeAccordingToString:(nonnull NSString *)passwordString;
++ (GXPasswordAddedApproach)passwordAddedApproachAccordingToString:(nonnull NSString *)passwordTypeString;
++ (nonnull NSString *)passwordStatusDescription:(GXPasswordStatus)status;
++ (nonnull GXPasswordModel *)passwordModelWithCoreDataEntity:(nonnull GXDatabaseEntityPassword *)passwordEntity;
 
 @end

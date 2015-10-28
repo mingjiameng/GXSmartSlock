@@ -14,7 +14,7 @@
 #import "GXPasswordTableViewCellDataModel.h"
 
 
-typedef void (^compeletionHandler) (NSInteger status);
+
 
 @protocol GXPasswordManagerModelDelegate <NSObject>
 
@@ -48,13 +48,18 @@ typedef void (^compeletionHandler) (NSInteger status);
 - (NSInteger)numberOfSectionsInTableView;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 - (nonnull GXPasswordTableViewCellDataModel *)cellDataForRowAtIndexPath:(nonnull NSIndexPath *)indexPath;
-
 - (nonnull GXPasswordModel *)passwordModelForRowAtIndexPath:(nonnull NSIndexPath *)indexPath;
 
 /*
  * user action
  */
+// status = -1 can't access to server
+// status = 0 success
+// status = 1 failed
+typedef void (^compeletionHandler) (NSInteger status);
 - (void)synchronizeData:(nullable compeletionHandler)handler;
+
+
 - (void)selectPasswordType:(nonnull NSString *)passwordType;
 
 @end

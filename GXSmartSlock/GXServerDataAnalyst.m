@@ -139,7 +139,7 @@
     }
 }
 
-+ (void)insertPasswordIntoDatabase:(NSArray *)passwordArray
++ (void)device:(NSString *)deviceIdentifire insertPasswordIntoDatabase:(NSArray *)passwordArray
 {
     NSMutableArray *passwordModelArray = [NSMutableArray array];
     
@@ -159,11 +159,12 @@
         passwordModel.addedApproach = [passwordDic objectForKey:PASSWORD_KEY_ADDED_APPROACH];
         passwordModel.passwordStatus = [[passwordDic objectForKey:PASSWORD_KEY_STATUS] integerValue];
         passwordModel.password = [passwordDic objectForKey:PASSWORD_KEY_PASSWORD];
+        passwordModel.deviceIdentifire = deviceIdentifire;
         
         [passwordModelArray addObject:passwordModel];
     }
     
-    
+    [GXDatabaseHelper device:deviceIdentifire insertPasswordIntoDatabase:passwordModelArray];
 }
 
 

@@ -14,6 +14,7 @@
 #import "GXDefaultHttpHelper.h"
 #import "GXDatabaseEntityPassword.h"
 #import "GXSynchronizePasswordParam.h"
+#import "GXServerDataAnalyst.h"
 
 #import <CoreData/CoreData.h>
 
@@ -93,7 +94,9 @@
 
 - (nonnull GXPasswordModel *)passwordModelForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GXPasswordModel *passwordModel = [[GXPasswordModel alloc] init];
+    GXDatabaseEntityPassword *passwordEntity = [self.currentFetchedResultsController objectAtIndexPath:indexPath];
+    
+    GXPasswordModel *passwordModel = [GXPasswordModel passwordModelWithCoreDataEntity:passwordEntity];
     
     return passwordModel;
 }
@@ -102,19 +105,25 @@
 {
     NSString *accessToken = nil;
     
-    if (handler) {
-        handler(0);
-    }
-    
     GXSynchronizePasswordParam *param = [[GXSynchronizePasswordParam alloc] init];
     param.accessToken = accessToken;
     param.deviceIdentifire = self.deviceModel.deviceIdentifire;
     
+    __block NSInteger requestStatus = 1;
+    
     [GXDefaultHttpHelper postWithSynchronizePasswordParam:param success:^(NSDictionary *result) {
-        NSInteger status = [[result objectForKey:@"err"] integerValue];
+        requestStatus = [[result objectForKey:@"err"] integerValue];
+        if (requestStatus == 0) {
+            NSArray *passwordArray = [result objectForKey:@"res"];
+            [GXServerDataAnalyst device:self.deviceModel.deviceIdentifire insertPasswordIntoDatabase:passwordArray];
+        }
     } failure:^(NSError *error) {
-        
+        requestStatus = -1;
     }];
+    
+    if (handler) {
+        handler(requestStatus);
+    }
 }
 
 #pragma mark - database

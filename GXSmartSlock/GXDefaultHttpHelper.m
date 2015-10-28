@@ -405,6 +405,23 @@
             failure(error);
         }
     }];
+}
+
++ (void)postWithDeletePasswordParam:(GXDeletePasswordParam *)param success:(HttpSuccess)success failure:(HttpFailure)failure
+{
+    NSDictionary *paramDic = @{KEY_ACCESS_TOKEN : param.accessToken,
+                               KEY_DEVICE_IDENTIFIRE : param.deviceIdentifire,
+                               KEY_PASSWORD_ID : param.passwordIdString,
+                               KEY_PASSWORD_OPERATION_TYPE : param.operationType};
+    
+    [GXHttpTool postWithServerURL:GXDeletePasswordURL params:paramDic success:^(NSDictionary *result) {
+        success(result);
+    } failure:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"删除密码失败");
+            failure(error);
+        }
+    }];
 
 }
 

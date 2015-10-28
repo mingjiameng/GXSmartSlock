@@ -116,40 +116,26 @@ typedef enum {
  *  检测外设是否是当前设备
  */
 
--(BOOL)peripheralIsEqualCurrentDevice:(NSString *)peripheraname
-{
-    BOOL result;
-    if ([_currentDeviceName length] && [peripheraname length]) {
-        if ([_currentDeviceName isEqualToString:peripheraname]) {
-            result =  YES;
-        }
-        else {
-            result = NO;
-        }
-    }
-    return result;
-}
-
 /**
  * 搜索到一个蓝牙设备，若周围蓝牙有多个，则会多次调用
  * 任何广播或扫描的相应数据保存在advertisementData中
  */
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    //GXLog(@"Discovered nearby Periapheral:    %@ (RSSI: %d)",advertisementData[@"kCBAdvDataLocalName"],[RSSI intValue]);
+    GXLog(@"Discovered nearby Periapheral:    %@ (RSSI: %d)",advertisementData[@"kCBAdvDataLocalName"],[RSSI intValue]);
     if (_connectedPeripheral !=nil) return;
    
-    if (!([[peripheral.name substringWithRange:(NSRange){0,5}] isEqualToString:@"Slock"])) {
-        [self refreshPeripheral];
+    if (peripheral.name == nil) {
         return;
     }
     
-    //GXLog(@"设备 = %@",_currentDeviceName);
-    //GXLog(@"搜索到的设备 = %@",advertisementData[@"kCBAdvDataLocalName"]);
-    if ([self peripheralIsEqualCurrentDevice:peripheral.name]) {
-        [_centralManager connectPeripheral:peripheral options:nil];
+    if (![_currentDeviceName isEqualToString:peripheral.name]) {
         return;
     }
+    
+    _connectedPeripheral = peripheral;
+    [_centralManager connectPeripheral:peripheral options:nil];
+
 }
 
 #pragma mark - CBCentralManager代理
@@ -162,7 +148,7 @@ typedef enum {
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-    _connectedPeripheral = peripheral;
+    
     GXLog(@"Connected to nearby peripheral:%@",peripheral.name);
     peripheral.delegate = self;
     _peripheralState = PeripheralStateIsConnected;
