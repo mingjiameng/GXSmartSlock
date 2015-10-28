@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Automatic">
+    <entity name="GXDevice" representedClassName="GXDatabaseEntityDevice" syncable="YES">
+        <attribute name="deviceAuthority" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceBattery" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="deviceCategory" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="deviceIdentifire" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceNickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceVersion" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="firewareDownloadVersion" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="supportedByRepeater" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="deviceUsers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXDevice_User_Mapping" inverseName="device" inverseEntity="GXDevice_User_Mapping" syncable="YES"/>
+        <relationship name="passwordList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GXPassword" syncable="YES"/>
+        <relationship name="unlockRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXRecord" inverseName="device" inverseEntity="GXRecord" syncable="YES"/>
+    </entity>
+    <entity name="GXDevice_User_Mapping" representedClassName="GXDatabaseEntityDeviceUserMappingItem" syncable="YES">
+        <attribute name="deviceAuthority" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceIdentifire" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceNickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceUserMappingID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="device" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXDevice" inverseName="deviceUsers" inverseEntity="GXDevice" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXUser" inverseName="devices" inverseEntity="GXUser" syncable="YES"/>
+    </entity>
+    <entity name="GXLocalUnlockRecord" representedClassName="GXDatabaseEntityLocalUnlockRecord" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="deviceIdentifire" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="event" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="GXOneTimePassword" representedClassName="GXDatabaseEntityOneTimePassword" syncable="YES">
+        <attribute name="deviceIdentifire" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="validity" optional="YES" attributeType="Boolean" syncable="YES"/>
+    </entity>
+    <entity name="GXPassword" representedClassName="GXDatabaseEntityPassword" syncable="YES">
+        <attribute name="actived" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="deviceIdentifire" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="passwordAddedApproach" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="passwordID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="passwordNickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="passwordStatus" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="passwordType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="device" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXDevice" syncable="YES"/>
+    </entity>
+    <entity name="GXPermanentPassword" syncable="YES">
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="GXRecord" representedClassName="GXDatabaseEntityUnlockRecord" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="deviceIdentifire" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="event" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="recordID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="relatedUserName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="device" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXDevice" inverseName="unlockRecords" inverseEntity="GXDevice" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GXUser" inverseName="records" inverseEntity="GXUser" syncable="YES"/>
+    </entity>
+    <entity name="GXUser" representedClassName="GXDatabaseEntityUser" syncable="YES">
+        <attribute name="headImageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remarkName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="devices" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GXDevice_User_Mapping" inverseName="user" inverseEntity="GXDevice_User_Mapping" syncable="YES"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GXRecord" inverseName="user" inverseEntity="GXRecord" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="GXDevice" positionX="-36" positionY="45" width="128" height="255"/>
+        <element name="GXDevice_User_Mapping" positionX="-18" positionY="90" width="128" height="165"/>
+        <element name="GXLocalUnlockRecord" positionX="-45" positionY="108" width="128" height="105"/>
+        <element name="GXOneTimePassword" positionX="-45" positionY="108" width="128" height="90"/>
+        <element name="GXPermanentPassword" positionX="-27" positionY="126" width="128" height="75"/>
+        <element name="GXRecord" positionX="-54" positionY="18" width="128" height="165"/>
+        <element name="GXUser" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="GXPassword" positionX="-36" positionY="126" width="128" height="210"/>
+    </elements>
+</model>
