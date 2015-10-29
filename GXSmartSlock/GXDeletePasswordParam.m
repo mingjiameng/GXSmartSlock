@@ -6,6 +6,8 @@
 //  Copyright © 2015 guosim. All rights reserved.
 //
 
+
+
 #import "GXDeletePasswordParam.h"
 
 @implementation GXDeletePasswordParam
@@ -16,7 +18,7 @@
     
     param.accessToken = accessToken;
     param.deviceIdentifire = deviceIdentifire;
-    param.passwordIdString = [NSString stringWithFormat:@"%ld", (long)passwordID];
+    param.passwordIdString = [NSString stringWithFormat:@"%@", @(passwordID)];
     param.operationType = operationType;
     
     return param;
