@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="2.3.1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F27" minimumToolsVersion="Automatic">
     <entity name="GXDevice" representedClassName="GXDatabaseEntityDevice" syncable="YES">
         <attribute name="deviceAuthority" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceBattery" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
@@ -78,9 +78,9 @@
         <element name="GXDevice_User_Mapping" positionX="-18" positionY="90" width="128" height="165"/>
         <element name="GXLocalUnlockRecord" positionX="-45" positionY="108" width="128" height="105"/>
         <element name="GXOneTimePassword" positionX="-45" positionY="108" width="128" height="90"/>
+        <element name="GXPassword" positionX="-36" positionY="126" width="128" height="210"/>
         <element name="GXPermanentPassword" positionX="-27" positionY="126" width="128" height="75"/>
         <element name="GXRecord" positionX="-54" positionY="18" width="128" height="165"/>
         <element name="GXUser" positionX="-63" positionY="-18" width="128" height="150"/>
-        <element name="GXPassword" positionX="-36" positionY="126" width="128" height="210"/>
     </elements>
 </model>
