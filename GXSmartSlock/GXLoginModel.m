@@ -34,7 +34,9 @@
     uname(&systemInfo);
     NSString *deviceType = [GXSystemInfoHelper getDeviceInfo:[NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding]];
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_DEVICE_TOKEN];
-    NSString *phoneInfo = [NSString stringWithFormat:@"%@,%@", deviceType, deviceToken];
+    NSString *currentAppVersionString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    
+    NSString *phoneInfo = [NSString stringWithFormat:@"%@,%@,%@", deviceType, deviceToken, currentAppVersionString];
     GXLoginParam *param = [GXLoginParam paramWithUserName:userName password:password phoneInfo:phoneInfo];
     
     [GXDefaultHttpHelper postWithLoginParam:param success:^(NSDictionary *result) {
