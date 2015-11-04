@@ -59,12 +59,24 @@
 #pragma mark - table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (self.viewType == SelectValidDeviceViewTypeSendKey) {
+        return 1;
+    } else if (self.viewType == SelectValidDeviceViewTypeUnlockRecord) {
+        return 2;
+    }
+    
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.validDeviceArray count];
+    if (section == 0) {
+        return [self.validDeviceArray count];
+    } else if (section == 1) {
+        return 1;
+    }
+    
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -74,11 +86,17 @@
         cell = [[GXSelectDeviceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"selectDevice"];
     }
 
-    GXDatabaseEntityDevice *device = [self.validDeviceArray objectAtIndex:indexPath.row];
-    
-    cell.imageView.image = [self deviceImageNameAccordingDeviceCategory:device.deviceCategory andDeviceIdentifire:device.deviceIdentifire];
-    
-    cell.textLabel.text = device.deviceNickname;
+    if (indexPath.section == 0) {
+        GXDatabaseEntityDevice *device = [self.validDeviceArray objectAtIndex:indexPath.row];
+        
+        cell.imageView.image = [self deviceImageNameAccordingDeviceCategory:device.deviceCategory andDeviceIdentifire:device.deviceIdentifire];
+        
+        cell.textLabel.text = device.deviceNickname;
+    } else if (indexPath.section == 1) {
+        cell.imageView.image = [UIImage imageNamed:DEVICE_CATEGORY_DEFAULT];
+        
+        cell.textLabel.text = @"所有设备";
+    }
     
     return cell;
 }
@@ -112,7 +130,11 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    GXDatabaseEntityDevice *device = [self.validDeviceArray objectAtIndex:indexPath.row];
+    GXDatabaseEntityDevice *device = nil;
+    
+    if (indexPath.section == 0) {
+        device = [self.validDeviceArray objectAtIndex:indexPath.row];
+    }
     
     if (self.deviceSelected) {
         self.deviceSelected(device);

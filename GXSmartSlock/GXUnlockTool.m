@@ -30,11 +30,13 @@
 
 #import <CoreData/CoreData.h>
 
+#define MANUL_UNLOCK_SCAN_DURATION 10.0f
+
 @interface GXUnlockTool () <GXUnlockModelDelegate, NSFetchedResultsControllerDelegate>
 {
     NSDictionary *_deviceKeyDic;
     NSDictionary *_deviceCategoryDic;
-    DefaultUnlockMode _currentUnlockModel;
+    DefaultUnlockMode _currentUnlockMode;
     
     GXManulUnlockModel *_manulUnlockModel;
     GXAutoUnlockModel *_autoUnlockModel;
@@ -54,8 +56,11 @@
     
     if (self) {
         _isUploadingUnlockRecord = NO;
-        [self updateUnlockMode];
+        
         [self updateDeviceKeyDictionary];
+        
+        [self updateUnlockMode];
+        
         [self trackLocalUnlockRecord];
     }
     
@@ -64,8 +69,24 @@
 
 - (void)updateUnlockMode
 {
+    // stop scan
+    if (_currentUnlockMode == DefaultUnlockModeAuto) {
+        if (_autoUnlockModel != nil) {
+            [_autoUnlockModel stopScan];
+        }
+    } else if (_currentUnlockMode == DefaultUnlockModeManul) {
+        if (_manulUnlockModel != nil) {
+            [_manulUnlockModel stopScan];
+        }
+    } else if (_currentUnlockMode == DefaultUnlockModeShake) {
+        if (_shakeUnlockModel != nil) {
+            [_shakeUnlockModel stopScan];
+        }
+    }
+    
+    // switch unlock mode
     DefaultUnlockMode unlockMode = [[[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_UNLOCK_MODE] integerValue];
-    _currentUnlockModel = unlockMode;
+    _currentUnlockMode = unlockMode;
     
     if (unlockMode == DefaultUnlockModeManul) {
         _autoUnlockModel = nil;
@@ -120,15 +141,22 @@
 - (void)manulUnlock
 {
     if (_manulUnlockModel != nil) {
+        
+        typeof(self) __weak weakSelf = self;
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [_manulUnlockModel startScan];
-            [self performSelector:@selector(forceStopUnlockAction) withObject:nil afterDelay:10.0];
+            [weakSelf performSelector:@selector(forceStopUnlockAction) withObject:nil afterDelay:MANUL_UNLOCK_SCAN_DURATION];
         });
     }
 }
 
 - (void)forceStopUnlockAction
 {
+    if (_manulUnlockModel == nil) {
+        return;
+    }
+    
     [_manulUnlockModel stopScan];
     
     if ([self.delegate respondsToSelector:@selector(forceStopUnlock)]) {
@@ -175,7 +203,7 @@
             return nil;
         }
         
-        if ([deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD] && _currentUnlockModel == DefaultUnlockModeAuto) {
+        if ([deviceCategory isEqualToString:DEVICE_CATEGORY_GUARD] && _currentUnlockMode == DefaultUnlockModeAuto) {
             return nil;
         }
     }

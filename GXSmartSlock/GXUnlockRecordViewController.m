@@ -202,9 +202,11 @@
     GXSelectValidDeviceViewController *selectValidDeviceVC = [[GXSelectValidDeviceViewController alloc] init];
     selectValidDeviceVC.viewType = SelectValidDeviceViewTypeUnlockRecord;
     selectValidDeviceVC.validDeviceArray = self.validDeviceArray;
+    
+    typeof(self) __weak weakSelf = self;
     selectValidDeviceVC.deviceSelected = ^(GXDatabaseEntityDevice *selectedDevice){
         _selectedDeviceEntity = selectedDevice;
-        [self reloadViewData];
+        [weakSelf reloadViewData];
     };
     
     UINavigationController *navigator = [[UINavigationController alloc] initWithRootViewController:selectValidDeviceVC];
