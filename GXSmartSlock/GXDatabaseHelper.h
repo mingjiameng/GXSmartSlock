@@ -17,32 +17,36 @@
  * insert data
  */
 + (void)setDefaultUser:(nonnull GXUserModel *)user;
-+ (void)insertDeviceIntoDatabase:(NSArray *)deviceArray;
-+ (void)insertDeviceUserMappingItemIntoDatabase:(NSArray *)deviceUserMappingArray;
-+ (void)insertUserIntoDatabase:(NSArray *)userArray;
-+ (void)insertUnlockRecordIntoDatabase:(NSArray *)unlockRecordArray;
++ (void)insertDeviceIntoDatabase:(nonnull NSArray *)deviceArray;
++ (void)insertDeviceUserMappingItemIntoDatabase:(nonnull NSArray *)deviceUserMappingArray;
++ (void)insertUserIntoDatabase:(nonnull NSArray *)userArray;
++ (void)insertUnlockRecordIntoDatabase:(nonnull NSArray *)unlockRecordArray;
 
 /************************seperator*********************************/
 
 /*
  * provide data
  */
-+ (NSFetchedResultsController *)validDeviceFetchedResultsController;
-+ (NSFetchedResultsController *)allDeviceFetchedResultsController;
-+ (NSFetchedResultsController *)deviceUserMappingModelFetchedResultsController:(NSString *)deviceIdentifire;
-+ (GXDatabaseEntityUser *)defaultUser;
-+ (NSArray *)managedDeviceArray;
-+ (NSFetchedResultsController *)unlockRecordOfDevice:(NSString *)deviceIdentifire;
-+ (NSArray *)validDeviceArray;
-+ (GXDatabaseEntityDevice *)deviceEntityWithDeviceIdentifire:(NSString *)deviceIdentifire;
-+ (NSFetchedResultsController *)allLocalUnlockRecordFetchedResultsController;
-+ (NSArray *)allLocalUnlockRecordArray;
-+ (NSFetchedResultsController *)oneTimePasswordFetchedResultsControllerOfDevice:(NSString *)deviceIdentifire;
++ (nullable NSFetchedResultsController *)validDeviceFetchedResultsController;
++ (nullable NSFetchedResultsController *)allDeviceFetchedResultsController;
++ (nullable NSFetchedResultsController *)deviceUserMappingModelFetchedResultsController:(nonnull NSString *)deviceIdentifire;
++ (nullable GXDatabaseEntityUser *)defaultUser;
++ (nullable NSArray *)managedDeviceArray;
+
+// when receive nil value, the method returns unlock records of all devices managed by current user
++ (nullable NSFetchedResultsController *)unlockRecordOfDevice:(nullable NSString *)deviceIdentifire;
+
+
++ (nullable NSArray *)validDeviceArray;
++ (nullable GXDatabaseEntityDevice *)deviceEntityWithDeviceIdentifire:(nonnull NSString *)deviceIdentifire;
++ (nullable NSFetchedResultsController *)allLocalUnlockRecordFetchedResultsController;
++ (nullable NSArray *)allLocalUnlockRecordArray;
++ (nullable NSFetchedResultsController *)oneTimePasswordFetchedResultsControllerOfDevice:(nonnull NSString *)deviceIdentifire;
 + (void)device:(nonnull NSString *)deviceIdentifire insertPasswordIntoDatabase:(nullable NSArray<GXPasswordModel *> *)passwordModelArray;
 
 // the previous one-time password will be deleted once you insert the new one-time password array
 // the param - oneTimePasswordArray contains object GXOneTimePasswordModel
-+ (void)device:(NSString *)deviceIdentifire insertNewOneTimePasswordIntoDatabase:(NSArray *)oneTimePasswordArray;
++ (void)device:(nonnull NSString *)deviceIdentifire insertNewOneTimePasswordIntoDatabase:(nonnull NSArray *)oneTimePasswordArray;
 
 // this interface is sepcifically for data migration(from SQL to CoreData)
 + (void)addOneTimePasswordIntoDatabase:(nonnull NSArray *)oneTimePasswordArray;

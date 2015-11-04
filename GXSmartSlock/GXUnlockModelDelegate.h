@@ -11,11 +11,12 @@
 @protocol GXUnlockModelDelegate <NSObject>
 
 @required
-
 - (void)tooLowSemaphoreToUnlock;
-- (NSString *)secretKeyForDevice:(NSString *)deviceIdentifire;
-- (void)unlockTheDevice:(NSString *)deviceIdentifire successful:(BOOL)successful;
-- (void)updateBatteryLevel:(NSInteger)batteryLevel ofDevice:(NSString *)deviceIdentifire;
-- (void)lowBatteryAlert:(NSString *)deviceIdentifire;
+- (nullable NSString *)secretKeyForDevice:(nonnull NSString *)deviceIdentifire;
+- (void)unlockTheDevice:(nonnull NSString *)deviceIdentifire successful:(BOOL)successful;
+- (void)updateBatteryLevel:(NSInteger)batteryLevel ofDevice:(nonnull NSString *)deviceIdentifire;
+- (void)lowBatteryAlert:(nonnull NSString *)deviceIdentifire;
+
+
 
 @end

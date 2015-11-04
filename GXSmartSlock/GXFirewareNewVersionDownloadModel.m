@@ -9,6 +9,7 @@
 #import "GXFirewareNewVersionDownloadModel.h"
 
 #import "MICRO_COMMON.h"
+#import "MICRO_HTTP.h"
 
 #import "AFNetworking.h"
 #import "zkeyURLDownloadHelper.h"
@@ -27,8 +28,8 @@
 {
     [self.delegate beginCheckNewVersion];
     
-    NSString *urlString = [NSString stringWithFormat:@"https://115.28.226.149/fw_version?typecode=%@", self.deviceCategory];
-    AFHTTPRequestOperationManager * requestOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:urlString]];
+    NSString *urlString = [NSString stringWithFormat:@"%@fw_version?typecode=%@",GXBaseURL, self.deviceCategory];
+    AFHTTPRequestOperationManager * requestOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:GXBaseURL]];
     
     AFSecurityPolicy * securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
     [AFHTTPRequestOperationManager manager].securityPolicy = securityPolicy;
@@ -40,7 +41,7 @@
     id __weak weakDelegate = self.delegate;
     GXFirewareNewVersionDownloadModel *__weak weakSelf = self;
     __block NSInteger newVersion = -1;
-    [requestOperationManager GET:@"https://115.28.226.149/fw_version" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [requestOperationManager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = (NSDictionary *)operation.responseObject;
         NSLog(@"result:%@", result);
         newVersion = [[result objectForKey:@"fw_version"] integerValue];
@@ -76,7 +77,7 @@
     NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_PASSWORD];
     
     zkeyURLDownloadHelper *downloader = [[zkeyURLDownloadHelper alloc] init];
-    downloader.urlString = @"http://115.28.226.149/source_file?";
+    downloader.urlString = [NSString stringWithFormat:@"%@source_file?", GXBaseURL_HTTP];
     downloader.destinationPath = filePath;
     downloader.httpMethod = HTTP_METHOD_POST;
     downloader.paramDic = @{@"username" : userName,
