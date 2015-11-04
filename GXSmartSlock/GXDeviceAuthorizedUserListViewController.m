@@ -23,6 +23,7 @@
 #import "zkeyActivityIndicatorView.h"
 
 #import "GXChangeRemarkOfAuthorizedUserViewController.h"
+#import "GXSendKeyViewController.h"
 
 #import <CoreData/CoreData.h>
 
@@ -299,7 +300,11 @@
 // TODO
 - (void)addUser
 {
+    GXSendKeyViewController *sendKeyVC = [[GXSendKeyViewController alloc] init];
+    sendKeyVC.viewType = GXSendKeyViewTypeCertainDevice;
+    sendKeyVC.deviceIdentifire = self.deviceIdentifire;
     
+    [self.navigationController pushViewController:sendKeyVC animated:YES];
 }
 
 #pragma mark - 

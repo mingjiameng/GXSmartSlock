@@ -48,7 +48,7 @@
     self = [super init];
     
     if (self) {
-        _autoUnlockCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
+        _autoUnlockCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
         _peripheralProccessingArray = [NSMutableArray array];
     }
     
@@ -246,7 +246,7 @@
         // read battery level
         NSString *batteryLevelString = [NSString stringWithFormat:@"%ld", strtoul([[characteristic.value.description ConvertToString] UTF8String], 0, 16)];
         float batteryLevel = [batteryLevelString floatValue];
-        NSLog(@"%f", batteryLevel);
+        //NSLog(@"%f", batteryLevel);
         
         NSString *tmpDeviceIdentifire = nil;
         for (NSMutableDictionary *peripheralProccessing in _peripheralProccessingArray) {
@@ -280,6 +280,7 @@
 
     [self cancelHandleWithDevice:peripheral.name];
 }
+
 
 #pragma mark - helper function
 - (void)readWriteCharacteristics:(CBCharacteristic *)characteristic inPeripheral:(CBPeripheral *)peripheral
