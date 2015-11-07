@@ -69,7 +69,7 @@
 - (void)addTips:(CGRect)frame
 {
     _tipsTextView = [[UITextView alloc] initWithFrame:frame];
-    _tipsTextView.text = @"在固件升级过程中请保持手机蓝牙打开、电量充足\n固件升级可能花费数分钟\n请按下门锁上的设置键并将手机靠近门锁";
+    _tipsTextView.text = @"请按下门锁上的设置键并将手机靠近门锁\n在固件升级过程中请保持手机蓝牙打开、电量充足，固件升级可能花费数分钟";
     _tipsTextView.textColor = [UIColor blackColor];
     _tipsTextView.font = [UIFont systemFontOfSize:17.0];
     _tipsTextView.userInteractionEnabled = NO;
