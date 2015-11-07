@@ -93,7 +93,7 @@
         
         cell.textLabel.text = device.deviceNickname;
     } else if (indexPath.section == 1) {
-        cell.imageView.image = [UIImage imageNamed:DEVICE_CATEGORY_DEFAULT];
+        cell.imageView.image = [UIImage imageNamed:DEVICE_CATEGORY_DEFAULT_IMG];
         
         cell.textLabel.text = @"所有设备";
     }

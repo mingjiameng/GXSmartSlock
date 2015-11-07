@@ -24,13 +24,15 @@
     NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
     NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_PASSWORD];
 
+    typeof(self) __weak weakSelf = self;
+    
     GXReceiveKeyParam *param = [GXReceiveKeyParam paramWithUserName:userName password:password deviceNickname:nickname forDevice:deviceIdentifire];
     [GXDefaultHttpHelper postWithReceiveKeyParam:param success:^(NSDictionary *result) {
         NSInteger status = [[result objectForKey:REJECT_KEY_STATUS] integerValue];
         if (status == 0) {
             [self.delegate receiveKeySuccessful:NO];
         } else if (status == 1) {
-            [self synchronizeDevice];
+            [weakSelf synchronizeDevice];
         } else if (status == 3) {
             [self.delegate deviceHadBeenDelete];
             [GXDatabaseHelper deleteDeviceWithIdentifire:deviceIdentifire];
@@ -47,8 +49,6 @@
     NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_NAME];
     NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER_PASSWORD];
     
-    GXReceiveKeyModel *__weak weakSelf = self;
-    
     GXSynchronizeDeviceParam *param = [GXSynchronizeDeviceParam paramWithUserName:userName password:password];
     [GXDefaultHttpHelper postWithSynchronizeDeviceParam:param success:^(NSDictionary *result) {
         NSInteger status = [[result objectForKey:SYNCHRONIZE_DEVICE_STATUS] integerValue];
@@ -64,10 +64,11 @@
                 [GXServerDataAnalyst insertDeviceUserMappingItemIntoDatabase:deviceUserMappingArray];
             });
             
-            [weakSelf.delegate receiveKeySuccessful:YES];
+            [self.delegate receiveKeySuccessful:YES];
         }
     } failure:^(NSError *error) {
         
+        [self.delegate receiveKeySuccessful:YES];
     }];
     
     
