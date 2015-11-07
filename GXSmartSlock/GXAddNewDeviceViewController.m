@@ -93,6 +93,12 @@
     if (!success) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"配对失败 请重试" message:nil delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil];
         [alert show];
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"成功添加门锁" message:@"您可以前往设备列表查看门锁详情" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAlertAction = [UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAlertAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
     }
     
     [self dismissViewControllerAnimated:YES completion:^{
