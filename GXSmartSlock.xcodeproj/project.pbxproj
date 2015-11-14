@@ -15,6 +15,9 @@
 		440E2E281BAAB20900388051 /* GXUpdateFirewareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 440E2E271BAAB20900388051 /* GXUpdateFirewareView.m */; };
 		440E2E2C1BAAD45000388051 /* zkeyURLDownloadHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 440E2E2B1BAAD45000388051 /* zkeyURLDownloadHelper.m */; };
 		441DAB901B9F11BD004F710D /* GXUnlockTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 441DAB8F1B9F11BD004F710D /* GXUnlockTool.m */; };
+		4473E7CF1BF06BCF00C4FAB9 /* GXSelectOrEnterUserNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4473E7CE1BF06BCF00C4FAB9 /* GXSelectOrEnterUserNameViewController.m */; };
+		4473E7D21BF1C44D00C4FAB9 /* zkeyFirstLetterOfChinese.c in Sources */ = {isa = PBXBuildFile; fileRef = 4473E7D01BF1C44D00C4FAB9 /* zkeyFirstLetterOfChinese.c */; };
+		4473E7D51BF1C71A00C4FAB9 /* GXPhoneContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4473E7D41BF1C71A00C4FAB9 /* GXPhoneContactModel.m */; };
 		448BE17D1B903B3900DC6FD0 /* GXDeviceListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 448BE17C1B903B3900DC6FD0 /* GXDeviceListTableViewCell.m */; };
 		44A2B6581BB0260100622726 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A2B6571BB0260100622726 /* libsqlite3.0.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		44A2B65D1BB0285C00622726 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A2B6591BB0285C00622726 /* libWeChatSDK.a */; };
@@ -242,6 +245,12 @@
 		440E2E2B1BAAD45000388051 /* zkeyURLDownloadHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeyURLDownloadHelper.m; sourceTree = "<group>"; };
 		441DAB8E1B9F11BD004F710D /* GXUnlockTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXUnlockTool.h; sourceTree = "<group>"; };
 		441DAB8F1B9F11BD004F710D /* GXUnlockTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXUnlockTool.m; sourceTree = "<group>"; };
+		4473E7CD1BF06BCF00C4FAB9 /* GXSelectOrEnterUserNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSelectOrEnterUserNameViewController.h; sourceTree = "<group>"; };
+		4473E7CE1BF06BCF00C4FAB9 /* GXSelectOrEnterUserNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXSelectOrEnterUserNameViewController.m; sourceTree = "<group>"; };
+		4473E7D01BF1C44D00C4FAB9 /* zkeyFirstLetterOfChinese.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zkeyFirstLetterOfChinese.c; sourceTree = "<group>"; };
+		4473E7D11BF1C44D00C4FAB9 /* zkeyFirstLetterOfChinese.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeyFirstLetterOfChinese.h; sourceTree = "<group>"; };
+		4473E7D31BF1C71A00C4FAB9 /* GXPhoneContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXPhoneContactModel.h; sourceTree = "<group>"; };
+		4473E7D41BF1C71A00C4FAB9 /* GXPhoneContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXPhoneContactModel.m; sourceTree = "<group>"; };
 		448BE17B1B903B3900DC6FD0 /* GXDeviceListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXDeviceListTableViewCell.h; sourceTree = "<group>"; };
 		448BE17C1B903B3900DC6FD0 /* GXDeviceListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GXDeviceListTableViewCell.m; sourceTree = "<group>"; };
 		44A2B6571BB0260100622726 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -1313,6 +1322,8 @@
 				44E8F5C61B9C3EB600B90035 /* GXSelectContactViewController.m */,
 				44E8F5C81B9C42EE00B90035 /* GXContactModel.h */,
 				44E8F5C91B9C42EE00B90035 /* GXContactModel.m */,
+				4473E7CD1BF06BCF00C4FAB9 /* GXSelectOrEnterUserNameViewController.h */,
+				4473E7CE1BF06BCF00C4FAB9 /* GXSelectOrEnterUserNameViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1322,6 +1333,10 @@
 			children = (
 				44E6F2EC1B9BF79900A38DF9 /* GXSendKeyModel.h */,
 				44E6F2ED1B9BF79900A38DF9 /* GXSendKeyModel.m */,
+				4473E7D01BF1C44D00C4FAB9 /* zkeyFirstLetterOfChinese.c */,
+				4473E7D11BF1C44D00C4FAB9 /* zkeyFirstLetterOfChinese.h */,
+				4473E7D31BF1C71A00C4FAB9 /* GXPhoneContactModel.h */,
+				4473E7D41BF1C71A00C4FAB9 /* GXPhoneContactModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1717,6 +1732,7 @@
 				44E6F2DC1B9B144B00A38DF9 /* GXAddNewDeviceModel.m in Sources */,
 				44A2B67F1BB4196100622726 /* GXUnlockRecordDetailViewDataModel.m in Sources */,
 				44B5A3511BD3792200021835 /* GXPasswordTableViewCellDataModel.m in Sources */,
+				4473E7D51BF1C71A00C4FAB9 /* GXPhoneContactModel.m in Sources */,
 				44EB633F1B9D1871008BF8BE /* GXUnlockRecordTableViewCell.m in Sources */,
 				44E6F2C01B988F1A00A38DF9 /* GXSynchronizeDeviceParam.m in Sources */,
 				440E2E181BAA540500388051 /* GXUpdateFirewareViewController.m in Sources */,
@@ -1736,6 +1752,7 @@
 				44ED1D4C1B8C148200F1A7F4 /* CircleView.m in Sources */,
 				44ED1D4D1B8C148200F1A7F4 /* zkeyRefreshHeaderView.m in Sources */,
 				44ED41A21B8A1F9E00079207 /* GXResetPasswordParam.m in Sources */,
+				4473E7D21BF1C44D00C4FAB9 /* zkeyFirstLetterOfChinese.c in Sources */,
 				44044F531BAEB342007B608C /* GXRemarkNameModel.m in Sources */,
 				44E916F01B87880300EF9C38 /* zkeyIdentifierValidator.m in Sources */,
 				44ED1D6D1B8DAF5700F1A7F4 /* GXDeviceDetailViewController.m in Sources */,
@@ -1813,6 +1830,7 @@
 				44E6F2B71B96E27300A38DF9 /* GXDeleteAuthorizedUserParam.m in Sources */,
 				44B5A3441BD34D1A00021835 /* GXPasswordManagerViewController.m in Sources */,
 				44E62E181BAFE0B100EC2C48 /* GXUpdateDeviceBatteryLevelParam.m in Sources */,
+				4473E7CF1BF06BCF00C4FAB9 /* GXSelectOrEnterUserNameViewController.m in Sources */,
 				44E9B8081B860CC600D289F0 /* zkeyAlertBanner.m in Sources */,
 				44ED41921B896B9700079207 /* AFSecurityPolicy.m in Sources */,
 				44EB63491B9D1BCB008BF8BE /* GXSynchronizeUnlockRecordParam.m in Sources */,

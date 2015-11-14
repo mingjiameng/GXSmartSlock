@@ -10,8 +10,9 @@
 
 @interface GXContactModel : NSObject
 
-@property (nonatomic, strong) NSString *phoneNumber;
-@property (nonatomic, strong) NSString *nickname;
+@property (nonatomic, strong) NSString *phoneNumber; // the "phoneNumber" may be mobilePhoneNumber or email-address
+@property (nonatomic, strong) NSString *nickname; // the name of contact
+@property (nonatomic, strong) NSString *pinyinString; // pinyin of nickname (pinyin == nickname if the nickname is English)
 
 + (GXContactModel *)modelWithUserName:(NSString *)phoneNumber nickname:(NSString *)nickname;
 
